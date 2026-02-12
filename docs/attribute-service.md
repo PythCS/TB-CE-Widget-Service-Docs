@@ -1,8 +1,8 @@
-# ATTRIBUTE
+# Attribute Service
 
-Entity attributes and timeseries data.
+Complete reference for AttributeService - read and write entity attributes, telemetry, and timeseries data.
 
-## Service Injection
+## Injection
 
 ```javascript
 const $injector = self.ctx.$scope.$injector;
@@ -16,113 +16,160 @@ const attributeService = self.ctx.attributeService;
 
 ### getEntityAttributes
 
-```javascript
-const entityId = { entityType: 'DEVICE', id: 'your-entity-id' };
-const attributeScope = {
-  // your attributeScope object
-};
-const keys = ['id1', 'id2', 'id3'];
-
-attributeService.getEntityAttributes(entityId, attributeScope, keys).subscribe(result => {
-  console.log('EntityAttributes:', result);
-});
-```
-
-### deleteEntityAttributes
+Get entity attributes by scope and optional key filter.
 
 ```javascript
-const entityId = { entityType: 'DEVICE', id: 'your-entity-id' };
-const attributeScope = {
-  // your attributeScope object
-};
-const attributes = {
-  // your attributes object
-};
-
-attributeService.deleteEntityAttributes(entityId, attributeScope, attributes).subscribe(result => {
-  console.log('Deleted Result:', result);
-});
-```
-
-### deleteEntityTimeseries
-
-```javascript
-const entityId = { entityType: 'DEVICE', id: 'your-entity-id' };
-const timeseries = {
-  // your timeseries object
-};
-const startTs = Date.now();
-const endTs = Date.now();
-
-attributeService.deleteEntityTimeseries(entityId, timeseries, startTs, endTs).subscribe(result => {
-  console.log('Deleted Result:', result);
+const entityId = { entityType: 'DEVICE', id: 'your-device-id' };
+const attributeScope = 'SERVER_SCOPE'; // or CLIENT_SCOPE, SHARED_SCOPE
+const keys = ['temperature', 'humidity']; // optional - get all if not specified
+attributeService.getEntityAttributes(entityId, attributeScope, keys).subscribe(attributes => {
+  console.log('Entity Attributes:', attributes);
 });
 ```
 
 ### saveEntityAttributes
 
-```javascript
-const entityId = { entityType: 'DEVICE', id: 'your-entity-id' };
-const attributeScope = {
-  // your attributeScope object
-};
-const attributes = {
-  // your attributes object
-};
-
-attributeService.saveEntityAttributes(entityId, attributeScope, attributes).subscribe(savedResult => {
-  console.log('Saved Result:', savedResult);
-});
-```
-
-### saveEntityTimeseries
+Save attributes to an entity.
 
 ```javascript
-const entityId = { entityType: 'DEVICE', id: 'your-entity-id' };
-const timeseriesScope = 'your-timeseriesscope';
-const timeseries = {
-  // your timeseries object
-};
-
-attributeService.saveEntityTimeseries(entityId, timeseriesScope, timeseries).subscribe(savedResult => {
-  console.log('Saved Result:', savedResult);
+const entityId = { entityType: 'DEVICE', id: 'your-device-id' };
+const attributeScope = 'SERVER_SCOPE';
+const attributes = [
+  { key: 'temperature', value: 25.5 },
+  { key: 'humidity', value: 65 }
+];
+attributeService.saveEntityAttributes(entityId, attributeScope, attributes).subscribe(result => {
+  console.log('Saved Attributes:', result);
 });
 ```
 
 ### getEntityTimeseries
 
-```javascript
-const entityId = { entityType: 'DEVICE', id: 'your-entity-id' };
-const keys = ['id1', 'id2', 'id3'];
-const startTs = Date.now();
-const endTs = Date.now();
-const limit = {
-  // your limit object
-};
-const agg = {
-  // your agg object
-};
-const interval = 100;
-const orderBy = {
-  // your orderBy object
-};
-const useStrictDataTypes = {
-  // your useStrictDataTypes object
-};
+Get timeseries data for an entity with time range and aggregation.
 
-attributeService.getEntityTimeseries(entityId, keys, startTs, endTs, limit, agg, interval, orderBy, useStrictDataTypes).subscribe(result => {
-  console.log('EntityTimeseries:', result);
+```javascript
+const entityId = { entityType: 'DEVICE', id: 'your-device-id' };
+const keys = ['temperature', 'humidity'];
+const startTs = Date.now() - 86400000; // 24 hours ago
+const endTs = Date.now();
+const limit = 100;
+const agg = 'NONE'; // or AVG, MIN, MAX, SUM, COUNT
+const interval = 3600000; // 1 hour in milliseconds
+const orderBy = 'ASC'; // or DESC
+const useStrictDataTypes = false;
+attributeService.getEntityTimeseries(entityId, keys, startTs, endTs, limit, agg, interval, orderBy, useStrictDataTypes).subscribe(timeseries => {
+  console.log('Entity Timeseries:', timeseries);
 });
 ```
 
 ### getEntityTimeseriesLatest
 
-```javascript
-const entityId = { entityType: 'DEVICE', id: 'your-entity-id' };
-const keys = ['id1', 'id2', 'id3'];
+Get the latest timeseries values for an entity.
 
-attributeService.getEntityTimeseriesLatest(entityId, keys).subscribe(result => {
-  console.log('EntityTimeseriesLatest:', result);
+```javascript
+const entityId = { entityType: 'DEVICE', id: 'your-device-id' };
+const keys = ['temperature', 'humidity']; // optional
+attributeService.getEntityTimeseriesLatest(entityId, keys).subscribe(latestData => {
+  console.log('Latest Timeseries:', latestData);
 });
 ```
 
+### saveEntityTimeseries
+
+Save timeseries data to an entity.
+
+```javascript
+const entityId = { entityType: 'DEVICE', id: 'your-device-id' };
+const timeseriesScope = 'ANY';
+const timeseries = [
+  { key: 'temperature', value: 25.5, ts: Date.now() },
+  { key: 'humidity', value: 65, ts: Date.now() }
+];
+attributeService.saveEntityTimeseries(entityId, timeseriesScope, timeseries).subscribe(result => {
+  console.log('Saved Timeseries:', result);
+});
+```
+
+### deleteEntityAttributes
+
+Delete attributes from an entity.
+
+```javascript
+const entityId = { entityType: 'DEVICE', id: 'your-device-id' };
+const attributeScope = 'SERVER_SCOPE';
+const attributes = [
+  { key: 'temperature' },
+  { key: 'humidity' }
+];
+attributeService.deleteEntityAttributes(entityId, attributeScope, attributes).subscribe(result => {
+  console.log('Deleted Attributes:', result);
+});
+```
+
+## Common Use Cases
+
+### Real-time Widget Data
+
+```javascript
+// Get latest values for widget display
+const entityId = self.ctx.defaultSubscription.entityId;
+attributeService.getEntityTimeseriesLatest(entityId).subscribe(data => {
+  Object.keys(data).forEach(key => {
+    console.log(`${key}: ${data[key][0].value}`);
+  });
+});
+```
+
+### Configuration Management
+
+```javascript
+// Save device configuration
+const deviceId = { entityType: 'DEVICE', id: 'your-device-id' };
+const config = [
+  { key: 'updateInterval', value: 60 },
+  { key: 'threshold', value: 25.0 },
+  { key: 'enabled', value: true }
+];
+
+attributeService.saveEntityAttributes(deviceId, 'SERVER_SCOPE', config).subscribe(result => {
+  console.log('Configuration saved');
+});
+```
+
+### Historical Data Analysis
+
+```javascript
+// Get last 7 days of temperature data with hourly aggregation
+const entityId = { entityType: 'DEVICE', id: 'sensor-1' };
+const keys = ['temperature'];
+const startTs = Date.now() - (7 * 24 * 60 * 60 * 1000); // 7 days ago
+const endTs = Date.now();
+
+attributeService.getEntityTimeseries(
+  entityId, 
+  keys, 
+  startTs, 
+  endTs, 
+  168, // 7 days * 24 hours
+  'AVG', 
+  3600000, // 1 hour interval
+  'ASC', 
+  false
+).subscribe(data => {
+  console.log('Weekly temperature trend:', data);
+});
+```
+
+## Attribute Scopes
+
+- **SERVER_SCOPE** - Server-side attributes (read-only from device perspective)
+- **CLIENT_SCOPE** - Client-side attributes (read-write from device)
+- **SHARED_SCOPE** - Shared attributes (server-to-client configuration)
+
+## Related Services
+
+- **DeviceService** - Manage the devices that own the attributes
+- **EntityService** - Generic entity operations
+- **AlarmService** - Create alarms based on attribute values
+
+See the complete [AttributeService documentation](../DOCUMENTATION.md#attribute-service) for all 7 methods.

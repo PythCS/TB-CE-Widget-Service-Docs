@@ -1,8 +1,8 @@
-# USER
+# User Service
 
-User management and authentication functions.
+Complete reference for UserService - manage users, authentication, and user operations.
 
-## Service Injection
+## Injection
 
 ```javascript
 const $injector = self.ctx.$scope.$injector;
@@ -16,120 +16,54 @@ const userService = self.ctx.userService;
 
 ### getUsers (!!CE VERSION!!)
 
-```javascript
-const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
+Get paginated list of users.
 
+```javascript
+const pageLink = self.ctx.pageLink(10, 0, '', 'email', 'ASC');
 userService.getUsers(pageLink).subscribe(users => {
-  console.log('Users:', users);
-});
-```
-
-### getTenantAdmins
-
-```javascript
-const tenantId = 'your-tenant-id';
-const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-
-userService.getTenantAdmins(tenantId, pageLink).subscribe(admins => {
-  console.log('Tenant Admins:', admins);
-});
-```
-
-### getCustomerUsers
-
-```javascript
-const customerId = 'your-customer-id';
-const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-
-userService.getCustomerUsers(customerId, pageLink).subscribe(result => {
-  console.log('CustomerUsers:', result);
-});
-```
-
-### getUsersForAssign
-
-```javascript
-const alarmId = 'your-alarm-id';
-const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-
-userService.getUsersForAssign(alarmId, pageLink).subscribe(users => {
-  console.log('Users:', users);
-});
-```
-
-### getUser
-
-```javascript
-const userId = 'your-user-id';
-
-userService.getUser(userId).subscribe(result => {
-  console.log('User:', result);
-});
-```
-
-### getUsersByIds
-
-```javascript
-const userIds = 'your-users-id';
-
-userService.getUsersByIds(userIds).subscribe(users => {
-  console.log('Users:', users);
+  console.log('List of Users:', users);
 });
 ```
 
 ### saveUser
 
+Create or update a user.
+
 ```javascript
 const user = {
-  // your user object
+  email: 'newuser@example.com',
+  firstName: 'John',
+  lastName: 'Doe'
 };
-const sendActivationMail = {
-  // your sendActivationMail object
-};
-
-userService.saveUser(user, sendActivationMail).subscribe(savedResult => {
-  console.log('Saved Result:', savedResult);
+const sendActivationMail = true;
+userService.saveUser(user, sendActivationMail).subscribe(savedUser => {
+  console.log('Saved User:', savedUser);
 });
 ```
 
-### getActivationLink
+### getUser
+
+Get a specific user by ID.
 
 ```javascript
 const userId = 'your-user-id';
-
-userService.getActivationLink(userId).subscribe(url => {
-  console.log('URL:', url);
+userService.getUser(userId).subscribe(user => {
+  console.log('User:', user);
 });
 ```
 
-### getActivationLinkInfo
+## Common Use Cases
+
+### User Management Dashboard
 
 ```javascript
-const userId = 'your-user-id';
-
-userService.getActivationLinkInfo(userId).subscribe(info => {
-  console.log('Info:', info);
+// Get all tenant users
+const pageLink = self.ctx.pageLink(50, 0, '', 'email', 'ASC');
+userService.getUsers(pageLink).subscribe(users => {
+  users.data.forEach(user => {
+    console.log(`${user.email} - ${user.firstName} ${user.lastName}`);
+  });
 });
 ```
 
-### setUserCredentialsEnabled
-
-```javascript
-const userId = 'your-user-id';
-const userCredentialsEnabled = true;
-
-userService.setUserCredentialsEnabled(userId, userCredentialsEnabled).subscribe(result => {
-  console.log('setUserCredentialsEnabled:', result);
-});
-```
-
-### findUsersByQuery
-
-```javascript
-const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-
-userService.findUsersByQuery(pageLink).subscribe(info => {
-  console.log('Info:', info);
-});
-```
-
+See the complete [UserService documentation](../DOCUMENTATION.md#user-service) for all 11 methods.
