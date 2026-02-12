@@ -1,8 +1,8 @@
 # User Service
 
-Complete reference for UserService - manage users, authentication, and user operations.
+Complete reference for the UserService in ThingsBoard widget development.
 
-## Injection
+## Service Injection
 
 ```javascript
 const $injector = self.ctx.$scope.$injector;
@@ -16,12 +16,23 @@ const userService = self.ctx.userService;
 
 ### getUsers (!!CE VERSION!!)
 
-Get paginated list of users.
+Get paginated list of users. Behavior differs between Community and Professional editions.
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, '', 'email', 'ASC');
 userService.getUsers(pageLink).subscribe(users => {
-  console.log('List of Users:', users);
+  console.log('Users:', users);
+});
+```
+
+### getUser
+
+Get a user by ID.
+
+```javascript
+const userId = 'your-user-id';
+userService.getUser(userId).subscribe(user => {
+  console.log('User:', user);
 });
 ```
 
@@ -31,9 +42,10 @@ Create or update a user.
 
 ```javascript
 const user = {
-  email: 'newuser@example.com',
+  email: 'user@example.com',
   firstName: 'John',
-  lastName: 'Doe'
+  lastName: 'Doe',
+  authority: 'CUSTOMER_USER'
 };
 const sendActivationMail = true;
 userService.saveUser(user, sendActivationMail).subscribe(savedUser => {
@@ -41,29 +53,64 @@ userService.saveUser(user, sendActivationMail).subscribe(savedUser => {
 });
 ```
 
-### getUser
+### getCustomerUsers
 
-Get a specific user by ID.
+Get users belonging to a specific customer.
+
+```javascript
+const customerId = 'your-customer-id';
+const pageLink = self.ctx.pageLink(10, 0, '', 'email', 'ASC');
+userService.getCustomerUsers(customerId, pageLink).subscribe(users => {
+  console.log('Customer Users:', users);
+});
+```
+
+### getActivationLink
+
+Get the activation link for a user.
 
 ```javascript
 const userId = 'your-user-id';
-userService.getUser(userId).subscribe(user => {
-  console.log('User:', user);
+userService.getActivationLink(userId).subscribe(activationLink => {
+  console.log('Activation Link:', activationLink);
 });
 ```
 
 ## Common Use Cases
 
-### User Management Dashboard
+### Creating User Management Interface
 
 ```javascript
-// Get all tenant users
+// Load all users for management table
 const pageLink = self.ctx.pageLink(50, 0, '', 'email', 'ASC');
-userService.getUsers(pageLink).subscribe(users => {
-  users.data.forEach(user => {
-    console.log(`${user.email} - ${user.firstName} ${user.lastName}`);
+userService.getUsers(pageLink).subscribe(userPage => {
+  const users = userPage.data;
+  console.log(`Found ${users.length} users`);
+  
+  users.forEach(user => {
+    console.log(`User: ${user.email} (${user.firstName} ${user.lastName})`);
   });
 });
 ```
 
-See the complete [UserService documentation](../DOCUMENTATION.md#user-service) for all 11 methods.
+### Finding Users by Email
+
+```javascript
+// Search for users by email pattern
+const searchText = '@company.com';
+const pageLink = self.ctx.pageLink(20, 0, searchText, 'email', 'ASC');
+userService.findUsersByQuery(pageLink).subscribe(users => {
+  console.log('Company users found:', users);
+});
+```
+
+### Managing User Status
+
+```javascript
+const userId = 'your-user-id';
+const isEnabled = false; // Disable user
+
+userService.setUserCredentialsEnabled(userId, isEnabled).subscribe(() => {
+  console.log('User credentials status updated');
+});
+```

@@ -1,8 +1,8 @@
 # Device Service
 
-Complete reference for DeviceService - manage devices, credentials, RPC commands, and device operations.
+Complete reference for the DeviceService in ThingsBoard widget development.
 
-## Injection
+## Service Injection
 
 ```javascript
 const $injector = self.ctx.$scope.$injector;
@@ -14,26 +14,26 @@ const deviceService = self.ctx.deviceService;
 
 ## Methods
 
-### getTenantDeviceInfos
-
-Get paginated list of tenant devices with optional type filtering.
-
-```javascript
-const pageLink = self.ctx.pageLink(10, 0, '', 'name', 'ASC');
-const type = ''; // empty string for all types
-deviceService.getTenantDeviceInfos(pageLink, type).subscribe(devices => {
-  console.log('Tenant Devices:', devices);
-});
-```
-
 ### getDevice
 
-Get a specific device by ID.
+Get a device by ID.
 
 ```javascript
 const deviceId = 'your-device-id';
 deviceService.getDevice(deviceId).subscribe(device => {
   console.log('Device:', device);
+});
+```
+
+### getTenantDeviceInfos
+
+Get paginated list of tenant devices.
+
+```javascript
+const pageLink = self.ctx.pageLink(10, 0, '', 'name', 'ASC');
+const type = 'sensor'; // Optional device type filter
+deviceService.getTenantDeviceInfos(pageLink, type).subscribe(devices => {
+  console.log('Tenant Devices:', devices);
 });
 ```
 
@@ -43,8 +43,9 @@ Create or update a device.
 
 ```javascript
 const device = {
-  name: 'My Device',
-  type: 'thermostat'
+  name: 'Temperature Sensor 01',
+  type: 'sensor',
+  // Additional device properties
 };
 deviceService.saveDevice(device).subscribe(savedDevice => {
   console.log('Saved Device:', savedDevice);
@@ -53,7 +54,7 @@ deviceService.saveDevice(device).subscribe(savedDevice => {
 
 ### getDeviceCredentials
 
-Get device credentials for connectivity.
+Get device access credentials.
 
 ```javascript
 const deviceId = 'your-device-id';
@@ -65,37 +66,25 @@ deviceService.getDeviceCredentials(deviceId, sync).subscribe(credentials => {
 
 ### sendTwoWayRpcCommand
 
-Send RPC command and wait for response.
+Send a two-way RPC command to a device.
 
 ```javascript
 const deviceId = 'your-device-id';
 const requestBody = {
   method: 'getTemperature',
-  timeout: 5000
+  params: {}
 };
 deviceService.sendTwoWayRpcCommand(deviceId, requestBody).subscribe(response => {
-  console.log('RPC Response:', response);
-});
-```
-
-### assignDeviceToCustomer
-
-Assign a device to a customer.
-
-```javascript
-const customerId = 'your-customer-id';
-const deviceId = 'your-device-id';
-deviceService.assignDeviceToCustomer(customerId, deviceId).subscribe(assignedDevice => {
-  console.log('Assigned Device:', assignedDevice);
+  console.log('Two-way RPC Response:', response);
 });
 ```
 
 ### findByName
 
-Find device by name.
+Find a device by name.
 
 ```javascript
-const deviceName = 'Device Name';
+const deviceName = 'Temperature Sensor 01';
 deviceService.findByName(deviceName).subscribe(device => {
   console.log('Device by Name:', device);
 });
@@ -103,64 +92,67 @@ deviceService.findByName(deviceName).subscribe(device => {
 
 ## Common Use Cases
 
-### Device Management Dashboard
+### Getting Device List for Dashboard
 
 ```javascript
-// Get all devices
-const pageLink = self.ctx.pageLink(50, 0, '', 'name', 'ASC');
-deviceService.getTenantDeviceInfos(pageLink, '').subscribe(devices => {
-  // Display in table or list
-  devices.data.forEach(device => {
-    console.log(`${device.name} - ${device.type}`);
+const pageLink = self.ctx.pageLink(20, 0, '', 'name', 'ASC');
+deviceService.getTenantDeviceInfos(pageLink, '').subscribe(devicePage => {
+  const devices = devicePage.data;
+  console.log(`Found ${devices.length} devices`);
+  
+  devices.forEach(device => {
+    console.log(`Device: ${device.name} (${device.type})`);
   });
 });
 ```
 
-### Device Control Widget
+### Sending Commands to Multiple Devices
 
 ```javascript
-// Send command to device
-const deviceId = self.ctx.datasources[0].entity.id;
+const deviceIds = ['device-1', 'device-2', 'device-3'];
 const command = {
-  method: 'setValue',
-  params: { value: 25 }
+  method: 'setRelayStatus',
+  params: { status: true }
 };
 
-deviceService.sendTwoWayRpcCommand(deviceId, command).subscribe(
-  response => {
-    console.log('Command successful:', response);
-  },
-  error => {
-    console.error('Command failed:', error);
-  }
-);
-```
-
-### Device Provisioning
-
-```javascript
-// Create new device with credentials
-const device = {
-  name: 'New Sensor',
-  type: 'temperature_sensor',
-  label: 'Office Temperature Sensor'
-};
-
-const credentials = {
-  credentialsType: 'ACCESS_TOKEN',
-  credentialsId: 'my-unique-token-123'
-};
-
-deviceService.saveDeviceWithCredentials(device, credentials).subscribe(result => {
-  console.log('Device created with credentials:', result);
+deviceIds.forEach(deviceId => {
+  deviceService.sendOneWayRpcCommand(deviceId, command).subscribe(() => {
+    console.log(`Command sent to device: ${deviceId}`);
+  });
 });
 ```
 
-## Related Services
+### Creating Device with Credentials
 
-- **AttributeService** - Read/write device attributes and telemetry
-- **AlarmService** - Manage device alarms
-- **DeviceProfileService** - Manage device configurations
-- **EntityRelationService** - Create relationships between devices
+```javascript
+const device = {
+  name: 'New Sensor Device',
+  type: 'sensor',
+  label: 'Warehouse Sensor #5'
+};
 
-See the complete [DeviceService documentation](../DOCUMENTATION.md#device-service) for all 29 methods.
+const credentials = {
+  credentialsType: 'ACCESS_STRING',
+  credentialsId: 'warehouse_sensor_05_identifier'
+};
+
+deviceService.saveDeviceWithCredentials(device, credentials).subscribe(result => {
+  console.log('Created device with credentials:', result);
+});
+```
+
+## Error Handling
+
+Always handle errors in device operations:
+
+```javascript
+deviceService.getDevice(deviceId).subscribe(
+  device => {
+    console.log('Device loaded:', device);
+  },
+  error => {
+    console.error('Failed to load device:', error);
+    // Handle error appropriately
+  }
+);
+```
