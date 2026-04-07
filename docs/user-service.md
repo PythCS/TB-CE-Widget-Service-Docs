@@ -1,8 +1,8 @@
-# User Service
+# User Service (!!CE VERSION!!)
 
-Complete reference for the UserService in ThingsBoard widget development.
+Manage users, permissions, and user-related operations in ThingsBoard. Note: Some methods behave differently between CE and PE versions.
 
-## Service Injection
+## Injection
 
 ```javascript
 const $injector = self.ctx.$scope.$injector;
@@ -14,103 +14,124 @@ const userService = self.ctx.userService;
 
 ## Methods
 
-### getUsers (!!CE VERSION!!)
-
-Get paginated list of users. Behavior differs between Community and Professional editions.
+**1. getUsers** (!!CE VERSION!!)
 
 ```javascript
-const pageLink = self.ctx.pageLink(10, 0, '', 'email', 'ASC');
-userService.getUsers(pageLink).subscribe(users => {
-  console.log('Users:', users);
+const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'email', 'ASC');
+
+userService.getUsers(pageLink).subscribe(response => {
+  console.log('Users:', response.data);
+});
+```
+*Note: This method behaves differently between CE and PE versions. In CE, it may return an empty result for non-system administrators due to security restrictions.*
+
+**2. getTenantAdmins**
+
+```javascript
+const tenantId = 'your-tenant-id';
+const pageLink = self.ctx.pageLink(10, 0);
+
+userService.getTenantAdmins(tenantId, pageLink).subscribe(response => {
+  console.log('Tenant Admins:', response.data);
 });
 ```
 
-### getUser
+**3. getCustomerUsers**
 
-Get a user by ID.
+```javascript
+const customerId = 'your-customer-id';
+const pageLink = self.ctx.pageLink(10, 0);
+
+userService.getCustomerUsers(customerId, pageLink).subscribe(response => {
+  console.log('Customer Users:', response.data);
+});
+```
+
+**4. getUsersForAssign**
+
+```javascript
+const alarmId = 'your-alarm-id';
+const pageLink = self.ctx.pageLink(10, 0);
+
+userService.getUsersForAssign(alarmId, pageLink).subscribe(response => {
+  console.log('Users for Alarm Assignment:', response.data);
+});
+```
+
+**5. getUser**
 
 ```javascript
 const userId = 'your-user-id';
+
 userService.getUser(userId).subscribe(user => {
   console.log('User:', user);
 });
 ```
 
-### saveUser
+**6. getUsersByIds**
 
-Create or update a user.
+```javascript
+const userIds = ['user-id-1', 'user-id-2'];
+
+userService.getUsersByIds(userIds).subscribe(users => {
+  console.log('Users by IDs:', users);
+});
+```
+
+**7. saveUser**
 
 ```javascript
 const user = {
-  email: 'user@example.com',
+  email: 'john.doe@example.com',
   firstName: 'John',
   lastName: 'Doe',
-  authority: 'CUSTOMER_USER'
+  authority: 'CUSTOMER_USER',
+  customerId: { entityType: 'CUSTOMER', id: 'your-customer-id' }
 };
 const sendActivationMail = true;
+
 userService.saveUser(user, sendActivationMail).subscribe(savedUser => {
   console.log('Saved User:', savedUser);
 });
 ```
 
-### getCustomerUsers
-
-Get users belonging to a specific customer.
-
-```javascript
-const customerId = 'your-customer-id';
-const pageLink = self.ctx.pageLink(10, 0, '', 'email', 'ASC');
-userService.getCustomerUsers(customerId, pageLink).subscribe(users => {
-  console.log('Customer Users:', users);
-});
-```
-
-### getActivationLink
-
-Get the activation link for a user.
+**8. getActivationLink**
 
 ```javascript
 const userId = 'your-user-id';
+
 userService.getActivationLink(userId).subscribe(activationLink => {
   console.log('Activation Link:', activationLink);
 });
 ```
 
-## Common Use Cases
-
-### Creating User Management Interface
-
-```javascript
-// Load all users for management table
-const pageLink = self.ctx.pageLink(50, 0, '', 'email', 'ASC');
-userService.getUsers(pageLink).subscribe(userPage => {
-  const users = userPage.data;
-  console.log(`Found ${users.length} users`);
-  
-  users.forEach(user => {
-    console.log(`User: ${user.email} (${user.firstName} ${user.lastName})`);
-  });
-});
-```
-
-### Finding Users by Email
-
-```javascript
-// Search for users by email pattern
-const searchText = '@company.com';
-const pageLink = self.ctx.pageLink(20, 0, searchText, 'email', 'ASC');
-userService.findUsersByQuery(pageLink).subscribe(users => {
-  console.log('Company users found:', users);
-});
-```
-
-### Managing User Status
+**9. getActivationLinkInfo**
 
 ```javascript
 const userId = 'your-user-id';
-const isEnabled = false; // Disable user
 
-userService.setUserCredentialsEnabled(userId, isEnabled).subscribe(() => {
+userService.getActivationLinkInfo(userId).subscribe(activationInfo => {
+  console.log('Activation Link Info:', activationInfo);
+});
+```
+
+**10. setUserCredentialsEnabled**
+
+```javascript
+const userId = 'your-user-id';
+const userCredentialsEnabled = true; // Optional
+
+userService.setUserCredentialsEnabled(userId, userCredentialsEnabled).subscribe(result => {
   console.log('User credentials status updated');
+});
+```
+
+**11. findUsersByQuery**
+
+```javascript
+const pageLink = self.ctx.pageLink(10, 0, 'john', 'email', 'ASC');
+
+userService.findUsersByQuery(pageLink).subscribe(response => {
+  console.log('Users by Query:', response.data);
 });
 ```

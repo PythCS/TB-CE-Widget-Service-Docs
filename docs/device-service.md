@@ -1,8 +1,8 @@
 # Device Service
 
-Complete reference for the DeviceService in ThingsBoard widget development.
+Manage devices, credentials, RPC calls, and device-related operations in ThingsBoard.
 
-## Service Injection
+## Injection
 
 ```javascript
 const $injector = self.ctx.$scope.$injector;
@@ -14,145 +14,349 @@ const deviceService = self.ctx.deviceService;
 
 ## Methods
 
-### getDevice
+**1. getDeviceInfosByQuery**
 
-Get a device by ID.
+```javascript
+const deviceInfoQuery = {
+  entityFilter: {
+    type: 'entitiesByType',
+    entityType: 'DEVICE'
+  },
+  pageLink: self.ctx.pageLink(10, 0)
+};
+
+deviceService.getDeviceInfosByQuery(deviceInfoQuery).subscribe(response => {
+  console.log('Device Infos by Query:', response.data);
+});
+```
+
+**2. getTenantDeviceInfos**
+
+```javascript
+const pageLink = self.ctx.pageLink(10, 0);
+const type = ''; // Device type filter, empty for all types
+
+deviceService.getTenantDeviceInfos(pageLink, type).subscribe(response => {
+  console.log('Tenant Device Infos:', response.data);
+});
+```
+
+**3. getTenantDeviceInfosByDeviceProfileId**
+
+```javascript
+const pageLink = self.ctx.pageLink(10, 0);
+const deviceProfileId = 'your-device-profile-id';
+
+deviceService.getTenantDeviceInfosByDeviceProfileId(pageLink, deviceProfileId).subscribe(response => {
+  console.log('Devices by Profile:', response.data);
+});
+```
+
+**4. getCustomerDeviceInfos**
+
+```javascript
+const customerId = 'your-customer-id';
+const pageLink = self.ctx.pageLink(10, 0);
+const type = '';
+
+deviceService.getCustomerDeviceInfos(customerId, pageLink, type).subscribe(response => {
+  console.log('Customer Device Infos:', response.data);
+});
+```
+
+**5. getCustomerDeviceInfosByDeviceProfileId**
+
+```javascript
+const customerId = 'your-customer-id';
+const pageLink = self.ctx.pageLink(10, 0);
+const deviceProfileId = 'your-device-profile-id';
+
+deviceService.getCustomerDeviceInfosByDeviceProfileId(customerId, pageLink, deviceProfileId).subscribe(response => {
+  console.log('Customer Devices by Profile:', response.data);
+});
+```
+
+**6. getDevice**
 
 ```javascript
 const deviceId = 'your-device-id';
+
 deviceService.getDevice(deviceId).subscribe(device => {
   console.log('Device:', device);
 });
 ```
 
-### getTenantDeviceInfos
-
-Get paginated list of tenant devices.
+**7. getDevices**
 
 ```javascript
-const pageLink = self.ctx.pageLink(10, 0, '', 'name', 'ASC');
-const type = 'sensor'; // Optional device type filter
-deviceService.getTenantDeviceInfos(pageLink, type).subscribe(devices => {
-  console.log('Tenant Devices:', devices);
+const deviceIds = ['device-id-1', 'device-id-2'];
+
+deviceService.getDevices(deviceIds).subscribe(devices => {
+  console.log('Devices:', devices);
 });
 ```
 
-### saveDevice
+**8. getDeviceInfo**
 
-Create or update a device.
+```javascript
+const deviceId = 'your-device-id';
+
+deviceService.getDeviceInfo(deviceId).subscribe(deviceInfo => {
+  console.log('Device Info:', deviceInfo);
+});
+```
+
+**9. saveDevice**
 
 ```javascript
 const device = {
-  name: 'Temperature Sensor 01',
+  name: 'Temperature Sensor 001',
   type: 'sensor',
-  // Additional device properties
+  customerId: { entityType: 'CUSTOMER', id: 'your-customer-id' }
 };
+
 deviceService.saveDevice(device).subscribe(savedDevice => {
   console.log('Saved Device:', savedDevice);
 });
 ```
 
-### getDeviceCredentials
+**10. saveDeviceWithCredentials**
 
-Get device access credentials.
+```javascript
+const device = {
+  name: 'Temperature Sensor 002',
+  type: 'sensor'
+};
+const credentials = {
+  credentialsType: 'ACCESS_TOKEN',
+  credentialsId: 'device-access-token'
+};
+
+deviceService.saveDeviceWithCredentials(device, credentials).subscribe(result => {
+  console.log('Device Saved with Credentials:', result);
+});
+```
+
+**11. getDeviceTypes**
+
+```javascript
+deviceService.getDeviceTypes().subscribe(deviceTypes => {
+  console.log('Device Types:', deviceTypes);
+});
+```
+
+**12. getDeviceCredentials**
 
 ```javascript
 const deviceId = 'your-device-id';
 const sync = false;
+
 deviceService.getDeviceCredentials(deviceId, sync).subscribe(credentials => {
   console.log('Device Credentials:', credentials);
 });
 ```
 
-### sendTwoWayRpcCommand
+**13. saveDeviceCredentials**
 
-Send a two-way RPC command to a device.
+```javascript
+const deviceCredentials = {
+  deviceId: { entityType: 'DEVICE', id: 'your-device-id' },
+  credentialsType: 'ACCESS_TOKEN',
+  credentialsId: 'new-access-token'
+};
+
+deviceService.saveDeviceCredentials(deviceCredentials).subscribe(savedCredentials => {
+  console.log('Saved Device Credentials:', savedCredentials);
+});
+```
+
+**14. makeDevicePublic**
+
+```javascript
+const deviceId = 'your-device-id';
+
+deviceService.makeDevicePublic(deviceId).subscribe(publicDevice => {
+  console.log('Public Device:', publicDevice);
+});
+```
+
+**15. assignDeviceToCustomer**
+
+```javascript
+const customerId = 'your-customer-id';
+const deviceId = 'your-device-id';
+
+deviceService.assignDeviceToCustomer(customerId, deviceId).subscribe(assignedDevice => {
+  console.log('Assigned Device:', assignedDevice);
+});
+```
+
+**16. sendOneWayRpcCommand**
 
 ```javascript
 const deviceId = 'your-device-id';
 const requestBody = {
-  method: 'getTemperature',
+  method: 'setValue',
+  params: { value: 25.5 }
+};
+
+deviceService.sendOneWayRpcCommand(deviceId, requestBody).subscribe(result => {
+  console.log('One-way RPC sent successfully');
+});
+```
+
+**17. sendTwoWayRpcCommand**
+
+```javascript
+const deviceId = 'your-device-id';
+const requestBody = {
+  method: 'getValue',
   params: {}
 };
+
 deviceService.sendTwoWayRpcCommand(deviceId, requestBody).subscribe(response => {
   console.log('Two-way RPC Response:', response);
 });
 ```
 
-### findByName
-
-Find a device by name.
+**18. getPersistedRpc**
 
 ```javascript
-const deviceName = 'Temperature Sensor 01';
+const rpcId = 'your-rpc-id';
+
+deviceService.getPersistedRpc(rpcId).subscribe(persistedRpc => {
+  console.log('Persisted RPC:', persistedRpc);
+});
+```
+
+**19. getPersistedRpcRequests**
+
+```javascript
+const deviceId = 'your-device-id';
+const pageLink = self.ctx.pageLink(10, 0);
+const rpcStatus = 'SUCCESSFUL'; // Optional
+
+deviceService.getPersistedRpcRequests(deviceId, pageLink, rpcStatus).subscribe(response => {
+  console.log('Persisted RPC Requests:', response.data);
+});
+```
+
+**20. findByQuery**
+
+```javascript
+const query = {
+  entityFilter: {
+    type: 'entitiesByType',
+    entityType: 'DEVICE'
+  },
+  pageLink: self.ctx.pageLink(10, 0)
+};
+
+deviceService.findByQuery(query).subscribe(devices => {
+  console.log('Devices by Query:', devices);
+});
+```
+
+**21. findByName**
+
+```javascript
+const deviceName = 'Temperature Sensor 001';
+
 deviceService.findByName(deviceName).subscribe(device => {
   console.log('Device by Name:', device);
 });
 ```
 
-## Common Use Cases
-
-### Getting Device List for Dashboard
+**22. claimDevice**
 
 ```javascript
-const pageLink = self.ctx.pageLink(20, 0, '', 'name', 'ASC');
-deviceService.getTenantDeviceInfos(pageLink, '').subscribe(devicePage => {
-  const devices = devicePage.data;
-  console.log(`Found ${devices.length} devices`);
-  
-  devices.forEach(device => {
-    console.log(`Device: ${device.name} (${device.type})`);
-  });
+const deviceName = 'Claimable Device';
+const claimRequest = {
+  secretKey: 'device-secret-key'
+};
+
+deviceService.claimDevice(deviceName, claimRequest).subscribe(claimResult => {
+  console.log('Device Claim Result:', claimResult);
 });
 ```
 
-### Sending Commands to Multiple Devices
+**23. assignDeviceToEdge**
 
 ```javascript
-const deviceIds = ['device-1', 'device-2', 'device-3'];
-const command = {
-  method: 'setRelayStatus',
-  params: { status: true }
-};
+const edgeId = 'your-edge-id';
+const deviceId = 'your-device-id';
 
-deviceIds.forEach(deviceId => {
-  deviceService.sendOneWayRpcCommand(deviceId, command).subscribe(() => {
-    console.log(`Command sent to device: ${deviceId}`);
-  });
+deviceService.assignDeviceToEdge(edgeId, deviceId).subscribe(assignedDevice => {
+  console.log('Device Assigned to Edge:', assignedDevice);
 });
 ```
 
-### Creating Device with Credentials
+**24. getEdgeDevices**
 
 ```javascript
-const device = {
-  name: 'New Sensor Device',
-  type: 'sensor',
-  label: 'Warehouse Sensor #5'
-};
+const edgeId = 'your-edge-id';
+const pageLink = self.ctx.pageLink(10, 0);
+const type = '';
 
-const credentials = {
-  credentialsType: 'ACCESS_STRING',
-  credentialsId: 'warehouse_sensor_05_identifier'
-};
-
-deviceService.saveDeviceWithCredentials(device, credentials).subscribe(result => {
-  console.log('Created device with credentials:', result);
+deviceService.getEdgeDevices(edgeId, pageLink, type).subscribe(response => {
+  console.log('Edge Devices:', response.data);
 });
 ```
 
-## Error Handling
-
-Always handle errors in device operations:
+**25. bulkImportDevices**
 
 ```javascript
-deviceService.getDevice(deviceId).subscribe(
-  device => {
-    console.log('Device loaded:', device);
-  },
-  error => {
-    console.error('Failed to load device:', error);
-    // Handle error appropriately
+const entitiesData = {
+  file: 'devices.csv',
+  mapping: {
+    name: 0,
+    type: 1
   }
-);
+};
+
+deviceService.bulkImportDevices(entitiesData).subscribe(importResult => {
+  console.log('Bulk Import Result:', importResult);
+});
+```
+
+**26. getDevicePublishTelemetryCommands**
+
+```javascript
+const deviceId = 'your-device-id';
+
+deviceService.getDevicePublishTelemetryCommands(deviceId).subscribe(telemetryCommands => {
+  console.log('Publish Telemetry Commands:', telemetryCommands);
+});
+```
+
+**27. downloadGatewayDockerComposeFile**
+
+```javascript
+const deviceId = 'your-gateway-device-id';
+
+deviceService.downloadGatewayDockerComposeFile(deviceId).subscribe(dockerCompose => {
+  console.log('Gateway Docker Compose downloaded');
+});
+```
+
+**28. rebootDevice**
+
+```javascript
+const deviceId = 'your-device-id';
+const isBootstrapServer = false;
+
+deviceService.rebootDevice(deviceId, isBootstrapServer).subscribe(result => {
+  console.log('Device reboot initiated');
+});
+```
+
+**29. rebootTrigger**
+
+```javascript
+const deviceId = 'your-device-id';
+const resourcePath = '/3/0/4';
+
+deviceService.rebootTrigger(deviceId, resourcePath).subscribe(result => {
+  console.log('Device reboot trigger sent');
+});
 ```
