@@ -1,22 +1,18 @@
-# Alarm Service
+# AlarmService
 
-Manage alarms, acknowledgments, and alarm-related operations in ThingsBoard.
+**Source:** `alarm.service.ts`  
+**Direct context access:** `none`
 
-## Injection
+---
 
 ```javascript
 const $injector = self.ctx.$scope.$injector;
 const alarmService = $injector.get(self.ctx.servicesMap.get('alarmService'));
 ```
-
-## Methods
-
 **1. getAlarm**
 
 ```javascript
-const alarmId = 'your-alarm-id';
-
-alarmService.getAlarm(alarmId).subscribe(alarm => {
+alarmService.getAlarm(/* alarmId */ null).subscribe(alarm => {
   console.log('Alarm:', alarm);
 });
 ```
@@ -24,160 +20,107 @@ alarmService.getAlarm(alarmId).subscribe(alarm => {
 **2. getAlarmInfo**
 
 ```javascript
-const alarmId = 'your-alarm-id';
-
-alarmService.getAlarmInfo(alarmId).subscribe(alarmInfo => {
-  console.log('Alarm Information:', alarmInfo);
+alarmService.getAlarmInfo(/* alarmId */ null).subscribe(alarmInfo => {
+  console.log('Alarm:', alarmInfo);
 });
 ```
 
 **3. saveAlarm**
 
 ```javascript
-const alarm = {
-  type: 'Temperature',
-  severity: 'CRITICAL',
-  originator: { entityType: 'DEVICE', id: 'your-device-id' }
-};
-
-alarmService.saveAlarm(alarm).subscribe(savedAlarm => {
-  console.log('Saved Alarm:', savedAlarm);
+alarmService.saveAlarm(/* alarm */ null).subscribe(alarm => {
+  console.log('Alarm:', alarm);
 });
 ```
 
 **4. ackAlarm**
 
 ```javascript
-const alarmId = 'your-alarm-id';
-
-alarmService.ackAlarm(alarmId).subscribe(alarmInfo => {
-  console.log('Acknowledged Alarm:', alarmInfo);
+alarmService.ackAlarm(/* alarmId */ null).subscribe(alarm => {
+  console.log('ackAlarm:', alarm);
 });
 ```
 
 **5. clearAlarm**
 
 ```javascript
-const alarmId = 'your-alarm-id';
-
-alarmService.clearAlarm(alarmId).subscribe(alarmInfo => {
-  console.log('Cleared Alarm:', alarmInfo);
+alarmService.clearAlarm(/* alarmId */ null).subscribe(alarm => {
+  console.log('clearAlarm:', alarm);
 });
 ```
 
 **6. assignAlarm**
 
 ```javascript
-const alarmId = 'your-alarm-id';
-const assigneeId = 'your-user-id';
-
-alarmService.assignAlarm(alarmId, assigneeId).subscribe(() => {
-  console.log('Alarm assigned successfully');
+alarmService.assignAlarm(/* alarmId */ null, /* assigneeId */ null).subscribe(alarm => {
+  console.log('assignAlarm:', alarm);
 });
 ```
 
 **7. unassignAlarm**
 
 ```javascript
-const alarmId = 'your-alarm-id';
-
-alarmService.unassignAlarm(alarmId).subscribe(() => {
-  console.log('Alarm unassigned successfully');
+alarmService.unassignAlarm(/* alarmId */ null).subscribe(unAlarm => {
+  console.log('unassignAlarm:', unAlarm);
 });
 ```
 
 **8. deleteAlarm**
 
 ```javascript
-const alarmId = 'your-alarm-id';
-
-alarmService.deleteAlarm(alarmId).subscribe(success => {
-  console.log('Alarm deleted:', success);
+alarmService.deleteAlarm(/* alarmId */ null).subscribe(alarm => {
+  console.log('Alarm:', alarm);
 });
 ```
 
 **9. getAlarms**
 
 ```javascript
-const query = {
-  entityFilter: {
-    type: 'singleEntity',
-    singleEntity: { entityType: 'DEVICE', id: 'your-device-id' }
-  },
-  pageLink: self.ctx.pageLink(10, 0)
-};
-
-alarmService.getAlarms(query).subscribe(response => {
-  console.log('Alarms:', response.data);
+alarmService.getAlarms(null).subscribe(alarms => {
+  console.log('Alarms:', alarms);
 });
 ```
 
 **10. getAlarmsV2**
 
 ```javascript
-const query = {
-  entityFilter: {
-    type: 'singleEntity',
-    singleEntity: { entityType: 'DEVICE', id: 'your-device-id' }
-  },
-  pageLink: self.ctx.pageLink(10, 0)
-};
-
-alarmService.getAlarmsV2(query).subscribe(response => {
-  console.log('Alarms V2:', response.data);
+alarmService.getAlarmsV2(null).subscribe(alarmsV2 => {
+  console.log('Alarms v2:', alarmsV2);
 });
 ```
 
 **11. getAllAlarms**
 
 ```javascript
-const query = {
-  entityFilter: {
-    type: 'entitiesByType',
-    entityType: 'DEVICE'
-  },
-  pageLink: self.ctx.pageLink(10, 0)
-};
-
-alarmService.getAllAlarms(query).subscribe(response => {
-  console.log('All Alarms:', response.data);
+alarmService.getAllAlarms(null).subscribe(allAlarms => {
+  console.log('AllAlarms:', allAlarms);
 });
 ```
 
 **12. getAllAlarmsV2**
 
 ```javascript
-const query = {
-  entityFilter: {
-    type: 'entitiesByType',
-    entityType: 'DEVICE'
-  },
-  pageLink: self.ctx.pageLink(10, 0)
-};
-
-alarmService.getAllAlarmsV2(query).subscribe(response => {
-  console.log('All Alarms V2:', response.data);
+alarmService.getAllAlarmsV2(null).subscribe(allAlarmsV2 => {
+  console.log('AllAlarms v2:', allAlarmsV2);
 });
 ```
 
 **13. getHighestAlarmSeverity**
 
 ```javascript
-const entityId = { entityType: 'DEVICE', id: 'your-device-id' };
-const alarmSearchStatus = 'ACTIVE';
-const alarmStatus = 'ACTIVE_UNACK';
-
-alarmService.getHighestAlarmSeverity(entityId, alarmSearchStatus, alarmStatus).subscribe(severity => {
-  console.log('Highest Alarm Severity:', severity);
+alarmService.getHighestAlarmSeverity(entityId, /* alarmSearchStatus */ null, /* alarmStatus */ null).subscribe(highestAlarmSeverity => {
+  console.log('HighestAlarmSeverity:', highestAlarmSeverity);
 });
 ```
 
 **14. getAlarmTypes**
 
 ```javascript
-const pageLink = self.ctx.pageLink(10, 0);
-
-alarmService.getAlarmTypes(pageLink).subscribe(response => {
-  console.log('Alarm Types:', response.data);
+alarmService.getAlarmTypes(self.ctx.pageLink(10, 0, null, null, null)).subscribe(alarmTypes => {
+  console.log('AlarmTypes:', alarmTypes);
 });
 ```
+
+---
+
+*Auto-generated by ThingsBoardDocUpdater*

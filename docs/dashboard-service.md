@@ -1,8 +1,9 @@
-# Dashboard Service
+# DashboardService
 
-Manage dashboards, assignments, and dashboard-related operations in ThingsBoard.
+**Source:** `dashboard.service.ts`  
+**Direct context access:** `dashboardService`
 
-## Injection
+---
 
 ```javascript
 const $injector = self.ctx.$scope.$injector;
@@ -12,46 +13,34 @@ const dashboardService = $injector.get(self.ctx.servicesMap.get('dashboardServic
 const dashboardService = self.ctx.dashboardService;
 ```
 
-## Methods
-
 **1. getTenantDashboards**
 
 ```javascript
-const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'title', 'ASC');
-
-dashboardService.getTenantDashboards(pageLink).subscribe(response => {
-  console.log('Tenant Dashboards:', response.data);
+dashboardService.getTenantDashboards(self.ctx.pageLink(10, 0, null, null, null)).subscribe(tenantDashboards => {
+  console.log('TenantDashboards:', tenantDashboards);
 });
 ```
 
 **2. getTenantDashboardsByTenantId**
 
 ```javascript
-const tenantId = 'your-tenant-id';
-const pageLink = self.ctx.pageLink(10, 0);
-
-dashboardService.getTenantDashboardsByTenantId(tenantId, pageLink).subscribe(response => {
-  console.log('Dashboards by Tenant:', response.data);
+dashboardService.getTenantDashboardsByTenantId(/* tenantId */ null, self.ctx.pageLink(10, 0, null, null, null)).subscribe(tenantDashboardsByTenantId => {
+  console.log('TenantDashboardsByTenantId:', tenantDashboardsByTenantId);
 });
 ```
 
 **3. getCustomerDashboards**
 
 ```javascript
-const customerId = 'your-customer-id';
-const pageLink = self.ctx.pageLink(10, 0);
-
-dashboardService.getCustomerDashboards(customerId, pageLink).subscribe(response => {
-  console.log('Customer Dashboards:', response.data);
+dashboardService.getCustomerDashboards(/* customerId */ null, self.ctx.pageLink(10, 0, null, null, null)).subscribe(customerDashboards => {
+  console.log('CustomerDashboards:', customerDashboards);
 });
 ```
 
 **4. getDashboard**
 
 ```javascript
-const dashboardId = 'your-dashboard-id';
-
-dashboardService.getDashboard(dashboardId).subscribe(dashboard => {
+dashboardService.getDashboard(/* dashboardId */ null).subscribe(dashboard => {
   console.log('Dashboard:', dashboard);
 });
 ```
@@ -59,115 +48,80 @@ dashboardService.getDashboard(dashboardId).subscribe(dashboard => {
 **5. exportDashboard**
 
 ```javascript
-const dashboardId = 'your-dashboard-id';
-
-dashboardService.exportDashboard(dashboardId).subscribe(exportedDashboard => {
-  console.log('Exported Dashboard:', exportedDashboard);
+dashboardService.exportDashboard(/* dashboardId */ null).subscribe(exportDashboard => {
+  console.log('exportDashboard:', exportDashboard);
 });
 ```
 
 **6. getDashboardInfo**
 
 ```javascript
-const dashboardId = 'your-dashboard-id';
-
-dashboardService.getDashboardInfo(dashboardId).subscribe(dashboardInfo => {
-  console.log('Dashboard Info:', dashboardInfo);
+dashboardService.getDashboardInfo(/* dashboardId */ null).subscribe(dashboardInfo => {
+  console.log('Dashboard:', dashboardInfo);
 });
 ```
 
 **7. getDashboards**
 
 ```javascript
-const dashboardIds = ['dashboard-id-1', 'dashboard-id-2'];
-
-dashboardService.getDashboards(dashboardIds).subscribe(dashboards => {
-  console.log('Dashboards by IDs:', dashboards);
+dashboardService.getDashboards(['id1', 'id2']).subscribe(dashboards => {
+  console.log('Dashboards:', dashboards);
 });
 ```
 
 **8. saveDashboard**
 
 ```javascript
-const dashboard = {
-  title: 'Device Monitoring Dashboard',
-  configuration: {
-    widgets: [],
-    states: {
-      default: {
-        name: 'Default',
-        layouts: {}
-      }
-    }
-  }
-};
-
-dashboardService.saveDashboard(dashboard).subscribe(savedDashboard => {
-  console.log('Saved Dashboard:', savedDashboard);
+dashboardService.saveDashboard(/* dashboard */ null).subscribe(dashboard => {
+  console.log('Dashboard:', dashboard);
 });
 ```
 
 **9. assignDashboardToCustomer**
 
 ```javascript
-const customerId = 'your-customer-id';
-const dashboardId = 'your-dashboard-id';
-
-dashboardService.assignDashboardToCustomer(customerId, dashboardId).subscribe(assignedDashboard => {
-  console.log('Assigned Dashboard:', assignedDashboard);
+dashboardService.assignDashboardToCustomer(/* customerId */ null, /* dashboardId */ null).subscribe(dashboardToCustomer => {
+  console.log('assignDashboardToCustomer:', dashboardToCustomer);
 });
 ```
 
 **10. makeDashboardPublic**
 
 ```javascript
-const dashboardId = 'your-dashboard-id';
-
-dashboardService.makeDashboardPublic(dashboardId).subscribe(publicDashboard => {
-  console.log('Public Dashboard:', publicDashboard);
+dashboardService.makeDashboardPublic(/* dashboardId */ null).subscribe(dashboardPublic => {
+  console.log('makeDashboardPublic:', dashboardPublic);
 });
 ```
 
 **11. makeDashboardPrivate**
 
 ```javascript
-const dashboardId = 'your-dashboard-id';
-
-dashboardService.makeDashboardPrivate(dashboardId).subscribe(privateDashboard => {
-  console.log('Private Dashboard:', privateDashboard);
+dashboardService.makeDashboardPrivate(/* dashboardId */ null).subscribe(dashboardPrivate => {
+  console.log('makeDashboardPrivate:', dashboardPrivate);
 });
 ```
 
 **12. updateDashboardCustomers**
 
 ```javascript
-const dashboardId = 'your-dashboard-id';
-const customerIds = ['customer-id-1', 'customer-id-2'];
-
-dashboardService.updateDashboardCustomers(dashboardId, customerIds).subscribe(updatedDashboard => {
-  console.log('Dashboard Customers Updated:', updatedDashboard);
+dashboardService.updateDashboardCustomers(/* dashboardId */ null, ['id1', 'id2']).subscribe(dashboardCustomers => {
+  console.log('updateDashboardCustomers:', dashboardCustomers);
 });
 ```
 
 **13. addDashboardCustomers**
 
 ```javascript
-const dashboardId = 'your-dashboard-id';
-const customerIds = ['customer-id-3', 'customer-id-4'];
-
-dashboardService.addDashboardCustomers(dashboardId, customerIds).subscribe(updatedDashboard => {
-  console.log('Dashboard Customers Added:', updatedDashboard);
+dashboardService.addDashboardCustomers(/* dashboardId */ null, ['id1', 'id2']).subscribe(addDashboardCustomers => {
+  console.log('addDashboardCustomers:', addDashboardCustomers);
 });
 ```
 
 **14. removeDashboardCustomers**
 
 ```javascript
-const dashboardId = 'your-dashboard-id';
-const customerIds = ['customer-id-1'];
-
-dashboardService.removeDashboardCustomers(dashboardId, customerIds).subscribe(updatedDashboard => {
-  console.log('Dashboard Customers Removed:', updatedDashboard);
+dashboardService.removeDashboardCustomers(/* dashboardId */ null, ['id1', 'id2']).subscribe(removeDashboardCustomers => {
+  console.log('removeDashboardCustomers:', removeDashboardCustomers);
 });
 ```
 
@@ -175,47 +129,42 @@ dashboardService.removeDashboardCustomers(dashboardId, customerIds).subscribe(up
 
 ```javascript
 dashboardService.getHomeDashboard().subscribe(homeDashboard => {
-  console.log('Home Dashboard:', homeDashboard);
+  console.log('HomeDashboard:', homeDashboard);
 });
 ```
 
 **16. getTenantHomeDashboardInfo**
 
 ```javascript
-dashboardService.getTenantHomeDashboardInfo().subscribe(homeInfo => {
-  console.log('Tenant Home Dashboard Info:', homeInfo);
+dashboardService.getTenantHomeDashboardInfo().subscribe(tenantHomeDashboardInfo => {
+  console.log('TenantHomeDashboard:', tenantHomeDashboardInfo);
 });
 ```
 
 **17. setTenantHomeDashboardInfo**
 
 ```javascript
-const homeDashboardInfo = {
-  dashboardId: { entityType: 'DASHBOARD', id: 'your-dashboard-id' },
-  hideDashboardToolbar: false
-};
-
-dashboardService.setTenantHomeDashboardInfo(homeDashboardInfo).subscribe(result => {
-  console.log('Home dashboard info set successfully');
+dashboardService.setTenantHomeDashboardInfo(/* homeDashboardInfo */ null).subscribe(tenantHomeDashboardInfo => {
+  console.log('setTenantHomeDashboard:', tenantHomeDashboardInfo);
 });
 ```
 
 **18. getPublicDashboardLink**
 
 ```javascript
-const dashboard = { publicCustomerId: 'public-customer-id' };
-
-const publicLink = dashboardService.getPublicDashboardLink(dashboard);
-console.log('Public Dashboard Link:', publicLink);
+dashboardService.getPublicDashboardLink(/* dashboard */ null).subscribe(publicDashboardLink => {
+  console.log('PublicDashboardLink:', publicDashboardLink);
+});
 ```
 
 **19. assignDashboardToEdge**
 
 ```javascript
-const edgeId = 'your-edge-id';
-const dashboardId = 'your-dashboard-id';
-
-dashboardService.assignDashboardToEdge(edgeId, dashboardId).subscribe(assignedDashboard => {
-  console.log('Dashboard Assigned to Edge:', assignedDashboard);
+dashboardService.assignDashboardToEdge(/* edgeId */ null, /* dashboardId */ null).subscribe(dashboardToEdge => {
+  console.log('assignDashboardToEdge:', dashboardToEdge);
 });
 ```
+
+---
+
+*Auto-generated by ThingsBoardDocUpdater*

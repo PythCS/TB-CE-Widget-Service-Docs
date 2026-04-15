@@ -1,98 +1,94 @@
-# ThingsBoard Widget Services API
+# ThingsBoard CE Widget Service Reference
 
-Complete reference for all widget services available in ThingsBoard CE.
+Complete reference for all ThingsBoard frontend services available in widget development and custom actions. All methods return RxJS Observables — call `.subscribe()` to get results.
 
-## Table of Contents
+Auto-generated from ThingsBoard CE 3.7.x source (widget-services).
 
-- [Using Services in Widgets/Custom Actions](#using-services-in-widgetscustom-actions)
-- [Using Page Links](#using-page-links)
-- [AdminService](#admin-service)
-- [AiModelService](#aimodel-service)
-- [AlarmCommentService](#alarmcomment-service)
-- [AlarmRulesService](#alarmrules-service)
-- [AlarmService](#alarm-service)
-- [ApiKeyService](#apikey-service)
-- [AssetProfileService](#assetprofile-service)
-- [AssetService](#asset-service)
-- [AttributeService](#attribute-service)
-- [AuditLogService](#auditlog-service)
-- [CalculatedFieldsService](#calculatedfields-service)
-- [ComponentDescriptorService](#componentdescriptor-service)
-- [CustomerService](#customer-service)
-- [DashboardService](#dashboard-service)
-- [DeviceProfileService](#deviceprofile-service)
-- [DeviceService](#device-service)
-- [DomainService](#domain-service)
-- [EdgeService](#edge-service)
-- [EntitiesVersionControlService](#entitiesversioncontrol-service)
-- [EntityRelationService](#entityrelation-service)
-- [EntityService](#entity-service)
-- [EntityViewService](#entityview-service)
-- [EventService](#event-service)
-- [GitHubService](#github-service)
-- [ImageService](#image-service)
-- [MobileAppService](#mobileapp-service)
-- [MobileApplicationService](#mobileapplication-service)
-- [NotificationService](#notification-service)
-- [OAuth2Service](#oauth2-service)
-- [OtaPackageService](#otapackage-service)
-- [QueueService](#queue-service)
-- [ResourceService](#resource-service)
-- [RuleChainService](#rulechain-service)
-- [TenantProfileService](#tenantprofile-service)
-- [TenantService](#tenant-service)
-- [TrendzSettingsService](#trendzsettings-service)
-- [TwoFactorAuthenticationService](#twofactorauthentication-service)
-- [UiSettingsService](#uisettings-service)
-- [UsageInfoService](#usageinfo-service)
-- [UserService](#user-service)
-- [UserSettingsService](#usersettings-service)
-- [WidgetService](#widget-service)
+---
 
-## Using Services in Widgets/Custom Actions
-
-Using services in custom actions is slightly different than in custom widget development.
+## USING SERVICES IN WIDGETS/CUSTOM ACTIONS
 
 In custom actions you use `widgetContext` — in widget development you use `self.ctx`. Same services, different context variable.
 
-Example Custom Action:
+**Example Custom Action:**
 
 ```javascript
 const $injector = widgetContext.$scope.$injector;
 const userService = $injector.get(widgetContext.servicesMap.get('userService'));
 ```
 
-Example Widget Development:
+**Example Widget Development:**
 
 ```javascript
 const $injector = self.ctx.$scope.$injector;
 const userService = $injector.get(self.ctx.servicesMap.get('userService'));
 ```
 
-## Using Page Links
+---
 
-Page links are used for pagination to avoid overloading the server when dealing with large datasets (1000+ results). They control how many items to fetch per request and which page to retrieve.
+## USING PAGE LINKS
 
-Create a page link like this:
+`PageLink` handles pagination — tell the server how many results (`limit`) and where to start (`offset`). Use `self.ctx.pageLink(limit, offset, searchText, sortProperty, sortOrder)` to build one.
 
 ```javascript
-const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
+const pageLink = self.ctx.pageLink(10, 0, null, 'name', 'ASC');
+userService.getUsers(pageLink).subscribe(users => {
+  console.log('Users:', users);
+});
 ```
 
-Parameters:
-- `pageSize` (number): How many items to return per page (e.g., 10, 20, 50)
-- `page` (number): Zero-based page index (0 = first page, 1 = second page, etc.)
-- `searchText` (string): Optional text to filter results
-- `sortProperty` (string): Property name to sort by
-- `sortOrder` (string): 'ASC' or 'DESC'
+`TimePageLink` adds time-range filtering — use it for audit logs, events, etc. that need a start/end timestamp.
 
-The response from paginated methods includes:
-- `data`: Array of items for the current page
-- `totalPages`: Total number of pages
-- `totalElements`: Total number of items across all pages
-- `hasNext`: Boolean indicating if more pages exist
+---
 
-### **ADMINSERVICE
+## SERVICE REFERENCE
+
+- [AdminService](#adminservice)
+- [AiModelService](#aimodelservice)
+- [AlarmCommentService](#alarmcommentservice)
+- [AlarmRulesService](#alarmrulesservice)
+- [AlarmService](#alarmservice)
+- [ApiKeyService](#apikeyservice)
+- [AssetProfileService](#assetprofileservice)
+- [AssetService](#assetservice)
+- [AttributeService](#attributeservice)
+- [AuditLogService](#auditlogservice)
+- [CalculatedFieldsService](#calculatedfieldsservice)
+- [ComponentDescriptorService](#componentdescriptorservice)
+- [CustomerService](#customerservice)
+- [DashboardService](#dashboardservice)
+- [DeviceProfileService](#deviceprofileservice)
+- [DeviceService](#deviceservice)
+- [DomainService](#domainservice)
+- [EdgeService](#edgeservice)
+- [EntitiesVersionControlService](#entitiesversioncontrolservice)
+- [EntityRelationService](#entityrelationservice)
+- [EntityService](#entityservice)
+- [EntityViewService](#entityviewservice)
+- [EventService](#eventservice)
+- [GitHubService](#githubservice)
+- [ImageService](#imageservice)
+- [MobileAppService](#mobileappservice)
+- [MobileApplicationService](#mobileapplicationservice)
+- [NotificationService](#notificationservice)
+- [OAuth2Service](#oauth2service)
+- [OtaPackageService](#otapackageservice)
+- [QueueService](#queueservice)
+- [ResourceService](#resourceservice)
+- [RuleChainService](#rulechainservice)
+- [TenantProfileService](#tenantprofileservice)
+- [TenantService](#tenantservice)
+- [TrendzSettingsService](#trendzsettingsservice)
+- [TwoFactorAuthenticationService](#twofactorauthenticationservice)
+- [UiSettingsService](#uisettingsservice)
+- [UsageInfoService](#usageinfoservice)
+- [UserService](#userservice)
+- [UserSettingsService](#usersettingsservice)
+- [WidgetService](#widgetservice)
+
+---
+
+### **ADMINSERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -104,148 +100,149 @@ const adminService = $injector.get(self.ctx.servicesMap.get('adminService'));
 **1. sendTestMail**
 
 ```javascript
-adminService.sendTestMail({ /* your adminSettings */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+adminService.sendTestMail(/* adminSettings */ null).subscribe(testMail => {
+  console.log('sendTestMail:', testMail);
 });
 ```
 
 **2. sendTestSms**
 
 ```javascript
-adminService.sendTestSms({ /* your testSmsRequest */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+adminService.sendTestSms(/* testSmsRequest */ null).subscribe(testSms => {
+  console.log('sendTestSms:', testSms);
 });
 ```
 
 **3. getSecuritySettings**
 
 ```javascript
-adminService.getSecuritySettings({ /* your config */ }).subscribe(ecurityetting => {
-  console.log('Security Settings:', ecurityetting);
+adminService.getSecuritySettings().subscribe(securitySettings => {
+  console.log('SecuritySettings:', securitySettings);
 });
 ```
 
 **4. saveSecuritySettings**
 
 ```javascript
-adminService.saveSecuritySettings({ /* your securitySettings */ }, { /* your config */ }).subscribe(savedSecuritySettings => {
-  console.log('Saved SecuritySettings:', savedSecuritySettings);
+adminService.saveSecuritySettings(/* securitySettings */ null).subscribe(securitySettings => {
+  console.log('SecuritySettings:', securitySettings);
 });
 ```
 
 **5. getJwtSettings**
 
 ```javascript
-adminService.getJwtSettings({ /* your config */ }).subscribe(jwtetting => {
-  console.log('Jwt Settings:', jwtetting);
+adminService.getJwtSettings().subscribe(jwtSettings => {
+  console.log('JwtSettings:', jwtSettings);
 });
 ```
 
 **6. saveJwtSettings**
 
 ```javascript
-adminService.saveJwtSettings({ /* your jwtSettings */ }, { /* your config */ }).subscribe(savedJwtSettings => {
-  console.log('Saved JwtSettings:', savedJwtSettings);
+adminService.saveJwtSettings(/* jwtSettings */ null).subscribe(jwtSettings => {
+  console.log('JwtSettings:', jwtSettings);
 });
 ```
 
 **7. getRepositorySettings**
 
 ```javascript
-adminService.getRepositorySettings({ /* your config */ }).subscribe(repoitoryetting => {
-  console.log('Repository Settings:', repoitoryetting);
+adminService.getRepositorySettings().subscribe(repositorySettings => {
+  console.log('RepositorySettings:', repositorySettings);
 });
 ```
 
 **8. saveRepositorySettings**
 
 ```javascript
-adminService.saveRepositorySettings({ /* your repositorySettings */ }, { /* your config */ }).subscribe(savedRepositorySettings => {
-  console.log('Saved RepositorySettings:', savedRepositorySettings);
+adminService.saveRepositorySettings(/* repositorySettings */ null).subscribe(repositorySettings => {
+  console.log('RepositorySettings:', repositorySettings);
 });
 ```
 
 **9. checkRepositoryAccess**
 
 ```javascript
-adminService.checkRepositoryAccess({ /* your repositorySettings */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+adminService.checkRepositoryAccess(/* repositorySettings */ null).subscribe(checkRepositoryAccess => {
+  console.log('checkRepositoryAccess:', checkRepositoryAccess);
 });
 ```
 
 **10. getRepositorySettingsInfo**
 
 ```javascript
-adminService.getRepositorySettingsInfo({ /* your config */ }).subscribe(repositorysettingsinfo => {
-  console.log('Repository Settings Info:', repositorysettingsinfo);
+adminService.getRepositorySettingsInfo().subscribe(repositorySettingsInfo => {
+  console.log('RepositorySettings:', repositorySettingsInfo);
 });
 ```
 
 **11. getAutoCommitSettings**
 
 ```javascript
-adminService.getAutoCommitSettings({ /* your config */ }).subscribe(autocommitetting => {
-  console.log('Auto Commit Settings:', autocommitetting);
+adminService.getAutoCommitSettings().subscribe(autoCommitSettings => {
+  console.log('AutoCommitSettings:', autoCommitSettings);
 });
 ```
 
 **12. autoCommitSettingsExists**
 
 ```javascript
-adminService.autoCommitSettingsExists({ /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+adminService.autoCommitSettingsExists().subscribe(autoCommitSettingsExists => {
+  console.log('autoCommitSettingsExists:', autoCommitSettingsExists);
 });
 ```
 
 **13. saveAutoCommitSettings**
 
 ```javascript
-adminService.saveAutoCommitSettings({ /* your autoCommitSettings */ }, { /* your config */ }).subscribe(savedAutoCommitSettings => {
-  console.log('Saved AutoCommitSettings:', savedAutoCommitSettings);
+adminService.saveAutoCommitSettings(/* autoCommitSettings */ null).subscribe(autoCommitSettings => {
+  console.log('AutoCommitSettings:', autoCommitSettings);
 });
 ```
 
 **14. checkUpdates**
 
 ```javascript
-adminService.checkUpdates({ /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+adminService.checkUpdates().subscribe(checkUpdates => {
+  console.log('checkUpdates:', checkUpdates);
 });
 ```
 
 **15. getFeaturesInfo**
 
 ```javascript
-adminService.getFeaturesInfo({ /* your config */ }).subscribe(featuresinfo => {
-  console.log('Features Info:', featuresinfo);
+adminService.getFeaturesInfo().subscribe(featuresInfo => {
+  console.log('Features:', featuresInfo);
 });
 ```
 
 **16. getLoginProcessingUrl**
 
 ```javascript
-adminService.getLoginProcessingUrl({ /* your config */ }).subscribe(loginprocessingurl => {
-  console.log('Login Processing Url:', loginprocessingurl);
+adminService.getLoginProcessingUrl().subscribe(loginProcessingUrl => {
+  console.log('LoginProcessingUrl:', loginProcessingUrl);
 });
 ```
 
 **17. generateAccessToken**
 
 ```javascript
-adminService.generateAccessToken({ /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+adminService.generateAccessToken().subscribe(accessToken => {
+  console.log('generateAccessToken:', accessToken);
 });
 ```
 
 **18. getMailConfigTemplate**
 
 ```javascript
-adminService.getMailConfigTemplate({ /* your config */ }).subscribe(mailconfigtemplate => {
-  console.log('Mail Config Template:', mailconfigtemplate);
+adminService.getMailConfigTemplate().subscribe(mailConfigTemplate => {
+  console.log('MailConfigTemplate:', mailConfigTemplate);
 });
 ```
 
-### **AIMODELSERVICE
+---
+### **AIMODELSERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -257,36 +254,37 @@ const aiModelService = $injector.get(self.ctx.servicesMap.get('aiModelService'))
 **1. saveAiModel**
 
 ```javascript
-aiModelService.saveAiModel({ /* your aiModel */ }, { /* your config */ }).subscribe(savedAiModel => {
-  console.log('Saved AiModel:', savedAiModel);
+aiModelService.saveAiModel(/* aiModel */ null).subscribe(aiModel => {
+  console.log('AiModel:', aiModel);
 });
 ```
 
 **2. getAiModels**
 
 ```javascript
-aiModelService.getAiModels(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(aimodel => {
-  console.log('Ai Models:', aimodel);
+aiModelService.getAiModels(self.ctx.pageLink(10, 0, null, null, null)).subscribe(aiModels => {
+  console.log('AiModels:', aiModels);
 });
 ```
 
 **3. getAiModelById**
 
 ```javascript
-aiModelService.getAiModelById('your-aimodel-id', { /* your config */ }).subscribe(aimodelbyid => {
-  console.log('Ai Model By Id:', aimodelbyid);
+aiModelService.getAiModelById(/* aiModelId */ null).subscribe(aiModelById => {
+  console.log('AiModelById:', aiModelById);
 });
 ```
 
 **4. checkConnectivity**
 
 ```javascript
-aiModelService.checkConnectivity({ /* your aiModelWithUserMsg */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+aiModelService.checkConnectivity(/* aiModelWithUserMsg */ null).subscribe(checkConnectivity => {
+  console.log('checkConnectivity:', checkConnectivity);
 });
 ```
 
-### **ALARMCOMMENTSERVICE
+---
+### **ALARMCOMMENTSERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -298,28 +296,29 @@ const alarmCommentService = $injector.get(self.ctx.servicesMap.get('alarmComment
 **1. saveAlarmComment**
 
 ```javascript
-alarmCommentService.saveAlarmComment('your-alarm-id', { /* your alarmComment */ }, { /* your config */ }).subscribe(savedAlarmComment => {
-  console.log('Saved AlarmComment:', savedAlarmComment);
+alarmCommentService.saveAlarmComment(/* alarmId */ null, /* alarmComment */ null).subscribe(alarmComment => {
+  console.log('AlarmComment:', alarmComment);
 });
 ```
 
 **2. getAlarmComments**
 
 ```javascript
-alarmCommentService.getAlarmComments('your-alarm-id', self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(alarmcomment => {
-  console.log('Alarm Comments:', alarmcomment);
+alarmCommentService.getAlarmComments(/* alarmId */ null, self.ctx.pageLink(10, 0, null, null, null)).subscribe(alarmComments => {
+  console.log('AlarmComments:', alarmComments);
 });
 ```
 
 **3. deleteAlarmComments**
 
 ```javascript
-alarmCommentService.deleteAlarmComments('your-alarm-id', 'your-comment-id', { /* your config */ }).subscribe(result => {
-  console.log('Delete Result:', result);
+alarmCommentService.deleteAlarmComments(/* alarmId */ null, /* commentId */ null).subscribe(alarmComments => {
+  console.log('AlarmComments:', alarmComments);
 });
 ```
 
-### **ALARMRULESSERVICE
+---
+### **ALARMRULESSERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -331,68 +330,69 @@ const alarmRulesService = $injector.get(self.ctx.servicesMap.get('alarmRulesServ
 **1. getAlarmRuleById**
 
 ```javascript
-alarmRulesService.getAlarmRuleById('your-alarmrule-id', { /* your config */ }).subscribe(alarmrulebyid => {
-  console.log('Alarm Rule By Id:', alarmrulebyid);
+alarmRulesService.getAlarmRuleById(/* alarmRuleId */ null).subscribe(alarmRuleById => {
+  console.log('AlarmRuleById:', alarmRuleById);
 });
 ```
 
 **2. saveAlarmRule**
 
 ```javascript
-alarmRulesService.saveAlarmRule({ /* your alarmRule */ }, { /* your config */ }).subscribe(savedAlarmRule => {
-  console.log('Saved AlarmRule:', savedAlarmRule);
+alarmRulesService.saveAlarmRule(/* alarmRule */ null).subscribe(alarmRule => {
+  console.log('AlarmRule:', alarmRule);
 });
 ```
 
 **3. deleteAlarmRule**
 
 ```javascript
-alarmRulesService.deleteAlarmRule('your-alarmrule-id', { /* your config */ }).subscribe(result => {
-  console.log('Delete Result:', result);
+alarmRulesService.deleteAlarmRule(/* alarmRuleId */ null).subscribe(alarmRule => {
+  console.log('AlarmRule:', alarmRule);
 });
 ```
 
 **4. getAlarmRules**
 
 ```javascript
-alarmRulesService.getAlarmRules(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your query */ }, { /* your config */ }).subscribe(alarmrule => {
-  console.log('Alarm Rules:', alarmrule);
+alarmRulesService.getAlarmRules(self.ctx.pageLink(10, 0, null, null, null), null).subscribe(alarmRules => {
+  console.log('AlarmRules:', alarmRules);
 });
 ```
 
 **5. getAlarmRulesByEntityId**
 
 ```javascript
-alarmRulesService.getAlarmRulesByEntityId(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(alarmrulesbyentityid => {
-  console.log('Alarm Rules By Entity Id:', alarmrulesbyentityid);
+alarmRulesService.getAlarmRulesByEntityId(self.ctx.pageLink(10, 0, null, null, null)).subscribe(alarmRulesByEntityId => {
+  console.log('AlarmRulesByEntityId:', alarmRulesByEntityId);
 });
 ```
 
 **6. testScript**
 
 ```javascript
-alarmRulesService.testScript({ /* your inputParams */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+alarmRulesService.testScript(/* inputParams */ null).subscribe(script => {
+  console.log('testScript:', script);
 });
 ```
 
 **7. getLatestAlarmRuleDebugEvent**
 
 ```javascript
-alarmRulesService.getLatestAlarmRuleDebugEvent('your-id', { /* your config */ }).subscribe(latestalarmruledebugevent => {
-  console.log('Latest Alarm Rule Debug Event:', latestalarmruledebugevent);
+alarmRulesService.getLatestAlarmRuleDebugEvent(/* id */ null).subscribe(laAlarmRuleDebugEvent => {
+  console.log('LatestAlarmRuleDebugEvent:', laAlarmRuleDebugEvent);
 });
 ```
 
 **8. getAlarmRuleNames**
 
 ```javascript
-alarmRulesService.getAlarmRuleNames(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(alarmrulename => {
-  console.log('Alarm Rule Names:', alarmrulename);
+alarmRulesService.getAlarmRuleNames(self.ctx.pageLink(10, 0, null, null, null)).subscribe(alarmRuleNames => {
+  console.log('AlarmRuleNames:', alarmRuleNames);
 });
 ```
 
-### **ALARMSERVICE
+---
+### **ALARMSERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -404,7 +404,7 @@ const alarmService = $injector.get(self.ctx.servicesMap.get('alarmService'));
 **1. getAlarm**
 
 ```javascript
-alarmService.getAlarm('your-alarm-id', { /* your config */ }).subscribe(alarm => {
+alarmService.getAlarm(/* alarmId */ null).subscribe(alarm => {
   console.log('Alarm:', alarm);
 });
 ```
@@ -412,108 +412,109 @@ alarmService.getAlarm('your-alarm-id', { /* your config */ }).subscribe(alarm =>
 **2. getAlarmInfo**
 
 ```javascript
-alarmService.getAlarmInfo('your-alarm-id', { /* your config */ }).subscribe(alarminfo => {
-  console.log('Alarm Info:', alarminfo);
+alarmService.getAlarmInfo(/* alarmId */ null).subscribe(alarmInfo => {
+  console.log('Alarm:', alarmInfo);
 });
 ```
 
 **3. saveAlarm**
 
 ```javascript
-alarmService.saveAlarm({ /* your alarm object */ }, { /* your config */ }).subscribe(savedAlarm => {
-  console.log('Saved Alarm:', savedAlarm);
+alarmService.saveAlarm(/* alarm */ null).subscribe(alarm => {
+  console.log('Alarm:', alarm);
 });
 ```
 
 **4. ackAlarm**
 
 ```javascript
-alarmService.ackAlarm('your-alarm-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+alarmService.ackAlarm(/* alarmId */ null).subscribe(alarm => {
+  console.log('ackAlarm:', alarm);
 });
 ```
 
 **5. clearAlarm**
 
 ```javascript
-alarmService.clearAlarm('your-alarm-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+alarmService.clearAlarm(/* alarmId */ null).subscribe(alarm => {
+  console.log('clearAlarm:', alarm);
 });
 ```
 
 **6. assignAlarm**
 
 ```javascript
-alarmService.assignAlarm('your-alarm-id', 'your-assignee-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+alarmService.assignAlarm(/* alarmId */ null, /* assigneeId */ null).subscribe(alarm => {
+  console.log('assignAlarm:', alarm);
 });
 ```
 
 **7. unassignAlarm**
 
 ```javascript
-alarmService.unassignAlarm('your-alarm-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+alarmService.unassignAlarm(/* alarmId */ null).subscribe(unAlarm => {
+  console.log('unassignAlarm:', unAlarm);
 });
 ```
 
 **8. deleteAlarm**
 
 ```javascript
-alarmService.deleteAlarm('your-alarm-id', { /* your config */ }).subscribe(result => {
-  console.log('Delete Result:', result);
+alarmService.deleteAlarm(/* alarmId */ null).subscribe(alarm => {
+  console.log('Alarm:', alarm);
 });
 ```
 
 **9. getAlarms**
 
 ```javascript
-alarmService.getAlarms({ /* your query */ }, { /* your config */ }).subscribe(alarm => {
-  console.log('Alarms:', alarm);
+alarmService.getAlarms(null).subscribe(alarms => {
+  console.log('Alarms:', alarms);
 });
 ```
 
 **10. getAlarmsV2**
 
 ```javascript
-alarmService.getAlarmsV2({ /* your query */ }, { /* your config */ }).subscribe(alarmsv2 => {
-  console.log('Alarms V2:', alarmsv2);
+alarmService.getAlarmsV2(null).subscribe(alarmsV2 => {
+  console.log('Alarms v2:', alarmsV2);
 });
 ```
 
 **11. getAllAlarms**
 
 ```javascript
-alarmService.getAllAlarms({ /* your query */ }, { /* your config */ }).subscribe(allalarm => {
-  console.log('All Alarms:', allalarm);
+alarmService.getAllAlarms(null).subscribe(allAlarms => {
+  console.log('AllAlarms:', allAlarms);
 });
 ```
 
 **12. getAllAlarmsV2**
 
 ```javascript
-alarmService.getAllAlarmsV2({ /* your query */ }, { /* your config */ }).subscribe(allalarmsv2 => {
-  console.log('All Alarms V2:', allalarmsv2);
+alarmService.getAllAlarmsV2(null).subscribe(allAlarmsV2 => {
+  console.log('AllAlarms v2:', allAlarmsV2);
 });
 ```
 
 **13. getHighestAlarmSeverity**
 
 ```javascript
-alarmService.getHighestAlarmSeverity('your-entity-id', { /* your alarmSearchStatus */ }, { /* your alarmStatus */ }, { /* your config */ }).subscribe(highestalarmseverity => {
-  console.log('Highest Alarm Severity:', highestalarmseverity);
+alarmService.getHighestAlarmSeverity(entityId, /* alarmSearchStatus */ null, /* alarmStatus */ null).subscribe(highestAlarmSeverity => {
+  console.log('HighestAlarmSeverity:', highestAlarmSeverity);
 });
 ```
 
 **14. getAlarmTypes**
 
 ```javascript
-alarmService.getAlarmTypes(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(alarmtype => {
-  console.log('Alarm Types:', alarmtype);
+alarmService.getAlarmTypes(self.ctx.pageLink(10, 0, null, null, null)).subscribe(alarmTypes => {
+  console.log('AlarmTypes:', alarmTypes);
 });
 ```
 
-### **APIKEYSERVICE
+---
+### **APIKEYSERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -525,44 +526,45 @@ const apiKeyService = $injector.get(self.ctx.servicesMap.get('apiKeyService'));
 **1. saveApiKey**
 
 ```javascript
-apiKeyService.saveApiKey({ /* your apiKey */ }, { /* your config */ }).subscribe(savedApiKey => {
-  console.log('Saved ApiKey:', savedApiKey);
+apiKeyService.saveApiKey(/* apiKey */ null).subscribe(apiKey => {
+  console.log('ApiKey:', apiKey);
 });
 ```
 
 **2. deleteApiKey**
 
 ```javascript
-apiKeyService.deleteApiKey('your-id', { /* your config */ }).subscribe(result => {
-  console.log('Delete Result:', result);
+apiKeyService.deleteApiKey(/* id */ null).subscribe(apiKey => {
+  console.log('ApiKey:', apiKey);
 });
 ```
 
 **3. updateApiKeyDescription**
 
 ```javascript
-apiKeyService.updateApiKeyDescription('your-id', 'your-description', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+apiKeyService.updateApiKeyDescription(/* id */ null, /* description */ null).subscribe(apiKeyDescription => {
+  console.log('updateApiKeyDescription:', apiKeyDescription);
 });
 ```
 
 **4. enableApiKey**
 
 ```javascript
-apiKeyService.enableApiKey('your-id', true, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+apiKeyService.enableApiKey(/* id */ null, true).subscribe(enableApiKey => {
+  console.log('enableApiKey:', enableApiKey);
 });
 ```
 
 **5. getUserApiKeys**
 
 ```javascript
-apiKeyService.getUserApiKeys('your-user-id', self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(uerapikey => {
-  console.log('User Api Keys:', uerapikey);
+apiKeyService.getUserApiKeys(/* userId */ null, self.ctx.pageLink(10, 0, null, null, null)).subscribe(userApiKeys => {
+  console.log('UserApiKeys:', userApiKeys);
 });
 ```
 
-### **ASSETPROFILESERVICE
+---
+### **ASSETPROFILESERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -574,84 +576,85 @@ const assetProfileService = $injector.get(self.ctx.servicesMap.get('assetProfile
 **1. getAssetProfiles**
 
 ```javascript
-assetProfileService.getAssetProfiles(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(aetprofile => {
-  console.log('Asset Profiles:', aetprofile);
+assetProfileService.getAssetProfiles(self.ctx.pageLink(10, 0, null, null, null)).subscribe(asProfiles => {
+  console.log('AssetProfiles:', asProfiles);
 });
 ```
 
 **2. getAssetProfilesByIds**
 
 ```javascript
-assetProfileService.getAssetProfilesByIds(['id1', 'id2'], { /* your config */ }).subscribe(aetprofilebyid => {
-  console.log('Asset Profiles By Ids:', aetprofilebyid);
+assetProfileService.getAssetProfilesByIds(['id1', 'id2']).subscribe(asProfilesByIds => {
+  console.log('AssetProfilesByIds:', asProfilesByIds);
 });
 ```
 
 **3. getAssetProfile**
 
 ```javascript
-assetProfileService.getAssetProfile('your-assetprofile-id', { /* your config */ }).subscribe(assetprofile => {
-  console.log('Asset Profile:', assetprofile);
+assetProfileService.getAssetProfile(/* assetProfileId */ null).subscribe(asProfile => {
+  console.log('AssetProfile:', asProfile);
 });
 ```
 
 **4. exportAssetProfile**
 
 ```javascript
-assetProfileService.exportAssetProfile('your-assetprofile-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+assetProfileService.exportAssetProfile(/* assetProfileId */ null).subscribe(exportAsProfile => {
+  console.log('exportAssetProfile:', exportAsProfile);
 });
 ```
 
 **5. saveAssetProfile**
 
 ```javascript
-assetProfileService.saveAssetProfile({ /* your assetProfile */ }, { /* your config */ }).subscribe(savedAssetProfile => {
-  console.log('Saved AssetProfile:', savedAssetProfile);
+assetProfileService.saveAssetProfile(/* assetProfile */ null).subscribe(asProfile => {
+  console.log('AssetProfile:', asProfile);
 });
 ```
 
 **6. setDefaultAssetProfile**
 
 ```javascript
-assetProfileService.setDefaultAssetProfile('your-assetprofile-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+assetProfileService.setDefaultAssetProfile(/* assetProfileId */ null).subscribe(defaultAsProfile => {
+  console.log('setDefaultAssetProfile:', defaultAsProfile);
 });
 ```
 
 **7. getDefaultAssetProfileInfo**
 
 ```javascript
-assetProfileService.getDefaultAssetProfileInfo({ /* your config */ }).subscribe(defaultassetprofileinfo => {
-  console.log('Default Asset Profile Info:', defaultassetprofileinfo);
+assetProfileService.getDefaultAssetProfileInfo().subscribe(defaultAsProfileInfo => {
+  console.log('DefaultAssetProfile:', defaultAsProfileInfo);
 });
 ```
 
 **8. getAssetProfileInfo**
 
 ```javascript
-assetProfileService.getAssetProfileInfo('your-assetprofile-id', { /* your config */ }).subscribe(assetprofileinfo => {
-  console.log('Asset Profile Info:', assetprofileinfo);
+assetProfileService.getAssetProfileInfo(/* assetProfileId */ null).subscribe(asProfileInfo => {
+  console.log('AssetProfile:', asProfileInfo);
 });
 ```
 
 **9. getAssetProfileInfos**
 
 ```javascript
-assetProfileService.getAssetProfileInfos(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(aetprofileinfo => {
-  console.log('Asset Profile Infos:', aetprofileinfo);
+assetProfileService.getAssetProfileInfos(self.ctx.pageLink(10, 0, null, null, null)).subscribe(asProfileInfos => {
+  console.log('AssetProfile infos:', asProfileInfos);
 });
 ```
 
 **10. getAssetProfileNames**
 
 ```javascript
-assetProfileService.getAssetProfileNames({ /* your activeOnly */ }, { /* your config */ }).subscribe(aetprofilename => {
-  console.log('Asset Profile Names:', aetprofilename);
+assetProfileService.getAssetProfileNames(null).subscribe(asProfileNames => {
+  console.log('AssetProfileNames:', asProfileNames);
 });
 ```
 
-### **ASSETSERVICE
+---
+### **ASSETSERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -663,135 +666,137 @@ const assetService = $injector.get(self.ctx.servicesMap.get('assetService'));
 const assetService = self.ctx.assetService;
 ```
 
+
 **1. getTenantAssetInfos**
 
 ```javascript
-assetService.getTenantAssetInfos(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-type', { /* your config */ }).subscribe(tenantaetinfo => {
-  console.log('Tenant Asset Infos:', tenantaetinfo);
+assetService.getTenantAssetInfos(self.ctx.pageLink(10, 0, null, null, null), null).subscribe(tenantAsInfos => {
+  console.log('TenantAsset infos:', tenantAsInfos);
 });
 ```
 
 **2. getTenantAssetInfosByAssetProfileId**
 
 ```javascript
-assetService.getTenantAssetInfosByAssetProfileId(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-assetprofile-id', { /* your config */ }).subscribe(tenantaetinfobyaetprofileid => {
-  console.log('Tenant Asset Infos By Asset Profile Id:', tenantaetinfobyaetprofileid);
+assetService.getTenantAssetInfosByAssetProfileId(self.ctx.pageLink(10, 0, null, null, null), null).subscribe(tenantAsInfosByAsProfileId => {
+  console.log('TenantAsset infosByAssetProfileId:', tenantAsInfosByAsProfileId);
 });
 ```
 
 **3. getCustomerAssetInfos**
 
 ```javascript
-assetService.getCustomerAssetInfos('your-customer-id', self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-type', { /* your config */ }).subscribe(cutomeraetinfo => {
-  console.log('Customer Asset Infos:', cutomeraetinfo);
+assetService.getCustomerAssetInfos(/* customerId */ null, self.ctx.pageLink(10, 0, null, null, null), null).subscribe(customerAsInfos => {
+  console.log('CustomerAsset infos:', customerAsInfos);
 });
 ```
 
 **4. getCustomerAssetInfosByAssetProfileId**
 
 ```javascript
-assetService.getCustomerAssetInfosByAssetProfileId('your-customer-id', self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-assetprofile-id', { /* your config */ }).subscribe(cutomeraetinfobyaetprofileid => {
-  console.log('Customer Asset Infos By Asset Profile Id:', cutomeraetinfobyaetprofileid);
+assetService.getCustomerAssetInfosByAssetProfileId(/* customerId */ null, self.ctx.pageLink(10, 0, null, null, null), null).subscribe(customerAsInfosByAsProfileId => {
+  console.log('CustomerAsset infosByAssetProfileId:', customerAsInfosByAsProfileId);
 });
 ```
 
 **5. getAsset**
 
 ```javascript
-assetService.getAsset('your-asset-id', { /* your config */ }).subscribe(asset => {
-  console.log('Asset:', asset);
+assetService.getAsset(/* assetId */ null).subscribe(as => {
+  console.log('Asset:', as);
 });
 ```
 
 **6. getAssets**
 
 ```javascript
-assetService.getAssets(['id1', 'id2'], { /* your config */ }).subscribe(aet => {
-  console.log('Assets:', aet);
+assetService.getAssets(['id1', 'id2']).subscribe(ass => {
+  console.log('Assets:', ass);
 });
 ```
 
 **7. getAssetInfo**
 
 ```javascript
-assetService.getAssetInfo('your-asset-id', { /* your config */ }).subscribe(assetinfo => {
-  console.log('Asset Info:', assetinfo);
+assetService.getAssetInfo(/* assetId */ null).subscribe(asInfo => {
+  console.log('Asset:', asInfo);
 });
 ```
 
 **8. saveAsset**
 
 ```javascript
-assetService.saveAsset({ /* your asset object */ }, { /* your config */ }).subscribe(savedAsset => {
-  console.log('Saved Asset:', savedAsset);
+assetService.saveAsset(/* asset */ null).subscribe(as => {
+  console.log('Asset:', as);
 });
 ```
 
 **9. getAssetTypes**
 
 ```javascript
-assetService.getAssetTypes({ /* your config */ }).subscribe(aettype => {
-  console.log('Asset Types:', aettype);
+assetService.getAssetTypes().subscribe(asTypes => {
+  console.log('AssetTypes:', asTypes);
 });
 ```
 
 **10. makeAssetPublic**
 
 ```javascript
-assetService.makeAssetPublic('your-asset-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+assetService.makeAssetPublic(/* assetId */ null).subscribe(asPublic => {
+  console.log('makeAssetPublic:', asPublic);
 });
 ```
 
 **11. assignAssetToCustomer**
 
 ```javascript
-assetService.assignAssetToCustomer('your-customer-id', 'your-asset-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+assetService.assignAssetToCustomer(/* customerId */ null, /* assetId */ null).subscribe(asToCustomer => {
+  console.log('assignAssetToCustomer:', asToCustomer);
 });
 ```
 
 **12. findByQuery**
 
 ```javascript
-assetService.findByQuery({ /* your query */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+assetService.findByQuery(null).subscribe(byQuery => {
+  console.log('ByQuery:', byQuery);
 });
 ```
 
 **13. findByName**
 
 ```javascript
-assetService.findByName('your-assetName', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+assetService.findByName(/* assetName */ null).subscribe(byName => {
+  console.log('ByName:', byName);
 });
 ```
 
 **14. assignAssetToEdge**
 
 ```javascript
-assetService.assignAssetToEdge('your-edge-id', 'your-asset-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+assetService.assignAssetToEdge(/* edgeId */ null, /* assetId */ null).subscribe(asToEdge => {
+  console.log('assignAssetToEdge:', asToEdge);
 });
 ```
 
 **15. getEdgeAssets**
 
 ```javascript
-assetService.getEdgeAssets('your-edge-id', self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-type', { /* your config */ }).subscribe(edgeaet => {
-  console.log('Edge Assets:', edgeaet);
+assetService.getEdgeAssets(/* edgeId */ null, self.ctx.pageLink(10, 0, null, null, null), null).subscribe(edgeAss => {
+  console.log('EdgeAssets:', edgeAss);
 });
 ```
 
 **16. bulkImportAssets**
 
 ```javascript
-assetService.bulkImportAssets({ /* your entitiesData */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+assetService.bulkImportAssets(/* entitiesData */ null).subscribe(bulkImportAss => {
+  console.log('bulkImportAssets:', bulkImportAss);
 });
 ```
 
-### **ATTRIBUTESERVICE
+---
+### **ATTRIBUTESERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -803,63 +808,65 @@ const attributeService = $injector.get(self.ctx.servicesMap.get('attributeServic
 const attributeService = self.ctx.attributeService;
 ```
 
+
 **1. getEntityAttributes**
 
 ```javascript
-attributeService.getEntityAttributes('your-entity-id', { /* your attributeScope */ }, ['id1', 'id2'], { /* your config */ }).subscribe(entityattribute => {
-  console.log('Entity Attributes:', entityattribute);
+attributeService.getEntityAttributes(entityId, null, ['id1', 'id2']).subscribe(entityAttributes => {
+  console.log('EntityAttributes:', entityAttributes);
 });
 ```
 
 **2. deleteEntityAttributes**
 
 ```javascript
-attributeService.deleteEntityAttributes('your-entity-id', { /* your attributeScope */ }, ['id1', 'id2'], { /* your config */ }).subscribe(result => {
-  console.log('Delete Result:', result);
+attributeService.deleteEntityAttributes(entityId, null, /* attributes */ null).subscribe(entityAttributes => {
+  console.log('EntityAttributes:', entityAttributes);
 });
 ```
 
 **3. deleteEntityTimeseries**
 
 ```javascript
-attributeService.deleteEntityTimeseries('your-entity-id', ['id1', 'id2'], 100, 100, { /* your config */ }).subscribe(result => {
-  console.log('Delete Result:', result);
+attributeService.deleteEntityTimeseries(entityId, /* timeseries */ null, 0, 0).subscribe(entityTimeseries => {
+  console.log('EntityTimeseries:', entityTimeseries);
 });
 ```
 
 **4. saveEntityAttributes**
 
 ```javascript
-attributeService.saveEntityAttributes('your-entity-id', { /* your attributeScope */ }, ['id1', 'id2'], { /* your config */ }).subscribe(savedEntityAttributes => {
-  console.log('Saved EntityAttributes:', savedEntityAttributes);
+attributeService.saveEntityAttributes(entityId, null, /* attributes */ null).subscribe(entityAttributes => {
+  console.log('EntityAttributes:', entityAttributes);
 });
 ```
 
 **5. saveEntityTimeseries**
 
 ```javascript
-attributeService.saveEntityTimeseries('your-entity-id', 'your-timeseriesScope', ['id1', 'id2'], { /* your config */ }).subscribe(savedEntityTimeseries => {
-  console.log('Saved EntityTimeseries:', savedEntityTimeseries);
+attributeService.saveEntityTimeseries(entityId, /* timeseriesScope */ null, /* timeseries */ null).subscribe(entityTimeseries => {
+  console.log('EntityTimeseries:', entityTimeseries);
 });
 ```
 
 **6. getEntityTimeseries**
 
 ```javascript
-attributeService.getEntityTimeseries('your-entity-id', ['id1', 'id2'], 100, 100, { /* your limit */ }, { /* your agg */ }, 100, { /* your orderBy */ }, 'your-usestrictdatatypes', { /* your config */ }).subscribe(entitytimeery => {
-  console.log('Entity Timeseries:', entitytimeery);
+attributeService.getEntityTimeseries(entityId, ['id1', 'id2'], 0, 0, null, null, 0, null, null).subscribe(entityTimeseries => {
+  console.log('EntityTimeseries:', entityTimeseries);
 });
 ```
 
 **7. getEntityTimeseriesLatest**
 
 ```javascript
-attributeService.getEntityTimeseriesLatest('your-entity-id', ['id1', 'id2'], { /* your config */ }).subscribe(entitytimeserieslatest => {
-  console.log('Entity Timeseries Latest:', entitytimeserieslatest);
+attributeService.getEntityTimeseriesLatest(entityId, ['id1', 'id2']).subscribe(entityTimeseriesLa => {
+  console.log('EntityTimeseriesLatest:', entityTimeseriesLa);
 });
 ```
 
-### **AUDITLOGSERVICE
+---
+### **AUDITLOGSERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -871,36 +878,37 @@ const auditLogService = $injector.get(self.ctx.servicesMap.get('auditLogService'
 **1. getAuditLogs**
 
 ```javascript
-auditLogService.getAuditLogs(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(auditlog => {
-  console.log('Audit Logs:', auditlog);
+auditLogService.getAuditLogs(self.ctx.pageLink(10, 0, null, null, null)).subscribe(auditLogs => {
+  console.log('AuditLogs:', auditLogs);
 });
 ```
 
 **2. getAuditLogsByCustomerId**
 
 ```javascript
-auditLogService.getAuditLogsByCustomerId('your-customer-id', self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(auditlogsbycustomerid => {
-  console.log('Audit Logs By Customer Id:', auditlogsbycustomerid);
+auditLogService.getAuditLogsByCustomerId(/* customerId */ null, self.ctx.pageLink(10, 0, null, null, null)).subscribe(auditLogsByCustomerId => {
+  console.log('AuditLogsByCustomerId:', auditLogsByCustomerId);
 });
 ```
 
 **3. getAuditLogsByUserId**
 
 ```javascript
-auditLogService.getAuditLogsByUserId('your-user-id', self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(auditlogsbyuserid => {
-  console.log('Audit Logs By User Id:', auditlogsbyuserid);
+auditLogService.getAuditLogsByUserId(/* userId */ null, self.ctx.pageLink(10, 0, null, null, null)).subscribe(auditLogsByUserId => {
+  console.log('AuditLogsByUserId:', auditLogsByUserId);
 });
 ```
 
 **4. getAuditLogsByEntityId**
 
 ```javascript
-auditLogService.getAuditLogsByEntityId('your-entity-id', self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(auditlogsbyentityid => {
-  console.log('Audit Logs By Entity Id:', auditlogsbyentityid);
+auditLogService.getAuditLogsByEntityId(entityId, self.ctx.pageLink(10, 0, null, null, null)).subscribe(auditLogsByEntityId => {
+  console.log('AuditLogsByEntityId:', auditLogsByEntityId);
 });
 ```
 
-### **CALCULATEDFIELDSSERVICE
+---
+### **CALCULATEDFIELDSSERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -912,68 +920,69 @@ const calculatedFieldsService = $injector.get(self.ctx.servicesMap.get('calculat
 **1. getCalculatedFieldById**
 
 ```javascript
-calculatedFieldsService.getCalculatedFieldById('your-calculatedfield-id', { /* your config */ }).subscribe(calculatedfieldbyid => {
-  console.log('Calculated Field By Id:', calculatedfieldbyid);
+calculatedFieldsService.getCalculatedFieldById(/* calculatedFieldId */ null).subscribe(calculatedFieldById => {
+  console.log('CalculatedFieldById:', calculatedFieldById);
 });
 ```
 
 **2. saveCalculatedField**
 
 ```javascript
-calculatedFieldsService.saveCalculatedField({ /* your calculatedField */ }, { /* your config */ }).subscribe(savedCalculatedField => {
-  console.log('Saved CalculatedField:', savedCalculatedField);
+calculatedFieldsService.saveCalculatedField(/* calculatedField */ null).subscribe(calculatedField => {
+  console.log('CalculatedField:', calculatedField);
 });
 ```
 
 **3. deleteCalculatedField**
 
 ```javascript
-calculatedFieldsService.deleteCalculatedField('your-calculatedfield-id', { /* your config */ }).subscribe(result => {
-  console.log('Delete Result:', result);
+calculatedFieldsService.deleteCalculatedField(/* calculatedFieldId */ null).subscribe(calculatedField => {
+  console.log('CalculatedField:', calculatedField);
 });
 ```
 
 **4. getCalculatedFields**
 
 ```javascript
-calculatedFieldsService.getCalculatedFields(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your query */ }, { /* your config */ }).subscribe(calculatedfield => {
-  console.log('Calculated Fields:', calculatedfield);
+calculatedFieldsService.getCalculatedFields(self.ctx.pageLink(10, 0, null, null, null), null).subscribe(calculatedFields => {
+  console.log('CalculatedFields:', calculatedFields);
 });
 ```
 
 **5. getCalculatedFieldsByEntityId**
 
 ```javascript
-calculatedFieldsService.getCalculatedFieldsByEntityId(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-type', { /* your config */ }).subscribe(calculatedfieldsbyentityid => {
-  console.log('Calculated Fields By Entity Id:', calculatedfieldsbyentityid);
+calculatedFieldsService.getCalculatedFieldsByEntityId(self.ctx.pageLink(10, 0, null, null, null), /* type */ null).subscribe(calculatedFieldsByEntityId => {
+  console.log('CalculatedFieldsByEntityId:', calculatedFieldsByEntityId);
 });
 ```
 
 **6. testScript**
 
 ```javascript
-calculatedFieldsService.testScript({ /* your inputParams */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+calculatedFieldsService.testScript(/* inputParams */ null).subscribe(script => {
+  console.log('testScript:', script);
 });
 ```
 
 **7. getLatestCalculatedFieldDebugEvent**
 
 ```javascript
-calculatedFieldsService.getLatestCalculatedFieldDebugEvent('your-id', { /* your config */ }).subscribe(latestcalculatedfielddebugevent => {
-  console.log('Latest Calculated Field Debug Event:', latestcalculatedfielddebugevent);
+calculatedFieldsService.getLatestCalculatedFieldDebugEvent(/* id */ null).subscribe(laCalculatedFieldDebugEvent => {
+  console.log('LatestCalculatedFieldDebugEvent:', laCalculatedFieldDebugEvent);
 });
 ```
 
 **8. getCalculatedFieldNames**
 
 ```javascript
-calculatedFieldsService.getCalculatedFieldNames(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-type', { /* your config */ }).subscribe(calculatedfieldname => {
-  console.log('Calculated Field Names:', calculatedfieldname);
+calculatedFieldsService.getCalculatedFieldNames(self.ctx.pageLink(10, 0, null, null, null), /* type */ null).subscribe(calculatedFieldNames => {
+  console.log('CalculatedFieldNames:', calculatedFieldNames);
 });
 ```
 
-### **COMPONENTDESCRIPTORSERVICE
+---
+### **COMPONENTDESCRIPTORSERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -985,28 +994,29 @@ const componentDescriptorService = $injector.get(self.ctx.servicesMap.get('compo
 **1. getComponentDescriptorsByType**
 
 ```javascript
-componentDescriptorService.getComponentDescriptorsByType('your-componenttype', 'your-rulechaintype', { /* your config */ }).subscribe(componentdescriptorsbytype => {
-  console.log('Component Descriptors By Type:', componentdescriptorsbytype);
+componentDescriptorService.getComponentDescriptorsByType(null, null).subscribe(componentDescriptorsByType => {
+  console.log('ComponentDescriptorsByType:', componentDescriptorsByType);
 });
 ```
 
 **2. getComponentDescriptorsByTypes**
 
 ```javascript
-componentDescriptorService.getComponentDescriptorsByTypes('your-componenttypes', 'your-rulechaintype', { /* your config */ }).subscribe(componentdecriptorbytype => {
-  console.log('Component Descriptors By Types:', componentdecriptorbytype);
+componentDescriptorService.getComponentDescriptorsByTypes(/* componentTypes */ null, null).subscribe(componentDescriptorsByTypes => {
+  console.log('ComponentDescriptorsByTypes:', componentDescriptorsByTypes);
 });
 ```
 
 **3. getComponentDescriptorByClazz**
 
 ```javascript
-componentDescriptorService.getComponentDescriptorByClazz('your-componentDescriptorClazz', { /* your config */ }).subscribe(componentdescriptorbyclazz => {
-  console.log('Component Descriptor By Clazz:', componentdescriptorbyclazz);
+componentDescriptorService.getComponentDescriptorByClazz(/* componentDescriptorClazz */ null).subscribe(componentDescriptorByClazz => {
+  console.log('ComponentDescriptorByClazz:', componentDescriptorByClazz);
 });
 ```
 
-### **CUSTOMERSERVICE
+---
+### **CUSTOMERSERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -1018,18 +1028,19 @@ const customerService = $injector.get(self.ctx.servicesMap.get('customerService'
 const customerService = self.ctx.customerService;
 ```
 
+
 **1. getCustomers**
 
 ```javascript
-customerService.getCustomers(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(cutomer => {
-  console.log('Customers:', cutomer);
+customerService.getCustomers(self.ctx.pageLink(10, 0, null, null, null)).subscribe(customers => {
+  console.log('Customers:', customers);
 });
 ```
 
 **2. getCustomer**
 
 ```javascript
-customerService.getCustomer('your-customer-id', { /* your config */ }).subscribe(customer => {
+customerService.getCustomer(/* customerId */ null).subscribe(customer => {
   console.log('Customer:', customer);
 });
 ```
@@ -1037,20 +1048,21 @@ customerService.getCustomer('your-customer-id', { /* your config */ }).subscribe
 **3. getCustomersByIds**
 
 ```javascript
-customerService.getCustomersByIds(['id1', 'id2'], { /* your config */ }).subscribe(cutomerbyid => {
-  console.log('Customers By Ids:', cutomerbyid);
+customerService.getCustomersByIds(['id1', 'id2']).subscribe(customersByIds => {
+  console.log('CustomersByIds:', customersByIds);
 });
 ```
 
 **4. saveCustomer**
 
 ```javascript
-customerService.saveCustomer({ /* your customer object */ }, { /* your config */ }).subscribe(savedCustomer => {
-  console.log('Saved Customer:', savedCustomer);
+customerService.saveCustomer(/* customer */ null).subscribe(customer => {
+  console.log('Customer:', customer);
 });
 ```
 
-### **DASHBOARDSERVICE
+---
+### **DASHBOARDSERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -1062,34 +1074,35 @@ const dashboardService = $injector.get(self.ctx.servicesMap.get('dashboardServic
 const dashboardService = self.ctx.dashboardService;
 ```
 
+
 **1. getTenantDashboards**
 
 ```javascript
-dashboardService.getTenantDashboards(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(tenantdahboard => {
-  console.log('Tenant Dashboards:', tenantdahboard);
+dashboardService.getTenantDashboards(self.ctx.pageLink(10, 0, null, null, null)).subscribe(tenantDashboards => {
+  console.log('TenantDashboards:', tenantDashboards);
 });
 ```
 
 **2. getTenantDashboardsByTenantId**
 
 ```javascript
-dashboardService.getTenantDashboardsByTenantId('your-tenant-id', self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(tenantdashboardsbytenantid => {
-  console.log('Tenant Dashboards By Tenant Id:', tenantdashboardsbytenantid);
+dashboardService.getTenantDashboardsByTenantId(/* tenantId */ null, self.ctx.pageLink(10, 0, null, null, null)).subscribe(tenantDashboardsByTenantId => {
+  console.log('TenantDashboardsByTenantId:', tenantDashboardsByTenantId);
 });
 ```
 
 **3. getCustomerDashboards**
 
 ```javascript
-dashboardService.getCustomerDashboards('your-customer-id', self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(cutomerdahboard => {
-  console.log('Customer Dashboards:', cutomerdahboard);
+dashboardService.getCustomerDashboards(/* customerId */ null, self.ctx.pageLink(10, 0, null, null, null)).subscribe(customerDashboards => {
+  console.log('CustomerDashboards:', customerDashboards);
 });
 ```
 
 **4. getDashboard**
 
 ```javascript
-dashboardService.getDashboard('your-dashboard-id', { /* your config */ }).subscribe(dashboard => {
+dashboardService.getDashboard(/* dashboardId */ null).subscribe(dashboard => {
   console.log('Dashboard:', dashboard);
 });
 ```
@@ -1097,124 +1110,125 @@ dashboardService.getDashboard('your-dashboard-id', { /* your config */ }).subscr
 **5. exportDashboard**
 
 ```javascript
-dashboardService.exportDashboard('your-dashboard-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+dashboardService.exportDashboard(/* dashboardId */ null).subscribe(exportDashboard => {
+  console.log('exportDashboard:', exportDashboard);
 });
 ```
 
 **6. getDashboardInfo**
 
 ```javascript
-dashboardService.getDashboardInfo('your-dashboard-id', { /* your config */ }).subscribe(dashboardinfo => {
-  console.log('Dashboard Info:', dashboardinfo);
+dashboardService.getDashboardInfo(/* dashboardId */ null).subscribe(dashboardInfo => {
+  console.log('Dashboard:', dashboardInfo);
 });
 ```
 
 **7. getDashboards**
 
 ```javascript
-dashboardService.getDashboards(['id1', 'id2'], { /* your config */ }).subscribe(dahboard => {
-  console.log('Dashboards:', dahboard);
+dashboardService.getDashboards(['id1', 'id2']).subscribe(dashboards => {
+  console.log('Dashboards:', dashboards);
 });
 ```
 
 **8. saveDashboard**
 
 ```javascript
-dashboardService.saveDashboard({ /* your dashboard object */ }, { /* your config */ }).subscribe(savedDashboard => {
-  console.log('Saved Dashboard:', savedDashboard);
+dashboardService.saveDashboard(/* dashboard */ null).subscribe(dashboard => {
+  console.log('Dashboard:', dashboard);
 });
 ```
 
 **9. assignDashboardToCustomer**
 
 ```javascript
-dashboardService.assignDashboardToCustomer('your-customer-id', 'your-dashboard-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+dashboardService.assignDashboardToCustomer(/* customerId */ null, /* dashboardId */ null).subscribe(dashboardToCustomer => {
+  console.log('assignDashboardToCustomer:', dashboardToCustomer);
 });
 ```
 
 **10. makeDashboardPublic**
 
 ```javascript
-dashboardService.makeDashboardPublic('your-dashboard-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+dashboardService.makeDashboardPublic(/* dashboardId */ null).subscribe(dashboardPublic => {
+  console.log('makeDashboardPublic:', dashboardPublic);
 });
 ```
 
 **11. makeDashboardPrivate**
 
 ```javascript
-dashboardService.makeDashboardPrivate('your-dashboard-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+dashboardService.makeDashboardPrivate(/* dashboardId */ null).subscribe(dashboardPrivate => {
+  console.log('makeDashboardPrivate:', dashboardPrivate);
 });
 ```
 
 **12. updateDashboardCustomers**
 
 ```javascript
-dashboardService.updateDashboardCustomers('your-dashboard-id', ['id1', 'id2'], { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+dashboardService.updateDashboardCustomers(/* dashboardId */ null, ['id1', 'id2']).subscribe(dashboardCustomers => {
+  console.log('updateDashboardCustomers:', dashboardCustomers);
 });
 ```
 
 **13. addDashboardCustomers**
 
 ```javascript
-dashboardService.addDashboardCustomers('your-dashboard-id', ['id1', 'id2'], { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+dashboardService.addDashboardCustomers(/* dashboardId */ null, ['id1', 'id2']).subscribe(addDashboardCustomers => {
+  console.log('addDashboardCustomers:', addDashboardCustomers);
 });
 ```
 
 **14. removeDashboardCustomers**
 
 ```javascript
-dashboardService.removeDashboardCustomers('your-dashboard-id', ['id1', 'id2'], { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+dashboardService.removeDashboardCustomers(/* dashboardId */ null, ['id1', 'id2']).subscribe(removeDashboardCustomers => {
+  console.log('removeDashboardCustomers:', removeDashboardCustomers);
 });
 ```
 
 **15. getHomeDashboard**
 
 ```javascript
-dashboardService.getHomeDashboard({ /* your config */ }).subscribe(homedashboard => {
-  console.log('Home Dashboard:', homedashboard);
+dashboardService.getHomeDashboard().subscribe(homeDashboard => {
+  console.log('HomeDashboard:', homeDashboard);
 });
 ```
 
 **16. getTenantHomeDashboardInfo**
 
 ```javascript
-dashboardService.getTenantHomeDashboardInfo({ /* your config */ }).subscribe(tenanthomedashboardinfo => {
-  console.log('Tenant Home Dashboard Info:', tenanthomedashboardinfo);
+dashboardService.getTenantHomeDashboardInfo().subscribe(tenantHomeDashboardInfo => {
+  console.log('TenantHomeDashboard:', tenantHomeDashboardInfo);
 });
 ```
 
 **17. setTenantHomeDashboardInfo**
 
 ```javascript
-dashboardService.setTenantHomeDashboardInfo({ /* your homeDashboardInfo */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+dashboardService.setTenantHomeDashboardInfo(/* homeDashboardInfo */ null).subscribe(tenantHomeDashboardInfo => {
+  console.log('setTenantHomeDashboard:', tenantHomeDashboardInfo);
 });
 ```
 
 **18. getPublicDashboardLink**
 
 ```javascript
-dashboardService.getPublicDashboardLink({ /* your dashboard object */ }).subscribe(publicdashboardlink => {
-  console.log('Public Dashboard Link:', publicdashboardlink);
+dashboardService.getPublicDashboardLink(/* dashboard */ null).subscribe(publicDashboardLink => {
+  console.log('PublicDashboardLink:', publicDashboardLink);
 });
 ```
 
 **19. assignDashboardToEdge**
 
 ```javascript
-dashboardService.assignDashboardToEdge('your-edge-id', 'your-dashboard-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+dashboardService.assignDashboardToEdge(/* edgeId */ null, /* dashboardId */ null).subscribe(dashboardToEdge => {
+  console.log('assignDashboardToEdge:', dashboardToEdge);
 });
 ```
 
-### **DEVICEPROFILESERVICE
+---
+### **DEVICEPROFILESERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -1226,140 +1240,141 @@ const deviceProfileService = $injector.get(self.ctx.servicesMap.get('deviceProfi
 **1. getDeviceProfiles**
 
 ```javascript
-deviceProfileService.getDeviceProfiles(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(deviceprofile => {
-  console.log('Device Profiles:', deviceprofile);
+deviceProfileService.getDeviceProfiles(self.ctx.pageLink(10, 0, null, null, null)).subscribe(deviceProfiles => {
+  console.log('DeviceProfiles:', deviceProfiles);
 });
 ```
 
 **2. getDeviceProfilesByIds**
 
 ```javascript
-deviceProfileService.getDeviceProfilesByIds(['id1', 'id2'], { /* your config */ }).subscribe(deviceprofilebyid => {
-  console.log('Device Profiles By Ids:', deviceprofilebyid);
+deviceProfileService.getDeviceProfilesByIds(['id1', 'id2']).subscribe(deviceProfilesByIds => {
+  console.log('DeviceProfilesByIds:', deviceProfilesByIds);
 });
 ```
 
 **3. getDeviceProfile**
 
 ```javascript
-deviceProfileService.getDeviceProfile('your-deviceprofile-id', { /* your config */ }).subscribe(deviceprofile => {
-  console.log('Device Profile:', deviceprofile);
+deviceProfileService.getDeviceProfile(/* deviceProfileId */ null).subscribe(deviceProfile => {
+  console.log('DeviceProfile:', deviceProfile);
 });
 ```
 
 **4. exportDeviceProfile**
 
 ```javascript
-deviceProfileService.exportDeviceProfile('your-deviceprofile-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+deviceProfileService.exportDeviceProfile(/* deviceProfileId */ null).subscribe(exportDeviceProfile => {
+  console.log('exportDeviceProfile:', exportDeviceProfile);
 });
 ```
 
 **5. getLwm2mObjects**
 
 ```javascript
-deviceProfileService.getLwm2mObjects({ /* your sortOrder */ }, ['id1', 'id2'], 'your-searchText', { /* your config */ }).subscribe(lwm2mobject => {
-  console.log('Lwm2m Objects:', lwm2mobject);
+deviceProfileService.getLwm2mObjects(null, ['id1', 'id2'], /* searchText */ null).subscribe(lwm2mObjects => {
+  console.log('Lwm2mObjects:', lwm2mObjects);
 });
 ```
 
 **6. getLwm2mBootstrapSecurityInfo**
 
 ```javascript
-deviceProfileService.getLwm2mBootstrapSecurityInfo(true, { /* your config */ }).subscribe(lwm2mbootstrapsecurityinfo => {
-  console.log('Lwm2m Bootstrap Security Info:', lwm2mbootstrapsecurityinfo);
+deviceProfileService.getLwm2mBootstrapSecurityInfo(true).subscribe(lwm2mBootstrapSecurityInfo => {
+  console.log('Lwm2mBootstrapSecurity:', lwm2mBootstrapSecurityInfo);
 });
 ```
 
 **7. getLwm2mBootstrapSecurityInfoBySecurityType**
 
 ```javascript
-deviceProfileService.getLwm2mBootstrapSecurityInfoBySecurityType(true, { /* your config */ }).subscribe(lwm2mbootstrapsecurityinfobysecuritytype => {
-  console.log('Lwm2m Bootstrap Security Info By Security Type:', lwm2mbootstrapsecurityinfobysecuritytype);
+deviceProfileService.getLwm2mBootstrapSecurityInfoBySecurityType(true).subscribe(lwm2mBootstrapSecurityInfoBySecurityType => {
+  console.log('Lwm2mBootstrapSecurity infoBySecurityType:', lwm2mBootstrapSecurityInfoBySecurityType);
 });
 ```
 
 **8. getLwm2mObjectsPage**
 
 ```javascript
-deviceProfileService.getLwm2mObjectsPage(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(lwm2mobjectspage => {
-  console.log('Lwm2m Objects Page:', lwm2mobjectspage);
+deviceProfileService.getLwm2mObjectsPage(self.ctx.pageLink(10, 0, null, null, null)).subscribe(lwm2mObjectsPage => {
+  console.log('Lwm2mObjectsPage:', lwm2mObjectsPage);
 });
 ```
 
 **9. saveDeviceProfileAndConfirmOtaChange**
 
 ```javascript
-deviceProfileService.saveDeviceProfileAndConfirmOtaChange({ /* your originDeviceProfile */ }, { /* your deviceProfile */ }, { /* your config */ }).subscribe(savedDeviceProfileAndConfirmOtaChange => {
-  console.log('Saved DeviceProfileAndConfirmOtaChange:', savedDeviceProfileAndConfirmOtaChange);
+deviceProfileService.saveDeviceProfileAndConfirmOtaChange(/* originDeviceProfile */ null, /* deviceProfile */ null).subscribe(deviceProfileAndConfirmOtaChange => {
+  console.log('DeviceProfile ConfirmOtaChange:', deviceProfileAndConfirmOtaChange);
 });
 ```
 
 **10. saveDeviceProfile**
 
 ```javascript
-deviceProfileService.saveDeviceProfile().subscribe(savedDeviceProfile => {
-  console.log('Saved DeviceProfile:', savedDeviceProfile);
+deviceProfileService.saveDeviceProfile().subscribe(deviceProfile => {
+  console.log('DeviceProfile:', deviceProfile);
 });
 ```
 
 **11. setDefaultDeviceProfile**
 
 ```javascript
-deviceProfileService.setDefaultDeviceProfile('your-deviceprofile-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+deviceProfileService.setDefaultDeviceProfile(/* deviceProfileId */ null).subscribe(defaultDeviceProfile => {
+  console.log('setDefaultDeviceProfile:', defaultDeviceProfile);
 });
 ```
 
 **12. getDefaultDeviceProfileInfo**
 
 ```javascript
-deviceProfileService.getDefaultDeviceProfileInfo({ /* your config */ }).subscribe(defaultdeviceprofileinfo => {
-  console.log('Default Device Profile Info:', defaultdeviceprofileinfo);
+deviceProfileService.getDefaultDeviceProfileInfo().subscribe(defaultDeviceProfileInfo => {
+  console.log('DefaultDeviceProfile:', defaultDeviceProfileInfo);
 });
 ```
 
 **13. getDeviceProfileInfo**
 
 ```javascript
-deviceProfileService.getDeviceProfileInfo('your-deviceprofile-id', { /* your config */ }).subscribe(deviceprofileinfo => {
-  console.log('Device Profile Info:', deviceprofileinfo);
+deviceProfileService.getDeviceProfileInfo(/* deviceProfileId */ null).subscribe(deviceProfileInfo => {
+  console.log('DeviceProfile:', deviceProfileInfo);
 });
 ```
 
 **14. getDeviceProfileInfos**
 
 ```javascript
-deviceProfileService.getDeviceProfileInfos(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-transporttype', { /* your config */ }).subscribe(deviceprofileinfo => {
-  console.log('Device Profile Infos:', deviceprofileinfo);
+deviceProfileService.getDeviceProfileInfos(self.ctx.pageLink(10, 0, null, null, null), null).subscribe(deviceProfileInfos => {
+  console.log('DeviceProfile infos:', deviceProfileInfos);
 });
 ```
 
 **15. getDeviceProfileDevicesAttributesKeys**
 
 ```javascript
-deviceProfileService.getDeviceProfileDevicesAttributesKeys('your-deviceprofile-id', { /* your config */ }).subscribe(deviceprofiledeviceattributekey => {
-  console.log('Device Profile Devices Attributes Keys:', deviceprofiledeviceattributekey);
+deviceProfileService.getDeviceProfileDevicesAttributesKeys(/* deviceProfileId */ null).subscribe(deviceProfileDevicesAttributesKeys => {
+  console.log('DeviceProfileDevicesAttributesKeys:', deviceProfileDevicesAttributesKeys);
 });
 ```
 
 **16. getDeviceProfileDevicesTimeseriesKeys**
 
 ```javascript
-deviceProfileService.getDeviceProfileDevicesTimeseriesKeys('your-deviceprofile-id', { /* your config */ }).subscribe(deviceprofiledevicetimeeriekey => {
-  console.log('Device Profile Devices Timeseries Keys:', deviceprofiledevicetimeeriekey);
+deviceProfileService.getDeviceProfileDevicesTimeseriesKeys(/* deviceProfileId */ null).subscribe(deviceProfileDevicesTimeseriesKeys => {
+  console.log('DeviceProfileDevicesTimeseriesKeys:', deviceProfileDevicesTimeseriesKeys);
 });
 ```
 
 **17. getDeviceProfileNames**
 
 ```javascript
-deviceProfileService.getDeviceProfileNames({ /* your activeOnly */ }, { /* your config */ }).subscribe(deviceprofilename => {
-  console.log('Device Profile Names:', deviceprofilename);
+deviceProfileService.getDeviceProfileNames(null).subscribe(deviceProfileNames => {
+  console.log('DeviceProfileNames:', deviceProfileNames);
 });
 ```
 
-### **DEVICESERVICE
+---
+### **DEVICESERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -1371,50 +1386,51 @@ const deviceService = $injector.get(self.ctx.servicesMap.get('deviceService'));
 const deviceService = self.ctx.deviceService;
 ```
 
+
 **1. getDeviceInfosByQuery**
 
 ```javascript
-deviceService.getDeviceInfosByQuery({ /* your deviceInfoQuery */ }, { /* your config */ }).subscribe(deviceinfobyquery => {
-  console.log('Device Infos By Query:', deviceinfobyquery);
+deviceService.getDeviceInfosByQuery(null).subscribe(deviceInfosByQuery => {
+  console.log('Device infosByQuery:', deviceInfosByQuery);
 });
 ```
 
 **2. getTenantDeviceInfos**
 
 ```javascript
-deviceService.getTenantDeviceInfos(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-type', { /* your config */ }).subscribe(tenantdeviceinfo => {
-  console.log('Tenant Device Infos:', tenantdeviceinfo);
+deviceService.getTenantDeviceInfos(self.ctx.pageLink(10, 0, null, null, null), null).subscribe(tenantDeviceInfos => {
+  console.log('TenantDevice infos:', tenantDeviceInfos);
 });
 ```
 
 **3. getTenantDeviceInfosByDeviceProfileId**
 
 ```javascript
-deviceService.getTenantDeviceInfosByDeviceProfileId(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-deviceprofile-id', { /* your config */ }).subscribe(tenantdeviceinfobydeviceprofileid => {
-  console.log('Tenant Device Infos By Device Profile Id:', tenantdeviceinfobydeviceprofileid);
+deviceService.getTenantDeviceInfosByDeviceProfileId(self.ctx.pageLink(10, 0, null, null, null), null).subscribe(tenantDeviceInfosByDeviceProfileId => {
+  console.log('TenantDevice infosByDeviceProfileId:', tenantDeviceInfosByDeviceProfileId);
 });
 ```
 
 **4. getCustomerDeviceInfos**
 
 ```javascript
-deviceService.getCustomerDeviceInfos('your-customer-id', self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-type', { /* your config */ }).subscribe(cutomerdeviceinfo => {
-  console.log('Customer Device Infos:', cutomerdeviceinfo);
+deviceService.getCustomerDeviceInfos(/* customerId */ null, self.ctx.pageLink(10, 0, null, null, null), null).subscribe(customerDeviceInfos => {
+  console.log('CustomerDevice infos:', customerDeviceInfos);
 });
 ```
 
 **5. getCustomerDeviceInfosByDeviceProfileId**
 
 ```javascript
-deviceService.getCustomerDeviceInfosByDeviceProfileId('your-customer-id', self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-deviceprofile-id', { /* your config */ }).subscribe(cutomerdeviceinfobydeviceprofileid => {
-  console.log('Customer Device Infos By Device Profile Id:', cutomerdeviceinfobydeviceprofileid);
+deviceService.getCustomerDeviceInfosByDeviceProfileId(/* customerId */ null, self.ctx.pageLink(10, 0, null, null, null), null).subscribe(customerDeviceInfosByDeviceProfileId => {
+  console.log('CustomerDevice infosByDeviceProfileId:', customerDeviceInfosByDeviceProfileId);
 });
 ```
 
 **6. getDevice**
 
 ```javascript
-deviceService.getDevice('your-device-id', { /* your config */ }).subscribe(device => {
+deviceService.getDevice(/* deviceId */ null).subscribe(device => {
   console.log('Device:', device);
 });
 ```
@@ -1422,188 +1438,189 @@ deviceService.getDevice('your-device-id', { /* your config */ }).subscribe(devic
 **7. getDevices**
 
 ```javascript
-deviceService.getDevices(['id1', 'id2'], { /* your config */ }).subscribe(device => {
-  console.log('Devices:', device);
+deviceService.getDevices(['id1', 'id2']).subscribe(devices => {
+  console.log('Devices:', devices);
 });
 ```
 
 **8. getDeviceInfo**
 
 ```javascript
-deviceService.getDeviceInfo('your-device-id', { /* your config */ }).subscribe(deviceinfo => {
-  console.log('Device Info:', deviceinfo);
+deviceService.getDeviceInfo(/* deviceId */ null).subscribe(deviceInfo => {
+  console.log('Device:', deviceInfo);
 });
 ```
 
 **9. saveDevice**
 
 ```javascript
-deviceService.saveDevice({ /* your device object */ }, { /* your config */ }).subscribe(savedDevice => {
-  console.log('Saved Device:', savedDevice);
+deviceService.saveDevice(/* device */ null).subscribe(device => {
+  console.log('Device:', device);
 });
 ```
 
 **10. saveDeviceWithCredentials**
 
 ```javascript
-deviceService.saveDeviceWithCredentials({ /* your device object */ }, { /* your credentials */ }, { /* your config */ }).subscribe(savedDeviceWithCredentials => {
-  console.log('Saved DeviceWithCredentials:', savedDeviceWithCredentials);
+deviceService.saveDeviceWithCredentials(/* device */ null, /* credentials */ null).subscribe(deviceWithCredentials => {
+  console.log('DeviceWithCredentials:', deviceWithCredentials);
 });
 ```
 
 **11. getDeviceTypes**
 
 ```javascript
-deviceService.getDeviceTypes({ /* your config */ }).subscribe(devicetype => {
-  console.log('Device Types:', devicetype);
+deviceService.getDeviceTypes().subscribe(deviceTypes => {
+  console.log('DeviceTypes:', deviceTypes);
 });
 ```
 
 **12. getDeviceCredentials**
 
 ```javascript
-deviceService.getDeviceCredentials('your-device-id', { /* your sync */ }, { /* your config */ }).subscribe(devicecredential => {
-  console.log('Device Credentials:', devicecredential);
+deviceService.getDeviceCredentials(/* deviceId */ null, null).subscribe(deviceCredentials => {
+  console.log('DeviceCredentials:', deviceCredentials);
 });
 ```
 
 **13. saveDeviceCredentials**
 
 ```javascript
-deviceService.saveDeviceCredentials({ /* your deviceCredentials */ }, { /* your config */ }).subscribe(savedDeviceCredentials => {
-  console.log('Saved DeviceCredentials:', savedDeviceCredentials);
+deviceService.saveDeviceCredentials(/* deviceCredentials */ null).subscribe(deviceCredentials => {
+  console.log('DeviceCredentials:', deviceCredentials);
 });
 ```
 
 **14. makeDevicePublic**
 
 ```javascript
-deviceService.makeDevicePublic('your-device-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+deviceService.makeDevicePublic(/* deviceId */ null).subscribe(devicePublic => {
+  console.log('makeDevicePublic:', devicePublic);
 });
 ```
 
 **15. assignDeviceToCustomer**
 
 ```javascript
-deviceService.assignDeviceToCustomer('your-customer-id', 'your-device-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+deviceService.assignDeviceToCustomer(/* customerId */ null, /* deviceId */ null).subscribe(deviceToCustomer => {
+  console.log('assignDeviceToCustomer:', deviceToCustomer);
 });
 ```
 
 **16. sendOneWayRpcCommand**
 
 ```javascript
-deviceService.sendOneWayRpcCommand('your-device-id', { /* your requestBody */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+deviceService.sendOneWayRpcCommand(/* deviceId */ null, /* requestBody */ null).subscribe(oneWayRpcCommand => {
+  console.log('sendOneWayRpcCommand:', oneWayRpcCommand);
 });
 ```
 
 **17. sendTwoWayRpcCommand**
 
 ```javascript
-deviceService.sendTwoWayRpcCommand('your-device-id', { /* your requestBody */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+deviceService.sendTwoWayRpcCommand(/* deviceId */ null, /* requestBody */ null).subscribe(twoWayRpcCommand => {
+  console.log('sendTwoWayRpcCommand:', twoWayRpcCommand);
 });
 ```
 
 **18. getPersistedRpc**
 
 ```javascript
-deviceService.getPersistedRpc('your-rpc-id', { /* your config */ }).subscribe(persistedrpc => {
-  console.log('Persisted Rpc:', persistedrpc);
+deviceService.getPersistedRpc(/* rpcId */ null).subscribe(persistedRpc => {
+  console.log('PersistedRpc:', persistedRpc);
 });
 ```
 
 **19. getPersistedRpcRequests**
 
 ```javascript
-deviceService.getPersistedRpcRequests('your-device-id', self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your rpcStatus */ }, { /* your config */ }).subscribe(peritedrpcrequet => {
-  console.log('Persisted Rpc Requests:', peritedrpcrequet);
+deviceService.getPersistedRpcRequests(/* deviceId */ null, self.ctx.pageLink(10, 0, null, null, null), /* rpcStatus */ null).subscribe(persistedRpcRequests => {
+  console.log('PersistedRpcRequests:', persistedRpcRequests);
 });
 ```
 
 **20. findByQuery**
 
 ```javascript
-deviceService.findByQuery({ /* your query */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+deviceService.findByQuery(null).subscribe(byQuery => {
+  console.log('ByQuery:', byQuery);
 });
 ```
 
 **21. findByName**
 
 ```javascript
-deviceService.findByName('your-deviceName', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+deviceService.findByName(/* deviceName */ null).subscribe(byName => {
+  console.log('ByName:', byName);
 });
 ```
 
 **22. claimDevice**
 
 ```javascript
-deviceService.claimDevice('your-deviceName', { /* your claimRequest */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+deviceService.claimDevice(/* deviceName */ null, /* claimRequest */ null).subscribe(claimDevice => {
+  console.log('claimDevice:', claimDevice);
 });
 ```
 
 **23. assignDeviceToEdge**
 
 ```javascript
-deviceService.assignDeviceToEdge('your-edge-id', 'your-device-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+deviceService.assignDeviceToEdge(/* edgeId */ null, /* deviceId */ null).subscribe(deviceToEdge => {
+  console.log('assignDeviceToEdge:', deviceToEdge);
 });
 ```
 
 **24. getEdgeDevices**
 
 ```javascript
-deviceService.getEdgeDevices('your-edge-id', self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-type', { /* your config */ }).subscribe(edgedevice => {
-  console.log('Edge Devices:', edgedevice);
+deviceService.getEdgeDevices(/* edgeId */ null, self.ctx.pageLink(10, 0, null, null, null), null).subscribe(edgeDevices => {
+  console.log('EdgeDevices:', edgeDevices);
 });
 ```
 
 **25. bulkImportDevices**
 
 ```javascript
-deviceService.bulkImportDevices({ /* your entitiesData */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+deviceService.bulkImportDevices(/* entitiesData */ null).subscribe(bulkImportDevices => {
+  console.log('bulkImportDevices:', bulkImportDevices);
 });
 ```
 
 **26. getDevicePublishTelemetryCommands**
 
 ```javascript
-deviceService.getDevicePublishTelemetryCommands('your-device-id', { /* your config */ }).subscribe(devicepublihtelemetrycommand => {
-  console.log('Device Publish Telemetry Commands:', devicepublihtelemetrycommand);
+deviceService.getDevicePublishTelemetryCommands(/* deviceId */ null).subscribe(devicePublishTelemetryCommands => {
+  console.log('DevicePublishTelemetryCommands:', devicePublishTelemetryCommands);
 });
 ```
 
 **27. downloadGatewayDockerComposeFile**
 
 ```javascript
-deviceService.downloadGatewayDockerComposeFile('your-device-id').subscribe(result => {
-  console.log('Result:', result);
+deviceService.downloadGatewayDockerComposeFile(/* deviceId */ null).subscribe(downGatewayDockerComposeFile => {
+  console.log('downloadGatewayDockerComposeFile:', downGatewayDockerComposeFile);
 });
 ```
 
 **28. rebootDevice**
 
 ```javascript
-deviceService.rebootDevice('your-device-id', true, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+deviceService.rebootDevice(/* deviceId */ null, true).subscribe(rebootDevice => {
+  console.log('rebootDevice:', rebootDevice);
 });
 ```
 
 **29. rebootTrigger**
 
 ```javascript
-deviceService.rebootTrigger('your-device-id', 'your-resourcePath', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+deviceService.rebootTrigger(/* deviceId */ null, /* resourcePath */ null).subscribe(rebootTrigger => {
+  console.log('rebootTrigger:', rebootTrigger);
 });
 ```
 
-### **DOMAINSERVICE
+---
+### **DOMAINSERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -1615,44 +1632,45 @@ const domainService = $injector.get(self.ctx.servicesMap.get('domainService'));
 **1. saveDomain**
 
 ```javascript
-domainService.saveDomain({ /* your domain */ }, ['id1', 'id2'], { /* your config */ }).subscribe(savedDomain => {
-  console.log('Saved Domain:', savedDomain);
+domainService.saveDomain(/* domain */ null, ['id1', 'id2']).subscribe(domain => {
+  console.log('Domain:', domain);
 });
 ```
 
 **2. updateOauth2Clients**
 
 ```javascript
-domainService.updateOauth2Clients('your-id', ['id1', 'id2'], { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+domainService.updateOauth2Clients(/* id */ null, ['id1', 'id2']).subscribe(oauth2Clients => {
+  console.log('updateOauth2Clients:', oauth2Clients);
 });
 ```
 
 **3. getTenantDomainInfos**
 
 ```javascript
-domainService.getTenantDomainInfos(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(tenantdomaininfo => {
-  console.log('Tenant Domain Infos:', tenantdomaininfo);
+domainService.getTenantDomainInfos(self.ctx.pageLink(10, 0, null, null, null)).subscribe(tenantDomainInfos => {
+  console.log('TenantDomain infos:', tenantDomainInfos);
 });
 ```
 
 **4. getDomainInfoById**
 
 ```javascript
-domainService.getDomainInfoById('your-id', { /* your config */ }).subscribe(domaininfobyid => {
-  console.log('Domain Info By Id:', domaininfobyid);
+domainService.getDomainInfoById(/* id */ null).subscribe(domainInfoById => {
+  console.log('Domain infoById:', domainInfoById);
 });
 ```
 
 **5. deleteDomain**
 
 ```javascript
-domainService.deleteDomain('your-id', { /* your config */ }).subscribe(result => {
-  console.log('Delete Result:', result);
+domainService.deleteDomain(/* id */ null).subscribe(domain => {
+  console.log('Domain:', domain);
 });
 ```
 
-### **EDGESERVICE
+---
+### **EDGESERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -1664,15 +1682,15 @@ const edgeService = $injector.get(self.ctx.servicesMap.get('edgeService'));
 **1. getEdges**
 
 ```javascript
-edgeService.getEdges(['id1', 'id2'], { /* your config */ }).subscribe(edge => {
-  console.log('Edges:', edge);
+edgeService.getEdges(['id1', 'id2']).subscribe(edges => {
+  console.log('Edges:', edges);
 });
 ```
 
 **2. getEdge**
 
 ```javascript
-edgeService.getEdge('your-edge-id', { /* your config */ }).subscribe(edge => {
+edgeService.getEdge(/* edgeId */ null).subscribe(edge => {
   console.log('Edge:', edge);
 });
 ```
@@ -1680,124 +1698,125 @@ edgeService.getEdge('your-edge-id', { /* your config */ }).subscribe(edge => {
 **3. getEdgeInfo**
 
 ```javascript
-edgeService.getEdgeInfo('your-edge-id', { /* your config */ }).subscribe(edgeinfo => {
-  console.log('Edge Info:', edgeinfo);
+edgeService.getEdgeInfo(/* edgeId */ null).subscribe(edgeInfo => {
+  console.log('Edge:', edgeInfo);
 });
 ```
 
 **4. saveEdge**
 
 ```javascript
-edgeService.saveEdge({ /* your edge object */ }, { /* your config */ }).subscribe(savedEdge => {
-  console.log('Saved Edge:', savedEdge);
+edgeService.saveEdge(/* edge */ null).subscribe(edge => {
+  console.log('Edge:', edge);
 });
 ```
 
 **5. getEdgeTypes**
 
 ```javascript
-edgeService.getEdgeTypes({ /* your config */ }).subscribe(edgetype => {
-  console.log('Edge Types:', edgetype);
+edgeService.getEdgeTypes().subscribe(edgeTypes => {
+  console.log('EdgeTypes:', edgeTypes);
 });
 ```
 
 **6. getCustomerEdgeInfos**
 
 ```javascript
-edgeService.getCustomerEdgeInfos('your-customer-id', self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-type', { /* your config */ }).subscribe(cutomeredgeinfo => {
-  console.log('Customer Edge Infos:', cutomeredgeinfo);
+edgeService.getCustomerEdgeInfos(/* customerId */ null, self.ctx.pageLink(10, 0, null, null, null), null).subscribe(customerEdgeInfos => {
+  console.log('CustomerEdge infos:', customerEdgeInfos);
 });
 ```
 
 **7. assignEdgeToCustomer**
 
 ```javascript
-edgeService.assignEdgeToCustomer('your-customer-id', 'your-edge-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+edgeService.assignEdgeToCustomer(/* customerId */ null, /* edgeId */ null).subscribe(edgeToCustomer => {
+  console.log('assignEdgeToCustomer:', edgeToCustomer);
 });
 ```
 
 **8. makeEdgePublic**
 
 ```javascript
-edgeService.makeEdgePublic('your-edge-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+edgeService.makeEdgePublic(/* edgeId */ null).subscribe(edgePublic => {
+  console.log('makeEdgePublic:', edgePublic);
 });
 ```
 
 **9. getTenantEdgeInfos**
 
 ```javascript
-edgeService.getTenantEdgeInfos(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-type', { /* your config */ }).subscribe(tenantedgeinfo => {
-  console.log('Tenant Edge Infos:', tenantedgeinfo);
+edgeService.getTenantEdgeInfos(self.ctx.pageLink(10, 0, null, null, null), null).subscribe(tenantEdgeInfos => {
+  console.log('TenantEdge infos:', tenantEdgeInfos);
 });
 ```
 
 **10. findByQuery**
 
 ```javascript
-edgeService.findByQuery({ /* your query */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+edgeService.findByQuery(null).subscribe(byQuery => {
+  console.log('ByQuery:', byQuery);
 });
 ```
 
 **11. getEdgeEvents**
 
 ```javascript
-edgeService.getEdgeEvents('your-entity-id', self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(edgeevent => {
-  console.log('Edge Events:', edgeevent);
+edgeService.getEdgeEvents(entityId, self.ctx.pageLink(10, 0, null, null, null)).subscribe(edgeEvents => {
+  console.log('EdgeEvents:', edgeEvents);
 });
 ```
 
 **12. findMissingToRelatedRuleChains**
 
 ```javascript
-edgeService.findMissingToRelatedRuleChains('your-edge-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+edgeService.findMissingToRelatedRuleChains(/* edgeId */ null).subscribe(missingToRelatedRuleChains => {
+  console.log('MissingToRelatedRuleChains:', missingToRelatedRuleChains);
 });
 ```
 
 **13. findByName**
 
 ```javascript
-edgeService.findByName('your-edgeName', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+edgeService.findByName(/* edgeName */ null).subscribe(byName => {
+  console.log('ByName:', byName);
 });
 ```
 
 **14. bulkImportEdges**
 
 ```javascript
-edgeService.bulkImportEdges({ /* your entitiesData */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+edgeService.bulkImportEdges(/* entitiesData */ null).subscribe(bulkImportEdges => {
+  console.log('bulkImportEdges:', bulkImportEdges);
 });
 ```
 
 **15. getEdgeInstallInstructions**
 
 ```javascript
-edgeService.getEdgeInstallInstructions('your-edge-id', { /* your method */ }, { /* your config */ }).subscribe(edgeintallintruction => {
-  console.log('Edge Install Instructions:', edgeintallintruction);
+edgeService.getEdgeInstallInstructions(/* edgeId */ null, null).subscribe(edgeInstallInstructions => {
+  console.log('EdgeInstallInstructions:', edgeInstallInstructions);
 });
 ```
 
 **16. getEdgeUpgradeInstructions**
 
 ```javascript
-edgeService.getEdgeUpgradeInstructions('your-edgeVersion', { /* your method */ }, { /* your config */ }).subscribe(edgeupgradeintruction => {
-  console.log('Edge Upgrade Instructions:', edgeupgradeintruction);
+edgeService.getEdgeUpgradeInstructions(/* edgeVersion */ null, null).subscribe(edgeUpgradeInstructions => {
+  console.log('EdgeUpgradeInstructions:', edgeUpgradeInstructions);
 });
 ```
 
 **17. isEdgeUpgradeAvailable**
 
 ```javascript
-edgeService.isEdgeUpgradeAvailable('your-edge-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+edgeService.isEdgeUpgradeAvailable(/* edgeId */ null).subscribe(isEdgeUpgradeAvailable => {
+  console.log('isEdgeUpgradeAvailable:', isEdgeUpgradeAvailable);
 });
 ```
 
-### **ENTITIESVERSIONCONTROLSERVICE
+---
+### **ENTITIESVERSIONCONTROLSERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -1809,100 +1828,101 @@ const entitiesVersionControlService = $injector.get(self.ctx.servicesMap.get('en
 **1. clearBranchList**
 
 ```javascript
-entitiesVersionControlService.clearBranchList().subscribe(result => {
-  console.log('Result:', result);
+entitiesVersionControlService.clearBranchList().subscribe(branchList => {
+  console.log('clearBranchList:', branchList);
 });
 ```
 
 **2. listBranches**
 
 ```javascript
-entitiesVersionControlService.listBranches().subscribe(result => {
-  console.log('Result:', result);
+entitiesVersionControlService.listBranches().subscribe(branches => {
+  console.log('listBranches:', branches);
 });
 ```
 
 **3. getEntityDataInfo**
 
 ```javascript
-entitiesVersionControlService.getEntityDataInfo('your-externalentity-id', 'your-version-id', { /* your config */ }).subscribe(entitydatainfo => {
-  console.log('Entity Data Info:', entitydatainfo);
+entitiesVersionControlService.getEntityDataInfo(entityId, /* versionId */ null).subscribe(entityDataInfo => {
+  console.log('EntityData:', entityDataInfo);
 });
 ```
 
 **4. saveEntitiesVersion**
 
 ```javascript
-entitiesVersionControlService.saveEntitiesVersion({ /* your request */ }, { /* your config */ }).subscribe(savedEntitiesVersion => {
-  console.log('Saved EntitiesVersion:', savedEntitiesVersion);
+entitiesVersionControlService.saveEntitiesVersion(/* request */ null).subscribe(entitiesVersion => {
+  console.log('EntitiesVersion:', entitiesVersion);
 });
 ```
 
 **5. getVersionCreateRequestStatus**
 
 ```javascript
-entitiesVersionControlService.getVersionCreateRequestStatus('your-request-id', { /* your config */ }).subscribe(verioncreaterequettatu => {
-  console.log('Version Create Request Status:', verioncreaterequettatu);
+entitiesVersionControlService.getVersionCreateRequestStatus(/* requestId */ null).subscribe(versionCreateRequestStatus => {
+  console.log('VersionCreateRequestStatus:', versionCreateRequestStatus);
 });
 ```
 
 **6. listEntityVersions**
 
 ```javascript
-entitiesVersionControlService.listEntityVersions(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-branch', 'your-externalentity-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+entitiesVersionControlService.listEntityVersions(self.ctx.pageLink(10, 0, null, null, null), /* branch */ null, entityId).subscribe(entityVersions => {
+  console.log('listEntityVersions:', entityVersions);
 });
 ```
 
 **7. listEntityTypeVersions**
 
 ```javascript
-entitiesVersionControlService.listEntityTypeVersions(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-branch', 'your-entitytype', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+entitiesVersionControlService.listEntityTypeVersions(self.ctx.pageLink(10, 0, null, null, null), /* branch */ null, null).subscribe(entityTypeVersions => {
+  console.log('listEntityTypeVersions:', entityTypeVersions);
 });
 ```
 
 **8. listVersions**
 
 ```javascript
-entitiesVersionControlService.listVersions(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-branch', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+entitiesVersionControlService.listVersions(self.ctx.pageLink(10, 0, null, null, null), /* branch */ null).subscribe(versions => {
+  console.log('listVersions:', versions);
 });
 ```
 
 **9. loadEntitiesVersion**
 
 ```javascript
-entitiesVersionControlService.loadEntitiesVersion({ /* your request */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+entitiesVersionControlService.loadEntitiesVersion(/* request */ null).subscribe(entitiesVersion => {
+  console.log('loadEntitiesVersion:', entitiesVersion);
 });
 ```
 
 **10. getVersionLoadRequestStatus**
 
 ```javascript
-entitiesVersionControlService.getVersionLoadRequestStatus('your-request-id', { /* your config */ }).subscribe(verionloadrequettatu => {
-  console.log('Version Load Request Status:', verionloadrequettatu);
+entitiesVersionControlService.getVersionLoadRequestStatus(/* requestId */ null).subscribe(versionLoadRequestStatus => {
+  console.log('VersionLoadRequestStatus:', versionLoadRequestStatus);
 });
 ```
 
 **11. compareEntityDataToVersion**
 
 ```javascript
-entitiesVersionControlService.compareEntityDataToVersion('your-entity-id', 'your-version-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+entitiesVersionControlService.compareEntityDataToVersion(entityId, /* versionId */ null).subscribe(entityDataToVersion => {
+  console.log('compareEntityDataToVersion:', entityDataToVersion);
 });
 ```
 
 **12. entityLoadErrorToMessage**
 
 ```javascript
-entitiesVersionControlService.entityLoadErrorToMessage({ /* your entityLoadError */ }).subscribe(result => {
-  console.log('Result:', result);
+entitiesVersionControlService.entityLoadErrorToMessage(/* entityLoadError */ null).subscribe(entityLoadErrorToMessage => {
+  console.log('entityLoadErrorToMessage:', entityLoadErrorToMessage);
 });
 ```
 
-### **ENTITYRELATIONSERVICE
+---
+### **ENTITYRELATIONSERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -1914,18 +1934,19 @@ const entityRelationService = $injector.get(self.ctx.servicesMap.get('entityRela
 const entityRelationService = self.ctx.entityRelationService;
 ```
 
+
 **1. saveRelation**
 
 ```javascript
-entityRelationService.saveRelation({ /* your relation */ }, { /* your config */ }).subscribe(savedRelation => {
-  console.log('Saved Relation:', savedRelation);
+entityRelationService.saveRelation(/* relation */ null).subscribe(relation => {
+  console.log('Relation:', relation);
 });
 ```
 
 **2. getRelation**
 
 ```javascript
-entityRelationService.getRelation('your-from-id', 'your-relationtype', 'your-to-id', { /* your config */ }).subscribe(relation => {
+entityRelationService.getRelation(entityId, /* relationType */ null, entityId).subscribe(relation => {
   console.log('Relation:', relation);
 });
 ```
@@ -1933,312 +1954,69 @@ entityRelationService.getRelation('your-from-id', 'your-relationtype', 'your-to-
 **3. findByFrom**
 
 ```javascript
-entityRelationService.findByFrom('your-from-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+entityRelationService.findByFrom(entityId).subscribe(byFrom => {
+  console.log('ByFrom:', byFrom);
 });
 ```
 
 **4. findInfoByFrom**
 
 ```javascript
-entityRelationService.findInfoByFrom('your-from-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+entityRelationService.findInfoByFrom(entityId).subscribe(infoByFrom => {
+  console.log('infoByFrom:', infoByFrom);
 });
 ```
 
 **5. findByFromAndType**
 
 ```javascript
-entityRelationService.findByFromAndType('your-from-id', 'your-relationtype', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+entityRelationService.findByFromAndType(entityId, /* relationType */ null).subscribe(byFromAndType => {
+  console.log('ByFrom Type:', byFromAndType);
 });
 ```
 
 **6. findByTo**
 
 ```javascript
-entityRelationService.findByTo('your-to-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+entityRelationService.findByTo(entityId).subscribe(byTo => {
+  console.log('ByTo:', byTo);
 });
 ```
 
 **7. findInfoByTo**
 
 ```javascript
-entityRelationService.findInfoByTo('your-to-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+entityRelationService.findInfoByTo(entityId).subscribe(infoByTo => {
+  console.log('infoByTo:', infoByTo);
 });
 ```
 
 **8. findByToAndType**
 
 ```javascript
-entityRelationService.findByToAndType('your-to-id', 'your-relationtype', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+entityRelationService.findByToAndType(entityId, /* relationType */ null).subscribe(byToAndType => {
+  console.log('ByTo Type:', byToAndType);
 });
 ```
 
 **9. findByQuery**
 
 ```javascript
-entityRelationService.findByQuery({ /* your query */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+entityRelationService.findByQuery(null).subscribe(byQuery => {
+  console.log('ByQuery:', byQuery);
 });
 ```
 
 **10. findInfoByQuery**
 
 ```javascript
-entityRelationService.findInfoByQuery({ /* your query */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+entityRelationService.findInfoByQuery(null).subscribe(infoByQuery => {
+  console.log('infoByQuery:', infoByQuery);
 });
 ```
 
-### **ENTITYSERVICE
-
-TO INJECT THE SERVICE:
-
-```javascript
-const $injector = self.ctx.$scope.$injector;
-const entityService = $injector.get(self.ctx.servicesMap.get('entityService'));
-
-// Alternative: Direct context access
-const entityService = self.ctx.entityService;
-```
-
-**1. getEntityObservable**
-
-```javascript
-entityService.getEntityObservable('your-entitytype', 'your-entity-id', { /* your config */ }).subscribe(entityobservable => {
-  console.log('Entity Observable:', entityobservable);
-});
-```
-
-**2. getEntity**
-
-```javascript
-entityService.getEntity('your-entitytype', 'your-entity-id', { /* your config */ }).subscribe(entity => {
-  console.log('Entity:', entity);
-});
-```
-
-**3. getEntitiesObservable**
-
-```javascript
-entityService.getEntitiesObservable('your-entitytype', 'your-entitys-id', { /* your config */ }).subscribe(entitiesobservable => {
-  console.log('Entities Observable:', entitiesobservable);
-});
-```
-
-**4. getEntities**
-
-```javascript
-entityService.getEntities('your-entitytype', 'your-entitys-id', { /* your config */ }).subscribe(entity => {
-  console.log('Entities:', entity);
-});
-```
-
-**5. getSingleTenantByPageLinkObservable**
-
-```javascript
-entityService.getSingleTenantByPageLinkObservable(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(singletenantbypagelinkobservable => {
-  console.log('Single Tenant By Page Link Observable:', singletenantbypagelinkobservable);
-});
-```
-
-**6. getSingleCustomerByPageLinkObservable**
-
-```javascript
-entityService.getSingleCustomerByPageLinkObservable(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(singlecustomerbypagelinkobservable => {
-  console.log('Single Customer By Page Link Observable:', singlecustomerbypagelinkobservable);
-});
-```
-
-**7. getEntitiesByPageLinkObservable**
-
-```javascript
-entityService.getEntitiesByPageLinkObservable('your-entitytype', self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-subtype', { /* your config */ }).subscribe(entitiesbypagelinkobservable => {
-  console.log('Entities By Page Link Observable:', entitiesbypagelinkobservable);
-});
-```
-
-**8. getEntitiesByPageLink**
-
-```javascript
-entityService.getEntitiesByPageLink('your-entitytype', self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-subtype', { /* your config */ }).subscribe(entitiesbypagelink => {
-  console.log('Entities By Page Link:', entitiesbypagelink);
-});
-```
-
-**9. getEntitiesByNameFilter**
-
-```javascript
-entityService.getEntitiesByNameFilter('your-entitytype', 'your-entityNameFilter', 100, 'your-subtype', { /* your config */ }).subscribe(entitiesbynamefilter => {
-  console.log('Entities By Name Filter:', entitiesbynamefilter);
-});
-```
-
-**10. findEntityDataByQuery**
-
-```javascript
-entityService.findEntityDataByQuery({ /* your query */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
-});
-```
-
-**11. findEntityKeysByQuery**
-
-```javascript
-entityService.findEntityKeysByQuery({ /* your query */ }, { /* your scope */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
-});
-```
-
-**12. findAlarmDataByQuery**
-
-```javascript
-entityService.findAlarmDataByQuery({ /* your query */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
-});
-```
-
-**13. findEntityInfosByFilterAndName**
-
-```javascript
-entityService.findEntityInfosByFilterAndName({ /* your filter */ }, 'your-searchText', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
-});
-```
-
-**14. findSingleEntityInfoByEntityFilter**
-
-```javascript
-entityService.findSingleEntityInfoByEntityFilter({ /* your filter */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
-});
-```
-
-**15. getAliasFilterTypesByEntityTypes**
-
-```javascript
-entityService.getAliasFilterTypesByEntityTypes('your-entitytypes').subscribe(aliafiltertypebyentitytype => {
-  console.log('Alias Filter Types By Entity Types:', aliafiltertypebyentitytype);
-});
-```
-
-**16. filterAliasByEntityTypes**
-
-```javascript
-entityService.filterAliasByEntityTypes({ /* your entityAlias */ }, 'your-entitytypes').subscribe(result => {
-  console.log('Result:', result);
-});
-```
-
-**17. filterAliasFilterTypeByEntityTypes**
-
-```javascript
-entityService.filterAliasFilterTypeByEntityTypes('your-aliasfiltertype', 'your-entitytypes').subscribe(result => {
-  console.log('Result:', result);
-});
-```
-
-**18. filterAliasFilterTypeByEntityType**
-
-```javascript
-entityService.filterAliasFilterTypeByEntityType('your-aliasfiltertype', 'your-entitytype').subscribe(result => {
-  console.log('Result:', result);
-});
-```
-
-**19. prepareAllowedEntityTypesList**
-
-```javascript
-entityService.prepareAllowedEntityTypesList('your-allowedentitytypes', 'your-usealiasentitytypes').subscribe(result => {
-  console.log('Result:', result);
-});
-```
-
-**20. getEntityFieldKeys**
-
-```javascript
-entityService.getEntityFieldKeys('your-entitytype', { /* your searchText */ }).subscribe(entityfieldkey => {
-  console.log('Entity Field Keys:', entityfieldkey);
-});
-```
-
-**21. getAlarmKeys**
-
-```javascript
-entityService.getAlarmKeys({ /* your searchText */ }).subscribe(alarmkey => {
-  console.log('Alarm Keys:', alarmkey);
-});
-```
-
-**22. getEntityKeys**
-
-```javascript
-entityService.getEntityKeys('your-entity-id', { /* your query */ }, 'your-type', { /* your config */ }).subscribe(entitykey => {
-  console.log('Entity Keys:', entitykey);
-});
-```
-
-**23. getEntityKeysByEntityFilter**
-
-```javascript
-entityService.getEntityKeysByEntityFilter({ /* your filter */ }, 'your-types', 'your-entitytypes', { /* your config */ }).subscribe(entitykeysbyentityfilter => {
-  console.log('Entity Keys By Entity Filter:', entitykeysbyentityfilter);
-});
-```
-
-**24. getEntityKeysByEntityFilterAndScope**
-
-```javascript
-entityService.getEntityKeysByEntityFilterAndScope({ /* your filter */ }, 'your-types', 'your-entitytypes', { /* your scope */ }, { /* your config */ }).subscribe(entitykeysbyentityfilterandscope => {
-  console.log('Entity Keys By Entity Filter And Scope:', entitykeysbyentityfilterandscope);
-});
-```
-
-**25. createDatasourcesFromSubscriptionsInfo**
-
-```javascript
-entityService.createDatasourcesFromSubscriptionsInfo({ /* your subscriptionsInfo */ }).subscribe(result => {
-  console.log('Result:', result);
-});
-```
-
-**26. createAlarmSourceFromSubscriptionInfo**
-
-```javascript
-entityService.createAlarmSourceFromSubscriptionInfo({ /* your subscriptionInfo */ }).subscribe(result => {
-  console.log('Result:', result);
-});
-```
-
-**27. getAssignedToEdgeEntitiesByType**
-
-```javascript
-entityService.getAssignedToEdgeEntitiesByType('your-edge-id', 'your-entitytype', self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder')).subscribe(assignedtoedgeentitiesbytype => {
-  console.log('Assigned To Edge Entities By Type:', assignedtoedgeentitiesbytype);
-});
-```
-
-**28. case**
-
-```javascript
-entityService.case().subscribe(result => {
-  console.log('Result:', result);
-});
-```
-
-**29. getEntitySubtypesObservable**
-
-```javascript
-entityService.getEntitySubtypesObservable('your-entitytype').subscribe(entitysubtypesobservable => {
-  console.log('Entity Subtypes Observable:', entitysubtypesobservable);
-});
-```
-
-### **ENTITYVIEWSERVICE
+---
+### **ENTITYVIEWSERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -2250,103 +2028,351 @@ const entityViewService = $injector.get(self.ctx.servicesMap.get('entityViewServ
 const entityViewService = self.ctx.entityViewService;
 ```
 
+
 **1. getTenantEntityViewInfos**
 
 ```javascript
-entityViewService.getTenantEntityViewInfos(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-type', { /* your config */ }).subscribe(tenantentityviewinfo => {
-  console.log('Tenant Entity View Infos:', tenantentityviewinfo);
+entityViewService.getTenantEntityViewInfos(self.ctx.pageLink(10, 0, null, null, null), null).subscribe(tenantEntityViewInfos => {
+  console.log('TenantEntityView infos:', tenantEntityViewInfos);
 });
 ```
 
 **2. getCustomerEntityViewInfos**
 
 ```javascript
-entityViewService.getCustomerEntityViewInfos('your-customer-id', self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-type', { /* your config */ }).subscribe(cutomerentityviewinfo => {
-  console.log('Customer Entity View Infos:', cutomerentityviewinfo);
+entityViewService.getCustomerEntityViewInfos(/* customerId */ null, self.ctx.pageLink(10, 0, null, null, null), null).subscribe(customerEntityViewInfos => {
+  console.log('CustomerEntityView infos:', customerEntityViewInfos);
 });
 ```
 
 **3. getEntityView**
 
 ```javascript
-entityViewService.getEntityView('your-entityview-id', { /* your config */ }).subscribe(entityview => {
-  console.log('Entity View:', entityview);
+entityViewService.getEntityView(/* entityViewId */ null).subscribe(entityView => {
+  console.log('EntityView:', entityView);
 });
 ```
 
 **4. getEntityViews**
 
 ```javascript
-entityViewService.getEntityViews('your-entityviews-id', { /* your config */ }).subscribe(entityview => {
-  console.log('Entity Views:', entityview);
+entityViewService.getEntityViews(['id1', 'id2']).subscribe(entityViews => {
+  console.log('EntityViews:', entityViews);
 });
 ```
 
 **5. getEntityViewInfo**
 
 ```javascript
-entityViewService.getEntityViewInfo('your-entityview-id', { /* your config */ }).subscribe(entityviewinfo => {
-  console.log('Entity View Info:', entityviewinfo);
+entityViewService.getEntityViewInfo(/* entityViewId */ null).subscribe(entityViewInfo => {
+  console.log('EntityView:', entityViewInfo);
 });
 ```
 
 **6. saveEntityView**
 
 ```javascript
-entityViewService.saveEntityView({ /* your entityView */ }, { /* your config */ }).subscribe(savedEntityView => {
-  console.log('Saved EntityView:', savedEntityView);
+entityViewService.saveEntityView(/* entityView */ null).subscribe(entityView => {
+  console.log('EntityView:', entityView);
 });
 ```
 
 **7. getEntityViewTypes**
 
 ```javascript
-entityViewService.getEntityViewTypes({ /* your config */ }).subscribe(entityviewtype => {
-  console.log('Entity View Types:', entityviewtype);
+entityViewService.getEntityViewTypes().subscribe(entityViewTypes => {
+  console.log('EntityViewTypes:', entityViewTypes);
 });
 ```
 
 **8. makeEntityViewPublic**
 
 ```javascript
-entityViewService.makeEntityViewPublic('your-entityview-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+entityViewService.makeEntityViewPublic(/* entityViewId */ null).subscribe(entityViewPublic => {
+  console.log('makeEntityViewPublic:', entityViewPublic);
 });
 ```
 
 **9. assignEntityViewToCustomer**
 
 ```javascript
-entityViewService.assignEntityViewToCustomer('your-customer-id', 'your-entityview-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+entityViewService.assignEntityViewToCustomer(/* customerId */ null, /* entityViewId */ null).subscribe(entityViewToCustomer => {
+  console.log('assignEntityViewToCustomer:', entityViewToCustomer);
 });
 ```
 
 **10. findByQuery**
 
 ```javascript
-entityViewService.findByQuery({ /* your query */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+entityViewService.findByQuery(null).subscribe(byQuery => {
+  console.log('ByQuery:', byQuery);
 });
 ```
 
 **11. assignEntityViewToEdge**
 
 ```javascript
-entityViewService.assignEntityViewToEdge('your-edge-id', 'your-entityview-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+entityViewService.assignEntityViewToEdge(/* edgeId */ null, /* entityViewId */ null).subscribe(entityViewToEdge => {
+  console.log('assignEntityViewToEdge:', entityViewToEdge);
 });
 ```
 
 **12. getEdgeEntityViews**
 
 ```javascript
-entityViewService.getEdgeEntityViews('your-edge-id', self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-type', { /* your config */ }).subscribe(edgeentityview => {
-  console.log('Edge Entity Views:', edgeentityview);
+entityViewService.getEdgeEntityViews(/* edgeId */ null, self.ctx.pageLink(10, 0, null, null, null), null).subscribe(edgeEntityViews => {
+  console.log('EdgeEntityViews:', edgeEntityViews);
 });
 ```
 
-### **EVENTSERVICE
+---
+### **ENTITYSERVICE**
+
+TO INJECT THE SERVICE:
+
+```javascript
+const $injector = self.ctx.$scope.$injector;
+const entityService = $injector.get(self.ctx.servicesMap.get('entityService'));
+
+// Alternative: Direct context access
+const entityService = self.ctx.entityService;
+```
+
+
+**1. getEntityObservable**
+
+```javascript
+entityService.getEntityObservable(null, /* entityId */ null).subscribe(entityObservable => {
+  console.log('EntityObservable:', entityObservable);
+});
+```
+
+**2. getEntity**
+
+```javascript
+entityService.getEntity(null, /* entityId */ null).subscribe(entity => {
+  console.log('Entity:', entity);
+});
+```
+
+**3. getEntitiesObservable**
+
+```javascript
+entityService.getEntitiesObservable(null, ['id1', 'id2']).subscribe(entitiesObservable => {
+  console.log('EntitiesObservable:', entitiesObservable);
+});
+```
+
+**4. getEntities**
+
+```javascript
+entityService.getEntities(null, ['id1', 'id2']).subscribe(entities => {
+  console.log('Entities:', entities);
+});
+```
+
+**5. getSingleTenantByPageLinkObservable**
+
+```javascript
+entityService.getSingleTenantByPageLinkObservable(self.ctx.pageLink(10, 0, null, null, null)).subscribe(singleTenantByPageLinkObservable => {
+  console.log('SingleTenantByPageLinkObservable:', singleTenantByPageLinkObservable);
+});
+```
+
+**6. getSingleCustomerByPageLinkObservable**
+
+```javascript
+entityService.getSingleCustomerByPageLinkObservable(self.ctx.pageLink(10, 0, null, null, null)).subscribe(singleCustomerByPageLinkObservable => {
+  console.log('SingleCustomerByPageLinkObservable:', singleCustomerByPageLinkObservable);
+});
+```
+
+**7. getEntitiesByPageLinkObservable**
+
+```javascript
+entityService.getEntitiesByPageLinkObservable(null, self.ctx.pageLink(10, 0, null, null, null), null).subscribe(entitiesByPageLinkObservable => {
+  console.log('EntitiesByPageLinkObservable:', entitiesByPageLinkObservable);
+});
+```
+
+**8. getEntitiesByPageLink**
+
+```javascript
+entityService.getEntitiesByPageLink(null, self.ctx.pageLink(10, 0, null, null, null), null).subscribe(entitiesByPageLink => {
+  console.log('EntitiesByPageLink:', entitiesByPageLink);
+});
+```
+
+**9. getEntitiesByNameFilter**
+
+```javascript
+entityService.getEntitiesByNameFilter(null, /* entityNameFilter */ null, 0, null).subscribe(entitiesByNameFilter => {
+  console.log('EntitiesByNameFilter:', entitiesByNameFilter);
+});
+```
+
+**10. findEntityDataByQuery**
+
+```javascript
+entityService.findEntityDataByQuery(null).subscribe(entityDataByQuery => {
+  console.log('EntityDataByQuery:', entityDataByQuery);
+});
+```
+
+**11. findEntityKeysByQuery**
+
+```javascript
+entityService.findEntityKeysByQuery(null, null).subscribe(entityKeysByQuery => {
+  console.log('EntityKeysByQuery:', entityKeysByQuery);
+});
+```
+
+**12. findAlarmDataByQuery**
+
+```javascript
+entityService.findAlarmDataByQuery(null).subscribe(alarmDataByQuery => {
+  console.log('AlarmDataByQuery:', alarmDataByQuery);
+});
+```
+
+**13. findEntityInfosByFilterAndName**
+
+```javascript
+entityService.findEntityInfosByFilterAndName(entityFilter, /* searchText */ null).subscribe(entityInfosByFilterAndName => {
+  console.log('Entity infosByFilter Name:', entityInfosByFilterAndName);
+});
+```
+
+**14. findSingleEntityInfoByEntityFilter**
+
+```javascript
+entityService.findSingleEntityInfoByEntityFilter(entityFilter).subscribe(singleEntityInfoByEntityFilter => {
+  console.log('SingleEntity infoByEntityFilter:', singleEntityInfoByEntityFilter);
+});
+```
+
+**15. getAliasFilterTypesByEntityTypes**
+
+```javascript
+entityService.getAliasFilterTypesByEntityTypes(/* entityTypes */ null).subscribe(aliasFilterTypesByEntityTypes => {
+  console.log('AliasFilterTypesByEntityTypes:', aliasFilterTypesByEntityTypes);
+});
+```
+
+**16. filterAliasByEntityTypes**
+
+```javascript
+entityService.filterAliasByEntityTypes(/* entityAlias */ null, /* entityTypes */ null).subscribe(filterAliasByEntityTypes => {
+  console.log('filterAliasByEntityTypes:', filterAliasByEntityTypes);
+});
+```
+
+**17. filterAliasFilterTypeByEntityTypes**
+
+```javascript
+entityService.filterAliasFilterTypeByEntityTypes(/* aliasFilterType */ null, /* entityTypes */ null).subscribe(filterAliasFilterTypeByEntityTypes => {
+  console.log('filterAliasFilterTypeByEntityTypes:', filterAliasFilterTypeByEntityTypes);
+});
+```
+
+**18. filterAliasFilterTypeByEntityType**
+
+```javascript
+entityService.filterAliasFilterTypeByEntityType(/* aliasFilterType */ null, /* entityType */ null).subscribe(filterAliasFilterTypeByEntityType => {
+  console.log('filterAliasFilterTypeByEntityType:', filterAliasFilterTypeByEntityType);
+});
+```
+
+**19. prepareAllowedEntityTypesList**
+
+```javascript
+entityService.prepareAllowedEntityTypesList(/* allowedEntityTypes */ null, false).subscribe(prepareAllowedEntityTypesList => {
+  console.log('prepareAllowedEntityTypesList:', prepareAllowedEntityTypesList);
+});
+```
+
+**20. getEntityFieldKeys**
+
+```javascript
+entityService.getEntityFieldKeys(null, null).subscribe(entityFieldKeys => {
+  console.log('EntityFieldKeys:', entityFieldKeys);
+});
+```
+
+**21. getAlarmKeys**
+
+```javascript
+entityService.getAlarmKeys(null).subscribe(alarmKeys => {
+  console.log('AlarmKeys:', alarmKeys);
+});
+```
+
+**22. getEntityKeys**
+
+```javascript
+entityService.getEntityKeys(entityId, /* query */ null, null).subscribe(entityKeys => {
+  console.log('EntityKeys:', entityKeys);
+});
+```
+
+**23. getEntityKeysByEntityFilter**
+
+```javascript
+entityService.getEntityKeysByEntityFilter(entityFilter, /* types */ null, /* entityTypes */ null).subscribe(entityKeysByEntityFilter => {
+  console.log('EntityKeysByEntityFilter:', entityKeysByEntityFilter);
+});
+```
+
+**24. getEntityKeysByEntityFilterAndScope**
+
+```javascript
+entityService.getEntityKeysByEntityFilterAndScope(entityFilter, /* types */ null, /* entityTypes */ null, null).subscribe(entityKeysByEntityFilterAndScope => {
+  console.log('EntityKeysByEntityFilter Scope:', entityKeysByEntityFilterAndScope);
+});
+```
+
+**25. createDatasourcesFromSubscriptionsInfo**
+
+```javascript
+entityService.createDatasourcesFromSubscriptionsInfo(/* subscriptionsInfo */ null).subscribe(datasourcesFromSubscriptionsInfo => {
+  console.log('createDatasourcesFromSubscriptions:', datasourcesFromSubscriptionsInfo);
+});
+```
+
+**26. createAlarmSourceFromSubscriptionInfo**
+
+```javascript
+entityService.createAlarmSourceFromSubscriptionInfo(/* subscriptionInfo */ null).subscribe(alarmSourceFromSubscriptionInfo => {
+  console.log('createAlarmSourceFromSubscription:', alarmSourceFromSubscriptionInfo);
+});
+```
+
+**27. getAssignedToEdgeEntitiesByType**
+
+```javascript
+entityService.getAssignedToEdgeEntitiesByType(/* edgeId */ null, null, self.ctx.pageLink(10, 0, null, null, null)).subscribe(assignedToEdgeEntitiesByType => {
+  console.log('AssignedToEdgeEntitiesByType:', assignedToEdgeEntitiesByType);
+});
+```
+
+**28. case**
+
+```javascript
+entityService.case().subscribe(case => {
+  console.log('case:', case);
+});
+```
+
+**29. getEntitySubtypesObservable**
+
+```javascript
+entityService.getEntitySubtypesObservable(null).subscribe(entitySubtypesObservable => {
+  console.log('EntitySubtypesObservable:', entitySubtypesObservable);
+});
+```
+
+---
+### **EVENTSERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -2358,20 +2384,21 @@ const eventService = $injector.get(self.ctx.servicesMap.get('eventService'));
 **1. getEvents**
 
 ```javascript
-eventService.getEvents('your-entity-id', 'your-eventtype', 'your-tenant-id', self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(event => {
-  console.log('Events:', event);
+eventService.getEvents(entityId, /* eventType */ null, /* tenantId */ null, self.ctx.pageLink(10, 0, null, null, null)).subscribe(events => {
+  console.log('Events:', events);
 });
 ```
 
 **2. getFilterEvents**
 
 ```javascript
-eventService.getFilterEvents('your-entity-id', 'your-eventtype', 'your-tenant-id', { /* your filters */ }, self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(filterevent => {
-  console.log('Filter Events:', filterevent);
+eventService.getFilterEvents(entityId, /* eventType */ null, /* tenantId */ null, /* filters */ null, self.ctx.pageLink(10, 0, null, null, null)).subscribe(filterEvents => {
+  console.log('FilterEvents:', filterEvents);
 });
 ```
 
-### **GITHUBSERVICE
+---
+### **GITHUBSERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -2383,12 +2410,13 @@ const gitHubService = $injector.get(self.ctx.servicesMap.get('gitHubService'));
 **1. getGitHubStar**
 
 ```javascript
-gitHubService.getGitHubStar({ /* your config */ }).subscribe(githubstar => {
-  console.log('Git Hub Star:', githubstar);
+gitHubService.getGitHubStar().subscribe(gitHubStar => {
+  console.log('GitHubStar:', gitHubStar);
 });
 ```
 
-### **IMAGESERVICE
+---
+### **IMAGESERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -2400,108 +2428,109 @@ const imageService = $injector.get(self.ctx.servicesMap.get('imageService'));
 **1. uploadImage**
 
 ```javascript
-imageService.uploadImage({ /* your file */ }, 'your-title', 'your-imagesubtype', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+imageService.uploadImage(/* file */ null, /* title */ null, null).subscribe(upImage => {
+  console.log('uploadImage:', upImage);
 });
 ```
 
 **2. updateImage**
 
 ```javascript
-imageService.updateImage('your-type', 'your-key', { /* your file */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+imageService.updateImage(null, /* key */ null, /* file */ null).subscribe(image => {
+  console.log('updateImage:', image);
 });
 ```
 
 **3. updateImageInfo**
 
 ```javascript
-imageService.updateImageInfo({ /* your imageInfo */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+imageService.updateImageInfo(/* imageInfo */ null).subscribe(imageInfo => {
+  console.log('updateImage:', imageInfo);
 });
 ```
 
 **4. updateImagePublicStatus**
 
 ```javascript
-imageService.updateImagePublicStatus({ /* your imageInfo */ }, true, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+imageService.updateImagePublicStatus(/* imageInfo */ null, true).subscribe(imagePublicStatus => {
+  console.log('updateImagePublicStatus:', imagePublicStatus);
 });
 ```
 
 **5. getImages**
 
 ```javascript
-imageService.getImages(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-imagesubtype', { /* your config */ }).subscribe(image => {
-  console.log('Images:', image);
+imageService.getImages(self.ctx.pageLink(10, 0, null, null, null), null).subscribe(images => {
+  console.log('Images:', images);
 });
 ```
 
 **6. getImageInfo**
 
 ```javascript
-imageService.getImageInfo('your-type', 'your-key', { /* your config */ }).subscribe(imageinfo => {
-  console.log('Image Info:', imageinfo);
+imageService.getImageInfo(null, /* key */ null).subscribe(imageInfo => {
+  console.log('Image:', imageInfo);
 });
 ```
 
 **7. getImageDataUrl**
 
 ```javascript
-imageService.getImageDataUrl('your-imageUrl').subscribe(imagedataurl => {
-  console.log('Image Data Url:', imagedataurl);
+imageService.getImageDataUrl(/* imageUrl */ null).subscribe(imageDataUrl => {
+  console.log('ImageDataUrl:', imageDataUrl);
 });
 ```
 
 **8. loadImageDataUrl**
 
 ```javascript
-imageService.loadImageDataUrl('your-imageLink').subscribe(result => {
-  console.log('Result:', result);
+imageService.loadImageDataUrl(/* imageLink */ null).subscribe(imageDataUrl => {
+  console.log('loadImageDataUrl:', imageDataUrl);
 });
 ```
 
 **9. getImageString**
 
 ```javascript
-imageService.getImageString('your-imageUrl').subscribe(imagestring => {
-  console.log('Image String:', imagestring);
+imageService.getImageString(/* imageUrl */ null).subscribe(imageString => {
+  console.log('ImageString:', imageString);
 });
 ```
 
 **10. resolveImageUrl**
 
 ```javascript
-imageService.resolveImageUrl('your-imageUrl').subscribe(result => {
-  console.log('Result:', result);
+imageService.resolveImageUrl(/* imageUrl */ null).subscribe(imageUrl => {
+  console.log('resolveImageUrl:', imageUrl);
 });
 ```
 
 **11. downloadImage**
 
 ```javascript
-imageService.downloadImage('your-type', 'your-key').subscribe(result => {
-  console.log('Result:', result);
+imageService.downloadImage(null, /* key */ null).subscribe(downImage => {
+  console.log('downloadImage:', downImage);
 });
 ```
 
 **12. exportImage**
 
 ```javascript
-imageService.exportImage('your-type', 'your-key', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+imageService.exportImage(null, /* key */ null).subscribe(exportImage => {
+  console.log('exportImage:', exportImage);
 });
 ```
 
 **13. importImage**
 
 ```javascript
-imageService.importImage({ /* your imageData */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+imageService.importImage(/* imageData */ null).subscribe(importImage => {
+  console.log('importImage:', importImage);
 });
 ```
 
-### **MOBILEAPPSERVICE
+---
+### **MOBILEAPPSERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -2513,60 +2542,61 @@ const mobileAppService = $injector.get(self.ctx.servicesMap.get('mobileAppServic
 **1. saveMobileApp**
 
 ```javascript
-mobileAppService.saveMobileApp({ /* your mobileApp */ }, { /* your config */ }).subscribe(savedMobileApp => {
-  console.log('Saved MobileApp:', savedMobileApp);
+mobileAppService.saveMobileApp(/* mobileApp */ null).subscribe(mobileApp => {
+  console.log('MobileApp:', mobileApp);
 });
 ```
 
 **2. getTenantMobileAppInfos**
 
 ```javascript
-mobileAppService.getTenantMobileAppInfos(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-platformtype', { /* your config */ }).subscribe(tenantmobileappinfo => {
-  console.log('Tenant Mobile App Infos:', tenantmobileappinfo);
+mobileAppService.getTenantMobileAppInfos(self.ctx.pageLink(10, 0, null, null, null), null).subscribe(tenantMobileAppInfos => {
+  console.log('TenantMobileApp infos:', tenantMobileAppInfos);
 });
 ```
 
 **3. getMobileAppInfoById**
 
 ```javascript
-mobileAppService.getMobileAppInfoById('your-id', { /* your config */ }).subscribe(mobileappinfobyid => {
-  console.log('Mobile App Info By Id:', mobileappinfobyid);
+mobileAppService.getMobileAppInfoById(/* id */ null).subscribe(mobileAppInfoById => {
+  console.log('MobileApp infoById:', mobileAppInfoById);
 });
 ```
 
 **4. deleteMobileApp**
 
 ```javascript
-mobileAppService.deleteMobileApp('your-id', { /* your config */ }).subscribe(result => {
-  console.log('Delete Result:', result);
+mobileAppService.deleteMobileApp(/* id */ null).subscribe(mobileApp => {
+  console.log('MobileApp:', mobileApp);
 });
 ```
 
 **5. getTenantMobileAppBundleInfos**
 
 ```javascript
-mobileAppService.getTenantMobileAppBundleInfos(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(tenantmobileappbundleinfo => {
-  console.log('Tenant Mobile App Bundle Infos:', tenantmobileappbundleinfo);
+mobileAppService.getTenantMobileAppBundleInfos(self.ctx.pageLink(10, 0, null, null, null)).subscribe(tenantMobileAppBundleInfos => {
+  console.log('TenantMobileAppBundle infos:', tenantMobileAppBundleInfos);
 });
 ```
 
 **6. getMobileAppBundleInfoById**
 
 ```javascript
-mobileAppService.getMobileAppBundleInfoById('your-id', { /* your config */ }).subscribe(mobileappbundleinfobyid => {
-  console.log('Mobile App Bundle Info By Id:', mobileappbundleinfobyid);
+mobileAppService.getMobileAppBundleInfoById(/* id */ null).subscribe(mobileAppBundleInfoById => {
+  console.log('MobileAppBundle infoById:', mobileAppBundleInfoById);
 });
 ```
 
 **7. deleteMobileAppBundle**
 
 ```javascript
-mobileAppService.deleteMobileAppBundle('your-id', { /* your config */ }).subscribe(result => {
-  console.log('Delete Result:', result);
+mobileAppService.deleteMobileAppBundle(/* id */ null).subscribe(mobileAppBundle => {
+  console.log('MobileAppBundle:', mobileAppBundle);
 });
 ```
 
-### **MOBILEAPPLICATIONSERVICE
+---
+### **MOBILEAPPLICATIONSERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -2578,28 +2608,29 @@ const mobileApplicationService = $injector.get(self.ctx.servicesMap.get('mobileA
 **1. getMobileAppSettings**
 
 ```javascript
-mobileApplicationService.getMobileAppSettings({ /* your config */ }).subscribe(mobileappetting => {
-  console.log('Mobile App Settings:', mobileappetting);
+mobileApplicationService.getMobileAppSettings().subscribe(mobileAppSettings => {
+  console.log('MobileAppSettings:', mobileAppSettings);
 });
 ```
 
 **2. saveMobileAppSettings**
 
 ```javascript
-mobileApplicationService.saveMobileAppSettings({ /* your mobileAppSettings */ }, { /* your config */ }).subscribe(savedMobileAppSettings => {
-  console.log('Saved MobileAppSettings:', savedMobileAppSettings);
+mobileApplicationService.saveMobileAppSettings(/* mobileAppSettings */ null).subscribe(mobileAppSettings => {
+  console.log('MobileAppSettings:', mobileAppSettings);
 });
 ```
 
 **3. getMobileAppDeepLink**
 
 ```javascript
-mobileApplicationService.getMobileAppDeepLink({ /* your config */ }).subscribe(mobileappdeeplink => {
-  console.log('Mobile App Deep Link:', mobileappdeeplink);
+mobileApplicationService.getMobileAppDeepLink().subscribe(mobileAppDeepLink => {
+  console.log('MobileAppDeepLink:', mobileAppDeepLink);
 });
 ```
 
-### **NOTIFICATIONSERVICE
+---
+### **NOTIFICATIONSERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -2611,309 +2642,311 @@ const notificationService = $injector.get(self.ctx.servicesMap.get('notification
 **1. getNotifications**
 
 ```javascript
-notificationService.getNotifications(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(notification => {
-  console.log('Notifications:', notification);
+notificationService.getNotifications(self.ctx.pageLink(10, 0, null, null, null)).subscribe(notifications => {
+  console.log('Notifications:', notifications);
 });
 ```
 
 **2. deleteNotification**
 
 ```javascript
-notificationService.deleteNotification('your-id', { /* your config */ }).subscribe(result => {
-  console.log('Delete Result:', result);
+notificationService.deleteNotification(/* id */ null).subscribe(notification => {
+  console.log('Notification:', notification);
 });
 ```
 
 **3. markNotificationAsRead**
 
 ```javascript
-notificationService.markNotificationAsRead('your-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+notificationService.markNotificationAsRead(/* id */ null).subscribe(markNotificationAsRead => {
+  console.log('markNotificationAsRead:', markNotificationAsRead);
 });
 ```
 
 **4. markAllNotificationsAsRead**
 
 ```javascript
-notificationService.markAllNotificationsAsRead({ /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+notificationService.markAllNotificationsAsRead().subscribe(markAllNotificationsAsRead => {
+  console.log('markAllNotificationsAsRead:', markAllNotificationsAsRead);
 });
 ```
 
 **5. createNotificationRequest**
 
 ```javascript
-notificationService.createNotificationRequest({ /* your notification */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+notificationService.createNotificationRequest(/* notification */ null).subscribe(notificationRequest => {
+  console.log('createNotificationRequest:', notificationRequest);
 });
 ```
 
 **6. sendEntitiesLimitIncreaseRequest**
 
 ```javascript
-notificationService.sendEntitiesLimitIncreaseRequest('your-entitytype', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+notificationService.sendEntitiesLimitIncreaseRequest(null).subscribe(entitiesLimitIncreaseRequest => {
+  console.log('sendEntitiesLimitIncreaseRequest:', entitiesLimitIncreaseRequest);
 });
 ```
 
 **7. getNotificationRequestById**
 
 ```javascript
-notificationService.getNotificationRequestById('your-id', { /* your config */ }).subscribe(notificationrequestbyid => {
-  console.log('Notification Request By Id:', notificationrequestbyid);
+notificationService.getNotificationRequestById(/* id */ null).subscribe(notificationRequestById => {
+  console.log('NotificationRequestById:', notificationRequestById);
 });
 ```
 
 **8. getAvailableDeliveryMethods**
 
 ```javascript
-notificationService.getAvailableDeliveryMethods({ /* your config */ }).subscribe(availabledeliverymethod => {
-  console.log('Available Delivery Methods:', availabledeliverymethod);
+notificationService.getAvailableDeliveryMethods().subscribe(availableDeliveryMethods => {
+  console.log('AvailableDeliveryMethods:', availableDeliveryMethods);
 });
 ```
 
 **9. deleteNotificationRequest**
 
 ```javascript
-notificationService.deleteNotificationRequest('your-id', { /* your config */ }).subscribe(result => {
-  console.log('Delete Result:', result);
+notificationService.deleteNotificationRequest(/* id */ null).subscribe(notificationRequest => {
+  console.log('NotificationRequest:', notificationRequest);
 });
 ```
 
 **10. getNotificationRequestPreview**
 
 ```javascript
-notificationService.getNotificationRequestPreview({ /* your notification */ }, { /* your config */ }).subscribe(notificationrequestpreview => {
-  console.log('Notification Request Preview:', notificationrequestpreview);
+notificationService.getNotificationRequestPreview(/* notification */ null).subscribe(notificationRequestPreview => {
+  console.log('NotificationRequestPreview:', notificationRequestPreview);
 });
 ```
 
 **11. getNotificationRequests**
 
 ```javascript
-notificationService.getNotificationRequests(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(notificationrequet => {
-  console.log('Notification Requests:', notificationrequet);
+notificationService.getNotificationRequests(self.ctx.pageLink(10, 0, null, null, null)).subscribe(notificationRequests => {
+  console.log('NotificationRequests:', notificationRequests);
 });
 ```
 
 **12. getNotificationSettings**
 
 ```javascript
-notificationService.getNotificationSettings({ /* your config */ }).subscribe(notificationetting => {
-  console.log('Notification Settings:', notificationetting);
+notificationService.getNotificationSettings().subscribe(notificationSettings => {
+  console.log('NotificationSettings:', notificationSettings);
 });
 ```
 
 **13. saveNotificationSettings**
 
 ```javascript
-notificationService.saveNotificationSettings({ /* your notificationSettings */ }, { /* your config */ }).subscribe(savedNotificationSettings => {
-  console.log('Saved NotificationSettings:', savedNotificationSettings);
+notificationService.saveNotificationSettings(/* notificationSettings */ null).subscribe(notificationSettings => {
+  console.log('NotificationSettings:', notificationSettings);
 });
 ```
 
 **14. listSlackConversations**
 
 ```javascript
-notificationService.listSlackConversations('your-type', 'your-token', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+notificationService.listSlackConversations(null, /* token */ null).subscribe(slConversations => {
+  console.log('listSlackConversations:', slConversations);
 });
 ```
 
 **15. saveNotificationRule**
 
 ```javascript
-notificationService.saveNotificationRule({ /* your notificationRule */ }, { /* your config */ }).subscribe(savedNotificationRule => {
-  console.log('Saved NotificationRule:', savedNotificationRule);
+notificationService.saveNotificationRule(/* notificationRule */ null).subscribe(notificationRule => {
+  console.log('NotificationRule:', notificationRule);
 });
 ```
 
 **16. getNotificationRuleById**
 
 ```javascript
-notificationService.getNotificationRuleById('your-id', { /* your config */ }).subscribe(notificationrulebyid => {
-  console.log('Notification Rule By Id:', notificationrulebyid);
+notificationService.getNotificationRuleById(/* id */ null).subscribe(notificationRuleById => {
+  console.log('NotificationRuleById:', notificationRuleById);
 });
 ```
 
 **17. deleteNotificationRule**
 
 ```javascript
-notificationService.deleteNotificationRule('your-id', { /* your config */ }).subscribe(result => {
-  console.log('Delete Result:', result);
+notificationService.deleteNotificationRule(/* id */ null).subscribe(notificationRule => {
+  console.log('NotificationRule:', notificationRule);
 });
 ```
 
 **18. getNotificationRules**
 
 ```javascript
-notificationService.getNotificationRules(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(notificationrule => {
-  console.log('Notification Rules:', notificationrule);
+notificationService.getNotificationRules(self.ctx.pageLink(10, 0, null, null, null)).subscribe(notificationRules => {
+  console.log('NotificationRules:', notificationRules);
 });
 ```
 
 **19. saveNotificationTarget**
 
 ```javascript
-notificationService.saveNotificationTarget({ /* your notificationTarget */ }, { /* your config */ }).subscribe(savedNotificationTarget => {
-  console.log('Saved NotificationTarget:', savedNotificationTarget);
+notificationService.saveNotificationTarget(/* notificationTarget */ null).subscribe(notificationTar => {
+  console.log('NotificationTarget:', notificationTar);
 });
 ```
 
 **20. getNotificationTargetById**
 
 ```javascript
-notificationService.getNotificationTargetById('your-id', { /* your config */ }).subscribe(notificationtargetbyid => {
-  console.log('Notification Target By Id:', notificationtargetbyid);
+notificationService.getNotificationTargetById(/* id */ null).subscribe(notificationTarById => {
+  console.log('NotificationTarget ById:', notificationTarById);
 });
 ```
 
 **21. deleteNotificationTarget**
 
 ```javascript
-notificationService.deleteNotificationTarget('your-id', { /* your config */ }).subscribe(result => {
-  console.log('Delete Result:', result);
+notificationService.deleteNotificationTarget(/* id */ null).subscribe(notificationTar => {
+  console.log('NotificationTarget:', notificationTar);
 });
 ```
 
 **22. getNotificationTargetsByIds**
 
 ```javascript
-notificationService.getNotificationTargetsByIds(['id1', 'id2'], { /* your config */ }).subscribe(notificationtargetbyid => {
-  console.log('Notification Targets By Ids:', notificationtargetbyid);
+notificationService.getNotificationTargetsByIds(['id1', 'id2']).subscribe(notificationTarsByIds => {
+  console.log('NotificationTarget sByIds:', notificationTarsByIds);
 });
 ```
 
 **23. getNotificationTargets**
 
 ```javascript
-notificationService.getNotificationTargets(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-type', { /* your config */ }).subscribe(notificationtarget => {
-  console.log('Notification Targets:', notificationtarget);
+notificationService.getNotificationTargets(self.ctx.pageLink(10, 0, null, null, null), null).subscribe(notificationTars => {
+  console.log('NotificationTarget s:', notificationTars);
 });
 ```
 
 **24. getRecipientsForNotificationTargetConfig**
 
 ```javascript
-notificationService.getRecipientsForNotificationTargetConfig({ /* your notificationTarget */ }, self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(recipientsfornotificationtargetconfig => {
-  console.log('Recipients For Notification Target Config:', recipientsfornotificationtargetconfig);
+notificationService.getRecipientsForNotificationTargetConfig(/* notificationTarget */ null, self.ctx.pageLink(10, 0, null, null, null)).subscribe(recipientsForNotificationTarConfig => {
+  console.log('RecipientsForNotificationTarget Config:', recipientsForNotificationTarConfig);
 });
 ```
 
 **25. saveNotificationTemplate**
 
 ```javascript
-notificationService.saveNotificationTemplate({ /* your notificationTarget */ }, { /* your config */ }).subscribe(savedNotificationTemplate => {
-  console.log('Saved NotificationTemplate:', savedNotificationTemplate);
+notificationService.saveNotificationTemplate(/* notificationTarget */ null).subscribe(notificationTemplate => {
+  console.log('NotificationTemplate:', notificationTemplate);
 });
 ```
 
 **26. getNotificationTemplateById**
 
 ```javascript
-notificationService.getNotificationTemplateById('your-id', { /* your config */ }).subscribe(notificationtemplatebyid => {
-  console.log('Notification Template By Id:', notificationtemplatebyid);
+notificationService.getNotificationTemplateById(/* id */ null).subscribe(notificationTemplateById => {
+  console.log('NotificationTemplateById:', notificationTemplateById);
 });
 ```
 
 **27. deleteNotificationTemplate**
 
 ```javascript
-notificationService.deleteNotificationTemplate('your-id', { /* your config */ }).subscribe(result => {
-  console.log('Delete Result:', result);
+notificationService.deleteNotificationTemplate(/* id */ null).subscribe(notificationTemplate => {
+  console.log('NotificationTemplate:', notificationTemplate);
 });
 ```
 
 **28. getNotificationTemplates**
 
 ```javascript
-notificationService.getNotificationTemplates(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-notificationtypes', { /* your config */ }).subscribe(notificationtemplate => {
-  console.log('Notification Templates:', notificationtemplate);
+notificationService.getNotificationTemplates(self.ctx.pageLink(10, 0, null, null, null), null).subscribe(notificationTemplates => {
+  console.log('NotificationTemplates:', notificationTemplates);
 });
 ```
 
 **29. getNotificationUserSettings**
 
 ```javascript
-notificationService.getNotificationUserSettings({ /* your config */ }).subscribe(notificationueretting => {
-  console.log('Notification User Settings:', notificationueretting);
+notificationService.getNotificationUserSettings().subscribe(notificationUserSettings => {
+  console.log('NotificationUserSettings:', notificationUserSettings);
 });
 ```
 
 **30. saveNotificationUserSettings**
 
 ```javascript
-notificationService.saveNotificationUserSettings({ /* your settings */ }, { /* your config */ }).subscribe(savedNotificationUserSettings => {
-  console.log('Saved NotificationUserSettings:', savedNotificationUserSettings);
+notificationService.saveNotificationUserSettings(/* settings */ null).subscribe(notificationUserSettings => {
+  console.log('NotificationUserSettings:', notificationUserSettings);
 });
 ```
 
-### **OAUTH2SERVICE
+---
+### **OAUTH2SERVICE**
 
 TO INJECT THE SERVICE:
 
 ```javascript
 const $injector = self.ctx.$scope.$injector;
-const oAuth2Service = $injector.get(self.ctx.servicesMap.get('oAuth2Service'));
+const oauth2Service = $injector.get(self.ctx.servicesMap.get('oauth2Service'));
 ```
 
 **1. getOAuth2Template**
 
 ```javascript
-oAuth2Service.getOAuth2Template({ /* your config */ }).subscribe(oauth2template => {
-  console.log('O Auth2 Template:', oauth2template);
+oauth2Service.getOAuth2Template().subscribe(oAuth2Template => {
+  console.log('OAuth2Template:', oAuth2Template);
 });
 ```
 
 **2. saveOAuth2Client**
 
 ```javascript
-oAuth2Service.saveOAuth2Client({ /* your oAuth2Client */ }, { /* your config */ }).subscribe(savedOAuth2Client => {
-  console.log('Saved OAuth2Client:', savedOAuth2Client);
+oauth2Service.saveOAuth2Client(/* oAuth2Client */ null).subscribe(oAuth2Client => {
+  console.log('OAuth2Client:', oAuth2Client);
 });
 ```
 
 **3. findTenantOAuth2ClientInfos**
 
 ```javascript
-oAuth2Service.findTenantOAuth2ClientInfos(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+oauth2Service.findTenantOAuth2ClientInfos(self.ctx.pageLink(10, 0, null, null, null)).subscribe(tenantOAuth2ClientInfos => {
+  console.log('TenantOAuth2Client infos:', tenantOAuth2ClientInfos);
 });
 ```
 
 **4. findTenantOAuth2ClientInfosByIds**
 
 ```javascript
-oAuth2Service.findTenantOAuth2ClientInfosByIds(['id1', 'id2'], { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+oauth2Service.findTenantOAuth2ClientInfosByIds(['id1', 'id2']).subscribe(tenantOAuth2ClientInfosByIds => {
+  console.log('TenantOAuth2Client infosByIds:', tenantOAuth2ClientInfosByIds);
 });
 ```
 
 **5. getOAuth2ClientById**
 
 ```javascript
-oAuth2Service.getOAuth2ClientById('your-id', { /* your config */ }).subscribe(oauth2clientbyid => {
-  console.log('O Auth2 Client By Id:', oauth2clientbyid);
+oauth2Service.getOAuth2ClientById(/* id */ null).subscribe(oAuth2ClientById => {
+  console.log('OAuth2ClientById:', oAuth2ClientById);
 });
 ```
 
 **6. deleteOauth2Client**
 
 ```javascript
-oAuth2Service.deleteOauth2Client('your-id', { /* your config */ }).subscribe(result => {
-  console.log('Delete Result:', result);
+oauth2Service.deleteOauth2Client(/* id */ null).subscribe(oauth2Client => {
+  console.log('Oauth2Client:', oauth2Client);
 });
 ```
 
 **7. getLoginProcessingUrl**
 
 ```javascript
-oAuth2Service.getLoginProcessingUrl({ /* your config */ }).subscribe(loginprocessingurl => {
-  console.log('Login Processing Url:', loginprocessingurl);
+oauth2Service.getLoginProcessingUrl().subscribe(loginProcessingUrl => {
+  console.log('LoginProcessingUrl:', loginProcessingUrl);
 });
 ```
 
-### **OTAPACKAGESERVICE
+---
+### **OTAPACKAGESERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -2925,84 +2958,85 @@ const otaPackageService = $injector.get(self.ctx.servicesMap.get('otaPackageServ
 **1. getOtaPackages**
 
 ```javascript
-otaPackageService.getOtaPackages(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(otapackage => {
-  console.log('Ota Packages:', otapackage);
+otaPackageService.getOtaPackages(self.ctx.pageLink(10, 0, null, null, null)).subscribe(otaPages => {
+  console.log('OtaPackages:', otaPages);
 });
 ```
 
 **2. getOtaPackagesInfoByDeviceProfileId**
 
 ```javascript
-otaPackageService.getOtaPackagesInfoByDeviceProfileId(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-deviceprofile-id', 'your-type', { /* your config */ }).subscribe(otapackagesinfobydeviceprofileid => {
-  console.log('Ota Packages Info By Device Profile Id:', otapackagesinfobydeviceprofileid);
+otaPackageService.getOtaPackagesInfoByDeviceProfileId(self.ctx.pageLink(10, 0, null, null, null), /* deviceProfileId */ null, null).subscribe(otaPagesInfoByDeviceProfileId => {
+  console.log('OtaPackages infoByDeviceProfileId:', otaPagesInfoByDeviceProfileId);
 });
 ```
 
 **3. getOtaPackage**
 
 ```javascript
-otaPackageService.getOtaPackage('your-otapackage-id', { /* your config */ }).subscribe(otapackage => {
-  console.log('Ota Package:', otapackage);
+otaPackageService.getOtaPackage(/* otaPackageId */ null).subscribe(otaPage => {
+  console.log('OtaPackage:', otaPage);
 });
 ```
 
 **4. getOtaPackageInfo**
 
 ```javascript
-otaPackageService.getOtaPackageInfo('your-otapackage-id', { /* your config */ }).subscribe(otapackageinfo => {
-  console.log('Ota Package Info:', otapackageinfo);
+otaPackageService.getOtaPackageInfo(/* otaPackageId */ null).subscribe(otaPageInfo => {
+  console.log('OtaPackage:', otaPageInfo);
 });
 ```
 
 **5. downloadOtaPackage**
 
 ```javascript
-otaPackageService.downloadOtaPackage('your-otapackage-id').subscribe(result => {
-  console.log('Result:', result);
+otaPackageService.downloadOtaPackage(/* otaPackageId */ null).subscribe(downOtaPage => {
+  console.log('downloadOtaPackage:', downOtaPage);
 });
 ```
 
 **6. saveOtaPackage**
 
 ```javascript
-otaPackageService.saveOtaPackage({ /* your otaPackage */ }, { /* your config */ }).subscribe(savedOtaPackage => {
-  console.log('Saved OtaPackage:', savedOtaPackage);
+otaPackageService.saveOtaPackage(/* otaPackage */ null).subscribe(otaPage => {
+  console.log('OtaPackage:', otaPage);
 });
 ```
 
 **7. saveOtaPackageInfo**
 
 ```javascript
-otaPackageService.saveOtaPackageInfo({ /* your otaPackageInfo */ }, { /* your config */ }).subscribe(savedOtaPackageInfo => {
-  console.log('Saved OtaPackageInfo:', savedOtaPackageInfo);
+otaPackageService.saveOtaPackageInfo(/* otaPackageInfo */ null).subscribe(otaPageInfo => {
+  console.log('OtaPackage:', otaPageInfo);
 });
 ```
 
 **8. uploadOtaPackageFile**
 
 ```javascript
-otaPackageService.uploadOtaPackageFile('your-otapackage-id', { /* your file */ }, { /* your checksumAlgorithm */ }, 'your-checksum', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+otaPackageService.uploadOtaPackageFile(/* otaPackageId */ null, /* file */ null, null, /* checksum */ null).subscribe(upOtaPageFile => {
+  console.log('uploadOtaPackageFile:', upOtaPageFile);
 });
 ```
 
 **9. countUpdateDeviceAfterChangePackage**
 
 ```javascript
-otaPackageService.countUpdateDeviceAfterChangePackage('your-type', 'your-entity-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+otaPackageService.countUpdateDeviceAfterChangePackage(null, entityId).subscribe(updateDeviceAfterChangePage => {
+  console.log('countUpdateDeviceAfterChangePackage:', updateDeviceAfterChangePage);
 });
 ```
 
 **10. confirmDialogUpdatePackage**
 
 ```javascript
-otaPackageService.confirmDialogUpdatePackage({ /* your entity */ }, { /* your originEntity */ }).subscribe(result => {
-  console.log('Result:', result);
+otaPackageService.confirmDialogUpdatePackage(/* entity */ null, /* originEntity */ null).subscribe(dialogUpdatePage => {
+  console.log('confirmDialogUpdatePackage:', dialogUpdatePage);
 });
 ```
 
-### **QUEUESERVICE
+---
+### **QUEUESERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -3014,60 +3048,61 @@ const queueService = $injector.get(self.ctx.servicesMap.get('queueService'));
 **1. getQueueById**
 
 ```javascript
-queueService.getQueueById('your-queue-id', { /* your config */ }).subscribe(queuebyid => {
-  console.log('Queue By Id:', queuebyid);
+queueService.getQueueById(/* queueId */ null).subscribe(queueById => {
+  console.log('QueueById:', queueById);
 });
 ```
 
 **2. getQueueByName**
 
 ```javascript
-queueService.getQueueByName('your-queueName', { /* your config */ }).subscribe(queuebyname => {
-  console.log('Queue By Name:', queuebyname);
+queueService.getQueueByName(/* queueName */ null).subscribe(queueByName => {
+  console.log('QueueByName:', queueByName);
 });
 ```
 
 **3. getTenantQueuesByServiceType**
 
 ```javascript
-queueService.getTenantQueuesByServiceType(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-servicetype', { /* your config */ }).subscribe(tenantqueuesbyservicetype => {
-  console.log('Tenant Queues By Service Type:', tenantqueuesbyservicetype);
+queueService.getTenantQueuesByServiceType(self.ctx.pageLink(10, 0, null, null, null), null).subscribe(tenantQueuesByServiceType => {
+  console.log('TenantQueuesByServiceType:', tenantQueuesByServiceType);
 });
 ```
 
 **4. saveQueue**
 
 ```javascript
-queueService.saveQueue({ /* your queue */ }, 'your-servicetype', { /* your config */ }).subscribe(savedQueue => {
-  console.log('Saved Queue:', savedQueue);
+queueService.saveQueue(/* queue */ null, null).subscribe(queue => {
+  console.log('Queue:', queue);
 });
 ```
 
 **5. getQueueStatistics**
 
 ```javascript
-queueService.getQueueStatistics(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(queuetatitic => {
-  console.log('Queue Statistics:', queuetatitic);
+queueService.getQueueStatistics(self.ctx.pageLink(10, 0, null, null, null)).subscribe(queueStatistics => {
+  console.log('QueueStatistics:', queueStatistics);
 });
 ```
 
 **6. getQueueStatisticsById**
 
 ```javascript
-queueService.getQueueStatisticsById('your-queuestat-id', { /* your config */ }).subscribe(queuestatisticsbyid => {
-  console.log('Queue Statistics By Id:', queuestatisticsbyid);
+queueService.getQueueStatisticsById(/* queueStatId */ null).subscribe(queueStatisticsById => {
+  console.log('QueueStatisticsById:', queueStatisticsById);
 });
 ```
 
 **7. getQueueStatisticsByIds**
 
 ```javascript
-queueService.getQueueStatisticsByIds(['id1', 'id2'], { /* your config */ }).subscribe(queuetatiticbyid => {
-  console.log('Queue Statistics By Ids:', queuetatiticbyid);
+queueService.getQueueStatisticsByIds(['id1', 'id2']).subscribe(queueStatisticsByIds => {
+  console.log('QueueStatisticsByIds:', queueStatisticsByIds);
 });
 ```
 
-### **RESOURCESERVICE
+---
+### **RESOURCESERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -3079,26 +3114,27 @@ const resourceService = $injector.get(self.ctx.servicesMap.get('resourceService'
 const resourceService = self.ctx.resourceService;
 ```
 
+
 **1. getResources**
 
 ```javascript
-resourceService.getResources(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-resourcetype', 'your-resourcesubtype', { /* your config */ }).subscribe(reource => {
-  console.log('Resources:', reource);
+resourceService.getResources(self.ctx.pageLink(10, 0, null, null, null), null, null).subscribe(resources => {
+  console.log('Resources:', resources);
 });
 ```
 
 **2. getTenantResources**
 
 ```javascript
-resourceService.getTenantResources(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(tenantreource => {
-  console.log('Tenant Resources:', tenantreource);
+resourceService.getTenantResources(self.ctx.pageLink(10, 0, null, null, null)).subscribe(tenantResources => {
+  console.log('TenantResources:', tenantResources);
 });
 ```
 
 **3. getResource**
 
 ```javascript
-resourceService.getResource('your-resource-id', { /* your config */ }).subscribe(resource => {
+resourceService.getResource(/* resourceId */ null).subscribe(resource => {
   console.log('Resource:', resource);
 });
 ```
@@ -3106,84 +3142,85 @@ resourceService.getResource('your-resource-id', { /* your config */ }).subscribe
 **4. getResourceInfoById**
 
 ```javascript
-resourceService.getResourceInfoById('your-resource-id', { /* your config */ }).subscribe(resourceinfobyid => {
-  console.log('Resource Info By Id:', resourceinfobyid);
+resourceService.getResourceInfoById(/* resourceId */ null).subscribe(resourceInfoById => {
+  console.log('Resource infoById:', resourceInfoById);
 });
 ```
 
 **5. getResourceInfo**
 
 ```javascript
-resourceService.getResourceInfo('your-type', { /* your scope */ }, 'your-key', { /* your config */ }).subscribe(resourceinfo => {
-  console.log('Resource Info:', resourceinfo);
+resourceService.getResourceInfo(null, null, /* key */ null).subscribe(resourceInfo => {
+  console.log('Resource:', resourceInfo);
 });
 ```
 
 **6. downloadResource**
 
 ```javascript
-resourceService.downloadResource('your-resource-id').subscribe(result => {
-  console.log('Result:', result);
+resourceService.downloadResource(/* resourceId */ null).subscribe(downResource => {
+  console.log('downloadResource:', downResource);
 });
 ```
 
 **7. saveResources**
 
 ```javascript
-resourceService.saveResources(['id1', 'id2'], { /* your config */ }).subscribe(savedResources => {
-  console.log('Saved Resources:', savedResources);
+resourceService.saveResources(/* resources */ null).subscribe(resources => {
+  console.log('Resources:', resources);
 });
 ```
 
 **8. saveResource**
 
 ```javascript
-resourceService.saveResource({ /* your resource */ }, { /* your config */ }).subscribe(savedResource => {
-  console.log('Saved Resource:', savedResource);
+resourceService.saveResource(/* resource */ null).subscribe(resource => {
+  console.log('Resource:', resource);
 });
 ```
 
 **9. uploadResources**
 
 ```javascript
-resourceService.uploadResources(['id1', 'id2'], { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+resourceService.uploadResources(/* resources */ null).subscribe(upResources => {
+  console.log('uploadResources:', upResources);
 });
 ```
 
 **10. uploadResource**
 
 ```javascript
-resourceService.uploadResource({ /* your resource */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+resourceService.uploadResource(/* resource */ null).subscribe(upResource => {
+  console.log('uploadResource:', upResource);
 });
 ```
 
 **11. updatedResourceInfo**
 
 ```javascript
-resourceService.updatedResourceInfo('your-resource-id', { /* your updatedResources */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+resourceService.updatedResourceInfo(/* resourceId */ null, /* updatedResources */ null).subscribe(dResourceInfo => {
+  console.log('updatedResource:', dResourceInfo);
 });
 ```
 
 **12. updatedResourceData**
 
 ```javascript
-resourceService.updatedResourceData('your-resource-id', { /* your data */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+resourceService.updatedResourceData(/* resourceId */ null, /* data */ null).subscribe(dResourceData => {
+  console.log('updatedResourceData:', dResourceData);
 });
 ```
 
 **13. getResourcesByIds**
 
 ```javascript
-resourceService.getResourcesByIds(['id1', 'id2'], { /* your config */ }).subscribe(reourcebyid => {
-  console.log('Resources By Ids:', reourcebyid);
+resourceService.getResourcesByIds(['id1', 'id2']).subscribe(resourcesByIds => {
+  console.log('ResourcesByIds:', resourcesByIds);
 });
 ```
 
-### **RULECHAINSERVICE
+---
+### **RULECHAINSERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -3195,220 +3232,221 @@ const ruleChainService = $injector.get(self.ctx.servicesMap.get('ruleChainServic
 **1. getRuleChains**
 
 ```javascript
-ruleChainService.getRuleChains(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-type', { /* your config */ }).subscribe(rulechain => {
-  console.log('Rule Chains:', rulechain);
+ruleChainService.getRuleChains(self.ctx.pageLink(10, 0, null, null, null), null).subscribe(ruleChains => {
+  console.log('RuleChains:', ruleChains);
 });
 ```
 
 **2. getRuleChainsByIds**
 
 ```javascript
-ruleChainService.getRuleChainsByIds(['id1', 'id2'], { /* your config */ }).subscribe(rulechainbyid => {
-  console.log('Rule Chains By Ids:', rulechainbyid);
+ruleChainService.getRuleChainsByIds(['id1', 'id2']).subscribe(ruleChainsByIds => {
+  console.log('RuleChainsByIds:', ruleChainsByIds);
 });
 ```
 
 **3. getRuleChain**
 
 ```javascript
-ruleChainService.getRuleChain('your-rulechain-id', { /* your config */ }).subscribe(rulechain => {
-  console.log('Rule Chain:', rulechain);
+ruleChainService.getRuleChain(/* ruleChainId */ null).subscribe(ruleChain => {
+  console.log('RuleChain:', ruleChain);
 });
 ```
 
 **4. getRuleChainOutputLabels**
 
 ```javascript
-ruleChainService.getRuleChainOutputLabels('your-rulechain-id', { /* your config */ }).subscribe(rulechainoutputlabel => {
-  console.log('Rule Chain Output Labels:', rulechainoutputlabel);
+ruleChainService.getRuleChainOutputLabels(/* ruleChainId */ null).subscribe(ruleChainOutputLabels => {
+  console.log('RuleChainOutputLabels:', ruleChainOutputLabels);
 });
 ```
 
 **5. createDefaultRuleChain**
 
 ```javascript
-ruleChainService.createDefaultRuleChain('your-ruleChainName', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+ruleChainService.createDefaultRuleChain(/* ruleChainName */ null).subscribe(defaultRuleChain => {
+  console.log('createDefaultRuleChain:', defaultRuleChain);
 });
 ```
 
 **6. saveRuleChain**
 
 ```javascript
-ruleChainService.saveRuleChain({ /* your ruleChain */ }, { /* your config */ }).subscribe(savedRuleChain => {
-  console.log('Saved RuleChain:', savedRuleChain);
+ruleChainService.saveRuleChain(/* ruleChain */ null).subscribe(ruleChain => {
+  console.log('RuleChain:', ruleChain);
 });
 ```
 
 **7. setRootRuleChain**
 
 ```javascript
-ruleChainService.setRootRuleChain('your-rulechain-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+ruleChainService.setRootRuleChain(/* ruleChainId */ null).subscribe(rootRuleChain => {
+  console.log('setRootRuleChain:', rootRuleChain);
 });
 ```
 
 **8. getRuleChainMetadata**
 
 ```javascript
-ruleChainService.getRuleChainMetadata('your-rulechain-id', { /* your config */ }).subscribe(rulechainmetadata => {
-  console.log('Rule Chain Metadata:', rulechainmetadata);
+ruleChainService.getRuleChainMetadata(/* ruleChainId */ null).subscribe(ruleChainMetadata => {
+  console.log('RuleChainMetadata:', ruleChainMetadata);
 });
 ```
 
 **9. saveRuleChainMetadata**
 
 ```javascript
-ruleChainService.saveRuleChainMetadata({ /* your ruleChainMetaData */ }, { /* your config */ }).subscribe(savedRuleChainMetadata => {
-  console.log('Saved RuleChainMetadata:', savedRuleChainMetadata);
+ruleChainService.saveRuleChainMetadata(/* ruleChainMetaData */ null).subscribe(ruleChainMetadata => {
+  console.log('RuleChainMetadata:', ruleChainMetadata);
 });
 ```
 
 **10. getRuleNodeComponents**
 
 ```javascript
-ruleChainService.getRuleNodeComponents({ /* your modulesMap */ }, 'your-rulechaintype', { /* your config */ }).subscribe(rulenodecomponent => {
-  console.log('Rule Node Components:', rulenodecomponent);
+ruleChainService.getRuleNodeComponents(/* modulesMap */ null, null).subscribe(ruleNodeComponents => {
+  console.log('RuleNodeComponents:', ruleNodeComponents);
 });
 ```
 
 **11. getRuleNodeConfigComponent**
 
 ```javascript
-ruleChainService.getRuleNodeConfigComponent('your-directive').subscribe(rulenodeconfigcomponent => {
-  console.log('Rule Node Config Component:', rulenodeconfigcomponent);
+ruleChainService.getRuleNodeConfigComponent(/* directive */ null).subscribe(ruleNodeConfigComponent => {
+  console.log('RuleNodeConfigComponent:', ruleNodeConfigComponent);
 });
 ```
 
 **12. getRuleNodeComponentByClazz**
 
 ```javascript
-ruleChainService.getRuleNodeComponentByClazz('your-rulechaintype', 'your-clazz').subscribe(rulenodecomponentbyclazz => {
-  console.log('Rule Node Component By Clazz:', rulenodecomponentbyclazz);
+ruleChainService.getRuleNodeComponentByClazz(null, /* clazz */ null).subscribe(ruleNodeComponentByClazz => {
+  console.log('RuleNodeComponentByClazz:', ruleNodeComponentByClazz);
 });
 ```
 
 **13. getRuleNodeSupportedLinks**
 
 ```javascript
-ruleChainService.getRuleNodeSupportedLinks({ /* your component */ }).subscribe(rulenodeupportedlink => {
-  console.log('Rule Node Supported Links:', rulenodeupportedlink);
+ruleChainService.getRuleNodeSupportedLinks(/* component */ null).subscribe(ruleNodeSupportedLinks => {
+  console.log('RuleNodeSupportedLinks:', ruleNodeSupportedLinks);
 });
 ```
 
 **14. ruleNodeAllowCustomLinks**
 
 ```javascript
-ruleChainService.ruleNodeAllowCustomLinks({ /* your component */ }).subscribe(result => {
-  console.log('Result:', result);
+ruleChainService.ruleNodeAllowCustomLinks(/* component */ null).subscribe(ruleNodeAllowCustomLinks => {
+  console.log('ruleNodeAllowCustomLinks:', ruleNodeAllowCustomLinks);
 });
 ```
 
 **15. ruleNodeSourceRuleChainId**
 
 ```javascript
-ruleChainService.ruleNodeSourceRuleChainId({ /* your component */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+ruleChainService.ruleNodeSourceRuleChainId(/* component */ null).subscribe(ruleNodeSourceRuleChainId => {
+  console.log('ruleNodeSourceRuleChainId:', ruleNodeSourceRuleChainId);
 });
 ```
 
 **16. getLatestRuleNodeDebugInput**
 
 ```javascript
-ruleChainService.getLatestRuleNodeDebugInput('your-rulenode-id', { /* your config */ }).subscribe(latestrulenodedebuginput => {
-  console.log('Latest Rule Node Debug Input:', latestrulenodedebuginput);
+ruleChainService.getLatestRuleNodeDebugInput(/* ruleNodeId */ null).subscribe(laRuleNodeDebugInput => {
+  console.log('LatestRuleNodeDebugInput:', laRuleNodeDebugInput);
 });
 ```
 
 **17. testScript**
 
 ```javascript
-ruleChainService.testScript({ /* your inputParams */ }, { /* your scriptLang */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+ruleChainService.testScript(/* inputParams */ null, null).subscribe(script => {
+  console.log('testScript:', script);
 });
 ```
 
 **18. loadRuleNodeComponents**
 
 ```javascript
-ruleChainService.loadRuleNodeComponents('your-rulechaintype', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+ruleChainService.loadRuleNodeComponents(null).subscribe(ruleNodeComponents => {
+  console.log('loadRuleNodeComponents:', ruleNodeComponents);
 });
 ```
 
 **19. resolveRuleNodeComponentsUiResources**
 
 ```javascript
-ruleChainService.resolveRuleNodeComponentsUiResources(['id1', 'id2'], { /* your modulesMap */ }).subscribe(result => {
-  console.log('Result:', result);
+ruleChainService.resolveRuleNodeComponentsUiResources(/* components */ null, /* modulesMap */ null).subscribe(ruleNodeComponentsUiResources => {
+  console.log('resolveRuleNodeComponentsUiResources:', ruleNodeComponentsUiResources);
 });
 ```
 
 **20. resolveRuleNodeComponentUiResources**
 
 ```javascript
-ruleChainService.resolveRuleNodeComponentUiResources({ /* your component */ }, { /* your modulesMap */ }).subscribe(result => {
-  console.log('Result:', result);
+ruleChainService.resolveRuleNodeComponentUiResources(/* component */ null, /* modulesMap */ null).subscribe(ruleNodeComponentUiResources => {
+  console.log('resolveRuleNodeComponentUiResources:', ruleNodeComponentUiResources);
 });
 ```
 
 **21. getEdgeRuleChains**
 
 ```javascript
-ruleChainService.getEdgeRuleChains('your-edge-id', self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(edgerulechain => {
-  console.log('Edge Rule Chains:', edgerulechain);
+ruleChainService.getEdgeRuleChains(/* edgeId */ null, self.ctx.pageLink(10, 0, null, null, null)).subscribe(edgeRuleChains => {
+  console.log('EdgeRuleChains:', edgeRuleChains);
 });
 ```
 
 **22. assignRuleChainToEdge**
 
 ```javascript
-ruleChainService.assignRuleChainToEdge('your-edge-id', 'your-rulechain-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+ruleChainService.assignRuleChainToEdge(/* edgeId */ null, /* ruleChainId */ null).subscribe(ruleChainToEdge => {
+  console.log('assignRuleChainToEdge:', ruleChainToEdge);
 });
 ```
 
 **23. setEdgeTemplateRootRuleChain**
 
 ```javascript
-ruleChainService.setEdgeTemplateRootRuleChain('your-rulechain-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+ruleChainService.setEdgeTemplateRootRuleChain(/* ruleChainId */ null).subscribe(edgeTemplateRootRuleChain => {
+  console.log('setEdgeTemplateRootRuleChain:', edgeTemplateRootRuleChain);
 });
 ```
 
 **24. setAutoAssignToEdgeRuleChain**
 
 ```javascript
-ruleChainService.setAutoAssignToEdgeRuleChain('your-rulechain-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+ruleChainService.setAutoAssignToEdgeRuleChain(/* ruleChainId */ null).subscribe(autoAssignToEdgeRuleChain => {
+  console.log('setAutoAssignToEdgeRuleChain:', autoAssignToEdgeRuleChain);
 });
 ```
 
 **25. unsetAutoAssignToEdgeRuleChain**
 
 ```javascript
-ruleChainService.unsetAutoAssignToEdgeRuleChain('your-rulechain-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+ruleChainService.unsetAutoAssignToEdgeRuleChain(/* ruleChainId */ null).subscribe(unAutoAssignToEdgeRuleChain => {
+  console.log('unsetAutoAssignToEdgeRuleChain:', unAutoAssignToEdgeRuleChain);
 });
 ```
 
 **26. getAutoAssignToEdgeRuleChains**
 
 ```javascript
-ruleChainService.getAutoAssignToEdgeRuleChains({ /* your config */ }).subscribe(autoaigntoedgerulechain => {
-  console.log('Auto Assign To Edge Rule Chains:', autoaigntoedgerulechain);
+ruleChainService.getAutoAssignToEdgeRuleChains().subscribe(autoAssignToEdgeRuleChains => {
+  console.log('AutoAssignToEdgeRuleChains:', autoAssignToEdgeRuleChains);
 });
 ```
 
 **27. setEdgeRootRuleChain**
 
 ```javascript
-ruleChainService.setEdgeRootRuleChain('your-edge-id', 'your-rulechain-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+ruleChainService.setEdgeRootRuleChain(/* edgeId */ null, /* ruleChainId */ null).subscribe(edgeRootRuleChain => {
+  console.log('setEdgeRootRuleChain:', edgeRootRuleChain);
 });
 ```
 
-### **TENANTPROFILESERVICE
+---
+### **TENANTPROFILESERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -3420,68 +3458,69 @@ const tenantProfileService = $injector.get(self.ctx.servicesMap.get('tenantProfi
 **1. getTenantProfiles**
 
 ```javascript
-tenantProfileService.getTenantProfiles(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(tenantprofile => {
-  console.log('Tenant Profiles:', tenantprofile);
+tenantProfileService.getTenantProfiles(self.ctx.pageLink(10, 0, null, null, null)).subscribe(tenantProfiles => {
+  console.log('TenantProfiles:', tenantProfiles);
 });
 ```
 
 **2. getTenantProfile**
 
 ```javascript
-tenantProfileService.getTenantProfile('your-tenantprofile-id', { /* your config */ }).subscribe(tenantprofile => {
-  console.log('Tenant Profile:', tenantprofile);
+tenantProfileService.getTenantProfile(/* tenantProfileId */ null).subscribe(tenantProfile => {
+  console.log('TenantProfile:', tenantProfile);
 });
 ```
 
 **3. saveTenantProfile**
 
 ```javascript
-tenantProfileService.saveTenantProfile({ /* your tenantProfile */ }, { /* your config */ }).subscribe(savedTenantProfile => {
-  console.log('Saved TenantProfile:', savedTenantProfile);
+tenantProfileService.saveTenantProfile(/* tenantProfile */ null).subscribe(tenantProfile => {
+  console.log('TenantProfile:', tenantProfile);
 });
 ```
 
 **4. setDefaultTenantProfile**
 
 ```javascript
-tenantProfileService.setDefaultTenantProfile('your-tenantprofile-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+tenantProfileService.setDefaultTenantProfile(/* tenantProfileId */ null).subscribe(defaultTenantProfile => {
+  console.log('setDefaultTenantProfile:', defaultTenantProfile);
 });
 ```
 
 **5. getDefaultTenantProfileInfo**
 
 ```javascript
-tenantProfileService.getDefaultTenantProfileInfo({ /* your config */ }).subscribe(defaulttenantprofileinfo => {
-  console.log('Default Tenant Profile Info:', defaulttenantprofileinfo);
+tenantProfileService.getDefaultTenantProfileInfo().subscribe(defaultTenantProfileInfo => {
+  console.log('DefaultTenantProfile:', defaultTenantProfileInfo);
 });
 ```
 
 **6. getTenantProfileInfo**
 
 ```javascript
-tenantProfileService.getTenantProfileInfo('your-tenantprofile-id', { /* your config */ }).subscribe(tenantprofileinfo => {
-  console.log('Tenant Profile Info:', tenantprofileinfo);
+tenantProfileService.getTenantProfileInfo(/* tenantProfileId */ null).subscribe(tenantProfileInfo => {
+  console.log('TenantProfile:', tenantProfileInfo);
 });
 ```
 
 **7. getTenantProfileInfos**
 
 ```javascript
-tenantProfileService.getTenantProfileInfos(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(tenantprofileinfo => {
-  console.log('Tenant Profile Infos:', tenantprofileinfo);
+tenantProfileService.getTenantProfileInfos(self.ctx.pageLink(10, 0, null, null, null)).subscribe(tenantProfileInfos => {
+  console.log('TenantProfile infos:', tenantProfileInfos);
 });
 ```
 
 **8. getTenantProfilesByIds**
 
 ```javascript
-tenantProfileService.getTenantProfilesByIds(['id1', 'id2'], { /* your config */ }).subscribe(tenantprofilebyid => {
-  console.log('Tenant Profiles By Ids:', tenantprofilebyid);
+tenantProfileService.getTenantProfilesByIds(['id1', 'id2']).subscribe(tenantProfilesByIds => {
+  console.log('TenantProfilesByIds:', tenantProfilesByIds);
 });
 ```
 
-### **TENANTSERVICE
+---
+### **TENANTSERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -3493,31 +3532,31 @@ const tenantService = $injector.get(self.ctx.servicesMap.get('tenantService'));
 **1. getTenants**
 
 ```javascript
-tenantService.getTenants(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(tenant => {
-  console.log('Tenants:', tenant);
+tenantService.getTenants(self.ctx.pageLink(10, 0, null, null, null)).subscribe(tenants => {
+  console.log('Tenants:', tenants);
 });
 ```
 
 **2. getTenantsByIds**
 
 ```javascript
-tenantService.getTenantsByIds(['id1', 'id2'], { /* your config */ }).subscribe(tenantbyid => {
-  console.log('Tenants By Ids:', tenantbyid);
+tenantService.getTenantsByIds(['id1', 'id2']).subscribe(tenantsByIds => {
+  console.log('TenantsByIds:', tenantsByIds);
 });
 ```
 
 **3. getTenantInfos**
 
 ```javascript
-tenantService.getTenantInfos(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(tenantinfo => {
-  console.log('Tenant Infos:', tenantinfo);
+tenantService.getTenantInfos(self.ctx.pageLink(10, 0, null, null, null)).subscribe(tenantInfos => {
+  console.log('Tenant infos:', tenantInfos);
 });
 ```
 
 **4. getTenant**
 
 ```javascript
-tenantService.getTenant('your-tenant-id', { /* your config */ }).subscribe(tenant => {
+tenantService.getTenant(/* tenantId */ null).subscribe(tenant => {
   console.log('Tenant:', tenant);
 });
 ```
@@ -3525,20 +3564,21 @@ tenantService.getTenant('your-tenant-id', { /* your config */ }).subscribe(tenan
 **5. getTenantInfo**
 
 ```javascript
-tenantService.getTenantInfo('your-tenant-id', { /* your config */ }).subscribe(tenantinfo => {
-  console.log('Tenant Info:', tenantinfo);
+tenantService.getTenantInfo(/* tenantId */ null).subscribe(tenantInfo => {
+  console.log('Tenant:', tenantInfo);
 });
 ```
 
 **6. saveTenant**
 
 ```javascript
-tenantService.saveTenant({ /* your tenant object */ }, { /* your config */ }).subscribe(savedTenant => {
-  console.log('Saved Tenant:', savedTenant);
+tenantService.saveTenant(/* tenant */ null).subscribe(tenant => {
+  console.log('Tenant:', tenant);
 });
 ```
 
-### **TRENDZSETTINGSSERVICE
+---
+### **TRENDZSETTINGSSERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -3550,20 +3590,21 @@ const trendzSettingsService = $injector.get(self.ctx.servicesMap.get('trendzSett
 **1. getTrendzSettings**
 
 ```javascript
-trendzSettingsService.getTrendzSettings({ /* your config */ }).subscribe(trendzetting => {
-  console.log('Trendz Settings:', trendzetting);
+trendzSettingsService.getTrendzSettings().subscribe(trendzSettings => {
+  console.log('TrendzSettings:', trendzSettings);
 });
 ```
 
 **2. saveTrendzSettings**
 
 ```javascript
-trendzSettingsService.saveTrendzSettings({ /* your trendzSettings */ }, { /* your config */ }).subscribe(savedTrendzSettings => {
-  console.log('Saved TrendzSettings:', savedTrendzSettings);
+trendzSettingsService.saveTrendzSettings(/* trendzSettings */ null).subscribe(trendzSettings => {
+  console.log('TrendzSettings:', trendzSettings);
 });
 ```
 
-### **TWOFACTORAUTHENTICATIONSERVICE
+---
+### **TWOFACTORAUTHENTICATIONSERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -3575,76 +3616,77 @@ const twoFactorAuthenticationService = $injector.get(self.ctx.servicesMap.get('t
 **1. getTwoFaSettings**
 
 ```javascript
-twoFactorAuthenticationService.getTwoFaSettings({ /* your config */ }).subscribe(twofaetting => {
-  console.log('Two Fa Settings:', twofaetting);
+twoFactorAuthenticationService.getTwoFaSettings().subscribe(twoFaSettings => {
+  console.log('TwoFaSettings:', twoFaSettings);
 });
 ```
 
 **2. saveTwoFaSettings**
 
 ```javascript
-twoFactorAuthenticationService.saveTwoFaSettings({ /* your settings */ }, { /* your config */ }).subscribe(savedTwoFaSettings => {
-  console.log('Saved TwoFaSettings:', savedTwoFaSettings);
+twoFactorAuthenticationService.saveTwoFaSettings(/* settings */ null).subscribe(twoFaSettings => {
+  console.log('TwoFaSettings:', twoFaSettings);
 });
 ```
 
 **3. getAvailableTwoFaProviders**
 
 ```javascript
-twoFactorAuthenticationService.getAvailableTwoFaProviders({ /* your config */ }).subscribe(availabletwofaprovider => {
-  console.log('Available Two Fa Providers:', availabletwofaprovider);
+twoFactorAuthenticationService.getAvailableTwoFaProviders().subscribe(availableTwoFaProviders => {
+  console.log('AvailableTwoFaProviders:', availableTwoFaProviders);
 });
 ```
 
 **4. generateTwoFaAccountConfig**
 
 ```javascript
-twoFactorAuthenticationService.generateTwoFaAccountConfig('your-providertype', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+twoFactorAuthenticationService.generateTwoFaAccountConfig(null).subscribe(twoFaAcConfig => {
+  console.log('generateTwoFaAccountConfig:', twoFaAcConfig);
 });
 ```
 
 **5. getAccountTwoFaSettings**
 
 ```javascript
-twoFactorAuthenticationService.getAccountTwoFaSettings({ /* your config */ }).subscribe(accounttwofaetting => {
-  console.log('Account Two Fa Settings:', accounttwofaetting);
+twoFactorAuthenticationService.getAccountTwoFaSettings().subscribe(acTwoFaSettings => {
+  console.log('AccountTwoFaSettings:', acTwoFaSettings);
 });
 ```
 
 **6. updateTwoFaAccountConfig**
 
 ```javascript
-twoFactorAuthenticationService.updateTwoFaAccountConfig('your-providertype', true, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+twoFactorAuthenticationService.updateTwoFaAccountConfig(null, true).subscribe(twoFaAcConfig => {
+  console.log('updateTwoFaAccountConfig:', twoFaAcConfig);
 });
 ```
 
 **7. submitTwoFaAccountConfig**
 
 ```javascript
-twoFactorAuthenticationService.submitTwoFaAccountConfig({ /* your authConfig */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+twoFactorAuthenticationService.submitTwoFaAccountConfig(/* authConfig */ null).subscribe(twoFaAcConfig => {
+  console.log('submitTwoFaAccountConfig:', twoFaAcConfig);
 });
 ```
 
 **8. verifyAndSaveTwoFaAccountConfig**
 
 ```javascript
-twoFactorAuthenticationService.verifyAndSaveTwoFaAccountConfig({ /* your authConfig */ }, 100, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+twoFactorAuthenticationService.verifyAndSaveTwoFaAccountConfig(/* authConfig */ null, 0).subscribe(andSaveTwoFaAcConfig => {
+  console.log('verify SaveTwoFaAccountConfig:', andSaveTwoFaAcConfig);
 });
 ```
 
 **9. deleteTwoFaAccountConfig**
 
 ```javascript
-twoFactorAuthenticationService.deleteTwoFaAccountConfig('your-providertype', { /* your config */ }).subscribe(result => {
-  console.log('Delete Result:', result);
+twoFactorAuthenticationService.deleteTwoFaAccountConfig(null).subscribe(twoFaAcConfig => {
+  console.log('TwoFaAccountConfig:', twoFaAcConfig);
 });
 ```
 
-### **UISETTINGSSERVICE
+---
+### **UISETTINGSSERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -3656,12 +3698,13 @@ const uiSettingsService = $injector.get(self.ctx.servicesMap.get('uiSettingsServ
 **1. getHelpBaseUrl**
 
 ```javascript
-uiSettingsService.getHelpBaseUrl().subscribe(helpbaseurl => {
-  console.log('Help Base Url:', helpbaseurl);
+uiSettingsService.getHelpBaseUrl().subscribe(helpBaseUrl => {
+  console.log('HelpBaseUrl:', helpBaseUrl);
 });
 ```
 
-### **USAGEINFOSERVICE
+---
+### **USAGEINFOSERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -3673,112 +3716,13 @@ const usageInfoService = $injector.get(self.ctx.servicesMap.get('usageInfoServic
 **1. getUsageInfo**
 
 ```javascript
-usageInfoService.getUsageInfo({ /* your config */ }).subscribe(usageinfo => {
-  console.log('Usage Info:', usageinfo);
+usageInfoService.getUsageInfo().subscribe(usageInfo => {
+  console.log('Usage:', usageInfo);
 });
 ```
 
-### **USERSERVICE
-
-TO INJECT THE SERVICE:
-
-```javascript
-const $injector = self.ctx.$scope.$injector;
-const userService = $injector.get(self.ctx.servicesMap.get('userService'));
-
-// Alternative: Direct context access
-const userService = self.ctx.userService;
-```
-
-**1. getUsers**
-
-```javascript
-userService.getUsers(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(uer => {
-  console.log('Users:', uer);
-});
-```
-
-**2. getTenantAdmins**
-
-```javascript
-userService.getTenantAdmins('your-tenant-id', self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(tenantadmin => {
-  console.log('Tenant Admins:', tenantadmin);
-});
-```
-
-**3. getCustomerUsers**
-
-```javascript
-userService.getCustomerUsers('your-customer-id', self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(cutomeruer => {
-  console.log('Customer Users:', cutomeruer);
-});
-```
-
-**4. getUsersForAssign**
-
-```javascript
-userService.getUsersForAssign('your-alarm-id', self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(usersforassign => {
-  console.log('Users For Assign:', usersforassign);
-});
-```
-
-**5. getUser**
-
-```javascript
-userService.getUser('your-user-id', { /* your config */ }).subscribe(user => {
-  console.log('User:', user);
-});
-```
-
-**6. getUsersByIds**
-
-```javascript
-userService.getUsersByIds(['id1', 'id2'], { /* your config */ }).subscribe(uerbyid => {
-  console.log('Users By Ids:', uerbyid);
-});
-```
-
-**7. saveUser**
-
-```javascript
-userService.saveUser({ /* your user object */ }, { /* your sendActivationMail */ }, { /* your config */ }).subscribe(savedUser => {
-  console.log('Saved User:', savedUser);
-});
-```
-
-**8. getActivationLink**
-
-```javascript
-userService.getActivationLink('your-user-id', { /* your config */ }).subscribe(activationlink => {
-  console.log('Activation Link:', activationlink);
-});
-```
-
-**9. getActivationLinkInfo**
-
-```javascript
-userService.getActivationLinkInfo('your-user-id', { /* your config */ }).subscribe(activationlinkinfo => {
-  console.log('Activation Link Info:', activationlinkinfo);
-});
-```
-
-**10. setUserCredentialsEnabled**
-
-```javascript
-userService.setUserCredentialsEnabled('your-user-id', true, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
-});
-```
-
-**11. findUsersByQuery**
-
-```javascript
-userService.findUsersByQuery(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
-});
-```
-
-### **USERSETTINGSSERVICE
+---
+### **USERSETTINGSSERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -3790,95 +3734,199 @@ const userSettingsService = $injector.get(self.ctx.servicesMap.get('userSettings
 const userSettingsService = self.ctx.userSettingsService;
 ```
 
+
 **1. loadUserSettings**
 
 ```javascript
-userSettingsService.loadUserSettings().subscribe(result => {
-  console.log('Result:', result);
+userSettingsService.loadUserSettings().subscribe(userSettings => {
+  console.log('loadUserSettings:', userSettings);
 });
 ```
 
 **2. saveUserSettings**
 
 ```javascript
-userSettingsService.saveUserSettings({ /* your userSettings */ }).subscribe(savedUserSettings => {
-  console.log('Saved UserSettings:', savedUserSettings);
+userSettingsService.saveUserSettings(/* userSettings */ null).subscribe(userSettings => {
+  console.log('UserSettings:', userSettings);
 });
 ```
 
 **3. putUserSettings**
 
 ```javascript
-userSettingsService.putUserSettings({ /* your userSettingsData */ }).subscribe(result => {
-  console.log('Result:', result);
+userSettingsService.putUserSettings(/* userSettingsData */ null).subscribe(putUserSettings => {
+  console.log('putUserSettings:', putUserSettings);
 });
 ```
 
 **4. getDocumentationLinks**
 
 ```javascript
-userSettingsService.getDocumentationLinks({ /* your config */ }).subscribe(documentationlink => {
-  console.log('Documentation Links:', documentationlink);
+userSettingsService.getDocumentationLinks().subscribe(documentationLinks => {
+  console.log('DocumentationLinks:', documentationLinks);
 });
 ```
 
 **5. updateDocumentationLinks**
 
 ```javascript
-userSettingsService.updateDocumentationLinks({ /* your documentationLinks */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+userSettingsService.updateDocumentationLinks(/* documentationLinks */ null).subscribe(documentationLinks => {
+  console.log('updateDocumentationLinks:', documentationLinks);
 });
 ```
 
 **6. getQuickLinks**
 
 ```javascript
-userSettingsService.getQuickLinks({ /* your config */ }).subscribe(quicklink => {
-  console.log('Quick Links:', quicklink);
+userSettingsService.getQuickLinks().subscribe(quickLinks => {
+  console.log('QuickLinks:', quickLinks);
 });
 ```
 
 **7. updateQuickLinks**
 
 ```javascript
-userSettingsService.updateQuickLinks({ /* your quickLinks */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+userSettingsService.updateQuickLinks(/* quickLinks */ null).subscribe(quickLinks => {
+  console.log('updateQuickLinks:', quickLinks);
 });
 ```
 
 **8. getGettingStarted**
 
 ```javascript
-userSettingsService.getGettingStarted({ /* your config */ }).subscribe(gettingstarted => {
-  console.log('Getting Started:', gettingstarted);
+userSettingsService.getGettingStarted().subscribe(gettingStarted => {
+  console.log('GettingStarted:', gettingStarted);
 });
 ```
 
 **9. updateGettingStarted**
 
 ```javascript
-userSettingsService.updateGettingStarted({ /* your gettingStarted */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+userSettingsService.updateGettingStarted(/* gettingStarted */ null).subscribe(gettingStarted => {
+  console.log('updateGettingStarted:', gettingStarted);
 });
 ```
 
 **10. getUserDashboardsInfo**
 
 ```javascript
-userSettingsService.getUserDashboardsInfo({ /* your config */ }).subscribe(userdashboardsinfo => {
-  console.log('User Dashboards Info:', userdashboardsinfo);
+userSettingsService.getUserDashboardsInfo().subscribe(userDashboardsInfo => {
+  console.log('UserDashboards:', userDashboardsInfo);
 });
 ```
 
 **11. reportUserDashboardAction**
 
 ```javascript
-userSettingsService.reportUserDashboardAction('your-dashboard-id', { /* your action */ }, { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+userSettingsService.reportUserDashboardAction(/* dashboardId */ null, null).subscribe(reportUserDashboardAction => {
+  console.log('reportUserDashboardAction:', reportUserDashboardAction);
 });
 ```
 
-### **WIDGETSERVICE
+---
+### **USERSERVICE**
+
+TO INJECT THE SERVICE:
+
+```javascript
+const $injector = self.ctx.$scope.$injector;
+const userService = $injector.get(self.ctx.servicesMap.get('userService'));
+
+// Alternative: Direct context access
+const userService = self.ctx.userService;
+```
+
+
+**1. getUsers**
+
+```javascript
+userService.getUsers(self.ctx.pageLink(10, 0, null, null, null)).subscribe(users => {
+  console.log('Users:', users);
+});
+```
+
+**2. getTenantAdmins**
+
+```javascript
+userService.getTenantAdmins(/* tenantId */ null, self.ctx.pageLink(10, 0, null, null, null)).subscribe(tenantAdmins => {
+  console.log('TenantAdmins:', tenantAdmins);
+});
+```
+
+**3. getCustomerUsers**
+
+```javascript
+userService.getCustomerUsers(/* customerId */ null, self.ctx.pageLink(10, 0, null, null, null)).subscribe(customerUsers => {
+  console.log('CustomerUsers:', customerUsers);
+});
+```
+
+**4. getUsersForAssign**
+
+```javascript
+userService.getUsersForAssign(/* alarmId */ null, self.ctx.pageLink(10, 0, null, null, null)).subscribe(usersForAssign => {
+  console.log('UsersForAssign:', usersForAssign);
+});
+```
+
+**5. getUser**
+
+```javascript
+userService.getUser(/* userId */ null).subscribe(user => {
+  console.log('User:', user);
+});
+```
+
+**6. getUsersByIds**
+
+```javascript
+userService.getUsersByIds(['id1', 'id2']).subscribe(usersByIds => {
+  console.log('UsersByIds:', usersByIds);
+});
+```
+
+**7. saveUser**
+
+```javascript
+userService.saveUser(/* user */ null, null).subscribe(user => {
+  console.log('User:', user);
+});
+```
+
+**8. getActivationLink**
+
+```javascript
+userService.getActivationLink(/* userId */ null).subscribe(activationLink => {
+  console.log('ActivationLink:', activationLink);
+});
+```
+
+**9. getActivationLinkInfo**
+
+```javascript
+userService.getActivationLinkInfo(/* userId */ null).subscribe(activationLinkInfo => {
+  console.log('ActivationLink:', activationLinkInfo);
+});
+```
+
+**10. setUserCredentialsEnabled**
+
+```javascript
+userService.setUserCredentialsEnabled(/* userId */ null, false).subscribe(userCredentialsEnabled => {
+  console.log('setUserCredentialsEnabled:', userCredentialsEnabled);
+});
+```
+
+**11. findUsersByQuery**
+
+```javascript
+userService.findUsersByQuery(self.ctx.pageLink(10, 0, null, null, null)).subscribe(usersByQuery => {
+  console.log('UsersByQuery:', usersByQuery);
+});
+```
+
+---
+### **WIDGETSERVICE**
 
 TO INJECT THE SERVICE:
 
@@ -3890,239 +3938,241 @@ const widgetService = $injector.get(self.ctx.servicesMap.get('widgetService'));
 **1. getWidgetScopeVariables**
 
 ```javascript
-widgetService.getWidgetScopeVariables().subscribe(widgetcopevariable => {
-  console.log('Widget Scope Variables:', widgetcopevariable);
+widgetService.getWidgetScopeVariables().subscribe(widScopeVariables => {
+  console.log('Widget ScopeVariables:', widScopeVariables);
 });
 ```
 
 **2. getAllWidgetsBundles**
 
 ```javascript
-widgetService.getAllWidgetsBundles({ /* your config */ }).subscribe(allwidgetbundle => {
-  console.log('All Widgets Bundles:', allwidgetbundle);
+widgetService.getAllWidgetsBundles().subscribe(allWidsBundles => {
+  console.log('AllWidget sBundles:', allWidsBundles);
 });
 ```
 
 **3. getSystemWidgetsBundles**
 
 ```javascript
-widgetService.getSystemWidgetsBundles({ /* your config */ }).subscribe(ytemwidgetbundle => {
-  console.log('System Widgets Bundles:', ytemwidgetbundle);
+widgetService.getSystemWidgetsBundles().subscribe(systemWidsBundles => {
+  console.log('SystemWidget sBundles:', systemWidsBundles);
 });
 ```
 
 **4. getTenantWidgetsBundles**
 
 ```javascript
-widgetService.getTenantWidgetsBundles({ /* your config */ }).subscribe(tenantwidgetbundle => {
-  console.log('Tenant Widgets Bundles:', tenantwidgetbundle);
+widgetService.getTenantWidgetsBundles().subscribe(tenantWidsBundles => {
+  console.log('TenantWidget sBundles:', tenantWidsBundles);
 });
 ```
 
 **5. getWidgetBundles**
 
 ```javascript
-widgetService.getWidgetBundles(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), { /* your config */ }).subscribe(widgetbundle => {
-  console.log('Widget Bundles:', widgetbundle);
+widgetService.getWidgetBundles(self.ctx.pageLink(10, 0, null, null, null)).subscribe(widBundles => {
+  console.log('Widget Bundles:', widBundles);
 });
 ```
 
 **6. getWidgetsBundle**
 
 ```javascript
-widgetService.getWidgetsBundle('your-widgetsbundle-id', { /* your config */ }).subscribe(widgetsbundle => {
-  console.log('Widgets Bundle:', widgetsbundle);
+widgetService.getWidgetsBundle(/* widgetsBundleId */ null).subscribe(widsBundle => {
+  console.log('Widget sBundle:', widsBundle);
 });
 ```
 
 **7. exportWidgetsBundle**
 
 ```javascript
-widgetService.exportWidgetsBundle('your-widgetsbundle-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+widgetService.exportWidgetsBundle(/* widgetsBundleId */ null).subscribe(exportWidsBundle => {
+  console.log('exportWidget sBundle:', exportWidsBundle);
 });
 ```
 
 **8. saveWidgetsBundle**
 
 ```javascript
-widgetService.saveWidgetsBundle({ /* your widgetsBundle */ }, { /* your config */ }).subscribe(savedWidgetsBundle => {
-  console.log('Saved WidgetsBundle:', savedWidgetsBundle);
+widgetService.saveWidgetsBundle(/* widgetsBundle */ null).subscribe(widsBundle => {
+  console.log('Widget sBundle:', widsBundle);
 });
 ```
 
 **9. updateWidgetsBundleWidgetTypes**
 
 ```javascript
-widgetService.updateWidgetsBundleWidgetTypes('your-widgetsbundle-id', 'your-widgettypeids', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+widgetService.updateWidgetsBundleWidgetTypes(/* widgetsBundleId */ null, ['id1', 'id2']).subscribe(widsBundleWidTypes => {
+  console.log('updateWidget sBundleWidget Types:', widsBundleWidTypes);
 });
 ```
 
 **10. updateWidgetsBundleWidgetFqns**
 
 ```javascript
-widgetService.updateWidgetsBundleWidgetFqns('your-widgetsbundle-id', 'your-widgettypefqns', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+widgetService.updateWidgetsBundleWidgetFqns(/* widgetsBundleId */ null, ['id1', 'id2']).subscribe(widsBundleWidFqns => {
+  console.log('updateWidget sBundleWidget Fqns:', widsBundleWidFqns);
 });
 ```
 
 **11. getBundleWidgetTypes**
 
 ```javascript
-widgetService.getBundleWidgetTypes('your-widgetsbundle-id', { /* your config */ }).subscribe(bundlewidgettype => {
-  console.log('Bundle Widget Types:', bundlewidgettype);
+widgetService.getBundleWidgetTypes(/* widgetsBundleId */ null).subscribe(bundleWidTypes => {
+  console.log('BundleWidget Types:', bundleWidTypes);
 });
 ```
 
 **12. exportBundleWidgetTypesDetails**
 
 ```javascript
-widgetService.exportBundleWidgetTypesDetails('your-widgetsbundle-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+widgetService.exportBundleWidgetTypesDetails(/* widgetsBundleId */ null).subscribe(exportBundleWidTypesDetails => {
+  console.log('exportBundleWidget TypesDetails:', exportBundleWidTypesDetails);
 });
 ```
 
 **13. getBundleWidgetTypeFqns**
 
 ```javascript
-widgetService.getBundleWidgetTypeFqns('your-widgetsbundle-id', { /* your config */ }).subscribe(bundlewidgettypefqn => {
-  console.log('Bundle Widget Type Fqns:', bundlewidgettypefqn);
+widgetService.getBundleWidgetTypeFqns(/* widgetsBundleId */ null).subscribe(bundleWidTypeFqns => {
+  console.log('BundleWidget TypeFqns:', bundleWidTypeFqns);
 });
 ```
 
 **14. getBundleWidgetTypeInfosList**
 
 ```javascript
-widgetService.getBundleWidgetTypeInfosList('your-widgetsbundle-id', { /* your config */ }).subscribe(bundlewidgettypeinfolit => {
-  console.log('Bundle Widget Type Infos List:', bundlewidgettypeinfolit);
+widgetService.getBundleWidgetTypeInfosList(/* widgetsBundleId */ null).subscribe(bundleWidTypeInfosList => {
+  console.log('BundleWidget Type infosList:', bundleWidTypeInfosList);
 });
 ```
 
 **15. getBundleWidgetTypeInfos**
 
 ```javascript
-widgetService.getBundleWidgetTypeInfos(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-widgetsbundle-id', 'your-widgettypes', { /* your config */ }).subscribe(bundlewidgettypeinfo => {
-  console.log('Bundle Widget Type Infos:', bundlewidgettypeinfo);
+widgetService.getBundleWidgetTypeInfos(self.ctx.pageLink(10, 0, null, null, null), /* widgetsBundleId */ null, null).subscribe(bundleWidTypeInfos => {
+  console.log('BundleWidget Type infos:', bundleWidTypeInfos);
 });
 ```
 
 **16. getWidgetType**
 
 ```javascript
-widgetService.getWidgetType('your-fullFqn', { /* your config */ }).subscribe(widgettype => {
-  console.log('Widget Type:', widgettype);
+widgetService.getWidgetType(/* fullFqn */ null).subscribe(widType => {
+  console.log('Widget Type:', widType);
 });
 ```
 
 **17. saveWidgetTypeDetails**
 
 ```javascript
-widgetService.saveWidgetTypeDetails({ /* your widgetInfo */ }, { /* your id */ }, 100, 100, { /* your config */ }).subscribe(savedWidgetTypeDetails => {
-  console.log('Saved WidgetTypeDetails:', savedWidgetTypeDetails);
+widgetService.saveWidgetTypeDetails(/* widgetInfo */ null, /* id */ null, 0, 0).subscribe(widTypeDetails => {
+  console.log('Widget TypeDetails:', widTypeDetails);
 });
 ```
 
 **18. saveImportedWidgetTypeDetails**
 
 ```javascript
-widgetService.saveImportedWidgetTypeDetails('your-widgettypedetails', { /* your config */ }).subscribe(savedImportedWidgetTypeDetails => {
-  console.log('Saved ImportedWidgetTypeDetails:', savedImportedWidgetTypeDetails);
+widgetService.saveImportedWidgetTypeDetails(/* widgetTypeDetails */ null).subscribe(importedWidTypeDetails => {
+  console.log('ImportedWidget TypeDetails:', importedWidTypeDetails);
 });
 ```
 
 **19. getWidgetTypeById**
 
 ```javascript
-widgetService.getWidgetTypeById('your-widgettype-id', { /* your config */ }).subscribe(widgettypebyid => {
-  console.log('Widget Type By Id:', widgettypebyid);
+widgetService.getWidgetTypeById(/* widgetTypeId */ null).subscribe(widTypeById => {
+  console.log('Widget TypeById:', widTypeById);
 });
 ```
 
 **20. exportWidgetType**
 
 ```javascript
-widgetService.exportWidgetType('your-widgettype-id', { /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+widgetService.exportWidgetType(/* widgetTypeId */ null).subscribe(exportWidType => {
+  console.log('exportWidget Type:', exportWidType);
 });
 ```
 
 **21. getWidgetTypeInfoById**
 
 ```javascript
-widgetService.getWidgetTypeInfoById('your-widgettype-id', { /* your config */ }).subscribe(widgettypeinfobyid => {
-  console.log('Widget Type Info By Id:', widgettypeinfobyid);
+widgetService.getWidgetTypeInfoById(/* widgetTypeId */ null).subscribe(widTypeInfoById => {
+  console.log('Widget Type infoById:', widTypeInfoById);
 });
 ```
 
 **22. saveWidgetType**
 
 ```javascript
-widgetService.saveWidgetType('your-widgettypedetails', { /* your config */ }).subscribe(savedWidgetType => {
-  console.log('Saved WidgetType:', savedWidgetType);
+widgetService.saveWidgetType(/* widgetTypeDetails */ null).subscribe(widType => {
+  console.log('Widget Type:', widType);
 });
 ```
 
 **23. getWidgetTypes**
 
 ```javascript
-widgetService.getWidgetTypes(self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder'), 'your-widgettypes', { /* your config */ }).subscribe(widgettype => {
-  console.log('Widget Types:', widgettype);
+widgetService.getWidgetTypes(self.ctx.pageLink(10, 0, null, null, null), null).subscribe(widTypes => {
+  console.log('Widget Types:', widTypes);
 });
 ```
 
 **24. getWidgetTemplate**
 
 ```javascript
-widgetService.getWidgetTemplate('your-widgettypeparam', { /* your config */ }).subscribe(widgettemplate => {
-  console.log('Widget Template:', widgettemplate);
+widgetService.getWidgetTemplate(/* widgetTypeParam */ null).subscribe(widTemplate => {
+  console.log('Widget Template:', widTemplate);
 });
 ```
 
 **25. getWidgetInfoFromCache**
 
 ```javascript
-widgetService.getWidgetInfoFromCache('your-fullFqn').subscribe(widgetinfofromcache => {
-  console.log('Widget Info From Cache:', widgetinfofromcache);
+widgetService.getWidgetInfoFromCache(/* fullFqn */ null).subscribe(widInfoFromCache => {
+  console.log('Widget infoFromCache:', widInfoFromCache);
 });
 ```
 
 **26. getBasicWidgetSettingsComponentBySelector**
 
 ```javascript
-widgetService.getBasicWidgetSettingsComponentBySelector('your-selector').subscribe(basicwidgetsettingscomponentbyselector => {
-  console.log('Basic Widget Settings Component By Selector:', basicwidgetsettingscomponentbyselector);
+widgetService.getBasicWidgetSettingsComponentBySelector(/* selector */ null).subscribe(basicWidSettingsComponentBySelector => {
+  console.log('BasicWidget SettingsComponentBySelector:', basicWidSettingsComponentBySelector);
 });
 ```
 
 **27. getWidgetSettingsComponentTypeBySelector**
 
 ```javascript
-widgetService.getWidgetSettingsComponentTypeBySelector('your-selector').subscribe(widgetsettingscomponenttypebyselector => {
-  console.log('Widget Settings Component Type By Selector:', widgetsettingscomponenttypebyselector);
+widgetService.getWidgetSettingsComponentTypeBySelector(/* selector */ null).subscribe(widSettingsComponentTypeBySelector => {
+  console.log('Widget SettingsComponentTypeBySelector:', widSettingsComponentTypeBySelector);
 });
 ```
 
 **28. widgetTypeUpdated**
 
 ```javascript
-widgetService.widgetTypeUpdated('your-updatedwidgettype').subscribe(result => {
-  console.log('Result:', result);
+widgetService.widgetTypeUpdated(/* updatedWidgetType */ null).subscribe(widTypeUpdated => {
+  console.log('widget TypeUpdated:', widTypeUpdated);
 });
 ```
 
 **29. getWidgetsBundlesByIds**
 
 ```javascript
-widgetService.getWidgetsBundlesByIds(['id1', 'id2'], { /* your config */ }).subscribe(widgetbundlebyid => {
-  console.log('Widgets Bundles By Ids:', widgetbundlebyid);
+widgetService.getWidgetsBundlesByIds(['id1', 'id2']).subscribe(widsBundlesByIds => {
+  console.log('Widget sBundlesByIds:', widsBundlesByIds);
 });
 ```
 
 **30. loadWidgetsBundleCache**
 
 ```javascript
-widgetService.loadWidgetsBundleCache({ /* your config */ }).subscribe(result => {
-  console.log('Result:', result);
+widgetService.loadWidgetsBundleCache().subscribe(widsBundleCache => {
+  console.log('loadWidget sBundleCache:', widsBundleCache);
 });
 ```
+
+---
