@@ -1,74 +1,25 @@
-# ThingsBoard Widget Service Docs
+# ThingsBoard CE Widget Services Documentation
 
-Auto-generated documentation for ThingsBoard CE frontend widget services.
+Copy-paste-ready documentation for ThingsBoard CE widget services.
 
-**Generated:** 2026-04-15  
-**Source:** ThingsBoard CE 3.7.x (`widget-services` package)
+## Services
 
-## What's in here
+42 services documented with working JavaScript examples for all 453 methods.
 
-- `DOCUMENTATION.md` — Full reference for all services (single file, ~1500+ lines)
-- `docs/` — Individual pages per service
+## Quick Start
 
-## Services covered
+1. Find the service you need (e.g. `userService`, `deviceService`)
+2. Copy the injection snippet
+3. Copy the method example and modify as needed
 
-- AdminService
-- AiModelService
-- AlarmCommentService
-- AlarmRulesService
-- AlarmService
-- ApiKeyService
-- AssetProfileService
-- AssetService
-- AttributeService
-- AuditLogService
-- CalculatedFieldsService
-- ComponentDescriptorService
-- CustomerService
-- DashboardService
-- DeviceProfileService
-- DeviceService
-- DomainService
-- EdgeService
-- EntitiesVersionControlService
-- EntityRelationService
-- EntityService
-- EntityViewService
-- EventService
-- GitHubService
-- ImageService
-- MobileAppService
-- MobileApplicationService
-- NotificationService
-- OAuth2Service
-- OtaPackageService
-- QueueService
-- ResourceService
-- RuleChainService
-- TenantProfileService
-- TenantService
-- TrendzSettingsService
-- TwoFactorAuthenticationService
-- UiSettingsService
-- UsageInfoService
-- UserService
-- UserSettingsService
-- WidgetService
+## Documentation Format
 
+- No parameter tables — just working code
+- Human-readable variable names
+- Plain JavaScript (no TypeScript annotations)
+- Inject via `$injector.get()` or direct context access
 
-## Quick start
+## Links
 
-```javascript
-// Inject any service
-const $injector = self.ctx.$scope.$injector;
-const deviceService = $injector.get(self.ctx.servicesMap.get('deviceService'));
-
-// Make an API call
-deviceService.getDevice('your-device-id').subscribe(device => {
-  console.log('Device:', device);
-});
-```
-
-## Contributing
-
-Docs are auto-generated from the ThingsBoard source. Do not edit these files directly — modify the generator instead.
+- [Full Documentation](DOCUMENTATION.md)
+- [ThingsBoard CE](https://github.com/thingsboard/thingsboard)
