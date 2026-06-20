@@ -1,25 +1,27 @@
-# ThingsBoard CE Widget Services Documentation
+# ThingsBoard CE Widget Service Documentation
 
-Copy-paste-ready documentation for ThingsBoard CE widget services.
+Auto-generated documentation for all ThingsBoard CE widget services.
 
-## Services
+Generated from TB CE commit `79bb2b0a659d` on 2026-06-19.
 
-42 services documented with working JavaScript examples for all 453 methods.
+42 services, 453 methods documented.
+
+## Usage
+
+See [DOCUMENTATION.md](DOCUMENTATION.md) for the full documentation with all services.
+
+Individual service docs are available in [docs/](docs/).
 
 ## Quick Start
 
-1. Find the service you need (e.g. `userService`, `deviceService`)
-2. Copy the injection snippet
-3. Copy the method example and modify as needed
+In widget development:
+```javascript
+const $injector = self.ctx.$scope.$injector;
+const deviceService = $injector.get(self.ctx.servicesMap.get('deviceService'));
+```
 
-## Documentation Format
-
-- No parameter tables — just working code
-- Human-readable variable names
-- Plain JavaScript (no TypeScript annotations)
-- Inject via `$injector.get()` or direct context access
-
-## Links
-
-- [Full Documentation](DOCUMENTATION.md)
-- [ThingsBoard CE](https://github.com/thingsboard/thingsboard)
+In custom actions:
+```javascript
+const $injector = widgetContext.$scope.$injector;
+const deviceService = $injector.get(widgetContext.servicesMap.get('deviceService'));
+```
