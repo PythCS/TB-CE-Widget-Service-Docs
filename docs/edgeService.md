@@ -1,8 +1,6 @@
 # EDGE SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **EDGE SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -14,8 +12,8 @@ const edgeService = $injector.get(self.ctx.servicesMap.get('edgeService'));
 **1. getEdges**
 
 ```javascript
-edgeService.getEdges('your-id').subscribe(edges => {
-  console.log('Get Edges: edges');
+edgeService.getEdges('your-edgeids-value').subscribe(edges => {
+  console.log('Get Edges:', edges);
 });
 ```
 
@@ -23,32 +21,31 @@ edgeService.getEdges('your-id').subscribe(edges => {
 
 ```javascript
 edgeService.getEdge('your-edge-id').subscribe(edge => {
-  console.log('Get Edge: edge');
+  console.log('Get Edge:', edge);
 });
 ```
 
 **3. getEdgeInfo**
 
 ```javascript
-edgeService.getEdgeInfo('your-edge-id').subscribe(edgeInfo => {
-  console.log('Get Edge Info: edgeInfo');
+edgeService.getEdgeInfo('your-edge-id').subscribe(info => {
+  console.log('Get Edge Info:', info);
 });
 ```
 
 **4. saveEdge**
 
 ```javascript
-const edge = edge;
-edgeService.saveEdge(edge).subscribe(savedEdge => {
-  console.log('Save Edge: savedEdge');
+edgeService.saveEdge('your-edge-value').subscribe(edge => {
+  console.log('Save Edge:', edge);
 });
 ```
 
 **5. getEdgeTypes**
 
 ```javascript
-edgeService.getEdgeTypes().subscribe(edgetypes => {
-  console.log('Get Edge Types: edgetypes');
+edgeService.getEdgeTypes().subscribe(edgeTypes => {
+  console.log('Get Edge Types:', edgeTypes);
 });
 ```
 
@@ -56,24 +53,24 @@ edgeService.getEdgeTypes().subscribe(edgetypes => {
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-edgeService.getCustomerEdgeInfos('your-customer-id', pageLink, 'type').subscribe(customeredgeinfos => {
-  console.log('Get Customer Edge Infos: customeredgeinfos');
+edgeService.getCustomerEdgeInfos('your-customer-id', pageLink, 'your-type-value').subscribe(customerEdgeInfos => {
+  console.log('Get Customer Edge Infos:', customerEdgeInfos);
 });
 ```
 
 **7. assignEdgeToCustomer**
 
 ```javascript
-edgeService.assignEdgeToCustomer('your-customer-id', 'your-edge-id').subscribe(result => {
-  console.log('Assign Edge To Customer: result');
+edgeService.assignEdgeToCustomer('your-customer-id', 'your-edge-id').subscribe(edgeToCustomer => {
+  console.log('Assign Edge To Customer:', edgeToCustomer);
 });
 ```
 
 **8. makeEdgePublic**
 
 ```javascript
-edgeService.makeEdgePublic('your-edge-id').subscribe(result => {
-  console.log('Make Edge Public: result');
+edgeService.makeEdgePublic('your-edge-id').subscribe(makeEdgePublic => {
+  console.log('Make Edge Public:', makeEdgePublic);
 });
 ```
 
@@ -81,17 +78,16 @@ edgeService.makeEdgePublic('your-edge-id').subscribe(result => {
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-edgeService.getTenantEdgeInfos(pageLink, 'type').subscribe(tenantedgeinfos => {
-  console.log('Get Tenant Edge Infos: tenantedgeinfos');
+edgeService.getTenantEdgeInfos(pageLink, 'your-type-value').subscribe(tenantEdgeInfos => {
+  console.log('Get Tenant Edge Infos:', tenantEdgeInfos);
 });
 ```
 
 **10. findByQuery**
 
 ```javascript
-const query = query;
-edgeService.findByQuery(query).subscribe(results => {
-  console.log('Find By Query: results');
+edgeService.findByQuery('your-query-value').subscribe(byQuery => {
+  console.log('Find By Query:', byQuery);
 });
 ```
 
@@ -99,60 +95,55 @@ edgeService.findByQuery(query).subscribe(results => {
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-edgeService.getEdgeEvents('your-entity-id', pageLink).subscribe(edgeevents => {
-  console.log('Get Edge Events: edgeevents');
+edgeService.getEdgeEvents('your-entity-id', pageLink).subscribe(edgeEvents => {
+  console.log('Get Edge Events:', edgeEvents);
 });
 ```
 
 **12. findMissingToRelatedRuleChains**
 
 ```javascript
-edgeService.findMissingToRelatedRuleChains('your-edge-id').subscribe(ruleChains => {
-  console.log('Find Missing To Related Rule Chains:ruleChains');
+edgeService.findMissingToRelatedRuleChains('your-edge-id').subscribe(missingToRelatedRuleChains => {
+  console.log('Find Missing To Related Rule Chains:', missingToRelatedRuleChains);
 });
 ```
 
 **13. findByName**
 
 ```javascript
-const edgeName = edgeName;
-edgeService.findByName(edgeName).subscribe(entity => {
-  console.log('Find By Name: entity');
+edgeService.findByName('your-edgename-value').subscribe(byName => {
+  console.log('Find By Name:', byName);
 });
 ```
 
 **14. bulkImportEdges**
 
 ```javascript
-const entitiesData = entitiesData;
-edgeService.bulkImportEdges(entitiesData).subscribe(result => {
-  console.log('Bulk Import Edges: result');
+edgeService.bulkImportEdges('your-entitiesdata-value').subscribe(bulkImportEdges => {
+  console.log('Bulk Import Edges:', bulkImportEdges);
 });
 ```
 
 **15. getEdgeInstallInstructions**
 
 ```javascript
-const method = method;
-edgeService.getEdgeInstallInstructions('your-edge-id', method).subscribe(edgeinstallinstructions => {
-  console.log('Get Edge Install Instructions: edgeinstallinstructions');
+edgeService.getEdgeInstallInstructions('your-edge-id', 'your-method-value').subscribe(edgeInstallInstructions => {
+  console.log('Get Edge Install Instructions:', edgeInstallInstructions);
 });
 ```
 
 **16. getEdgeUpgradeInstructions**
 
 ```javascript
-const edgeVersion = edgeVersion;
-const method = method;
-edgeService.getEdgeUpgradeInstructions(edgeVersion, method).subscribe(edgeupgradeinstructions => {
-  console.log('Get Edge Upgrade Instructions: edgeupgradeinstructions');
+edgeService.getEdgeUpgradeInstructions('your-edgeversion-value', 'your-method-value').subscribe(edgeUpgradeInstructions => {
+  console.log('Get Edge Upgrade Instructions:', edgeUpgradeInstructions);
 });
 ```
 
 **17. isEdgeUpgradeAvailable**
 
 ```javascript
-edgeService.isEdgeUpgradeAvailable('your-edge-id').subscribe(result => {
-  console.log('Is Edge Upgrade Available: result');
+edgeService.isEdgeUpgradeAvailable('your-edge-id').subscribe(isEdgeUpgradeAvailable => {
+  console.log('Is Edge Upgrade Available:', isEdgeUpgradeAvailable);
 });
 ```

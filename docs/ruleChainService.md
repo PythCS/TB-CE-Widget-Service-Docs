@@ -1,8 +1,6 @@
 # RULE CHAIN SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **RULE CHAIN SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -15,175 +13,160 @@ const ruleChainService = $injector.get(self.ctx.servicesMap.get('ruleChainServic
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-ruleChainService.getRuleChains(pageLink, 'type').subscribe(rulechains => {
-  console.log('Get Rule Chains: rulechains');
+ruleChainService.getRuleChains(pageLink, 'your-type-value').subscribe(ruleChains => {
+  console.log('Get Rule Chains:', ruleChains);
 });
 ```
 
 **2. getRuleChainsByIds**
 
 ```javascript
-ruleChainService.getRuleChainsByIds('your-id').subscribe(rulechainsbyids => {
-  console.log('Get Rule Chains By Ids: rulechainsbyids');
+ruleChainService.getRuleChainsByIds('your-rulechainids-value').subscribe(ruleChainsByIds => {
+  console.log('Get Rule Chains By Ids:', ruleChainsByIds);
 });
 ```
 
 **3. getRuleChain**
 
 ```javascript
-ruleChainService.getRuleChain('your-rule-chain-id').subscribe(ruleChain => {
-  console.log('Get Rule Chain: ruleChain');
+ruleChainService.getRuleChain('your-rulechain-id').subscribe(ruleChain => {
+  console.log('Get Rule Chain:', ruleChain);
 });
 ```
 
 **4. getRuleChainOutputLabels**
 
 ```javascript
-ruleChainService.getRuleChainOutputLabels('your-rule-chain-id').subscribe(rulechainoutputlabels => {
-  console.log('Get Rule Chain Output Labels: rulechainoutputlabels');
+ruleChainService.getRuleChainOutputLabels('your-rulechain-id').subscribe(ruleChainOutputLabels => {
+  console.log('Get Rule Chain Output Labels:', ruleChainOutputLabels);
 });
 ```
 
 **5. createDefaultRuleChain**
 
 ```javascript
-const ruleChainName = ruleChainName;
-ruleChainService.createDefaultRuleChain(ruleChainName).subscribe(result => {
-  console.log('Create Default Rule Chain: result');
+ruleChainService.createDefaultRuleChain('your-rulechainname-value').subscribe(defaultRuleChain => {
+  console.log('Create Default Rule Chain:', defaultRuleChain);
 });
 ```
 
 **6. saveRuleChain**
 
 ```javascript
-const ruleChain = ruleChain;
-ruleChainService.saveRuleChain(ruleChain).subscribe(savedRuleChain => {
-  console.log('Save Rule Chain: savedRuleChain');
+ruleChainService.saveRuleChain('your-rulechain-value').subscribe(ruleChain => {
+  console.log('Save Rule Chain:', ruleChain);
 });
 ```
 
 **7. setRootRuleChain**
 
 ```javascript
-ruleChainService.setRootRuleChain('your-rule-chain-id').subscribe(result => {
-  console.log('Set Root Rule Chain: result');
+ruleChainService.setRootRuleChain('your-rulechain-id').subscribe(rootRuleChain => {
+  console.log('Set Root Rule Chain:', rootRuleChain);
 });
 ```
 
 **8. getRuleChainMetadata**
 
 ```javascript
-ruleChainService.getRuleChainMetadata('your-rule-chain-id').subscribe(ruleChainMetadata => {
-  console.log('Get Rule Chain Metadata: ruleChainMetadata');
+ruleChainService.getRuleChainMetadata('your-rulechain-id').subscribe(ruleChainMetadata => {
+  console.log('Get Rule Chain Metadata:', ruleChainMetadata);
 });
 ```
 
 **9. saveRuleChainMetadata**
 
 ```javascript
-const ruleChainMetaData = ruleChainMetaData;
-ruleChainService.saveRuleChainMetadata(ruleChainMetaData).subscribe(savedRuleChainMetadata => {
-  console.log('Save Rule Chain Metadata: savedRuleChainMetadata');
+ruleChainService.saveRuleChainMetadata('your-rulechainmetadata-value').subscribe(ruleChainMetadata => {
+  console.log('Save Rule Chain Metadata:', ruleChainMetadata);
 });
 ```
 
 **10. getRuleNodeComponents**
 
 ```javascript
-const modulesMap = modulesMap;
-ruleChainService.getRuleNodeComponents(modulesMap, 'type').subscribe(rulenodecomponents => {
-  console.log('Get Rule Node Components: rulenodecomponents');
+ruleChainService.getRuleNodeComponents('your-modulesmap-value', 'your-rulechaintype-value').subscribe(ruleNodeComponents => {
+  console.log('Get Rule Node Components:', ruleNodeComponents);
 });
 ```
 
 **11. getRuleNodeConfigComponent**
 
 ```javascript
-const directive = directive;
-ruleChainService.getRuleNodeConfigComponent(directive).subscribe(ruleNodeConfigComponent => {
-  console.log('Get Rule Node Config Component:ruleNodeConfigComponent');
+ruleChainService.getRuleNodeConfigComponent('your-directive-value').subscribe(ruleNodeConfigComponent => {
+  console.log('Get Rule Node Config Component:', ruleNodeConfigComponent);
 });
 ```
 
 **12. getRuleNodeComponentByClazz**
 
 ```javascript
-const clazz = clazz;
-ruleChainService.getRuleNodeComponentByClazz('type', clazz).subscribe(ruleNodeComponentByClazz => {
-  console.log('Get Rule Node Component By Clazz:ruleNodeComponentByClazz');
+ruleChainService.getRuleNodeComponentByClazz('your-rulechaintype-value', 'your-clazz-value').subscribe(ruleNodeComponentByClazz => {
+  console.log('Get Rule Node Component By Clazz:', ruleNodeComponentByClazz);
 });
 ```
 
 **13. getRuleNodeSupportedLinks**
 
 ```javascript
-const component = component;
-ruleChainService.getRuleNodeSupportedLinks(component).subscribe(rulenodesupportedlinks => {
-  console.log('Get Rule Node Supported Links: rulenodesupportedlinks');
+ruleChainService.getRuleNodeSupportedLinks('your-component-value').subscribe(ruleNodeSupportedLinks => {
+  console.log('Get Rule Node Supported Links:', ruleNodeSupportedLinks);
 });
 ```
 
 **14. ruleNodeAllowCustomLinks**
 
 ```javascript
-const component = component;
-ruleChainService.ruleNodeAllowCustomLinks(component).subscribe(result => {
-  console.log('Rule Node Allow Custom Links: result');
+ruleChainService.ruleNodeAllowCustomLinks('your-component-value').subscribe(ruleNodeAllowCustomLinks => {
+  console.log('Rule Node Allow Custom Links:', ruleNodeAllowCustomLinks);
 });
 ```
 
 **15. ruleNodeSourceRuleChainId**
 
 ```javascript
-const component = component;
-ruleChainService.ruleNodeSourceRuleChainId(component).subscribe(result => {
-  console.log('Rule Node Source Rule Chain Id:result');
+ruleChainService.ruleNodeSourceRuleChainId('your-component-value').subscribe(ruleNodeSourceRuleChainId => {
+  console.log('Rule Node Source Rule Chain Id:', ruleNodeSourceRuleChainId);
 });
 ```
 
 **16. getLatestRuleNodeDebugInput**
 
 ```javascript
-ruleChainService.getLatestRuleNodeDebugInput('your-id').subscribe(latestRuleNodeDebugInput => {
-  console.log('Get Latest Rule Node Debug Input:latestRuleNodeDebugInput');
+ruleChainService.getLatestRuleNodeDebugInput('your-rulenode-id').subscribe(latestRuleNodeDebugInput => {
+  console.log('Get Latest Rule Node Debug Input:', latestRuleNodeDebugInput);
 });
 ```
 
 **17. testScript**
 
 ```javascript
-const inputParams = inputParams;
-const scriptLang = scriptLang;
-ruleChainService.testScript(inputParams, scriptLang).subscribe(result => {
-  console.log('Test Script: result');
+ruleChainService.testScript('your-inputparams-value', 'your-scriptlang-value').subscribe(testScript => {
+  console.log('Test Script:', testScript);
 });
 ```
 
 **18. loadRuleNodeComponents**
 
 ```javascript
-ruleChainService.loadRuleNodeComponents('type').subscribe(result => {
-  console.log('Load Rule Node Components: result');
+ruleChainService.loadRuleNodeComponents('your-rulechaintype-value').subscribe(loadRuleNodeComponents => {
+  console.log('Load Rule Node Components:', loadRuleNodeComponents);
 });
 ```
 
 **19. resolveRuleNodeComponentsUiResources**
 
 ```javascript
-const components = components;
-const modulesMap = modulesMap;
-ruleChainService.resolveRuleNodeComponentsUiResources(components, modulesMap).subscribe(result => {
-  console.log('Resolve Rule Node Components Ui Resources:result');
+ruleChainService.resolveRuleNodeComponentsUiResources('your-components-value', 'your-modulesmap-value').subscribe(resolveRuleNodeComponentsUiResources => {
+  console.log('Resolve Rule Node Components Ui Resources:', resolveRuleNodeComponentsUiResources);
 });
 ```
 
 **20. resolveRuleNodeComponentUiResources**
 
 ```javascript
-const component = component;
-const modulesMap = modulesMap;
-ruleChainService.resolveRuleNodeComponentUiResources(component, modulesMap).subscribe(result => {
-  console.log('Resolve Rule Node Component Ui Resources:result');
+ruleChainService.resolveRuleNodeComponentUiResources('your-component-value', 'your-modulesmap-value').subscribe(resolveRuleNodeComponentUiResources => {
+  console.log('Resolve Rule Node Component Ui Resources:', resolveRuleNodeComponentUiResources);
 });
 ```
 
@@ -191,55 +174,55 @@ ruleChainService.resolveRuleNodeComponentUiResources(component, modulesMap).subs
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-ruleChainService.getEdgeRuleChains('your-edge-id', pageLink).subscribe(edgerulechains => {
-  console.log('Get Edge Rule Chains: edgerulechains');
+ruleChainService.getEdgeRuleChains('your-edge-id', pageLink).subscribe(edgeRuleChains => {
+  console.log('Get Edge Rule Chains:', edgeRuleChains);
 });
 ```
 
 **22. assignRuleChainToEdge**
 
 ```javascript
-ruleChainService.assignRuleChainToEdge('your-edge-id', 'your-rule-chain-id').subscribe(result => {
-  console.log('Assign Rule Chain To Edge: result');
+ruleChainService.assignRuleChainToEdge('your-edge-id', 'your-rulechain-id').subscribe(ruleChainToEdge => {
+  console.log('Assign Rule Chain To Edge:', ruleChainToEdge);
 });
 ```
 
 **23. setEdgeTemplateRootRuleChain**
 
 ```javascript
-ruleChainService.setEdgeTemplateRootRuleChain('your-rule-chain-id').subscribe(result => {
-  console.log('Set Edge Template Root Rule Chain:result');
+ruleChainService.setEdgeTemplateRootRuleChain('your-rulechain-id').subscribe(edgeTemplateRootRuleChain => {
+  console.log('Set Edge Template Root Rule Chain:', edgeTemplateRootRuleChain);
 });
 ```
 
 **24. setAutoAssignToEdgeRuleChain**
 
 ```javascript
-ruleChainService.setAutoAssignToEdgeRuleChain('your-rule-chain-id').subscribe(result => {
-  console.log('Set Auto Assign To Edge Rule Chain:result');
+ruleChainService.setAutoAssignToEdgeRuleChain('your-rulechain-id').subscribe(autoAssignToEdgeRuleChain => {
+  console.log('Set Auto Assign To Edge Rule Chain:', autoAssignToEdgeRuleChain);
 });
 ```
 
 **25. unsetAutoAssignToEdgeRuleChain**
 
 ```javascript
-ruleChainService.unsetAutoAssignToEdgeRuleChain('your-rule-chain-id').subscribe(result => {
-  console.log('Unset Auto Assign To Edge Rule Chain:result');
+ruleChainService.unsetAutoAssignToEdgeRuleChain('your-rulechain-id').subscribe(unsetAutoAssignToEdgeRuleChain => {
+  console.log('Unset Auto Assign To Edge Rule Chain:', unsetAutoAssignToEdgeRuleChain);
 });
 ```
 
 **26. getAutoAssignToEdgeRuleChains**
 
 ```javascript
-ruleChainService.getAutoAssignToEdgeRuleChains().subscribe(autoassigntoedgerulechains => {
-  console.log('Get Auto Assign To Edge Rule Chains:autoassigntoedgerulechains');
+ruleChainService.getAutoAssignToEdgeRuleChains().subscribe(autoAssignToEdgeRuleChains => {
+  console.log('Get Auto Assign To Edge Rule Chains:', autoAssignToEdgeRuleChains);
 });
 ```
 
 **27. setEdgeRootRuleChain**
 
 ```javascript
-ruleChainService.setEdgeRootRuleChain('your-edge-id', 'your-rule-chain-id').subscribe(result => {
-  console.log('Set Edge Root Rule Chain: result');
+ruleChainService.setEdgeRootRuleChain('your-edge-id', 'your-rulechain-id').subscribe(edgeRootRuleChain => {
+  console.log('Set Edge Root Rule Chain:', edgeRootRuleChain);
 });
 ```

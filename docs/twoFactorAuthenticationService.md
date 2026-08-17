@@ -1,8 +1,6 @@
 # TWO FACTOR AUTHENTICATION SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **TWO FACTOR AUTHENTICATION SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -14,75 +12,71 @@ const twoFactorAuthenticationService = $injector.get(self.ctx.servicesMap.get('t
 **1. getTwoFaSettings**
 
 ```javascript
-twoFactorAuthenticationService.getTwoFaSettings().subscribe(twofasettings => {
-  console.log('Get Two Fa Settings: twofasettings');
+twoFactorAuthenticationService.getTwoFaSettings().subscribe(twoFaSettings => {
+  console.log('Get Two Fa Settings:', twoFaSettings);
 });
 ```
 
 **2. saveTwoFaSettings**
 
 ```javascript
-const settings = settings;
-twoFactorAuthenticationService.saveTwoFaSettings(settings).subscribe(savedTwoFaSettings => {
-  console.log('Save Two Fa Settings: savedTwoFaSettings');
+twoFactorAuthenticationService.saveTwoFaSettings('your-settings-value').subscribe(twoFaSettings => {
+  console.log('Save Two Fa Settings:', twoFaSettings);
 });
 ```
 
 **3. getAvailableTwoFaProviders**
 
 ```javascript
-twoFactorAuthenticationService.getAvailableTwoFaProviders().subscribe(availabletwofaproviders => {
-  console.log('Get Available Two Fa Providers:availabletwofaproviders');
+twoFactorAuthenticationService.getAvailableTwoFaProviders().subscribe(availableTwoFaProviders => {
+  console.log('Get Available Two Fa Providers:', availableTwoFaProviders);
 });
 ```
 
 **4. generateTwoFaAccountConfig**
 
 ```javascript
-twoFactorAuthenticationService.generateTwoFaAccountConfig('your-id').subscribe(result => {
-  console.log('Generate Two Fa Account Config:result');
+twoFactorAuthenticationService.generateTwoFaAccountConfig('your-providertype-value').subscribe(twoFaAccountConfig => {
+  console.log('Generate Two Fa Account Config:', twoFaAccountConfig);
 });
 ```
 
 **5. getAccountTwoFaSettings**
 
 ```javascript
-twoFactorAuthenticationService.getAccountTwoFaSettings().subscribe(accounttwofasettings => {
-  console.log('Get Account Two Fa Settings: accounttwofasettings');
+twoFactorAuthenticationService.getAccountTwoFaSettings().subscribe(accountTwoFaSettings => {
+  console.log('Get Account Two Fa Settings:', accountTwoFaSettings);
 });
 ```
 
 **6. updateTwoFaAccountConfig**
 
 ```javascript
-twoFactorAuthenticationService.updateTwoFaAccountConfig('your-id', true).subscribe(result => {
-  console.log('Update Two Fa Account Config: result');
+twoFactorAuthenticationService.updateTwoFaAccountConfig('your-providertype-value', true).subscribe(twoFaAccountConfig => {
+  console.log('Update Two Fa Account Config:', twoFaAccountConfig);
 });
 ```
 
 **7. submitTwoFaAccountConfig**
 
 ```javascript
-const authConfig = authConfig;
-twoFactorAuthenticationService.submitTwoFaAccountConfig(authConfig).subscribe(result => {
-  console.log('Submit Two Fa Account Config: result');
+twoFactorAuthenticationService.submitTwoFaAccountConfig('your-authconfig-value').subscribe(submitTwoFaAccountConfig => {
+  console.log('Submit Two Fa Account Config:', submitTwoFaAccountConfig);
 });
 ```
 
 **8. verifyAndSaveTwoFaAccountConfig**
 
 ```javascript
-const authConfig = authConfig;
-const verificationCode = verificationCode;
-twoFactorAuthenticationService.verifyAndSaveTwoFaAccountConfig(authConfig, verificationCode).subscribe(result => {
-  console.log('Verify And Save Two Fa Account Config:result');
+twoFactorAuthenticationService.verifyAndSaveTwoFaAccountConfig('your-authconfig-value', 0).subscribe(verifyAndSaveTwoFaAccountConfig => {
+  console.log('Verify And Save Two Fa Account Config:', verifyAndSaveTwoFaAccountConfig);
 });
 ```
 
 **9. deleteTwoFaAccountConfig**
 
 ```javascript
-twoFactorAuthenticationService.deleteTwoFaAccountConfig('your-id').subscribe(result => {
-  console.log('Delete Two Fa Account Config: result');
+twoFactorAuthenticationService.deleteTwoFaAccountConfig('your-providertype-value').subscribe(twoFaAccountConfig => {
+  console.log('Delete Two Fa Account Config:', twoFaAccountConfig);
 });
 ```

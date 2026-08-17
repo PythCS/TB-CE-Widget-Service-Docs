@@ -1,8 +1,6 @@
 # ENTITY SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **ENTITY SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -17,32 +15,32 @@ const entityService = self.ctx.entityService;
 **1. getEntityObservable**
 
 ```javascript
-entityService.getEntityObservable('type', 'your-entity-id').subscribe(entityObservable => {
-  console.log('Get Entity Observable: entityObservable');
+self.ctx.entityService.getEntityObservable('your-entitytype-value', 'your-entity-id').subscribe(entityObservable => {
+  console.log('Get Entity Observable:', entityObservable);
 });
 ```
 
 **2. getEntity**
 
 ```javascript
-entityService.getEntity('type', 'your-entity-id').subscribe(entity => {
-  console.log('Get Entity: entity');
+self.ctx.entityService.getEntity('your-entitytype-value', 'your-entity-id').subscribe(entity => {
+  console.log('Get Entity:', entity);
 });
 ```
 
 **3. getEntitiesObservable**
 
 ```javascript
-entityService.getEntitiesObservable('type', 'your-id').subscribe(entitiesObservable => {
-  console.log('Get Entities Observable: entitiesObservable');
+self.ctx.entityService.getEntitiesObservable('your-entitytype-value', 'your-entityids-value').subscribe(entitiesObservable => {
+  console.log('Get Entities Observable:', entitiesObservable);
 });
 ```
 
 **4. getEntities**
 
 ```javascript
-entityService.getEntities('type', 'your-id').subscribe(entities => {
-  console.log('Get Entities: entities');
+self.ctx.entityService.getEntities('your-entitytype-value', 'your-entityids-value').subscribe(entities => {
+  console.log('Get Entities:', entities);
 });
 ```
 
@@ -50,8 +48,8 @@ entityService.getEntities('type', 'your-id').subscribe(entities => {
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-entityService.getSingleTenantByPageLinkObservable(pageLink).subscribe(singleTenantByPageLinkObservable => {
-  console.log('Get Single Tenant By Page Link Observable:singleTenantByPageLinkObservable');
+self.ctx.entityService.getSingleTenantByPageLinkObservable(pageLink).subscribe(singleTenantByPageLinkObservable => {
+  console.log('Get Single Tenant By Page Link Observable:', singleTenantByPageLinkObservable);
 });
 ```
 
@@ -59,8 +57,8 @@ entityService.getSingleTenantByPageLinkObservable(pageLink).subscribe(singleTena
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-entityService.getSingleCustomerByPageLinkObservable(pageLink).subscribe(singleCustomerByPageLinkObservable => {
-  console.log('Get Single Customer By Page Link Observable:singleCustomerByPageLinkObservable');
+self.ctx.entityService.getSingleCustomerByPageLinkObservable(pageLink).subscribe(singleCustomerByPageLinkObservable => {
+  console.log('Get Single Customer By Page Link Observable:', singleCustomerByPageLinkObservable);
 });
 ```
 
@@ -68,8 +66,8 @@ entityService.getSingleCustomerByPageLinkObservable(pageLink).subscribe(singleCu
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-entityService.getEntitiesByPageLinkObservable('type', pageLink, 'type').subscribe(entitiesByPageLinkObservable => {
-  console.log('Get Entities By Page Link Observable:entitiesByPageLinkObservable');
+self.ctx.entityService.getEntitiesByPageLinkObservable('your-entitytype-value', pageLink, 'your-subtype-value').subscribe(entitiesByPageLinkObservable => {
+  console.log('Get Entities By Page Link Observable:', entitiesByPageLinkObservable);
 });
 ```
 
@@ -77,165 +75,152 @@ entityService.getEntitiesByPageLinkObservable('type', pageLink, 'type').subscrib
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-entityService.getEntitiesByPageLink('type', pageLink, 'type').subscribe(entitiesByPageLink => {
-  console.log('Get Entities By Page Link: entitiesByPageLink');
+self.ctx.entityService.getEntitiesByPageLink('your-entitytype-value', pageLink, 'your-subtype-value').subscribe(entitiesByPageLink => {
+  console.log('Get Entities By Page Link:', entitiesByPageLink);
 });
 ```
 
 **9. getEntitiesByNameFilter**
 
 ```javascript
-const entityNameFilter = entityNameFilter;
-const pageSize = pageSize;
-entityService.getEntitiesByNameFilter('type', entityNameFilter, pageSize, 'type').subscribe(entitiesByNameFilter => {
-  console.log('Get Entities By Name Filter: entitiesByNameFilter');
+self.ctx.entityService.getEntitiesByNameFilter('your-entitytype-value', 'your-entitynamefilter-value', 0, 'your-subtype-value').subscribe(entitiesByNameFilter => {
+  console.log('Get Entities By Name Filter:', entitiesByNameFilter);
 });
 ```
 
 **10. findEntityDataByQuery**
 
 ```javascript
-const query = query;
-entityService.findEntityDataByQuery(query).subscribe(results => {
-  console.log('Find Entity Data By Query: results');
+self.ctx.entityService.findEntityDataByQuery('your-query-value').subscribe(entityDataByQuery => {
+  console.log('Find Entity Data By Query:', entityDataByQuery);
 });
 ```
 
 **11. findEntityKeysByQuery**
 
 ```javascript
-const query = query;
-entityService.findEntityKeysByQuery(query, 'SERVER_SCOPE').subscribe(results => {
-  console.log('Find Entity Keys By Query: results');
+self.ctx.entityService.findEntityKeysByQuery('your-query-value', 'your-scope-value').subscribe(entityKeysByQuery => {
+  console.log('Find Entity Keys By Query:', entityKeysByQuery);
 });
 ```
 
 **12. findAlarmDataByQuery**
 
 ```javascript
-const query = query;
-entityService.findAlarmDataByQuery(query).subscribe(results => {
-  console.log('Find Alarm Data By Query: results');
+self.ctx.entityService.findAlarmDataByQuery('your-query-value').subscribe(alarmDataByQuery => {
+  console.log('Find Alarm Data By Query:', alarmDataByQuery);
 });
 ```
 
 **13. findEntityInfosByFilterAndName**
 
 ```javascript
-const filter = filter;
-entityService.findEntityInfosByFilterAndName(filter, 'searchText').subscribe(results => {
-  console.log('Find Entity Infos By Filter And Name:results');
+self.ctx.entityService.findEntityInfosByFilterAndName('your-filter-value', 'your-searchtext-value').subscribe(entityInfosByFilterAndName => {
+  console.log('Find Entity Infos By Filter And Name:', entityInfosByFilterAndName);
 });
 ```
 
 **14. findSingleEntityInfoByEntityFilter**
 
 ```javascript
-const filter = filter;
-entityService.findSingleEntityInfoByEntityFilter(filter).subscribe(results => {
-  console.log('Find Single Entity Info By Entity Filter:results');
+self.ctx.entityService.findSingleEntityInfoByEntityFilter('your-filter-value').subscribe(singleEntityInfoByEntityFilter => {
+  console.log('Find Single Entity Info By Entity Filter:', singleEntityInfoByEntityFilter);
 });
 ```
 
 **15. getAliasFilterTypesByEntityTypes**
 
 ```javascript
-entityService.getAliasFilterTypesByEntityTypes('type').subscribe(aliasfiltertypesbyentitytypes => {
-  console.log('Get Alias Filter Types By Entity Types:aliasfiltertypesbyentitytypes');
+self.ctx.entityService.getAliasFilterTypesByEntityTypes('your-entitytypes-value').subscribe(aliasFilterTypesByEntityTypes => {
+  console.log('Get Alias Filter Types By Entity Types:', aliasFilterTypesByEntityTypes);
 });
 ```
 
 **16. filterAliasByEntityTypes**
 
 ```javascript
-const entityAlias = entityAlias;
-entityService.filterAliasByEntityTypes(entityAlias, 'type').subscribe(result => {
-  console.log('Filter Alias By Entity Types: result');
+self.ctx.entityService.filterAliasByEntityTypes('your-entityalias-value', 'your-entitytypes-value').subscribe(filterAliasByEntityTypes => {
+  console.log('Filter Alias By Entity Types:', filterAliasByEntityTypes);
 });
 ```
 
 **17. filterAliasFilterTypeByEntityTypes**
 
 ```javascript
-entityService.filterAliasFilterTypeByEntityTypes('type', 'type').subscribe(result => {
-  console.log('Filter Alias Filter Type By Entity Types:result');
+self.ctx.entityService.filterAliasFilterTypeByEntityTypes('your-aliasfiltertype-value', 'your-entitytypes-value').subscribe(filterAliasFilterTypeByEntityTypes => {
+  console.log('Filter Alias Filter Type By Entity Types:', filterAliasFilterTypeByEntityTypes);
 });
 ```
 
 **18. filterAliasFilterTypeByEntityType**
 
 ```javascript
-entityService.filterAliasFilterTypeByEntityType('type', 'type').subscribe(result => {
-  console.log('Filter Alias Filter Type By Entity Type:result');
+self.ctx.entityService.filterAliasFilterTypeByEntityType('your-aliasfiltertype-value', 'your-entitytype-value').subscribe(filterAliasFilterTypeByEntityType => {
+  console.log('Filter Alias Filter Type By Entity Type:', filterAliasFilterTypeByEntityType);
 });
 ```
 
 **19. prepareAllowedEntityTypesList**
 
 ```javascript
-entityService.prepareAllowedEntityTypesList('type', 'type').subscribe(result => {
-  console.log('Prepare Allowed Entity Types List:result');
+self.ctx.entityService.prepareAllowedEntityTypesList('your-allowedentitytypes-value', true).subscribe(prepareAllowedEntityTypesList => {
+  console.log('Prepare Allowed Entity Types List:', prepareAllowedEntityTypesList);
 });
 ```
 
 **20. getEntityFieldKeys**
 
 ```javascript
-entityService.getEntityFieldKeys('type', 'searchText').subscribe(entityfieldkeys => {
-  console.log('Get Entity Field Keys: entityfieldkeys');
+self.ctx.entityService.getEntityFieldKeys('your-entitytype-value', 'your-searchtext-value').subscribe(entityFieldKeys => {
+  console.log('Get Entity Field Keys:', entityFieldKeys);
 });
 ```
 
 **21. getAlarmKeys**
 
 ```javascript
-entityService.getAlarmKeys('searchText').subscribe(alarmkeys => {
-  console.log('Get Alarm Keys: alarmkeys');
+self.ctx.entityService.getAlarmKeys('your-searchtext-value').subscribe(alarmKeys => {
+  console.log('Get Alarm Keys:', alarmKeys);
 });
 ```
 
 **22. getEntityKeys**
 
 ```javascript
-const query = query;
-entityService.getEntityKeys('your-entity-id', query, 'type').subscribe(entitykeys => {
-  console.log('Get Entity Keys: entitykeys');
+self.ctx.entityService.getEntityKeys('your-entity-id', 'your-query-value', 'your-type-value').subscribe(entityKeys => {
+  console.log('Get Entity Keys:', entityKeys);
 });
 ```
 
 **23. getEntityKeysByEntityFilter**
 
 ```javascript
-const filter = filter;
-entityService.getEntityKeysByEntityFilter(filter, 'type', 'type').subscribe(entityKeysByEntityFilter => {
-  console.log('Get Entity Keys By Entity Filter:entityKeysByEntityFilter');
+self.ctx.entityService.getEntityKeysByEntityFilter('your-filter-value', 'your-types-value', 'your-entitytypes-value').subscribe(entityKeysByEntityFilter => {
+  console.log('Get Entity Keys By Entity Filter:', entityKeysByEntityFilter);
 });
 ```
 
 **24. getEntityKeysByEntityFilterAndScope**
 
 ```javascript
-const filter = filter;
-entityService.getEntityKeysByEntityFilterAndScope(filter, 'type', 'type', 'SERVER_SCOPE').subscribe(entityKeysByEntityFilterAndScope => {
-  console.log('Get Entity Keys By Entity Filter And Scope:entityKeysByEntityFilterAndScope');
+self.ctx.entityService.getEntityKeysByEntityFilterAndScope('your-filter-value', 'your-types-value', 'your-entitytypes-value', 'your-scope-value').subscribe(entityKeysByEntityFilterAndScope => {
+  console.log('Get Entity Keys By Entity Filter And Scope:', entityKeysByEntityFilterAndScope);
 });
 ```
 
 **25. createDatasourcesFromSubscriptionsInfo**
 
 ```javascript
-const subscriptionsInfo = subscriptionsInfo;
-entityService.createDatasourcesFromSubscriptionsInfo(subscriptionsInfo).subscribe(result => {
-  console.log('Create Datasources From Subscriptions Info:result');
+self.ctx.entityService.createDatasourcesFromSubscriptionsInfo('your-subscriptionsinfo-value').subscribe(datasourcesFromSubscriptionsInfo => {
+  console.log('Create Datasources From Subscriptions Info:', datasourcesFromSubscriptionsInfo);
 });
 ```
 
 **26. createAlarmSourceFromSubscriptionInfo**
 
 ```javascript
-const subscriptionInfo = subscriptionInfo;
-entityService.createAlarmSourceFromSubscriptionInfo(subscriptionInfo).subscribe(result => {
-  console.log('Create Alarm Source From Subscription Info:result');
+self.ctx.entityService.createAlarmSourceFromSubscriptionInfo('your-subscriptioninfo-value').subscribe(alarmSourceFromSubscriptionInfo => {
+  console.log('Create Alarm Source From Subscription Info:', alarmSourceFromSubscriptionInfo);
 });
 ```
 
@@ -243,23 +228,23 @@ entityService.createAlarmSourceFromSubscriptionInfo(subscriptionInfo).subscribe(
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-entityService.getAssignedToEdgeEntitiesByType('your-edge-id', 'type', pageLink).subscribe(assignedToEdgeEntitiesByType => {
-  console.log('Get Assigned To Edge Entities By Type:assignedToEdgeEntitiesByType');
+self.ctx.entityService.getAssignedToEdgeEntitiesByType('your-edge-id', 'your-entitytype-value', pageLink).subscribe(assignedToEdgeEntitiesByType => {
+  console.log('Get Assigned To Edge Entities By Type:', assignedToEdgeEntitiesByType);
 });
 ```
 
 **28. case**
 
 ```javascript
-entityService.case().subscribe(result => {
-  console.log('Case: result');
+self.ctx.entityService.case().subscribe(case => {
+  console.log('Case:', case);
 });
 ```
 
 **29. getEntitySubtypesObservable**
 
 ```javascript
-entityService.getEntitySubtypesObservable('type').subscribe(entitySubtypesObservable => {
-  console.log('Get Entity Subtypes Observable:entitySubtypesObservable');
+self.ctx.entityService.getEntitySubtypesObservable('your-entitytype-value').subscribe(entitySubtypesObservable => {
+  console.log('Get Entity Subtypes Observable:', entitySubtypesObservable);
 });
 ```

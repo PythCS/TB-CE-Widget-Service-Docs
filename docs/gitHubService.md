@@ -1,8 +1,6 @@
 # GIT HUB SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **GIT HUB SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -15,6 +13,6 @@ const gitHubService = $injector.get(self.ctx.servicesMap.get('gitHubService'));
 
 ```javascript
 gitHubService.getGitHubStar().subscribe(gitHubStar => {
-  console.log('Get Git Hub Star: gitHubStar');
+  console.log('Get Git Hub Star:', gitHubStar);
 });
 ```

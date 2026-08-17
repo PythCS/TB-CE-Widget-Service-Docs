@@ -1,8 +1,6 @@
 # ASSET SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **ASSET SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -18,8 +16,8 @@ const assetService = self.ctx.assetService;
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-assetService.getTenantAssetInfos(pageLink, 'type').subscribe(tenantassetinfos => {
-  console.log('Get Tenant Asset Infos: tenantassetinfos');
+self.ctx.assetService.getTenantAssetInfos(pageLink, 'your-type-value').subscribe(tenantAssetInfos => {
+  console.log('Get Tenant Asset Infos:', tenantAssetInfos);
 });
 ```
 
@@ -27,8 +25,8 @@ assetService.getTenantAssetInfos(pageLink, 'type').subscribe(tenantassetinfos =>
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-assetService.getTenantAssetInfosByAssetProfileId(pageLink, 'your-asset-profile-id').subscribe(tenantAssetInfosByAssetProfileId => {
-  console.log('Get Tenant Asset Infos By Asset Profile Id:tenantAssetInfosByAssetProfileId');
+self.ctx.assetService.getTenantAssetInfosByAssetProfileId(pageLink, 'your-assetprofile-id').subscribe(tenantAssetInfosByAssetProfileId => {
+  console.log('Get Tenant Asset Infos By Asset Profile Id:', tenantAssetInfosByAssetProfileId);
 });
 ```
 
@@ -36,8 +34,8 @@ assetService.getTenantAssetInfosByAssetProfileId(pageLink, 'your-asset-profile-i
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-assetService.getCustomerAssetInfos('your-customer-id', pageLink, 'type').subscribe(customerassetinfos => {
-  console.log('Get Customer Asset Infos: customerassetinfos');
+self.ctx.assetService.getCustomerAssetInfos('your-customer-id', pageLink, 'your-type-value').subscribe(customerAssetInfos => {
+  console.log('Get Customer Asset Infos:', customerAssetInfos);
 });
 ```
 
@@ -45,91 +43,88 @@ assetService.getCustomerAssetInfos('your-customer-id', pageLink, 'type').subscri
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-assetService.getCustomerAssetInfosByAssetProfileId('your-customer-id', pageLink, 'your-asset-profile-id').subscribe(customerAssetInfosByAssetProfileId => {
-  console.log('Get Customer Asset Infos By Asset Profile Id:customerAssetInfosByAssetProfileId');
+self.ctx.assetService.getCustomerAssetInfosByAssetProfileId('your-customer-id', pageLink, 'your-assetprofile-id').subscribe(customerAssetInfosByAssetProfileId => {
+  console.log('Get Customer Asset Infos By Asset Profile Id:', customerAssetInfosByAssetProfileId);
 });
 ```
 
 **5. getAsset**
 
 ```javascript
-assetService.getAsset('your-asset-id').subscribe(asset => {
-  console.log('Get Asset: asset');
+self.ctx.assetService.getAsset('your-asset-id').subscribe(asset => {
+  console.log('Get Asset:', asset);
 });
 ```
 
 **6. getAssets**
 
 ```javascript
-assetService.getAssets('your-id').subscribe(assets => {
-  console.log('Get Assets: assets');
+self.ctx.assetService.getAssets('your-assetids-value').subscribe(assets => {
+  console.log('Get Assets:', assets);
 });
 ```
 
 **7. getAssetInfo**
 
 ```javascript
-assetService.getAssetInfo('your-asset-id').subscribe(assetInfo => {
-  console.log('Get Asset Info: assetInfo');
+self.ctx.assetService.getAssetInfo('your-asset-id').subscribe(assetInfo => {
+  console.log('Get Asset Info:', assetInfo);
 });
 ```
 
 **8. saveAsset**
 
 ```javascript
-const asset = asset;
-assetService.saveAsset(asset).subscribe(savedAsset => {
-  console.log('Save Asset: savedAsset');
+self.ctx.assetService.saveAsset('your-asset-value').subscribe(asset => {
+  console.log('Save Asset:', asset);
 });
 ```
 
 **9. getAssetTypes**
 
 ```javascript
-assetService.getAssetTypes().subscribe(assettypes => {
-  console.log('Get Asset Types: assettypes');
+self.ctx.assetService.getAssetTypes().subscribe(assetTypes => {
+  console.log('Get Asset Types:', assetTypes);
 });
 ```
 
 **10. makeAssetPublic**
 
 ```javascript
-assetService.makeAssetPublic('your-asset-id').subscribe(result => {
-  console.log('Make Asset Public: result');
+self.ctx.assetService.makeAssetPublic('your-asset-id').subscribe(makeAssetPublic => {
+  console.log('Make Asset Public:', makeAssetPublic);
 });
 ```
 
 **11. assignAssetToCustomer**
 
 ```javascript
-assetService.assignAssetToCustomer('your-customer-id', 'your-asset-id').subscribe(result => {
-  console.log('Assign Asset To Customer: result');
+self.ctx.assetService.assignAssetToCustomer('your-customer-id', 'your-asset-id').subscribe(assetToCustomer => {
+  console.log('Assign Asset To Customer:', assetToCustomer);
 });
 ```
 
 **12. findByQuery**
 
 ```javascript
-const query = query;
-assetService.findByQuery(query).subscribe(results => {
-  console.log('Find By Query: results');
+self.ctx.assetService.findByQuery('your-query-value').subscribe(byQuery => {
+  console.log('Find By Query:', byQuery);
 });
 ```
 
 **13. findByName**
 
 ```javascript
-const assetName = assetName;
-assetService.findByName(assetName).subscribe(entity => {
-  console.log('Find By Name: entity');
+self.ctx.assetService.findByName('your-assetname-value').subscribe(byName => {
+  console.log('Find By Name:', byName);
 });
 ```
 
 **14. assignAssetToEdge**
 
 ```javascript
-assetService.assignAssetToEdge('your-edge-id', 'your-asset-id').subscribe(result => {
-  console.log('Assign Asset To Edge: result');
+self.ctx.assetService.assignAssetToEdge('your-edge-id', 'your-asset-id').subscribe(assetToEdge => {
+  console.log('Assign Asset To Edge:', assetToEdge);
 });
 ```
 
@@ -137,16 +132,15 @@ assetService.assignAssetToEdge('your-edge-id', 'your-asset-id').subscribe(result
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-assetService.getEdgeAssets('your-edge-id', pageLink, 'type').subscribe(edgeassets => {
-  console.log('Get Edge Assets: edgeassets');
+self.ctx.assetService.getEdgeAssets('your-edge-id', pageLink, 'your-type-value').subscribe(edgeAssets => {
+  console.log('Get Edge Assets:', edgeAssets);
 });
 ```
 
 **16. bulkImportAssets**
 
 ```javascript
-const entitiesData = entitiesData;
-assetService.bulkImportAssets(entitiesData).subscribe(result => {
-  console.log('Bulk Import Assets: result');
+self.ctx.assetService.bulkImportAssets('your-entitiesdata-value').subscribe(bulkImportAssets => {
+  console.log('Bulk Import Assets:', bulkImportAssets);
 });
 ```

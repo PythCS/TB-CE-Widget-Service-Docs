@@ -1,8 +1,6 @@
 # COMPONENT DESCRIPTOR SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **COMPONENT DESCRIPTOR SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -14,24 +12,23 @@ const componentDescriptorService = $injector.get(self.ctx.servicesMap.get('compo
 **1. getComponentDescriptorsByType**
 
 ```javascript
-componentDescriptorService.getComponentDescriptorsByType('type', 'type').subscribe(componentDescriptorsByType => {
-  console.log('Get Component Descriptors By Type:componentDescriptorsByType');
+componentDescriptorService.getComponentDescriptorsByType('your-componenttype-value', 'your-rulechaintype-value').subscribe(componentDescriptorsByType => {
+  console.log('Get Component Descriptors By Type:', componentDescriptorsByType);
 });
 ```
 
 **2. getComponentDescriptorsByTypes**
 
 ```javascript
-componentDescriptorService.getComponentDescriptorsByTypes('type', 'type').subscribe(componentdescriptorsbytypes => {
-  console.log('Get Component Descriptors By Types:componentdescriptorsbytypes');
+componentDescriptorService.getComponentDescriptorsByTypes('your-componenttypes-value', 'your-rulechaintype-value').subscribe(componentDescriptorsByTypes => {
+  console.log('Get Component Descriptors By Types:', componentDescriptorsByTypes);
 });
 ```
 
 **3. getComponentDescriptorByClazz**
 
 ```javascript
-const componentDescriptorClazz = componentDescriptorClazz;
-componentDescriptorService.getComponentDescriptorByClazz(componentDescriptorClazz).subscribe(componentDescriptorByClazz => {
-  console.log('Get Component Descriptor By Clazz:componentDescriptorByClazz');
+componentDescriptorService.getComponentDescriptorByClazz('your-componentdescriptorclazz-value').subscribe(componentDescriptorByClazz => {
+  console.log('Get Component Descriptor By Clazz:', componentDescriptorByClazz);
 });
 ```

@@ -1,8 +1,6 @@
 # USAGE INFO SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **USAGE INFO SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -15,6 +13,6 @@ const usageInfoService = $injector.get(self.ctx.servicesMap.get('usageInfoServic
 
 ```javascript
 usageInfoService.getUsageInfo().subscribe(usageInfo => {
-  console.log('Get Usage Info: usageInfo');
+  console.log('Get Usage Info:', usageInfo);
 });
 ```

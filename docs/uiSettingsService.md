@@ -1,8 +1,6 @@
 # UI SETTINGS SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **UI SETTINGS SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -15,6 +13,6 @@ const uiSettingsService = $injector.get(self.ctx.servicesMap.get('uiSettingsServ
 
 ```javascript
 uiSettingsService.getHelpBaseUrl().subscribe(helpBaseUrl => {
-  console.log('Get Help Base Url: helpBaseUrl');
+  console.log('Get Help Base Url:', helpBaseUrl);
 });
 ```

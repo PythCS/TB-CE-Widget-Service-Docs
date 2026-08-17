@@ -1,8 +1,6 @@
 # USER SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **USER SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -18,8 +16,8 @@ const userService = self.ctx.userService;
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-userService.getUsers(pageLink).subscribe(users => {
-  console.log('Get Users: users');
+self.ctx.userService.getUsers(pageLink).subscribe(users => {
+  console.log('Get Users:', users);
 });
 ```
 
@@ -27,8 +25,8 @@ userService.getUsers(pageLink).subscribe(users => {
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-userService.getTenantAdmins('your-tenant-id', pageLink).subscribe(tenantadmins => {
-  console.log('Get Tenant Admins: tenantadmins');
+self.ctx.userService.getTenantAdmins('your-tenant-id', pageLink).subscribe(admins => {
+  console.log('Get Tenant Admins:', admins);
 });
 ```
 
@@ -36,8 +34,8 @@ userService.getTenantAdmins('your-tenant-id', pageLink).subscribe(tenantadmins =
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-userService.getCustomerUsers('your-customer-id', pageLink).subscribe(customerusers => {
-  console.log('Get Customer Users: customerusers');
+self.ctx.userService.getCustomerUsers('your-customer-id', pageLink).subscribe(users => {
+  console.log('Get Customer Users:', users);
 });
 ```
 
@@ -45,57 +43,56 @@ userService.getCustomerUsers('your-customer-id', pageLink).subscribe(customeruse
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-userService.getUsersForAssign('your-alarm-id', pageLink).subscribe(usersForAssign => {
-  console.log('Get Users For Assign: usersForAssign');
+self.ctx.userService.getUsersForAssign('your-alarm-id', pageLink).subscribe(usersForAssign => {
+  console.log('Get Users For Assign:', usersForAssign);
 });
 ```
 
 **5. getUser**
 
 ```javascript
-userService.getUser('your-user-id').subscribe(user => {
-  console.log('Get User: user');
+self.ctx.userService.getUser('your-user-id').subscribe(user => {
+  console.log('Get User:', user);
 });
 ```
 
 **6. getUsersByIds**
 
 ```javascript
-userService.getUsersByIds('your-id').subscribe(usersbyids => {
-  console.log('Get Users By Ids: usersbyids');
+self.ctx.userService.getUsersByIds('your-userids-value').subscribe(usersByIds => {
+  console.log('Get Users By Ids:', usersByIds);
 });
 ```
 
 **7. saveUser**
 
 ```javascript
-const user = user;
-userService.saveUser(user, true).subscribe(savedUser => {
-  console.log('Save User: savedUser');
+self.ctx.userService.saveUser('your-user-value', 'your-email@example.com').subscribe(user => {
+  console.log('Save User:', user);
 });
 ```
 
 **8. getActivationLink**
 
 ```javascript
-userService.getActivationLink('your-user-id').subscribe(activationLink => {
-  console.log('Get Activation Link: activationLink');
+self.ctx.userService.getActivationLink('your-user-id').subscribe(activationLink => {
+  console.log('Get Activation Link:', activationLink);
 });
 ```
 
 **9. getActivationLinkInfo**
 
 ```javascript
-userService.getActivationLinkInfo('your-user-id').subscribe(activationLinkInfo => {
-  console.log('Get Activation Link Info: activationLinkInfo');
+self.ctx.userService.getActivationLinkInfo('your-user-id').subscribe(activationLinkInfo => {
+  console.log('Get Activation Link Info:', activationLinkInfo);
 });
 ```
 
 **10. setUserCredentialsEnabled**
 
 ```javascript
-userService.setUserCredentialsEnabled('your-user-id', true).subscribe(result => {
-  console.log('Set User Credentials Enabled: result');
+self.ctx.userService.setUserCredentialsEnabled('your-user-id', true).subscribe(userCredentialsEnabled => {
+  console.log('Set User Credentials Enabled:', userCredentialsEnabled);
 });
 ```
 
@@ -103,7 +100,7 @@ userService.setUserCredentialsEnabled('your-user-id', true).subscribe(result => 
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-userService.findUsersByQuery(pageLink).subscribe(results => {
-  console.log('Find Users By Query: results');
+self.ctx.userService.findUsersByQuery(pageLink).subscribe(usersByQuery => {
+  console.log('Find Users By Query:', usersByQuery);
 });
 ```

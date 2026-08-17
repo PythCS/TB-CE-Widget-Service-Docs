@@ -1,8 +1,6 @@
 # AI MODEL SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **AI MODEL SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -14,9 +12,8 @@ const aiModelService = $injector.get(self.ctx.servicesMap.get('aiModelService'))
 **1. saveAiModel**
 
 ```javascript
-const aiModel = aiModel;
-aiModelService.saveAiModel(aiModel).subscribe(savedAiModel => {
-  console.log('Save Ai Model: savedAiModel');
+aiModelService.saveAiModel('your-aimodel-value').subscribe(aiModel => {
+  console.log('Save Ai Model:', aiModel);
 });
 ```
 
@@ -24,24 +21,23 @@ aiModelService.saveAiModel(aiModel).subscribe(savedAiModel => {
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-aiModelService.getAiModels(pageLink).subscribe(aimodels => {
-  console.log('Get Ai Models: aimodels');
+aiModelService.getAiModels(pageLink).subscribe(aiModels => {
+  console.log('Get Ai Models:', aiModels);
 });
 ```
 
 **3. getAiModelById**
 
 ```javascript
-aiModelService.getAiModelById('your-id').subscribe(aiModelById => {
-  console.log('Get Ai Model By Id: aiModelById');
+aiModelService.getAiModelById('your-aimodel-id').subscribe(aiModelById => {
+  console.log('Get Ai Model By Id:', aiModelById);
 });
 ```
 
 **4. checkConnectivity**
 
 ```javascript
-const aiModelWithUserMsg = aiModelWithUserMsg;
-aiModelService.checkConnectivity(aiModelWithUserMsg).subscribe(result => {
-  console.log('Check Connectivity: result');
+aiModelService.checkConnectivity('your-aimodelwithusermsg-value').subscribe(connectivity => {
+  console.log('Check Connectivity:', connectivity);
 });
 ```

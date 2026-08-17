@@ -1,8 +1,6 @@
 # ALARM RULES SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **ALARM RULES SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -14,25 +12,24 @@ const alarmRulesService = $injector.get(self.ctx.servicesMap.get('alarmRulesServ
 **1. getAlarmRuleById**
 
 ```javascript
-alarmRulesService.getAlarmRuleById('your-alarm-rule-id').subscribe(alarmRuleById => {
-  console.log('Get Alarm Rule By Id: alarmRuleById');
+alarmRulesService.getAlarmRuleById('your-alarmrule-id').subscribe(alarmRuleById => {
+  console.log('Get Alarm Rule By Id:', alarmRuleById);
 });
 ```
 
 **2. saveAlarmRule**
 
 ```javascript
-const alarmRule = alarmRule;
-alarmRulesService.saveAlarmRule(alarmRule).subscribe(savedAlarmRule => {
-  console.log('Save Alarm Rule: savedAlarmRule');
+alarmRulesService.saveAlarmRule('your-alarmrule-value').subscribe(alarmRule => {
+  console.log('Save Alarm Rule:', alarmRule);
 });
 ```
 
 **3. deleteAlarmRule**
 
 ```javascript
-alarmRulesService.deleteAlarmRule('your-alarm-rule-id').subscribe(result => {
-  console.log('Delete Alarm Rule: result');
+alarmRulesService.deleteAlarmRule('your-alarmrule-id').subscribe(alarmRule => {
+  console.log('Delete Alarm Rule:', alarmRule);
 });
 ```
 
@@ -40,9 +37,8 @@ alarmRulesService.deleteAlarmRule('your-alarm-rule-id').subscribe(result => {
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const query = query;
-alarmRulesService.getAlarmRules(pageLink, query).subscribe(alarmrules => {
-  console.log('Get Alarm Rules: alarmrules');
+alarmRulesService.getAlarmRules(pageLink, 'your-query-value').subscribe(alarmRules => {
+  console.log('Get Alarm Rules:', alarmRules);
 });
 ```
 
@@ -51,24 +47,23 @@ alarmRulesService.getAlarmRules(pageLink, query).subscribe(alarmrules => {
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
 alarmRulesService.getAlarmRulesByEntityId(pageLink).subscribe(alarmRulesByEntityId => {
-  console.log('Get Alarm Rules By Entity Id: alarmRulesByEntityId');
+  console.log('Get Alarm Rules By Entity Id:', alarmRulesByEntityId);
 });
 ```
 
 **6. testScript**
 
 ```javascript
-const inputParams = inputParams;
-alarmRulesService.testScript(inputParams).subscribe(result => {
-  console.log('Test Script: result');
+alarmRulesService.testScript('your-inputparams-value').subscribe(testScript => {
+  console.log('Test Script:', testScript);
 });
 ```
 
 **7. getLatestAlarmRuleDebugEvent**
 
 ```javascript
-alarmRulesService.getLatestAlarmRuleDebugEvent('your-id').subscribe(latestAlarmRuleDebugEvent => {
-  console.log('Get Latest Alarm Rule Debug Event:latestAlarmRuleDebugEvent');
+alarmRulesService.getLatestAlarmRuleDebugEvent('your--id').subscribe(latestAlarmRuleDebugEvent => {
+  console.log('Get Latest Alarm Rule Debug Event:', latestAlarmRuleDebugEvent);
 });
 ```
 
@@ -76,7 +71,7 @@ alarmRulesService.getLatestAlarmRuleDebugEvent('your-id').subscribe(latestAlarmR
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-alarmRulesService.getAlarmRuleNames(pageLink).subscribe(alarmrulenames => {
-  console.log('Get Alarm Rule Names: alarmrulenames');
+alarmRulesService.getAlarmRuleNames(pageLink).subscribe(alarmRuleNames => {
+  console.log('Get Alarm Rule Names:', alarmRuleNames);
 });
 ```

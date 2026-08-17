@@ -1,8 +1,6 @@
 # CUSTOMER SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **CUSTOMER SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -18,32 +16,31 @@ const customerService = self.ctx.customerService;
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-customerService.getCustomers(pageLink).subscribe(customers => {
-  console.log('Get Customers: customers');
+self.ctx.customerService.getCustomers(pageLink).subscribe(customers => {
+  console.log('Get Customers:', customers);
 });
 ```
 
 **2. getCustomer**
 
 ```javascript
-customerService.getCustomer('your-customer-id').subscribe(customer => {
-  console.log('Get Customer: customer');
+self.ctx.customerService.getCustomer('your-customer-id').subscribe(customer => {
+  console.log('Get Customer:', customer);
 });
 ```
 
 **3. getCustomersByIds**
 
 ```javascript
-customerService.getCustomersByIds('your-id').subscribe(customersbyids => {
-  console.log('Get Customers By Ids: customersbyids');
+self.ctx.customerService.getCustomersByIds('your-customerids-value').subscribe(customersByIds => {
+  console.log('Get Customers By Ids:', customersByIds);
 });
 ```
 
 **4. saveCustomer**
 
 ```javascript
-const customer = customer;
-customerService.saveCustomer(customer).subscribe(savedCustomer => {
-  console.log('Save Customer: savedCustomer');
+self.ctx.customerService.saveCustomer('your-customer-value').subscribe(customer => {
+  console.log('Save Customer:', customer);
 });
 ```

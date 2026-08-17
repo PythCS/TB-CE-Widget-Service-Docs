@@ -1,8 +1,6 @@
 # ASSET PROFILE SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **ASSET PROFILE SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -15,49 +13,48 @@ const assetProfileService = $injector.get(self.ctx.servicesMap.get('assetProfile
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-assetProfileService.getAssetProfiles(pageLink).subscribe(assetprofiles => {
-  console.log('Get Asset Profiles: assetprofiles');
+assetProfileService.getAssetProfiles(pageLink).subscribe(assetProfiles => {
+  console.log('Get Asset Profiles:', assetProfiles);
 });
 ```
 
 **2. getAssetProfilesByIds**
 
 ```javascript
-assetProfileService.getAssetProfilesByIds('your-id').subscribe(assetprofilesbyids => {
-  console.log('Get Asset Profiles By Ids: assetprofilesbyids');
+assetProfileService.getAssetProfilesByIds('your-assetprofileids-value').subscribe(assetProfilesByIds => {
+  console.log('Get Asset Profiles By Ids:', assetProfilesByIds);
 });
 ```
 
 **3. getAssetProfile**
 
 ```javascript
-assetProfileService.getAssetProfile('your-asset-profile-id').subscribe(assetProfile => {
-  console.log('Get Asset Profile: assetProfile');
+assetProfileService.getAssetProfile('your-assetprofile-id').subscribe(assetProfile => {
+  console.log('Get Asset Profile:', assetProfile);
 });
 ```
 
 **4. exportAssetProfile**
 
 ```javascript
-assetProfileService.exportAssetProfile('your-asset-profile-id').subscribe(exported => {
-  console.log('Export Asset Profile: exported');
+assetProfileService.exportAssetProfile('your-assetprofile-id').subscribe(assetProfile => {
+  console.log('Export Asset Profile:', assetProfile);
 });
 ```
 
 **5. saveAssetProfile**
 
 ```javascript
-const assetProfile = assetProfile;
-assetProfileService.saveAssetProfile(assetProfile).subscribe(savedAssetProfile => {
-  console.log('Save Asset Profile: savedAssetProfile');
+assetProfileService.saveAssetProfile('your-assetprofile-value').subscribe(assetProfile => {
+  console.log('Save Asset Profile:', assetProfile);
 });
 ```
 
 **6. setDefaultAssetProfile**
 
 ```javascript
-assetProfileService.setDefaultAssetProfile('your-asset-profile-id').subscribe(result => {
-  console.log('Set Default Asset Profile: result');
+assetProfileService.setDefaultAssetProfile('your-assetprofile-id').subscribe(defaultAssetProfile => {
+  console.log('Set Default Asset Profile:', defaultAssetProfile);
 });
 ```
 
@@ -65,15 +62,15 @@ assetProfileService.setDefaultAssetProfile('your-asset-profile-id').subscribe(re
 
 ```javascript
 assetProfileService.getDefaultAssetProfileInfo().subscribe(defaultAssetProfileInfo => {
-  console.log('Get Default Asset Profile Info:defaultAssetProfileInfo');
+  console.log('Get Default Asset Profile Info:', defaultAssetProfileInfo);
 });
 ```
 
 **8. getAssetProfileInfo**
 
 ```javascript
-assetProfileService.getAssetProfileInfo('your-asset-profile-id').subscribe(assetProfileInfo => {
-  console.log('Get Asset Profile Info: assetProfileInfo');
+assetProfileService.getAssetProfileInfo('your-assetprofile-id').subscribe(assetProfileInfo => {
+  console.log('Get Asset Profile Info:', assetProfileInfo);
 });
 ```
 
@@ -81,15 +78,15 @@ assetProfileService.getAssetProfileInfo('your-asset-profile-id').subscribe(asset
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-assetProfileService.getAssetProfileInfos(pageLink).subscribe(assetprofileinfos => {
-  console.log('Get Asset Profile Infos: assetprofileinfos');
+assetProfileService.getAssetProfileInfos(pageLink).subscribe(assetProfileInfos => {
+  console.log('Get Asset Profile Infos:', assetProfileInfos);
 });
 ```
 
 **10. getAssetProfileNames**
 
 ```javascript
-assetProfileService.getAssetProfileNames(true).subscribe(assetprofilenames => {
-  console.log('Get Asset Profile Names: assetprofilenames');
+assetProfileService.getAssetProfileNames('your-activeonly-value').subscribe(assetProfileNames => {
+  console.log('Get Asset Profile Names:', assetProfileNames);
 });
 ```

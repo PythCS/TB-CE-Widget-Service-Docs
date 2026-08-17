@@ -1,8 +1,6 @@
 # ALARM COMMENT SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **ALARM COMMENT SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -14,9 +12,8 @@ const alarmCommentService = $injector.get(self.ctx.servicesMap.get('alarmComment
 **1. saveAlarmComment**
 
 ```javascript
-const alarmComment = alarmComment;
-alarmCommentService.saveAlarmComment('your-alarm-id', alarmComment).subscribe(savedAlarmComment => {
-  console.log('Save Alarm Comment: savedAlarmComment');
+alarmCommentService.saveAlarmComment('your-alarm-id', 'your-alarmcomment-value').subscribe(alarmComment => {
+  console.log('Save Alarm Comment:', alarmComment);
 });
 ```
 
@@ -24,8 +21,8 @@ alarmCommentService.saveAlarmComment('your-alarm-id', alarmComment).subscribe(sa
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-alarmCommentService.getAlarmComments('your-alarm-id', pageLink).subscribe(alarmcomments => {
-  console.log('Get Alarm Comments: alarmcomments');
+alarmCommentService.getAlarmComments('your-alarm-id', pageLink).subscribe(alarmComments => {
+  console.log('Get Alarm Comments:', alarmComments);
 });
 ```
 
@@ -33,6 +30,6 @@ alarmCommentService.getAlarmComments('your-alarm-id', pageLink).subscribe(alarmc
 
 ```javascript
 alarmCommentService.deleteAlarmComments('your-alarm-id', 'your-comment-id').subscribe(result => {
-  console.log('Delete Alarm Comments: result');
+  console.log('Delete Alarm Comments:', result);
 });
 ```

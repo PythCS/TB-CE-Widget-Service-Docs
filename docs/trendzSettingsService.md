@@ -1,8 +1,6 @@
 # TRENDZ SETTINGS SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **TRENDZ SETTINGS SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -14,16 +12,15 @@ const trendzSettingsService = $injector.get(self.ctx.servicesMap.get('trendzSett
 **1. getTrendzSettings**
 
 ```javascript
-trendzSettingsService.getTrendzSettings().subscribe(trendzsettings => {
-  console.log('Get Trendz Settings: trendzsettings');
+trendzSettingsService.getTrendzSettings().subscribe(trendzSettings => {
+  console.log('Get Trendz Settings:', trendzSettings);
 });
 ```
 
 **2. saveTrendzSettings**
 
 ```javascript
-const trendzSettings = trendzSettings;
-trendzSettingsService.saveTrendzSettings(trendzSettings).subscribe(savedTrendzSettings => {
-  console.log('Save Trendz Settings: savedTrendzSettings');
+trendzSettingsService.saveTrendzSettings('your-trendzsettings-value').subscribe(trendzSettings => {
+  console.log('Save Trendz Settings:', trendzSettings);
 });
 ```

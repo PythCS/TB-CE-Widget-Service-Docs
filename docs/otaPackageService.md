@@ -1,8 +1,6 @@
 # OTA PACKAGE SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **OTA PACKAGE SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -15,8 +13,8 @@ const otaPackageService = $injector.get(self.ctx.servicesMap.get('otaPackageServ
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-otaPackageService.getOtaPackages(pageLink).subscribe(otapackages => {
-  console.log('Get Ota Packages: otapackages');
+otaPackageService.getOtaPackages(pageLink).subscribe(otaPackages => {
+  console.log('Get Ota Packages:', otaPackages);
 });
 ```
 
@@ -24,76 +22,71 @@ otaPackageService.getOtaPackages(pageLink).subscribe(otapackages => {
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-otaPackageService.getOtaPackagesInfoByDeviceProfileId(pageLink, 'your-device-profile-id', 'type').subscribe(otaPackagesInfoByDeviceProfileId => {
-  console.log('Get Ota Packages Info By Device Profile Id:otaPackagesInfoByDeviceProfileId');
+otaPackageService.getOtaPackagesInfoByDeviceProfileId(pageLink, 'your-deviceprofile-id', 'your-type-value').subscribe(otaPackagesInfoByDeviceProfileId => {
+  console.log('Get Ota Packages Info By Device Profile Id:', otaPackagesInfoByDeviceProfileId);
 });
 ```
 
 **3. getOtaPackage**
 
 ```javascript
-otaPackageService.getOtaPackage('your-ota-package-id').subscribe(otaPackage => {
-  console.log('Get Ota Package: otaPackage');
+otaPackageService.getOtaPackage('your-otapackage-id').subscribe(otaPackage => {
+  console.log('Get Ota Package:', otaPackage);
 });
 ```
 
 **4. getOtaPackageInfo**
 
 ```javascript
-otaPackageService.getOtaPackageInfo('your-ota-package-id').subscribe(otaPackageInfo => {
-  console.log('Get Ota Package Info: otaPackageInfo');
+otaPackageService.getOtaPackageInfo('your-otapackage-id').subscribe(otaPackageInfo => {
+  console.log('Get Ota Package Info:', otaPackageInfo);
 });
 ```
 
 **5. downloadOtaPackage**
 
 ```javascript
-otaPackageService.downloadOtaPackage('your-ota-package-id').subscribe(result => {
-  console.log('Download Ota Package: result');
+otaPackageService.downloadOtaPackage('your-otapackage-id').subscribe(downloadOtaPackage => {
+  console.log('Download Ota Package:', downloadOtaPackage);
 });
 ```
 
 **6. saveOtaPackage**
 
 ```javascript
-const otaPackage = otaPackage;
-otaPackageService.saveOtaPackage(otaPackage).subscribe(savedOtaPackage => {
-  console.log('Save Ota Package: savedOtaPackage');
+otaPackageService.saveOtaPackage('your-otapackage-value').subscribe(otaPackage => {
+  console.log('Save Ota Package:', otaPackage);
 });
 ```
 
 **7. saveOtaPackageInfo**
 
 ```javascript
-const otaPackageInfo = otaPackageInfo;
-otaPackageService.saveOtaPackageInfo(otaPackageInfo).subscribe(savedOtaPackageInfo => {
-  console.log('Save Ota Package Info: savedOtaPackageInfo');
+otaPackageService.saveOtaPackageInfo('your-otapackageinfo-value').subscribe(otaPackageInfo => {
+  console.log('Save Ota Package Info:', otaPackageInfo);
 });
 ```
 
 **8. uploadOtaPackageFile**
 
 ```javascript
-const file = file;
-otaPackageService.uploadOtaPackageFile('your-ota-package-id', file, 'SHA256', 'checksum').subscribe(result => {
-  console.log('Upload Ota Package File: result');
+otaPackageService.uploadOtaPackageFile('your-otapackage-id', 'your-file-value', 'your-checksumalgorithm-value', 'your-checksum-value').subscribe(uploadOtaPackageFile => {
+  console.log('Upload Ota Package File:', uploadOtaPackageFile);
 });
 ```
 
 **9. countUpdateDeviceAfterChangePackage**
 
 ```javascript
-otaPackageService.countUpdateDeviceAfterChangePackage('type', 'your-entity-id').subscribe(count => {
-  console.log('Count Update Device After Change Package:count');
+otaPackageService.countUpdateDeviceAfterChangePackage('your-type-value', 'your-entity-id').subscribe(countUpdateDeviceAfterChangePackage => {
+  console.log('Count Update Device After Change Package:', countUpdateDeviceAfterChangePackage);
 });
 ```
 
 **10. confirmDialogUpdatePackage**
 
 ```javascript
-const entity = entity;
-const originEntity = originEntity;
-otaPackageService.confirmDialogUpdatePackage(entity, originEntity).subscribe(result => {
-  console.log('Confirm Dialog Update Package: result');
+otaPackageService.confirmDialogUpdatePackage('your-entity-value', 'your-originentity-value').subscribe(confirmDialogUpdatePackage => {
+  console.log('Confirm Dialog Update Package:', confirmDialogUpdatePackage);
 });
 ```

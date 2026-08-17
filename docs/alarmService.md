@@ -1,8 +1,6 @@
 # ALARM SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **ALARM SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -15,7 +13,7 @@ const alarmService = $injector.get(self.ctx.servicesMap.get('alarmService'));
 
 ```javascript
 alarmService.getAlarm('your-alarm-id').subscribe(alarm => {
-  console.log('Get Alarm: alarm');
+  console.log('Get Alarm:', alarm);
 });
 ```
 
@@ -23,32 +21,31 @@ alarmService.getAlarm('your-alarm-id').subscribe(alarm => {
 
 ```javascript
 alarmService.getAlarmInfo('your-alarm-id').subscribe(alarmInfo => {
-  console.log('Get Alarm Info: alarmInfo');
+  console.log('Get Alarm Info:', alarmInfo);
 });
 ```
 
 **3. saveAlarm**
 
 ```javascript
-const alarm = alarm;
-alarmService.saveAlarm(alarm).subscribe(savedAlarm => {
-  console.log('Save Alarm: savedAlarm');
+alarmService.saveAlarm('your-alarm-value').subscribe(alarm => {
+  console.log('Save Alarm:', alarm);
 });
 ```
 
 **4. ackAlarm**
 
 ```javascript
-alarmService.ackAlarm('your-alarm-id').subscribe(result => {
-  console.log('Ack Alarm: result');
+alarmService.ackAlarm('your-alarm-id').subscribe(alarm => {
+  console.log('Ack Alarm:', alarm);
 });
 ```
 
 **5. clearAlarm**
 
 ```javascript
-alarmService.clearAlarm('your-alarm-id').subscribe(result => {
-  console.log('Clear Alarm: result');
+alarmService.clearAlarm('your-alarm-id').subscribe(alarm => {
+  console.log('Clear Alarm:', alarm);
 });
 ```
 
@@ -56,7 +53,7 @@ alarmService.clearAlarm('your-alarm-id').subscribe(result => {
 
 ```javascript
 alarmService.assignAlarm('your-alarm-id', 'your-assignee-id').subscribe(result => {
-  console.log('Assign Alarm: result');
+  console.log('Assign Alarm:', result);
 });
 ```
 
@@ -64,61 +61,55 @@ alarmService.assignAlarm('your-alarm-id', 'your-assignee-id').subscribe(result =
 
 ```javascript
 alarmService.unassignAlarm('your-alarm-id').subscribe(result => {
-  console.log('Unassign Alarm: result');
+  console.log('Unassign Alarm:', result);
 });
 ```
 
 **8. deleteAlarm**
 
 ```javascript
-alarmService.deleteAlarm('your-alarm-id').subscribe(result => {
-  console.log('Delete Alarm: result');
+alarmService.deleteAlarm('your-alarm-id').subscribe(alarm => {
+  console.log('Delete Alarm:', alarm);
 });
 ```
 
 **9. getAlarms**
 
 ```javascript
-const query = query;
-alarmService.getAlarms(query).subscribe(alarms => {
-  console.log('Get Alarms: alarms');
+alarmService.getAlarms('your-query-value').subscribe(alarms => {
+  console.log('Get Alarms:', alarms);
 });
 ```
 
 **10. getAlarmsV2**
 
 ```javascript
-const query = query;
-alarmService.getAlarmsV2(query).subscribe(alarmsV2 => {
-  console.log('Get Alarms V: alarmsV2');
+alarmService.getAlarmsV2('your-query-value').subscribe(alarmsV2 => {
+  console.log('Get Alarms V 2:', alarmsV2);
 });
 ```
 
 **11. getAllAlarms**
 
 ```javascript
-const query = query;
-alarmService.getAllAlarms(query).subscribe(allalarms => {
-  console.log('Get All Alarms: allalarms');
+alarmService.getAllAlarms('your-query-value').subscribe(allAlarms => {
+  console.log('Get All Alarms:', allAlarms);
 });
 ```
 
 **12. getAllAlarmsV2**
 
 ```javascript
-const query = query;
-alarmService.getAllAlarmsV2(query).subscribe(allAlarmsV2 => {
-  console.log('Get All Alarms V: allAlarmsV2');
+alarmService.getAllAlarmsV2('your-query-value').subscribe(allAlarmsV2 => {
+  console.log('Get All Alarms V 2:', allAlarmsV2);
 });
 ```
 
 **13. getHighestAlarmSeverity**
 
 ```javascript
-const alarmSearchStatus = alarmSearchStatus;
-const alarmStatus = alarmStatus;
-alarmService.getHighestAlarmSeverity('your-entity-id', alarmSearchStatus, alarmStatus).subscribe(highestAlarmSeverity => {
-  console.log('Get Highest Alarm Severity: highestAlarmSeverity');
+alarmService.getHighestAlarmSeverity('your-entity-id', 'your-alarmsearchstatus-value', 'your-alarmstatus-value').subscribe(highestAlarmSeverity => {
+  console.log('Get Highest Alarm Severity:', highestAlarmSeverity);
 });
 ```
 
@@ -126,7 +117,7 @@ alarmService.getHighestAlarmSeverity('your-entity-id', alarmSearchStatus, alarmS
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-alarmService.getAlarmTypes(pageLink).subscribe(alarmtypes => {
-  console.log('Get Alarm Types: alarmtypes');
+alarmService.getAlarmTypes(pageLink).subscribe(alarmTypes => {
+  console.log('Get Alarm Types:', alarmTypes);
 });
 ```

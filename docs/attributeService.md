@@ -1,8 +1,6 @@
 # ATTRIBUTE SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **ATTRIBUTE SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -17,59 +15,55 @@ const attributeService = self.ctx.attributeService;
 **1. getEntityAttributes**
 
 ```javascript
-attributeService.getEntityAttributes('your-entity-id', 'SERVER_SCOPE', ['key1', 'key2']).subscribe(entityattributes => {
-  console.log('Get Entity Attributes: entityattributes');
+self.ctx.attributeService.getEntityAttributes('your-entity-id', 'your-attributescope-value', 'your-keys-value').subscribe(entityAttributes => {
+  console.log('Get Entity Attributes:', entityAttributes);
 });
 ```
 
 **2. deleteEntityAttributes**
 
 ```javascript
-attributeService.deleteEntityAttributes('your-entity-id', 'SERVER_SCOPE', [{key: 'key1', value: 'value1'}]).subscribe(result => {
-  console.log('Delete Entity Attributes: result');
+self.ctx.attributeService.deleteEntityAttributes('your-entity-id', 'your-attributescope-value', 'your-attributes-value').subscribe(entityAttributes => {
+  console.log('Delete Entity Attributes:', entityAttributes);
 });
 ```
 
 **3. deleteEntityTimeseries**
 
 ```javascript
-const startTs = Date.now() - 86400000;
-const endTs = Date.now();
-attributeService.deleteEntityTimeseries('your-entity-id', [{key: 'tsKey', ts: Date.now(), value: 42}], startTs, endTs).subscribe(result => {
-  console.log('Delete Entity Timeseries: result');
+self.ctx.attributeService.deleteEntityTimeseries('your-entity-id', 'your-timeseries-value', 0, 0).subscribe(entityTimeseries => {
+  console.log('Delete Entity Timeseries:', entityTimeseries);
 });
 ```
 
 **4. saveEntityAttributes**
 
 ```javascript
-attributeService.saveEntityAttributes('your-entity-id', 'SERVER_SCOPE', [{key: 'key1', value: 'value1'}]).subscribe(savedEntityAttributes => {
-  console.log('Save Entity Attributes: savedEntityAttributes');
+self.ctx.attributeService.saveEntityAttributes('your-entity-id', 'your-attributescope-value', 'your-attributes-value').subscribe(entityAttributes => {
+  console.log('Save Entity Attributes:', entityAttributes);
 });
 ```
 
 **5. saveEntityTimeseries**
 
 ```javascript
-attributeService.saveEntityTimeseries('your-entity-id', 'SERVER_SCOPE', [{key: 'tsKey', ts: Date.now(), value: 42}]).subscribe(savedEntityTimeseries => {
-  console.log('Save Entity Timeseries: savedEntityTimeseries');
+self.ctx.attributeService.saveEntityTimeseries('your-entity-id', 'your-timeseriesscope-value', 'your-timeseries-value').subscribe(entityTimeseries => {
+  console.log('Save Entity Timeseries:', entityTimeseries);
 });
 ```
 
 **6. getEntityTimeseries**
 
 ```javascript
-const startTs = Date.now() - 86400000;
-const endTs = Date.now();
-attributeService.getEntityTimeseries('your-entity-id', ['key1', 'key2'], startTs, endTs, 100, 'NONE', 3600000, 'ASC', 'type').subscribe(entitytimeseries => {
-  console.log('Get Entity Timeseries: entitytimeseries');
+self.ctx.attributeService.getEntityTimeseries('your-entity-id', 'your-keys-value', 0, 0, 'your-limit-value', 'your-agg-value', 0, 'your-orderby-value', 'your-usestrictdatatypes-value').subscribe(entityTimeseries => {
+  console.log('Get Entity Timeseries:', entityTimeseries);
 });
 ```
 
 **7. getEntityTimeseriesLatest**
 
 ```javascript
-attributeService.getEntityTimeseriesLatest('your-entity-id', ['key1', 'key2']).subscribe(entityTimeseriesLatest => {
-  console.log('Get Entity Timeseries Latest: entityTimeseriesLatest');
+self.ctx.attributeService.getEntityTimeseriesLatest('your-entity-id', 'your-keys-value').subscribe(entityTimeseriesLatest => {
+  console.log('Get Entity Timeseries Latest:', entityTimeseriesLatest);
 });
 ```

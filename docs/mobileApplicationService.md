@@ -1,8 +1,6 @@
 # MOBILE APPLICATION SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **MOBILE APPLICATION SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -14,17 +12,16 @@ const mobileApplicationService = $injector.get(self.ctx.servicesMap.get('mobileA
 **1. getMobileAppSettings**
 
 ```javascript
-mobileApplicationService.getMobileAppSettings().subscribe(mobileappsettings => {
-  console.log('Get Mobile App Settings: mobileappsettings');
+mobileApplicationService.getMobileAppSettings().subscribe(settings => {
+  console.log('Get Mobile App Settings:', settings);
 });
 ```
 
 **2. saveMobileAppSettings**
 
 ```javascript
-const mobileAppSettings = mobileAppSettings;
-mobileApplicationService.saveMobileAppSettings(mobileAppSettings).subscribe(savedMobileAppSettings => {
-  console.log('Save Mobile App Settings: savedMobileAppSettings');
+mobileApplicationService.saveMobileAppSettings('your-mobileappsettings-value').subscribe(mobileAppSettings => {
+  console.log('Save Mobile App Settings:', mobileAppSettings);
 });
 ```
 
@@ -32,6 +29,6 @@ mobileApplicationService.saveMobileAppSettings(mobileAppSettings).subscribe(save
 
 ```javascript
 mobileApplicationService.getMobileAppDeepLink().subscribe(mobileAppDeepLink => {
-  console.log('Get Mobile App Deep Link: mobileAppDeepLink');
+  console.log('Get Mobile App Deep Link:', mobileAppDeepLink);
 });
 ```

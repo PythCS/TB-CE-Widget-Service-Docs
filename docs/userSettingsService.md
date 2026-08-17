@@ -1,8 +1,6 @@
 # USER SETTINGS SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **USER SETTINGS SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -17,93 +15,87 @@ const userSettingsService = self.ctx.userSettingsService;
 **1. loadUserSettings**
 
 ```javascript
-userSettingsService.loadUserSettings().subscribe(result => {
-  console.log('Load User Settings: result');
+self.ctx.userSettingsService.loadUserSettings().subscribe(loadUserSettings => {
+  console.log('Load User Settings:', loadUserSettings);
 });
 ```
 
 **2. saveUserSettings**
 
 ```javascript
-const userSettings = userSettings;
-userSettingsService.saveUserSettings(userSettings).subscribe(savedUserSettings => {
-  console.log('Save User Settings: savedUserSettings');
+self.ctx.userSettingsService.saveUserSettings('your-usersettings-value').subscribe(userSettings => {
+  console.log('Save User Settings:', userSettings);
 });
 ```
 
 **3. putUserSettings**
 
 ```javascript
-const userSettingsData = userSettingsData;
-userSettingsService.putUserSettings(userSettingsData).subscribe(result => {
-  console.log('Put User Settings: result');
+self.ctx.userSettingsService.putUserSettings('your-usersettingsdata-value').subscribe(result => {
+  console.log('Put User Settings:', result);
 });
 ```
 
 **4. getDocumentationLinks**
 
 ```javascript
-userSettingsService.getDocumentationLinks().subscribe(documentationlinks => {
-  console.log('Get Documentation Links: documentationlinks');
+self.ctx.userSettingsService.getDocumentationLinks().subscribe(documentationLinks => {
+  console.log('Get Documentation Links:', documentationLinks);
 });
 ```
 
 **5. updateDocumentationLinks**
 
 ```javascript
-const documentationLinks = documentationLinks;
-userSettingsService.updateDocumentationLinks(documentationLinks).subscribe(result => {
-  console.log('Update Documentation Links: result');
+self.ctx.userSettingsService.updateDocumentationLinks('your-documentationlinks-value').subscribe(result => {
+  console.log('Update Documentation Links:', result);
 });
 ```
 
 **6. getQuickLinks**
 
 ```javascript
-userSettingsService.getQuickLinks().subscribe(quicklinks => {
-  console.log('Get Quick Links: quicklinks');
+self.ctx.userSettingsService.getQuickLinks().subscribe(quickLinks => {
+  console.log('Get Quick Links:', quickLinks);
 });
 ```
 
 **7. updateQuickLinks**
 
 ```javascript
-const quickLinks = quickLinks;
-userSettingsService.updateQuickLinks(quickLinks).subscribe(result => {
-  console.log('Update Quick Links: result');
+self.ctx.userSettingsService.updateQuickLinks('your-quicklinks-value').subscribe(result => {
+  console.log('Update Quick Links:', result);
 });
 ```
 
 **8. getGettingStarted**
 
 ```javascript
-userSettingsService.getGettingStarted().subscribe(gettingStarted => {
-  console.log('Get Getting Started: gettingStarted');
+self.ctx.userSettingsService.getGettingStarted().subscribe(gettingStarted => {
+  console.log('Get Getting Started:', gettingStarted);
 });
 ```
 
 **9. updateGettingStarted**
 
 ```javascript
-const gettingStarted = gettingStarted;
-userSettingsService.updateGettingStarted(gettingStarted).subscribe(result => {
-  console.log('Update Getting Started: result');
+self.ctx.userSettingsService.updateGettingStarted('your-gettingstarted-value').subscribe(result => {
+  console.log('Update Getting Started:', result);
 });
 ```
 
 **10. getUserDashboardsInfo**
 
 ```javascript
-userSettingsService.getUserDashboardsInfo().subscribe(userDashboardsInfo => {
-  console.log('Get User Dashboards Info: userDashboardsInfo');
+self.ctx.userSettingsService.getUserDashboardsInfo().subscribe(userDashboardsInfo => {
+  console.log('Get User Dashboards Info:', userDashboardsInfo);
 });
 ```
 
 **11. reportUserDashboardAction**
 
 ```javascript
-const action = action;
-userSettingsService.reportUserDashboardAction('your-dashboard-id', action).subscribe(result => {
-  console.log('Report User Dashboard Action: result');
+self.ctx.userSettingsService.reportUserDashboardAction('your-dashboard-id', 'your-action-value').subscribe(reportUserDashboardAction => {
+  console.log('Report User Dashboard Action:', reportUserDashboardAction);
 });
 ```

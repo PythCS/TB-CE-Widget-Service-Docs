@@ -1,8 +1,6 @@
 # TENANT SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **TENANT SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -16,15 +14,15 @@ const tenantService = $injector.get(self.ctx.servicesMap.get('tenantService'));
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
 tenantService.getTenants(pageLink).subscribe(tenants => {
-  console.log('Get Tenants: tenants');
+  console.log('Get Tenants:', tenants);
 });
 ```
 
 **2. getTenantsByIds**
 
 ```javascript
-tenantService.getTenantsByIds('your-id').subscribe(tenantsbyids => {
-  console.log('Get Tenants By Ids: tenantsbyids');
+tenantService.getTenantsByIds('your-tenantids-value').subscribe(tenantsByIds => {
+  console.log('Get Tenants By Ids:', tenantsByIds);
 });
 ```
 
@@ -32,8 +30,8 @@ tenantService.getTenantsByIds('your-id').subscribe(tenantsbyids => {
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-tenantService.getTenantInfos(pageLink).subscribe(tenantinfos => {
-  console.log('Get Tenant Infos: tenantinfos');
+tenantService.getTenantInfos(pageLink).subscribe(tenantInfos => {
+  console.log('Get Tenant Infos:', tenantInfos);
 });
 ```
 
@@ -41,7 +39,7 @@ tenantService.getTenantInfos(pageLink).subscribe(tenantinfos => {
 
 ```javascript
 tenantService.getTenant('your-tenant-id').subscribe(tenant => {
-  console.log('Get Tenant: tenant');
+  console.log('Get Tenant:', tenant);
 });
 ```
 
@@ -49,15 +47,14 @@ tenantService.getTenant('your-tenant-id').subscribe(tenant => {
 
 ```javascript
 tenantService.getTenantInfo('your-tenant-id').subscribe(tenantInfo => {
-  console.log('Get Tenant Info: tenantInfo');
+  console.log('Get Tenant Info:', tenantInfo);
 });
 ```
 
 **6. saveTenant**
 
 ```javascript
-const tenant = tenant;
-tenantService.saveTenant(tenant).subscribe(savedTenant => {
-  console.log('Save Tenant: savedTenant');
+tenantService.saveTenant('your-tenant-value').subscribe(tenant => {
+  console.log('Save Tenant:', tenant);
 });
 ```

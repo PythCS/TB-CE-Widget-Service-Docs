@@ -1,8 +1,6 @@
 # EVENT SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **EVENT SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -15,8 +13,8 @@ const eventService = $injector.get(self.ctx.servicesMap.get('eventService'));
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-eventService.getEvents('your-entity-id', 'type', 'your-tenant-id', pageLink).subscribe(events => {
-  console.log('Get Events: events');
+eventService.getEvents('your-entity-id', 'your-eventtype-value', 'your-tenant-id', pageLink).subscribe(events => {
+  console.log('Get Events:', events);
 });
 ```
 
@@ -24,8 +22,7 @@ eventService.getEvents('your-entity-id', 'type', 'your-tenant-id', pageLink).sub
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const filters = filters;
-eventService.getFilterEvents('your-entity-id', 'type', 'your-tenant-id', filters, pageLink).subscribe(filterevents => {
-  console.log('Get Filter Events: filterevents');
+eventService.getFilterEvents('your-entity-id', 'your-eventtype-value', 'your-tenant-id', 'your-filters-value', pageLink).subscribe(filterEvents => {
+  console.log('Get Filter Events:', filterEvents);
 });
 ```

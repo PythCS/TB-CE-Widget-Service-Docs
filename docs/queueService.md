@@ -1,8 +1,6 @@
 # QUEUE SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **QUEUE SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -15,16 +13,15 @@ const queueService = $injector.get(self.ctx.servicesMap.get('queueService'));
 
 ```javascript
 queueService.getQueueById('your-queue-id').subscribe(queueById => {
-  console.log('Get Queue By Id: queueById');
+  console.log('Get Queue By Id:', queueById);
 });
 ```
 
 **2. getQueueByName**
 
 ```javascript
-const queueName = queueName;
-queueService.getQueueByName(queueName).subscribe(queueByName => {
-  console.log('Get Queue By Name: queueByName');
+queueService.getQueueByName('your-queuename-value').subscribe(queueByName => {
+  console.log('Get Queue By Name:', queueByName);
 });
 ```
 
@@ -32,17 +29,16 @@ queueService.getQueueByName(queueName).subscribe(queueByName => {
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-queueService.getTenantQueuesByServiceType(pageLink, 'type').subscribe(tenantQueuesByServiceType => {
-  console.log('Get Tenant Queues By Service Type:tenantQueuesByServiceType');
+queueService.getTenantQueuesByServiceType(pageLink, 'your-servicetype-value').subscribe(tenantQueuesByServiceType => {
+  console.log('Get Tenant Queues By Service Type:', tenantQueuesByServiceType);
 });
 ```
 
 **4. saveQueue**
 
 ```javascript
-const queue = queue;
-queueService.saveQueue(queue, 'type').subscribe(savedQueue => {
-  console.log('Save Queue: savedQueue');
+queueService.saveQueue('your-queue-value', 'your-servicetype-value').subscribe(queue => {
+  console.log('Save Queue:', queue);
 });
 ```
 
@@ -50,23 +46,23 @@ queueService.saveQueue(queue, 'type').subscribe(savedQueue => {
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-queueService.getQueueStatistics(pageLink).subscribe(queuestatistics => {
-  console.log('Get Queue Statistics: queuestatistics');
+queueService.getQueueStatistics(pageLink).subscribe(queueStatistics => {
+  console.log('Get Queue Statistics:', queueStatistics);
 });
 ```
 
 **6. getQueueStatisticsById**
 
 ```javascript
-queueService.getQueueStatisticsById('your-id').subscribe(queueStatisticsById => {
-  console.log('Get Queue Statistics By Id: queueStatisticsById');
+queueService.getQueueStatisticsById('your-queuestat-id').subscribe(queueStatisticsById => {
+  console.log('Get Queue Statistics By Id:', queueStatisticsById);
 });
 ```
 
 **7. getQueueStatisticsByIds**
 
 ```javascript
-queueService.getQueueStatisticsByIds('your-id').subscribe(queuestatisticsbyids => {
-  console.log('Get Queue Statistics By Ids: queuestatisticsbyids');
+queueService.getQueueStatisticsByIds('your-queuestatids-value').subscribe(queueStatisticsByIds => {
+  console.log('Get Queue Statistics By Ids:', queueStatisticsByIds);
 });
 ```

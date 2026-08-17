@@ -1,8 +1,6 @@
 # AUDIT LOG SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **AUDIT LOG SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -15,8 +13,8 @@ const auditLogService = $injector.get(self.ctx.servicesMap.get('auditLogService'
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-auditLogService.getAuditLogs(pageLink).subscribe(auditlogs => {
-  console.log('Get Audit Logs: auditlogs');
+auditLogService.getAuditLogs(pageLink).subscribe(auditLogs => {
+  console.log('Get Audit Logs:', auditLogs);
 });
 ```
 
@@ -25,7 +23,7 @@ auditLogService.getAuditLogs(pageLink).subscribe(auditlogs => {
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
 auditLogService.getAuditLogsByCustomerId('your-customer-id', pageLink).subscribe(auditLogsByCustomerId => {
-  console.log('Get Audit Logs By Customer Id: auditLogsByCustomerId');
+  console.log('Get Audit Logs By Customer Id:', auditLogsByCustomerId);
 });
 ```
 
@@ -34,7 +32,7 @@ auditLogService.getAuditLogsByCustomerId('your-customer-id', pageLink).subscribe
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
 auditLogService.getAuditLogsByUserId('your-user-id', pageLink).subscribe(auditLogsByUserId => {
-  console.log('Get Audit Logs By User Id: auditLogsByUserId');
+  console.log('Get Audit Logs By User Id:', auditLogsByUserId);
 });
 ```
 
@@ -43,6 +41,6 @@ auditLogService.getAuditLogsByUserId('your-user-id', pageLink).subscribe(auditLo
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
 auditLogService.getAuditLogsByEntityId('your-entity-id', pageLink).subscribe(auditLogsByEntityId => {
-  console.log('Get Audit Logs By Entity Id: auditLogsByEntityId');
+  console.log('Get Audit Logs By Entity Id:', auditLogsByEntityId);
 });
 ```

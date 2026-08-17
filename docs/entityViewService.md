@@ -1,8 +1,6 @@
 # ENTITY VIEW SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **ENTITY VIEW SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -18,8 +16,8 @@ const entityViewService = self.ctx.entityViewService;
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-entityViewService.getTenantEntityViewInfos(pageLink, 'type').subscribe(tenantentityviewinfos => {
-  console.log('Get Tenant Entity View Infos: tenantentityviewinfos');
+self.ctx.entityViewService.getTenantEntityViewInfos(pageLink, 'your-type-value').subscribe(tenantEntityViewInfos => {
+  console.log('Get Tenant Entity View Infos:', tenantEntityViewInfos);
 });
 ```
 
@@ -27,82 +25,80 @@ entityViewService.getTenantEntityViewInfos(pageLink, 'type').subscribe(tenantent
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-entityViewService.getCustomerEntityViewInfos('your-customer-id', pageLink, 'type').subscribe(customerentityviewinfos => {
-  console.log('Get Customer Entity View Infos:customerentityviewinfos');
+self.ctx.entityViewService.getCustomerEntityViewInfos('your-customer-id', pageLink, 'your-type-value').subscribe(customerEntityViewInfos => {
+  console.log('Get Customer Entity View Infos:', customerEntityViewInfos);
 });
 ```
 
 **3. getEntityView**
 
 ```javascript
-entityViewService.getEntityView('your-entity-view-id').subscribe(entityView => {
-  console.log('Get Entity View: entityView');
+self.ctx.entityViewService.getEntityView('your-entityview-id').subscribe(entityView => {
+  console.log('Get Entity View:', entityView);
 });
 ```
 
 **4. getEntityViews**
 
 ```javascript
-entityViewService.getEntityViews('your-id').subscribe(entityviews => {
-  console.log('Get Entity Views: entityviews');
+self.ctx.entityViewService.getEntityViews('your-entityviewids-value').subscribe(entityViews => {
+  console.log('Get Entity Views:', entityViews);
 });
 ```
 
 **5. getEntityViewInfo**
 
 ```javascript
-entityViewService.getEntityViewInfo('your-entity-view-id').subscribe(entityViewInfo => {
-  console.log('Get Entity View Info: entityViewInfo');
+self.ctx.entityViewService.getEntityViewInfo('your-entityview-id').subscribe(entityViewInfo => {
+  console.log('Get Entity View Info:', entityViewInfo);
 });
 ```
 
 **6. saveEntityView**
 
 ```javascript
-const entityView = entityView;
-entityViewService.saveEntityView(entityView).subscribe(savedEntityView => {
-  console.log('Save Entity View: savedEntityView');
+self.ctx.entityViewService.saveEntityView('your-entityview-value').subscribe(entityView => {
+  console.log('Save Entity View:', entityView);
 });
 ```
 
 **7. getEntityViewTypes**
 
 ```javascript
-entityViewService.getEntityViewTypes().subscribe(entityviewtypes => {
-  console.log('Get Entity View Types: entityviewtypes');
+self.ctx.entityViewService.getEntityViewTypes().subscribe(entityViewTypes => {
+  console.log('Get Entity View Types:', entityViewTypes);
 });
 ```
 
 **8. makeEntityViewPublic**
 
 ```javascript
-entityViewService.makeEntityViewPublic('your-entity-view-id').subscribe(result => {
-  console.log('Make Entity View Public: result');
+self.ctx.entityViewService.makeEntityViewPublic('your-entityview-id').subscribe(makeEntityViewPublic => {
+  console.log('Make Entity View Public:', makeEntityViewPublic);
 });
 ```
 
 **9. assignEntityViewToCustomer**
 
 ```javascript
-entityViewService.assignEntityViewToCustomer('your-customer-id', 'your-entity-view-id').subscribe(result => {
-  console.log('Assign Entity View To Customer:result');
+self.ctx.entityViewService.assignEntityViewToCustomer('your-customer-id', 'your-entityview-id').subscribe(entityViewToCustomer => {
+  console.log('Assign Entity View To Customer:', entityViewToCustomer);
 });
 ```
 
 **10. findByQuery**
 
 ```javascript
-const query = query;
-entityViewService.findByQuery(query).subscribe(results => {
-  console.log('Find By Query: results');
+self.ctx.entityViewService.findByQuery('your-query-value').subscribe(byQuery => {
+  console.log('Find By Query:', byQuery);
 });
 ```
 
 **11. assignEntityViewToEdge**
 
 ```javascript
-entityViewService.assignEntityViewToEdge('your-edge-id', 'your-entity-view-id').subscribe(result => {
-  console.log('Assign Entity View To Edge: result');
+self.ctx.entityViewService.assignEntityViewToEdge('your-edge-id', 'your-entityview-id').subscribe(entityViewToEdge => {
+  console.log('Assign Entity View To Edge:', entityViewToEdge);
 });
 ```
 
@@ -110,7 +106,7 @@ entityViewService.assignEntityViewToEdge('your-edge-id', 'your-entity-view-id').
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-entityViewService.getEdgeEntityViews('your-edge-id', pageLink, 'type').subscribe(edgeentityviews => {
-  console.log('Get Edge Entity Views: edgeentityviews');
+self.ctx.entityViewService.getEdgeEntityViews('your-edge-id', pageLink, 'your-type-value').subscribe(edgeEntityViews => {
+  console.log('Get Edge Entity Views:', edgeEntityViews);
 });
 ```

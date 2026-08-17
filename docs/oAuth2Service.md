@@ -1,8 +1,6 @@
-# O AUTH SERVICE
+# O AUTH 2 SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **O AUTH SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -15,16 +13,15 @@ const oAuth2Service = $injector.get(self.ctx.servicesMap.get('oAuth2Service'));
 
 ```javascript
 oAuth2Service.getOAuth2Template().subscribe(oAuth2Template => {
-  console.log('Get O Auth Template: oAuth2Template');
+  console.log('Get O Auth 2 Template:', oAuth2Template);
 });
 ```
 
 **2. saveOAuth2Client**
 
 ```javascript
-const oAuth2Client = oAuth2Client;
-oAuth2Service.saveOAuth2Client(oAuth2Client).subscribe(savedOAuth2Client => {
-  console.log('Save O Auth Client: savedOAuth2Client');
+oAuth2Service.saveOAuth2Client('your-oauth2client-value').subscribe(oAuth2Client => {
+  console.log('Save O Auth 2 Client:', oAuth2Client);
 });
 ```
 
@@ -32,32 +29,32 @@ oAuth2Service.saveOAuth2Client(oAuth2Client).subscribe(savedOAuth2Client => {
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-oAuth2Service.findTenantOAuth2ClientInfos(pageLink).subscribe(results => {
-  console.log('Find Tenant O Auth Client Infos:results');
+oAuth2Service.findTenantOAuth2ClientInfos(pageLink).subscribe(tenantOAuth2ClientInfos => {
+  console.log('Find Tenant O Auth 2 Client Infos:', tenantOAuth2ClientInfos);
 });
 ```
 
 **4. findTenantOAuth2ClientInfosByIds**
 
 ```javascript
-oAuth2Service.findTenantOAuth2ClientInfosByIds('your-id').subscribe(results => {
-  console.log('Find Tenant O Auth Client Infos By Ids:results');
+oAuth2Service.findTenantOAuth2ClientInfosByIds('your-clientids-value').subscribe(tenantOAuth2ClientInfosByIds => {
+  console.log('Find Tenant O Auth 2 Client Infos By Ids:', tenantOAuth2ClientInfosByIds);
 });
 ```
 
 **5. getOAuth2ClientById**
 
 ```javascript
-oAuth2Service.getOAuth2ClientById('your-id').subscribe(oAuth2ClientById => {
-  console.log('Get O Auth Client By Id: oAuth2ClientById');
+oAuth2Service.getOAuth2ClientById('your--id').subscribe(oAuth2ClientById => {
+  console.log('Get O Auth 2 Client By Id:', oAuth2ClientById);
 });
 ```
 
 **6. deleteOauth2Client**
 
 ```javascript
-oAuth2Service.deleteOauth2Client('your-id').subscribe(result => {
-  console.log('Delete Oauth Client: result');
+oAuth2Service.deleteOauth2Client('your--id').subscribe(result => {
+  console.log('Delete Oauth 2 Client:', result);
 });
 ```
 
@@ -65,6 +62,6 @@ oAuth2Service.deleteOauth2Client('your-id').subscribe(result => {
 
 ```javascript
 oAuth2Service.getLoginProcessingUrl().subscribe(loginProcessingUrl => {
-  console.log('Get Login Processing Url: loginProcessingUrl');
+  console.log('Get Login Processing Url:', loginProcessingUrl);
 });
 ```

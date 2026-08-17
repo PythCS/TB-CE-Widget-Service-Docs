@@ -1,8 +1,6 @@
 # DEVICE SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **DEVICE SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -17,9 +15,8 @@ const deviceService = self.ctx.deviceService;
 **1. getDeviceInfosByQuery**
 
 ```javascript
-const deviceInfoQuery = query;
-deviceService.getDeviceInfosByQuery(deviceInfoQuery).subscribe(deviceInfosByQuery => {
-  console.log('Get Device Infos By Query: deviceInfosByQuery');
+self.ctx.deviceService.getDeviceInfosByQuery('your-deviceinfoquery-value').subscribe(deviceInfosByQuery => {
+  console.log('Get Device Infos By Query:', deviceInfosByQuery);
 });
 ```
 
@@ -27,8 +24,8 @@ deviceService.getDeviceInfosByQuery(deviceInfoQuery).subscribe(deviceInfosByQuer
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-deviceService.getTenantDeviceInfos(pageLink, 'type').subscribe(tenantdeviceinfos => {
-  console.log('Get Tenant Device Infos: tenantdeviceinfos');
+self.ctx.deviceService.getTenantDeviceInfos(pageLink, 'your-type-value').subscribe(tenantDeviceInfos => {
+  console.log('Get Tenant Device Infos:', tenantDeviceInfos);
 });
 ```
 
@@ -36,8 +33,8 @@ deviceService.getTenantDeviceInfos(pageLink, 'type').subscribe(tenantdeviceinfos
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-deviceService.getTenantDeviceInfosByDeviceProfileId(pageLink, 'your-device-profile-id').subscribe(tenantDeviceInfosByDeviceProfileId => {
-  console.log('Get Tenant Device Infos By Device Profile Id:tenantDeviceInfosByDeviceProfileId');
+self.ctx.deviceService.getTenantDeviceInfosByDeviceProfileId(pageLink, 'your-deviceprofile-id').subscribe(tenantDeviceInfosByDeviceProfileId => {
+  console.log('Get Tenant Device Infos By Device Profile Id:', tenantDeviceInfosByDeviceProfileId);
 });
 ```
 
@@ -45,8 +42,8 @@ deviceService.getTenantDeviceInfosByDeviceProfileId(pageLink, 'your-device-profi
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-deviceService.getCustomerDeviceInfos('your-customer-id', pageLink, 'type').subscribe(customerdeviceinfos => {
-  console.log('Get Customer Device Infos: customerdeviceinfos');
+self.ctx.deviceService.getCustomerDeviceInfos('your-customer-id', pageLink, 'your-type-value').subscribe(customerDeviceInfos => {
+  console.log('Get Customer Device Infos:', customerDeviceInfos);
 });
 ```
 
@@ -54,116 +51,112 @@ deviceService.getCustomerDeviceInfos('your-customer-id', pageLink, 'type').subsc
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-deviceService.getCustomerDeviceInfosByDeviceProfileId('your-customer-id', pageLink, 'your-device-profile-id').subscribe(customerDeviceInfosByDeviceProfileId => {
-  console.log('Get Customer Device Infos By Device Profile Id:customerDeviceInfosByDeviceProfileId');
+self.ctx.deviceService.getCustomerDeviceInfosByDeviceProfileId('your-customer-id', pageLink, 'your-deviceprofile-id').subscribe(customerDeviceInfosByDeviceProfileId => {
+  console.log('Get Customer Device Infos By Device Profile Id:', customerDeviceInfosByDeviceProfileId);
 });
 ```
 
 **6. getDevice**
 
 ```javascript
-deviceService.getDevice('your-device-id').subscribe(device => {
-  console.log('Get Device: device');
+self.ctx.deviceService.getDevice('your-device-id').subscribe(device => {
+  console.log('Get Device:', device);
 });
 ```
 
 **7. getDevices**
 
 ```javascript
-deviceService.getDevices('your-id').subscribe(devices => {
-  console.log('Get Devices: devices');
+self.ctx.deviceService.getDevices('your-deviceids-value').subscribe(devices => {
+  console.log('Get Devices:', devices);
 });
 ```
 
 **8. getDeviceInfo**
 
 ```javascript
-deviceService.getDeviceInfo('your-device-id').subscribe(deviceInfo => {
-  console.log('Get Device Info: deviceInfo');
+self.ctx.deviceService.getDeviceInfo('your-device-id').subscribe(deviceInfo => {
+  console.log('Get Device Info:', deviceInfo);
 });
 ```
 
 **9. saveDevice**
 
 ```javascript
-const device = device;
-deviceService.saveDevice(device).subscribe(savedDevice => {
-  console.log('Save Device: savedDevice');
+self.ctx.deviceService.saveDevice('your-device-value').subscribe(device => {
+  console.log('Save Device:', device);
 });
 ```
 
 **10. saveDeviceWithCredentials**
 
 ```javascript
-const device = device;
-const credentials = credentials;
-deviceService.saveDeviceWithCredentials(device, credentials).subscribe(savedDeviceWithCredentials => {
-  console.log('Save Device With Credentials: savedDeviceWithCredentials');
+self.ctx.deviceService.saveDeviceWithCredentials('your-device-value', 'your-credentials-value').subscribe(deviceWithCredentials => {
+  console.log('Save Device With Credentials:', deviceWithCredentials);
 });
 ```
 
 **11. getDeviceTypes**
 
 ```javascript
-deviceService.getDeviceTypes().subscribe(devicetypes => {
-  console.log('Get Device Types: devicetypes');
+self.ctx.deviceService.getDeviceTypes().subscribe(deviceTypes => {
+  console.log('Get Device Types:', deviceTypes);
 });
 ```
 
 **12. getDeviceCredentials**
 
 ```javascript
-deviceService.getDeviceCredentials('your-device-id', false).subscribe(devicecredentials => {
-  console.log('Get Device Credentials: devicecredentials');
+self.ctx.deviceService.getDeviceCredentials('your-device-id', true).subscribe(deviceCredentials => {
+  console.log('Get Device Credentials:', deviceCredentials);
 });
 ```
 
 **13. saveDeviceCredentials**
 
 ```javascript
-const deviceCredentials = deviceCredentials;
-deviceService.saveDeviceCredentials(deviceCredentials).subscribe(savedDeviceCredentials => {
-  console.log('Save Device Credentials: savedDeviceCredentials');
+self.ctx.deviceService.saveDeviceCredentials('your-devicecredentials-value').subscribe(deviceCredentials => {
+  console.log('Save Device Credentials:', deviceCredentials);
 });
 ```
 
 **14. makeDevicePublic**
 
 ```javascript
-deviceService.makeDevicePublic('your-device-id').subscribe(result => {
-  console.log('Make Device Public: result');
+self.ctx.deviceService.makeDevicePublic('your-device-id').subscribe(makeDevicePublic => {
+  console.log('Make Device Public:', makeDevicePublic);
 });
 ```
 
 **15. assignDeviceToCustomer**
 
 ```javascript
-deviceService.assignDeviceToCustomer('your-customer-id', 'your-device-id').subscribe(result => {
-  console.log('Assign Device To Customer: result');
+self.ctx.deviceService.assignDeviceToCustomer('your-customer-id', 'your-device-id').subscribe(deviceToCustomer => {
+  console.log('Assign Device To Customer:', deviceToCustomer);
 });
 ```
 
 **16. sendOneWayRpcCommand**
 
 ```javascript
-deviceService.sendOneWayRpcCommand('your-device-id', { method: 'getMethod', params: {} }).subscribe(result => {
-  console.log('Send One Way Rpc Command: result');
+self.ctx.deviceService.sendOneWayRpcCommand('your-device-id', 'your-requestbody-value').subscribe(oneWayRpcCommand => {
+  console.log('Send One Way Rpc Command:', oneWayRpcCommand);
 });
 ```
 
 **17. sendTwoWayRpcCommand**
 
 ```javascript
-deviceService.sendTwoWayRpcCommand('your-device-id', { method: 'getMethod', params: {} }).subscribe(result => {
-  console.log('Send Two Way Rpc Command: result');
+self.ctx.deviceService.sendTwoWayRpcCommand('your-device-id', 'your-requestbody-value').subscribe(twoWayRpcCommand => {
+  console.log('Send Two Way Rpc Command:', twoWayRpcCommand);
 });
 ```
 
 **18. getPersistedRpc**
 
 ```javascript
-deviceService.getPersistedRpc('your-rpc-id').subscribe(persistedRpc => {
-  console.log('Get Persisted Rpc: persistedRpc');
+self.ctx.deviceService.getPersistedRpc('your-rpc-id').subscribe(persistedRpc => {
+  console.log('Get Persisted Rpc:', persistedRpc);
 });
 ```
 
@@ -171,45 +164,40 @@ deviceService.getPersistedRpc('your-rpc-id').subscribe(persistedRpc => {
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const rpcStatus = rpcStatus;
-deviceService.getPersistedRpcRequests('your-device-id', pageLink, rpcStatus).subscribe(persistedrpcrequests => {
-  console.log('Get Persisted Rpc Requests: persistedrpcrequests');
+self.ctx.deviceService.getPersistedRpcRequests('your-device-id', pageLink, 'your-rpcstatus-value').subscribe(persistedRpcRequests => {
+  console.log('Get Persisted Rpc Requests:', persistedRpcRequests);
 });
 ```
 
 **20. findByQuery**
 
 ```javascript
-const query = query;
-deviceService.findByQuery(query).subscribe(results => {
-  console.log('Find By Query: results');
+self.ctx.deviceService.findByQuery('your-query-value').subscribe(byQuery => {
+  console.log('Find By Query:', byQuery);
 });
 ```
 
 **21. findByName**
 
 ```javascript
-const deviceName = deviceName;
-deviceService.findByName(deviceName).subscribe(entity => {
-  console.log('Find By Name: entity');
+self.ctx.deviceService.findByName('your-devicename-value').subscribe(byName => {
+  console.log('Find By Name:', byName);
 });
 ```
 
 **22. claimDevice**
 
 ```javascript
-const deviceName = deviceName;
-const claimRequest = claimRequest;
-deviceService.claimDevice(deviceName, claimRequest).subscribe(result => {
-  console.log('Claim Device: result');
+self.ctx.deviceService.claimDevice('your-devicename-value', 'your-claimrequest-value').subscribe(claimDevice => {
+  console.log('Claim Device:', claimDevice);
 });
 ```
 
 **23. assignDeviceToEdge**
 
 ```javascript
-deviceService.assignDeviceToEdge('your-edge-id', 'your-device-id').subscribe(result => {
-  console.log('Assign Device To Edge: result');
+self.ctx.deviceService.assignDeviceToEdge('your-edge-id', 'your-device-id').subscribe(deviceToEdge => {
+  console.log('Assign Device To Edge:', deviceToEdge);
 });
 ```
 
@@ -217,49 +205,47 @@ deviceService.assignDeviceToEdge('your-edge-id', 'your-device-id').subscribe(res
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-deviceService.getEdgeDevices('your-edge-id', pageLink, 'type').subscribe(edgedevices => {
-  console.log('Get Edge Devices: edgedevices');
+self.ctx.deviceService.getEdgeDevices('your-edge-id', pageLink, 'your-type-value').subscribe(edgeDevices => {
+  console.log('Get Edge Devices:', edgeDevices);
 });
 ```
 
 **25. bulkImportDevices**
 
 ```javascript
-const entitiesData = entitiesData;
-deviceService.bulkImportDevices(entitiesData).subscribe(result => {
-  console.log('Bulk Import Devices: result');
+self.ctx.deviceService.bulkImportDevices('your-entitiesdata-value').subscribe(bulkImportDevices => {
+  console.log('Bulk Import Devices:', bulkImportDevices);
 });
 ```
 
 **26. getDevicePublishTelemetryCommands**
 
 ```javascript
-deviceService.getDevicePublishTelemetryCommands('your-device-id').subscribe(devicepublishtelemetrycommands => {
-  console.log('Get Device Publish Telemetry Commands:devicepublishtelemetrycommands');
+self.ctx.deviceService.getDevicePublishTelemetryCommands('your-device-id').subscribe(devicePublishTelemetryCommands => {
+  console.log('Get Device Publish Telemetry Commands:', devicePublishTelemetryCommands);
 });
 ```
 
 **27. downloadGatewayDockerComposeFile**
 
 ```javascript
-deviceService.downloadGatewayDockerComposeFile('your-device-id').subscribe(result => {
-  console.log('Download Gateway Docker Compose File:result');
+self.ctx.deviceService.downloadGatewayDockerComposeFile('your-device-id').subscribe(downloadGatewayDockerComposeFile => {
+  console.log('Download Gateway Docker Compose File:', downloadGatewayDockerComposeFile);
 });
 ```
 
 **28. rebootDevice**
 
 ```javascript
-deviceService.rebootDevice('your-device-id', true).subscribe(result => {
-  console.log('Reboot Device: result');
+self.ctx.deviceService.rebootDevice('your-device-id', true).subscribe(rebootDevice => {
+  console.log('Reboot Device:', rebootDevice);
 });
 ```
 
 **29. rebootTrigger**
 
 ```javascript
-const resourcePath = resourcePath;
-deviceService.rebootTrigger('your-device-id', resourcePath).subscribe(result => {
-  console.log('Reboot Trigger: result');
+self.ctx.deviceService.rebootTrigger('your-device-id', 'your-resourcepath-value').subscribe(rebootTrigger => {
+  console.log('Reboot Trigger:', rebootTrigger);
 });
 ```

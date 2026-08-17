@@ -1,8 +1,6 @@
 # ENTITIES VERSION CONTROL SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **ENTITIES VERSION CONTROL SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -14,41 +12,40 @@ const entitiesVersionControlService = $injector.get(self.ctx.servicesMap.get('en
 **1. clearBranchList**
 
 ```javascript
-entitiesVersionControlService.clearBranchList().subscribe(result => {
-  console.log('Clear Branch List: result');
+entitiesVersionControlService.clearBranchList().subscribe(branchList => {
+  console.log('Clear Branch List:', branchList);
 });
 ```
 
 **2. listBranches**
 
 ```javascript
-entitiesVersionControlService.listBranches().subscribe(results => {
-  console.log('List Branches: results');
+entitiesVersionControlService.listBranches().subscribe(branches => {
+  console.log('List Branches:', branches);
 });
 ```
 
 **3. getEntityDataInfo**
 
 ```javascript
-entitiesVersionControlService.getEntityDataInfo('your-id', 'your-id').subscribe(entityDataInfo => {
-  console.log('Get Entity Data Info: entityDataInfo');
+entitiesVersionControlService.getEntityDataInfo('your-externalentity-id', 'your-version-id').subscribe(entityDataInfo => {
+  console.log('Get Entity Data Info:', entityDataInfo);
 });
 ```
 
 **4. saveEntitiesVersion**
 
 ```javascript
-const request = request;
-entitiesVersionControlService.saveEntitiesVersion(request).subscribe(savedEntitiesVersion => {
-  console.log('Save Entities Version: savedEntitiesVersion');
+entitiesVersionControlService.saveEntitiesVersion('your-request-value').subscribe(entitiesVersion => {
+  console.log('Save Entities Version:', entitiesVersion);
 });
 ```
 
 **5. getVersionCreateRequestStatus**
 
 ```javascript
-entitiesVersionControlService.getVersionCreateRequestStatus('your-id').subscribe(versioncreaterequeststatus => {
-  console.log('Get Version Create Request Status:versioncreaterequeststatus');
+entitiesVersionControlService.getVersionCreateRequestStatus('your-request-id').subscribe(versionCreateRequestStatus => {
+  console.log('Get Version Create Request Status:', versionCreateRequestStatus);
 });
 ```
 
@@ -56,9 +53,8 @@ entitiesVersionControlService.getVersionCreateRequestStatus('your-id').subscribe
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const branch = branch;
-entitiesVersionControlService.listEntityVersions(pageLink, branch, 'your-id').subscribe(results => {
-  console.log('List Entity Versions: results');
+entitiesVersionControlService.listEntityVersions(pageLink, 'your-branch-value', 'your-externalentity-id').subscribe(entityVersions => {
+  console.log('List Entity Versions:', entityVersions);
 });
 ```
 
@@ -66,9 +62,8 @@ entitiesVersionControlService.listEntityVersions(pageLink, branch, 'your-id').su
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const branch = branch;
-entitiesVersionControlService.listEntityTypeVersions(pageLink, branch, 'type').subscribe(results => {
-  console.log('List Entity Type Versions: results');
+entitiesVersionControlService.listEntityTypeVersions(pageLink, 'your-branch-value', 'your-entitytype-value').subscribe(entityTypeVersions => {
+  console.log('List Entity Type Versions:', entityTypeVersions);
 });
 ```
 
@@ -76,42 +71,39 @@ entitiesVersionControlService.listEntityTypeVersions(pageLink, branch, 'type').s
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const branch = branch;
-entitiesVersionControlService.listVersions(pageLink, branch).subscribe(results => {
-  console.log('List Versions: results');
+entitiesVersionControlService.listVersions(pageLink, 'your-branch-value').subscribe(versions => {
+  console.log('List Versions:', versions);
 });
 ```
 
 **9. loadEntitiesVersion**
 
 ```javascript
-const request = request;
-entitiesVersionControlService.loadEntitiesVersion(request).subscribe(result => {
-  console.log('Load Entities Version: result');
+entitiesVersionControlService.loadEntitiesVersion('your-request-value').subscribe(loadEntitiesVersion => {
+  console.log('Load Entities Version:', loadEntitiesVersion);
 });
 ```
 
 **10. getVersionLoadRequestStatus**
 
 ```javascript
-entitiesVersionControlService.getVersionLoadRequestStatus('your-id').subscribe(versionloadrequeststatus => {
-  console.log('Get Version Load Request Status:versionloadrequeststatus');
+entitiesVersionControlService.getVersionLoadRequestStatus('your-request-id').subscribe(versionLoadRequestStatus => {
+  console.log('Get Version Load Request Status:', versionLoadRequestStatus);
 });
 ```
 
 **11. compareEntityDataToVersion**
 
 ```javascript
-entitiesVersionControlService.compareEntityDataToVersion('your-entity-id', 'your-id').subscribe(result => {
-  console.log('Compare Entity Data To Version:result');
+entitiesVersionControlService.compareEntityDataToVersion('your-entity-id', 'your-version-id').subscribe(compareEntityDataToVersion => {
+  console.log('Compare Entity Data To Version:', compareEntityDataToVersion);
 });
 ```
 
 **12. entityLoadErrorToMessage**
 
 ```javascript
-const entityLoadError = entityLoadError;
-entitiesVersionControlService.entityLoadErrorToMessage(entityLoadError).subscribe(result => {
-  console.log('Entity Load Error To Message: result');
+entitiesVersionControlService.entityLoadErrorToMessage('your-entityloaderror-value').subscribe(entityLoadErrorToMessage => {
+  console.log('Entity Load Error To Message:', entityLoadErrorToMessage);
 });
 ```

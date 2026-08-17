@@ -1,8 +1,6 @@
 # IMAGE SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **IMAGE SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -14,38 +12,32 @@ const imageService = $injector.get(self.ctx.servicesMap.get('imageService'));
 **1. uploadImage**
 
 ```javascript
-const file = file;
-const title = title;
-imageService.uploadImage(file, title, 'type').subscribe(result => {
-  console.log('Upload Image: result');
+imageService.uploadImage('your-file-value', 'your-title-value', 'your-imagesubtype-value').subscribe(uploadImage => {
+  console.log('Upload Image:', uploadImage);
 });
 ```
 
 **2. updateImage**
 
 ```javascript
-const key = key;
-const file = file;
-imageService.updateImage('type', key, file).subscribe(result => {
-  console.log('Update Image: result');
+imageService.updateImage('your-type-value', 'your-key-value', 'your-file-value').subscribe(image => {
+  console.log('Update Image:', image);
 });
 ```
 
 **3. updateImageInfo**
 
 ```javascript
-const imageInfo = imageInfo;
-imageService.updateImageInfo(imageInfo).subscribe(result => {
-  console.log('Update Image Info: result');
+imageService.updateImageInfo('your-imageinfo-value').subscribe(imageInfo => {
+  console.log('Update Image Info:', imageInfo);
 });
 ```
 
 **4. updateImagePublicStatus**
 
 ```javascript
-const imageInfo = imageInfo;
-imageService.updateImagePublicStatus(imageInfo, true).subscribe(result => {
-  console.log('Update Image Public Status: result');
+imageService.updateImagePublicStatus('your-imageinfo-value', true).subscribe(imagePublicStatus => {
+  console.log('Update Image Public Status:', imagePublicStatus);
 });
 ```
 
@@ -53,79 +45,71 @@ imageService.updateImagePublicStatus(imageInfo, true).subscribe(result => {
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-imageService.getImages(pageLink, 'type').subscribe(images => {
-  console.log('Get Images: images');
+imageService.getImages(pageLink, 'your-imagesubtype-value').subscribe(images => {
+  console.log('Get Images:', images);
 });
 ```
 
 **6. getImageInfo**
 
 ```javascript
-const key = key;
-imageService.getImageInfo('type', key).subscribe(imageInfo => {
-  console.log('Get Image Info: imageInfo');
+imageService.getImageInfo('your-type-value', 'your-key-value').subscribe(imageInfo => {
+  console.log('Get Image Info:', imageInfo);
 });
 ```
 
 **7. getImageDataUrl**
 
 ```javascript
-const imageUrl = imageUrl;
-imageService.getImageDataUrl(imageUrl).subscribe(imageDataUrl => {
-  console.log('Get Image Data Url: imageDataUrl');
+imageService.getImageDataUrl('your-imageurl-value').subscribe(imageDataUrl => {
+  console.log('Get Image Data Url:', imageDataUrl);
 });
 ```
 
 **8. loadImageDataUrl**
 
 ```javascript
-const imageLink = imageLink;
-imageService.loadImageDataUrl(imageLink).subscribe(result => {
-  console.log('Load Image Data Url: result');
+imageService.loadImageDataUrl('your-imagelink-value').subscribe(loadImageDataUrl => {
+  console.log('Load Image Data Url:', loadImageDataUrl);
 });
 ```
 
 **9. getImageString**
 
 ```javascript
-const imageUrl = imageUrl;
-imageService.getImageString(imageUrl).subscribe(imageString => {
-  console.log('Get Image String: imageString');
+imageService.getImageString('your-imageurl-value').subscribe(imageString => {
+  console.log('Get Image String:', imageString);
 });
 ```
 
 **10. resolveImageUrl**
 
 ```javascript
-const imageUrl = imageUrl;
-imageService.resolveImageUrl(imageUrl).subscribe(result => {
-  console.log('Resolve Image Url: result');
+imageService.resolveImageUrl('your-imageurl-value').subscribe(resolveImageUrl => {
+  console.log('Resolve Image Url:', resolveImageUrl);
 });
 ```
 
 **11. downloadImage**
 
 ```javascript
-const key = key;
-imageService.downloadImage('type', key).subscribe(result => {
-  console.log('Download Image: result');
+imageService.downloadImage('your-type-value', 'your-key-value').subscribe(downloadImage => {
+  console.log('Download Image:', downloadImage);
 });
 ```
 
 **12. exportImage**
 
 ```javascript
-const key = key;
-imageService.exportImage('type', key).subscribe(exported => {
-  console.log('Export Image: exported');
+imageService.exportImage('your-type-value', 'your-key-value').subscribe(image => {
+  console.log('Export Image:', image);
 });
 ```
 
 **13. importImage**
 
 ```javascript
-const imageData = imageData;
-imageService.importImage(imageData).subscribe(result => {
-  console.log('Import Image: result');
+imageService.importImage('your-imagedata-value').subscribe(image => {
+  console.log('Import Image:', image);
 });
 ```

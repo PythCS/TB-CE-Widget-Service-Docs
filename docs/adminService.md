@@ -1,8 +1,6 @@
 # ADMIN SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **ADMIN SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -14,78 +12,72 @@ const adminService = $injector.get(self.ctx.servicesMap.get('adminService'));
 **1. sendTestMail**
 
 ```javascript
-const adminSettings = adminSettings;
-adminService.sendTestMail(adminSettings).subscribe(result => {
-  console.log('Send Test Mail: result');
+adminService.sendTestMail('your-adminsettings-value').subscribe(result => {
+  console.log('Send Test Mail:', result);
 });
 ```
 
 **2. sendTestSms**
 
 ```javascript
-const testSmsRequest = testSmsRequest;
-adminService.sendTestSms(testSmsRequest).subscribe(result => {
-  console.log('Send Test Sms: result');
+adminService.sendTestSms('your-testsmsrequest-value').subscribe(result => {
+  console.log('Send Test Sms:', result);
 });
 ```
 
 **3. getSecuritySettings**
 
 ```javascript
-adminService.getSecuritySettings().subscribe(securitysettings => {
-  console.log('Get Security Settings: securitysettings');
+adminService.getSecuritySettings().subscribe(securitySettings => {
+  console.log('Get Security Settings:', securitySettings);
 });
 ```
 
 **4. saveSecuritySettings**
 
 ```javascript
-const securitySettings = securitySettings;
-adminService.saveSecuritySettings(securitySettings).subscribe(savedSecuritySettings => {
-  console.log('Save Security Settings: savedSecuritySettings');
+adminService.saveSecuritySettings('your-securitysettings-value').subscribe(securitySettings => {
+  console.log('Save Security Settings:', securitySettings);
 });
 ```
 
 **5. getJwtSettings**
 
 ```javascript
-adminService.getJwtSettings().subscribe(jwtsettings => {
-  console.log('Get Jwt Settings: jwtsettings');
+adminService.getJwtSettings().subscribe(jwtSettings => {
+  console.log('Get Jwt Settings:', jwtSettings);
 });
 ```
 
 **6. saveJwtSettings**
 
 ```javascript
-const jwtSettings = jwtSettings;
-adminService.saveJwtSettings(jwtSettings).subscribe(savedJwtSettings => {
-  console.log('Save Jwt Settings: savedJwtSettings');
+adminService.saveJwtSettings('your-jwtsettings-value').subscribe(jwtSettings => {
+  console.log('Save Jwt Settings:', jwtSettings);
 });
 ```
 
 **7. getRepositorySettings**
 
 ```javascript
-adminService.getRepositorySettings().subscribe(repositorysettings => {
-  console.log('Get Repository Settings: repositorysettings');
+adminService.getRepositorySettings().subscribe(repositorySettings => {
+  console.log('Get Repository Settings:', repositorySettings);
 });
 ```
 
 **8. saveRepositorySettings**
 
 ```javascript
-const repositorySettings = repositorySettings;
-adminService.saveRepositorySettings(repositorySettings).subscribe(savedRepositorySettings => {
-  console.log('Save Repository Settings: savedRepositorySettings');
+adminService.saveRepositorySettings('your-repositorysettings-value').subscribe(repositorySettings => {
+  console.log('Save Repository Settings:', repositorySettings);
 });
 ```
 
 **9. checkRepositoryAccess**
 
 ```javascript
-const repositorySettings = repositorySettings;
-adminService.checkRepositoryAccess(repositorySettings).subscribe(result => {
-  console.log('Check Repository Access: result');
+adminService.checkRepositoryAccess('your-repositorysettings-value').subscribe(result => {
+  console.log('Check Repository Access:', result);
 });
 ```
 
@@ -93,40 +85,39 @@ adminService.checkRepositoryAccess(repositorySettings).subscribe(result => {
 
 ```javascript
 adminService.getRepositorySettingsInfo().subscribe(repositorySettingsInfo => {
-  console.log('Get Repository Settings Info: repositorySettingsInfo');
+  console.log('Get Repository Settings Info:', repositorySettingsInfo);
 });
 ```
 
 **11. getAutoCommitSettings**
 
 ```javascript
-adminService.getAutoCommitSettings().subscribe(autocommitsettings => {
-  console.log('Get Auto Commit Settings: autocommitsettings');
+adminService.getAutoCommitSettings().subscribe(autoCommitSettings => {
+  console.log('Get Auto Commit Settings:', autoCommitSettings);
 });
 ```
 
 **12. autoCommitSettingsExists**
 
 ```javascript
-adminService.autoCommitSettingsExists().subscribe(result => {
-  console.log('Auto Commit Settings Exists: result');
+adminService.autoCommitSettingsExists().subscribe(autoCommitSettingsExists => {
+  console.log('Auto Commit Settings Exists:', autoCommitSettingsExists);
 });
 ```
 
 **13. saveAutoCommitSettings**
 
 ```javascript
-const autoCommitSettings = autoCommitSettings;
-adminService.saveAutoCommitSettings(autoCommitSettings).subscribe(savedAutoCommitSettings => {
-  console.log('Save Auto Commit Settings: savedAutoCommitSettings');
+adminService.saveAutoCommitSettings('your-autocommitsettings-value').subscribe(autoCommitSettings => {
+  console.log('Save Auto Commit Settings:', autoCommitSettings);
 });
 ```
 
 **14. checkUpdates**
 
 ```javascript
-adminService.checkUpdates().subscribe(result => {
-  console.log('Check Updates: result');
+adminService.checkUpdates().subscribe(updates => {
+  console.log('Check Updates:', updates);
 });
 ```
 
@@ -134,7 +125,7 @@ adminService.checkUpdates().subscribe(result => {
 
 ```javascript
 adminService.getFeaturesInfo().subscribe(featuresInfo => {
-  console.log('Get Features Info: featuresInfo');
+  console.log('Get Features Info:', featuresInfo);
 });
 ```
 
@@ -142,15 +133,15 @@ adminService.getFeaturesInfo().subscribe(featuresInfo => {
 
 ```javascript
 adminService.getLoginProcessingUrl().subscribe(loginProcessingUrl => {
-  console.log('Get Login Processing Url: loginProcessingUrl');
+  console.log('Get Login Processing Url:', loginProcessingUrl);
 });
 ```
 
 **17. generateAccessToken**
 
 ```javascript
-adminService.generateAccessToken().subscribe(result => {
-  console.log('Generate Access Token: result');
+adminService.generateAccessToken().subscribe(accessToken => {
+  console.log('Generate Access Token:', accessToken);
 });
 ```
 
@@ -158,6 +149,6 @@ adminService.generateAccessToken().subscribe(result => {
 
 ```javascript
 adminService.getMailConfigTemplate().subscribe(mailConfigTemplate => {
-  console.log('Get Mail Config Template: mailConfigTemplate');
+  console.log('Get Mail Config Template:', mailConfigTemplate);
 });
 ```

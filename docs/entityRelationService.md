@@ -1,8 +1,6 @@
 # ENTITY RELATION SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **ENTITY RELATION SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -17,82 +15,79 @@ const entityRelationService = self.ctx.entityRelationService;
 **1. saveRelation**
 
 ```javascript
-const relation = relation;
-entityRelationService.saveRelation(relation).subscribe(savedRelation => {
-  console.log('Save Relation: savedRelation');
+self.ctx.entityRelationService.saveRelation('your-relation-value').subscribe(relation => {
+  console.log('Save Relation:', relation);
 });
 ```
 
 **2. getRelation**
 
 ```javascript
-entityRelationService.getRelation('your-id', 'type', 'your-id').subscribe(relation => {
-  console.log('Get Relation: relation');
+self.ctx.entityRelationService.getRelation('your-from-id', 'your-relationtype-value', 'your-to-id').subscribe(relation => {
+  console.log('Get Relation:', relation);
 });
 ```
 
 **3. findByFrom**
 
 ```javascript
-entityRelationService.findByFrom('your-id').subscribe(relations => {
-  console.log('Find By From: relations');
+self.ctx.entityRelationService.findByFrom('your-from-id').subscribe(byFrom => {
+  console.log('Find By From:', byFrom);
 });
 ```
 
 **4. findInfoByFrom**
 
 ```javascript
-entityRelationService.findInfoByFrom('your-id').subscribe(relations => {
-  console.log('Find Info By From: relations');
+self.ctx.entityRelationService.findInfoByFrom('your-from-id').subscribe(infoByFrom => {
+  console.log('Find Info By From:', infoByFrom);
 });
 ```
 
 **5. findByFromAndType**
 
 ```javascript
-entityRelationService.findByFromAndType('your-id', 'type').subscribe(relations => {
-  console.log('Find By From And Type: relations');
+self.ctx.entityRelationService.findByFromAndType('your-from-id', 'your-relationtype-value').subscribe(byFromAndType => {
+  console.log('Find By From And Type:', byFromAndType);
 });
 ```
 
 **6. findByTo**
 
 ```javascript
-entityRelationService.findByTo('your-id').subscribe(relations => {
-  console.log('Find By To: relations');
+self.ctx.entityRelationService.findByTo('your-to-id').subscribe(byTo => {
+  console.log('Find By To:', byTo);
 });
 ```
 
 **7. findInfoByTo**
 
 ```javascript
-entityRelationService.findInfoByTo('your-id').subscribe(relations => {
-  console.log('Find Info By To: relations');
+self.ctx.entityRelationService.findInfoByTo('your-to-id').subscribe(infoByTo => {
+  console.log('Find Info By To:', infoByTo);
 });
 ```
 
 **8. findByToAndType**
 
 ```javascript
-entityRelationService.findByToAndType('your-id', 'type').subscribe(relations => {
-  console.log('Find By To And Type: relations');
+self.ctx.entityRelationService.findByToAndType('your-to-id', 'your-relationtype-value').subscribe(byToAndType => {
+  console.log('Find By To And Type:', byToAndType);
 });
 ```
 
 **9. findByQuery**
 
 ```javascript
-const query = query;
-entityRelationService.findByQuery(query).subscribe(results => {
-  console.log('Find By Query: results');
+self.ctx.entityRelationService.findByQuery('your-query-value').subscribe(byQuery => {
+  console.log('Find By Query:', byQuery);
 });
 ```
 
 **10. findInfoByQuery**
 
 ```javascript
-const query = query;
-entityRelationService.findInfoByQuery(query).subscribe(relations => {
-  console.log('Find Info By Query: relations');
+self.ctx.entityRelationService.findInfoByQuery('your-query-value').subscribe(infoByQuery => {
+  console.log('Find Info By Query:', infoByQuery);
 });
 ```

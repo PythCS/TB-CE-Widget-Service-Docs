@@ -1,8 +1,6 @@
 # DEVICE PROFILE SERVICE
 
-Part of [ThingsBoard CE Widget Service Documentation](../DOCUMENTATION.md)
-
-### **DEVICE PROFILE SERVICE**
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
 
 TO INJECT THE SERVICE:
 
@@ -15,40 +13,40 @@ const deviceProfileService = $injector.get(self.ctx.servicesMap.get('deviceProfi
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-deviceProfileService.getDeviceProfiles(pageLink).subscribe(deviceprofiles => {
-  console.log('Get Device Profiles: deviceprofiles');
+deviceProfileService.getDeviceProfiles(pageLink).subscribe(deviceProfiles => {
+  console.log('Get Device Profiles:', deviceProfiles);
 });
 ```
 
 **2. getDeviceProfilesByIds**
 
 ```javascript
-deviceProfileService.getDeviceProfilesByIds('your-id').subscribe(deviceprofilesbyids => {
-  console.log('Get Device Profiles By Ids: deviceprofilesbyids');
+deviceProfileService.getDeviceProfilesByIds('your-deviceprofileids-value').subscribe(deviceProfilesByIds => {
+  console.log('Get Device Profiles By Ids:', deviceProfilesByIds);
 });
 ```
 
 **3. getDeviceProfile**
 
 ```javascript
-deviceProfileService.getDeviceProfile('your-device-profile-id').subscribe(deviceProfile => {
-  console.log('Get Device Profile: deviceProfile');
+deviceProfileService.getDeviceProfile('your-deviceprofile-id').subscribe(deviceProfile => {
+  console.log('Get Device Profile:', deviceProfile);
 });
 ```
 
 **4. exportDeviceProfile**
 
 ```javascript
-deviceProfileService.exportDeviceProfile('your-device-profile-id').subscribe(exported => {
-  console.log('Export Device Profile: exported');
+deviceProfileService.exportDeviceProfile('your-deviceprofile-id').subscribe(deviceProfile => {
+  console.log('Export Device Profile:', deviceProfile);
 });
 ```
 
 **5. getLwm2mObjects**
 
 ```javascript
-deviceProfileService.getLwm2mObjects('ASC', 'your-id', 'searchText').subscribe(lwm2mobjects => {
-  console.log('Get Lwm m Objects: lwm2mobjects');
+deviceProfileService.getLwm2mObjects('your-sortorder-value', 'your-objectids-value', 'your-searchtext-value').subscribe(lwm2mObjects => {
+  console.log('Get Lwm 2 m Objects:', lwm2mObjects);
 });
 ```
 
@@ -56,7 +54,7 @@ deviceProfileService.getLwm2mObjects('ASC', 'your-id', 'searchText').subscribe(l
 
 ```javascript
 deviceProfileService.getLwm2mBootstrapSecurityInfo(true).subscribe(lwm2mBootstrapSecurityInfo => {
-  console.log('Get Lwm m Bootstrap Security Info:lwm2mBootstrapSecurityInfo');
+  console.log('Get Lwm 2 m Bootstrap Security Info:', lwm2mBootstrapSecurityInfo);
 });
 ```
 
@@ -64,7 +62,7 @@ deviceProfileService.getLwm2mBootstrapSecurityInfo(true).subscribe(lwm2mBootstra
 
 ```javascript
 deviceProfileService.getLwm2mBootstrapSecurityInfoBySecurityType(true).subscribe(lwm2mBootstrapSecurityInfoBySecurityType => {
-  console.log('Get Lwm m Bootstrap Security Info By Security Type:lwm2mBootstrapSecurityInfoBySecurityType');
+  console.log('Get Lwm 2 m Bootstrap Security Info By Security Type:', lwm2mBootstrapSecurityInfoBySecurityType);
 });
 ```
 
@@ -73,33 +71,31 @@ deviceProfileService.getLwm2mBootstrapSecurityInfoBySecurityType(true).subscribe
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
 deviceProfileService.getLwm2mObjectsPage(pageLink).subscribe(lwm2mObjectsPage => {
-  console.log('Get Lwm m Objects Page: lwm2mObjectsPage');
+  console.log('Get Lwm 2 m Objects Page:', lwm2mObjectsPage);
 });
 ```
 
 **9. saveDeviceProfileAndConfirmOtaChange**
 
 ```javascript
-const originDeviceProfile = originEntity;
-const deviceProfile = deviceProfile;
-deviceProfileService.saveDeviceProfileAndConfirmOtaChange(originDeviceProfile, deviceProfile).subscribe(savedDeviceProfileAndConfirmOtaChange => {
-  console.log('Save Device Profile And Confirm Ota Change:savedDeviceProfileAndConfirmOtaChange');
+deviceProfileService.saveDeviceProfileAndConfirmOtaChange('your-origindeviceprofile-value', 'your-deviceprofile-value').subscribe(deviceProfileAndConfirmOtaChange => {
+  console.log('Save Device Profile And Confirm Ota Change:', deviceProfileAndConfirmOtaChange);
 });
 ```
 
 **10. saveDeviceProfile**
 
 ```javascript
-deviceProfileService.saveDeviceProfile().subscribe(savedDeviceProfile => {
-  console.log('Save Device Profile: savedDeviceProfile');
+deviceProfileService.saveDeviceProfile().subscribe(deviceProfile => {
+  console.log('Save Device Profile:', deviceProfile);
 });
 ```
 
 **11. setDefaultDeviceProfile**
 
 ```javascript
-deviceProfileService.setDefaultDeviceProfile('your-device-profile-id').subscribe(result => {
-  console.log('Set Default Device Profile: result');
+deviceProfileService.setDefaultDeviceProfile('your-deviceprofile-id').subscribe(defaultDeviceProfile => {
+  console.log('Set Default Device Profile:', defaultDeviceProfile);
 });
 ```
 
@@ -107,15 +103,15 @@ deviceProfileService.setDefaultDeviceProfile('your-device-profile-id').subscribe
 
 ```javascript
 deviceProfileService.getDefaultDeviceProfileInfo().subscribe(defaultDeviceProfileInfo => {
-  console.log('Get Default Device Profile Info:defaultDeviceProfileInfo');
+  console.log('Get Default Device Profile Info:', defaultDeviceProfileInfo);
 });
 ```
 
 **13. getDeviceProfileInfo**
 
 ```javascript
-deviceProfileService.getDeviceProfileInfo('your-device-profile-id').subscribe(deviceProfileInfo => {
-  console.log('Get Device Profile Info: deviceProfileInfo');
+deviceProfileService.getDeviceProfileInfo('your-deviceprofile-id').subscribe(info => {
+  console.log('Get Device Profile Info:', info);
 });
 ```
 
@@ -123,31 +119,31 @@ deviceProfileService.getDeviceProfileInfo('your-device-profile-id').subscribe(de
 
 ```javascript
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-deviceProfileService.getDeviceProfileInfos(pageLink, 'type').subscribe(deviceprofileinfos => {
-  console.log('Get Device Profile Infos: deviceprofileinfos');
+deviceProfileService.getDeviceProfileInfos(pageLink, 'your-transporttype-value').subscribe(deviceProfileInfos => {
+  console.log('Get Device Profile Infos:', deviceProfileInfos);
 });
 ```
 
 **15. getDeviceProfileDevicesAttributesKeys**
 
 ```javascript
-deviceProfileService.getDeviceProfileDevicesAttributesKeys('your-device-profile-id').subscribe(deviceprofiledevicesattributeskeys => {
-  console.log('Get Device Profile Devices Attributes Keys:deviceprofiledevicesattributeskeys');
+deviceProfileService.getDeviceProfileDevicesAttributesKeys('your-deviceprofile-id').subscribe(deviceProfileDevicesAttributesKeys => {
+  console.log('Get Device Profile Devices Attributes Keys:', deviceProfileDevicesAttributesKeys);
 });
 ```
 
 **16. getDeviceProfileDevicesTimeseriesKeys**
 
 ```javascript
-deviceProfileService.getDeviceProfileDevicesTimeseriesKeys('your-device-profile-id').subscribe(deviceprofiledevicestimeserieskeys => {
-  console.log('Get Device Profile Devices Timeseries Keys:deviceprofiledevicestimeserieskeys');
+deviceProfileService.getDeviceProfileDevicesTimeseriesKeys('your-deviceprofile-id').subscribe(deviceProfileDevicesTimeseriesKeys => {
+  console.log('Get Device Profile Devices Timeseries Keys:', deviceProfileDevicesTimeseriesKeys);
 });
 ```
 
 **17. getDeviceProfileNames**
 
 ```javascript
-deviceProfileService.getDeviceProfileNames(true).subscribe(deviceprofilenames => {
-  console.log('Get Device Profile Names: deviceprofilenames');
+deviceProfileService.getDeviceProfileNames('your-activeonly-value').subscribe(deviceProfileNames => {
+  console.log('Get Device Profile Names:', deviceProfileNames);
 });
 ```
