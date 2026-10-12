@@ -1,5 +1,7 @@
 # ALARM COMMENT SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -10,37 +12,24 @@ const alarmCommentService = $injector.get(self.ctx.servicesMap.get('alarmComment
 **1. saveAlarmComment**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const alarmCommentService = $injector.get(self.ctx.servicesMap.get('alarmCommentService'));
-const alarmId = 'your-alarm-id';
-const alarmComment = {  // AlarmComment object
-  // ... set the fields you need
-};
-alarmCommentService.saveAlarmComment(alarmId, alarmComment).subscribe(savedAlarmComment => {
-  console.log('Saved Alarm Comment:', savedAlarmComment);
+alarmCommentService.saveAlarmComment('your-alarm-id', 'your-alarmcomment-value').subscribe(alarmComment => {
+  console.log('Save Alarm Comment:', alarmComment);
 });
 ```
 
 **2. getAlarmComments**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const alarmCommentService = $injector.get(self.ctx.servicesMap.get('alarmCommentService'));
-const alarmId = 'your-alarm-id';
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-alarmCommentService.getAlarmComments(alarmId, pageLink).subscribe(alarmComments => {
-  console.log('List of Alarm Comments:', alarmComments);
+alarmCommentService.getAlarmComments('your-alarm-id', pageLink).subscribe(alarmComments => {
+  console.log('Get Alarm Comments:', alarmComments);
 });
 ```
 
 **3. deleteAlarmComments**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const alarmCommentService = $injector.get(self.ctx.servicesMap.get('alarmCommentService'));
-const alarmId = 'your-alarm-id';
-const commentId = 'your-comment-id';
-alarmCommentService.deleteAlarmComments(alarmId, commentId).subscribe(result => {
-  console.log('Delete Alarm Comments result:', result);
+alarmCommentService.deleteAlarmComments('your-alarm-id', 'your-comment-id').subscribe(result => {
+  console.log('Delete Alarm Comments:', result);
 });
 ```

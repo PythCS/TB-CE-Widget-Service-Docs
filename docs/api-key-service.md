@@ -1,5 +1,7 @@
 # API KEY SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -10,47 +12,31 @@ const apiKeyService = $injector.get(self.ctx.servicesMap.get('apiKeyService'));
 **1. saveApiKey**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const apiKeyService = $injector.get(self.ctx.servicesMap.get('apiKeyService'));
-const apiKey = {  // ApiKeyInfo object
-  // ... set the fields you need
-};
-apiKeyService.saveApiKey(apiKey).subscribe(savedApiKey => {
-  console.log('Saved Api Key:', savedApiKey);
+apiKeyService.saveApiKey('your-api-key').subscribe(apiKey => {
+  console.log('Save Api Key:', apiKey);
 });
 ```
 
 **2. deleteApiKey**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const apiKeyService = $injector.get(self.ctx.servicesMap.get('apiKeyService'));
-const id = 'your-id';
-apiKeyService.deleteApiKey(id).subscribe(result => {
-  console.log('Delete Api Key result:', result);
+apiKeyService.deleteApiKey('your--id').subscribe(result => {
+  console.log('Delete Api Key:', result);
 });
 ```
 
 **3. updateApiKeyDescription**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const apiKeyService = $injector.get(self.ctx.servicesMap.get('apiKeyService'));
-const id = 'your-id';
-const description = 'your-description';
-apiKeyService.updateApiKeyDescription(id, description).subscribe(savedApiKeyDescription => {
-  console.log('Saved Api Key Description:', savedApiKeyDescription);
+apiKeyService.updateApiKeyDescription('your--id', 'your-description-value').subscribe(apiKeyDescription => {
+  console.log('Update Api Key Description:', apiKeyDescription);
 });
 ```
 
 **4. enableApiKey**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const apiKeyService = $injector.get(self.ctx.servicesMap.get('apiKeyService'));
-const id = 'your-id';
-const enabledValue = true;
-apiKeyService.enableApiKey(id, enabledValue).subscribe(enableApiKey => {
+apiKeyService.enableApiKey('your--id', true).subscribe(enableApiKey => {
   console.log('Enable Api Key:', enableApiKey);
 });
 ```
@@ -58,11 +44,8 @@ apiKeyService.enableApiKey(id, enabledValue).subscribe(enableApiKey => {
 **5. getUserApiKeys**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const apiKeyService = $injector.get(self.ctx.servicesMap.get('apiKeyService'));
-const userId = 'your-user-id';
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-apiKeyService.getUserApiKeys(userId, pageLink).subscribe(userApiKeys => {
-  console.log('List of User Api Keys:', userApiKeys);
+apiKeyService.getUserApiKeys('your-user-id', pageLink).subscribe(userApiKeys => {
+  console.log('Get User Api Keys:', userApiKeys);
 });
 ```

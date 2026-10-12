@@ -1,5 +1,7 @@
 # AUDIT LOG SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -10,44 +12,35 @@ const auditLogService = $injector.get(self.ctx.servicesMap.get('auditLogService'
 **1. getAuditLogs**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const auditLogService = $injector.get(self.ctx.servicesMap.get('auditLogService'));
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const result = auditLogService.getAuditLogs(pageLink);
-console.log('Result:', result);
+auditLogService.getAuditLogs(pageLink).subscribe(auditLogs => {
+  console.log('Get Audit Logs:', auditLogs);
+});
 ```
 
 **2. getAuditLogsByCustomerId**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const auditLogService = $injector.get(self.ctx.servicesMap.get('auditLogService'));
-const customerId = 'your-customer-id';
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const result = auditLogService.getAuditLogsByCustomerId(customerId, pageLink);
-console.log('Result:', result);
+auditLogService.getAuditLogsByCustomerId('your-customer-id', pageLink).subscribe(auditLogsByCustomerId => {
+  console.log('Get Audit Logs By Customer Id:', auditLogsByCustomerId);
+});
 ```
 
 **3. getAuditLogsByUserId**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const auditLogService = $injector.get(self.ctx.servicesMap.get('auditLogService'));
-const userId = 'your-user-id';
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const result = auditLogService.getAuditLogsByUserId(userId, pageLink);
-console.log('Result:', result);
+auditLogService.getAuditLogsByUserId('your-user-id', pageLink).subscribe(auditLogsByUserId => {
+  console.log('Get Audit Logs By User Id:', auditLogsByUserId);
+});
 ```
 
 **4. getAuditLogsByEntityId**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const auditLogService = $injector.get(self.ctx.servicesMap.get('auditLogService'));
-const entityId = {  // EntityId object
-  // ... set the fields you need
-};
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const result = auditLogService.getAuditLogsByEntityId(entityId, pageLink);
-console.log('Result:', result);
+auditLogService.getAuditLogsByEntityId('your-entity-id', pageLink).subscribe(auditLogsByEntityId => {
+  console.log('Get Audit Logs By Entity Id:', auditLogsByEntityId);
+});
 ```

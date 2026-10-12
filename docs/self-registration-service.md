@@ -1,5 +1,7 @@
 # SELF REGISTRATION SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -10,48 +12,38 @@ const selfRegistrationService = $injector.get(self.ctx.servicesMap.get('selfRegi
 **1. getRegistrationLink**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const selfRegistrationService = $injector.get(self.ctx.servicesMap.get('selfRegistrationService'));
-const domainName = 'your-domain-name';
-const result = selfRegistrationService.getRegistrationLink(domainName);
-console.log('Result:', result);
+selfRegistrationService.getRegistrationLink('your-domainname-value').subscribe(registrationLink => {
+  console.log('Get Registration Link:', registrationLink);
+});
 ```
 
 **2. loadSelfRegistrationParams**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const selfRegistrationService = $injector.get(self.ctx.servicesMap.get('selfRegistrationService'));
-selfRegistrationService.loadSelfRegistrationParams().subscribe(selfRegistrationParams => {
-  console.log('Load Self Registration Params:', selfRegistrationParams);
+selfRegistrationService.loadSelfRegistrationParams().subscribe(loadSelfRegistrationParams => {
+  console.log('Load Self Registration Params:', loadSelfRegistrationParams);
 });
 ```
 
 **3. loadPrivacyPolicy**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const selfRegistrationService = $injector.get(self.ctx.servicesMap.get('selfRegistrationService'));
-selfRegistrationService.loadPrivacyPolicy().subscribe(privacyPolicy => {
-  console.log('Load Privacy Policy:', privacyPolicy);
+selfRegistrationService.loadPrivacyPolicy().subscribe(loadPrivacyPolicy => {
+  console.log('Load Privacy Policy:', loadPrivacyPolicy);
 });
 ```
 
 **4. loadTermsOfUse**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const selfRegistrationService = $injector.get(self.ctx.servicesMap.get('selfRegistrationService'));
-selfRegistrationService.loadTermsOfUse().subscribe(termsOfUse => {
-  console.log('Load Terms Of Use:', termsOfUse);
+selfRegistrationService.loadTermsOfUse().subscribe(loadTermsOfUse => {
+  console.log('Load Terms Of Use:', loadTermsOfUse);
 });
 ```
 
 **5. isAvailablePage**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const selfRegistrationService = $injector.get(self.ctx.servicesMap.get('selfRegistrationService'));
 selfRegistrationService.isAvailablePage().subscribe(isAvailablePage => {
   console.log('Is Available Page:', isAvailablePage);
 });
@@ -60,21 +52,14 @@ selfRegistrationService.isAvailablePage().subscribe(isAvailablePage => {
 **6. saveSelfRegistrationParams**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const selfRegistrationService = $injector.get(self.ctx.servicesMap.get('selfRegistrationService'));
-const selfRegistrationParams = {  // WebSelfRegistrationParams object
-  // ... set the fields you need
-};
-selfRegistrationService.saveSelfRegistrationParams(selfRegistrationParams).subscribe(savedSelfRegistrationParams => {
-  console.log('Saved Self Registration Params:', savedSelfRegistrationParams);
+selfRegistrationService.saveSelfRegistrationParams('your-selfregistrationparams-value').subscribe(selfRegistrationParams => {
+  console.log('Save Self Registration Params:', selfRegistrationParams);
 });
 ```
 
 **7. getSelfRegistrationParams**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const selfRegistrationService = $injector.get(self.ctx.servicesMap.get('selfRegistrationService'));
 selfRegistrationService.getSelfRegistrationParams().subscribe(selfRegistrationParams => {
   console.log('Get Self Registration Params:', selfRegistrationParams);
 });

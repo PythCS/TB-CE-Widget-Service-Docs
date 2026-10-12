@@ -1,5 +1,7 @@
 # USER SETTINGS SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -13,41 +15,31 @@ const userSettingsService = self.ctx.userSettingsService;
 **1. loadUserSettings**
 
 ```javascript
-const userSettingsService = self.ctx.userSettingsService;
-userSettingsService.loadUserSettings().subscribe(userSettings => {
-  console.log('Load User Settings:', userSettings);
+self.ctx.userSettingsService.loadUserSettings().subscribe(loadUserSettings => {
+  console.log('Load User Settings:', loadUserSettings);
 });
 ```
 
 **2. saveUserSettings**
 
 ```javascript
-const userSettingsService = self.ctx.userSettingsService;
-const userSettings = {  // UserSettings object
-  // ... set the fields you need
-};
-userSettingsService.saveUserSettings(userSettings).subscribe(savedUserSettings => {
-  console.log('Saved User Settings:', savedUserSettings);
+self.ctx.userSettingsService.saveUserSettings('your-usersettings-value').subscribe(userSettings => {
+  console.log('Save User Settings:', userSettings);
 });
 ```
 
 **3. putUserSettings**
 
 ```javascript
-const userSettingsService = self.ctx.userSettingsService;
-const userSettingsData = {  // Partial<UserSettings> object
-  // ... set the fields you need
-};
-userSettingsService.putUserSettings(userSettingsData).subscribe(putUserSettings => {
-  console.log('Put User Settings:', putUserSettings);
+self.ctx.userSettingsService.putUserSettings('your-usersettingsdata-value').subscribe(result => {
+  console.log('Put User Settings:', result);
 });
 ```
 
 **4. getDocumentationLinks**
 
 ```javascript
-const userSettingsService = self.ctx.userSettingsService;
-userSettingsService.getDocumentationLinks().subscribe(documentationLinks => {
+self.ctx.userSettingsService.getDocumentationLinks().subscribe(documentationLinks => {
   console.log('Get Documentation Links:', documentationLinks);
 });
 ```
@@ -55,20 +47,15 @@ userSettingsService.getDocumentationLinks().subscribe(documentationLinks => {
 **5. updateDocumentationLinks**
 
 ```javascript
-const userSettingsService = self.ctx.userSettingsService;
-const documentationLinks = {  // DocumentationLinks object
-  // ... set the fields you need
-};
-userSettingsService.updateDocumentationLinks(documentationLinks).subscribe(savedDocumentationLinks => {
-  console.log('Saved Documentation Links:', savedDocumentationLinks);
+self.ctx.userSettingsService.updateDocumentationLinks('your-documentationlinks-value').subscribe(result => {
+  console.log('Update Documentation Links:', result);
 });
 ```
 
 **6. getQuickLinks**
 
 ```javascript
-const userSettingsService = self.ctx.userSettingsService;
-userSettingsService.getQuickLinks().subscribe(quickLinks => {
+self.ctx.userSettingsService.getQuickLinks().subscribe(quickLinks => {
   console.log('Get Quick Links:', quickLinks);
 });
 ```
@@ -76,20 +63,15 @@ userSettingsService.getQuickLinks().subscribe(quickLinks => {
 **7. updateQuickLinks**
 
 ```javascript
-const userSettingsService = self.ctx.userSettingsService;
-const quickLinks = {  // QuickLinks object
-  // ... set the fields you need
-};
-userSettingsService.updateQuickLinks(quickLinks).subscribe(savedQuickLinks => {
-  console.log('Saved Quick Links:', savedQuickLinks);
+self.ctx.userSettingsService.updateQuickLinks('your-quicklinks-value').subscribe(result => {
+  console.log('Update Quick Links:', result);
 });
 ```
 
 **8. getGettingStarted**
 
 ```javascript
-const userSettingsService = self.ctx.userSettingsService;
-userSettingsService.getGettingStarted().subscribe(gettingStarted => {
+self.ctx.userSettingsService.getGettingStarted().subscribe(gettingStarted => {
   console.log('Get Getting Started:', gettingStarted);
 });
 ```
@@ -97,20 +79,15 @@ userSettingsService.getGettingStarted().subscribe(gettingStarted => {
 **9. updateGettingStarted**
 
 ```javascript
-const userSettingsService = self.ctx.userSettingsService;
-const gettingStarted = {  // GettingStarted object
-  // ... set the fields you need
-};
-userSettingsService.updateGettingStarted(gettingStarted).subscribe(savedGettingStarted => {
-  console.log('Saved Getting Started:', savedGettingStarted);
+self.ctx.userSettingsService.updateGettingStarted('your-gettingstarted-value').subscribe(result => {
+  console.log('Update Getting Started:', result);
 });
 ```
 
 **10. getUserDashboardsInfo**
 
 ```javascript
-const userSettingsService = self.ctx.userSettingsService;
-userSettingsService.getUserDashboardsInfo().subscribe(userDashboardsInfo => {
+self.ctx.userSettingsService.getUserDashboardsInfo().subscribe(userDashboardsInfo => {
   console.log('Get User Dashboards Info:', userDashboardsInfo);
 });
 ```
@@ -118,12 +95,7 @@ userSettingsService.getUserDashboardsInfo().subscribe(userDashboardsInfo => {
 **11. reportUserDashboardAction**
 
 ```javascript
-const userSettingsService = self.ctx.userSettingsService;
-const dashboardId = 'your-dashboard-id';
-const action = {  // UserDashboardAction object
-  // ... set the fields you need
-};
-userSettingsService.reportUserDashboardAction(dashboardId, action).subscribe(reportUserDashboardAction => {
+self.ctx.userSettingsService.reportUserDashboardAction('your-dashboard-id', 'your-action-value').subscribe(reportUserDashboardAction => {
   console.log('Report User Dashboard Action:', reportUserDashboardAction);
 });
 ```

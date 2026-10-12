@@ -1,5 +1,7 @@
 # BLOB ENTITY SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -10,10 +12,7 @@ const blobEntityService = $injector.get(self.ctx.servicesMap.get('blobEntityServ
 **1. getBlobEntityInfo**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const blobEntityService = $injector.get(self.ctx.servicesMap.get('blobEntityService'));
-const blobEntityId = 'your-blob-entity-id';
-blobEntityService.getBlobEntityInfo(blobEntityId).subscribe(blobEntityInfo => {
+blobEntityService.getBlobEntityInfo('your-blobentity-id').subscribe(blobEntityInfo => {
   console.log('Get Blob Entity Info:', blobEntityInfo);
 });
 ```
@@ -21,33 +20,24 @@ blobEntityService.getBlobEntityInfo(blobEntityId).subscribe(blobEntityInfo => {
 **2. getBlobEntities**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const blobEntityService = $injector.get(self.ctx.servicesMap.get('blobEntityService'));
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const type = 'value';
-blobEntityService.getBlobEntities(pageLink, type).subscribe(blobEntities => {
-  console.log('List of Blob Entities:', blobEntities);
+blobEntityService.getBlobEntities(pageLink, 'your-type-value').subscribe(blobEntities => {
+  console.log('Get Blob Entities:', blobEntities);
 });
 ```
 
 **3. getBlobEntitiesByIds**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const blobEntityService = $injector.get(self.ctx.servicesMap.get('blobEntityService'));
-const blobEntityIds = ['your-blob-entity-i-1', 'your-blob-entity-i-2'];
-blobEntityService.getBlobEntitiesByIds(blobEntityIds).subscribe(blobEntitiesBys => {
-  console.log('List of Blob Entities By Ids:', blobEntitiesBys);
+blobEntityService.getBlobEntitiesByIds('your-blobentityids-value').subscribe(blobEntitiesByIds => {
+  console.log('Get Blob Entities By Ids:', blobEntitiesByIds);
 });
 ```
 
 **4. downloadBlobEntity**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const blobEntityService = $injector.get(self.ctx.servicesMap.get('blobEntityService'));
-const blobEntityId = 'your-blob-entity-id';
-blobEntityService.downloadBlobEntity(blobEntityId).subscribe(downloadBlobEntity => {
+blobEntityService.downloadBlobEntity('your-blobentity-id').subscribe(downloadBlobEntity => {
   console.log('Download Blob Entity:', downloadBlobEntity);
 });
 ```

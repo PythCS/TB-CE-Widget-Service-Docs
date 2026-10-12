@@ -1,5 +1,7 @@
 # ALARM RULES SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -10,72 +12,49 @@ const alarmRulesService = $injector.get(self.ctx.servicesMap.get('alarmRulesServ
 **1. getAlarmRuleById**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const alarmRulesService = $injector.get(self.ctx.servicesMap.get('alarmRulesService'));
-const alarmRuleId = 'your-alarm-rule-id';
-alarmRulesService.getAlarmRuleById(alarmRuleId).subscribe(alarmRuleBy => {
-  console.log('Get Alarm Rule By Id:', alarmRuleBy);
+alarmRulesService.getAlarmRuleById('your-alarmrule-id').subscribe(alarmRuleById => {
+  console.log('Get Alarm Rule By Id:', alarmRuleById);
 });
 ```
 
 **2. saveAlarmRule**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const alarmRulesService = $injector.get(self.ctx.servicesMap.get('alarmRulesService'));
-const alarmRule = {  // CalculatedFieldAlarmRule object
-  // ... set the fields you need
-};
-alarmRulesService.saveAlarmRule(alarmRule).subscribe(savedAlarmRule => {
-  console.log('Saved Alarm Rule:', savedAlarmRule);
+alarmRulesService.saveAlarmRule('your-alarmrule-value').subscribe(alarmRule => {
+  console.log('Save Alarm Rule:', alarmRule);
 });
 ```
 
 **3. deleteAlarmRule**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const alarmRulesService = $injector.get(self.ctx.servicesMap.get('alarmRulesService'));
-const alarmRuleId = 'your-alarm-rule-id';
-alarmRulesService.deleteAlarmRule(alarmRuleId).subscribe(result => {
-  console.log('Delete Alarm Rule result:', result);
+alarmRulesService.deleteAlarmRule('your-alarmrule-id').subscribe(alarmRule => {
+  console.log('Delete Alarm Rule:', alarmRule);
 });
 ```
 
 **4. getAlarmRules**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const alarmRulesService = $injector.get(self.ctx.servicesMap.get('alarmRulesService'));
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const query = {  // CalculatedFieldsQuery object
-  // ... set the fields you need
-};
-alarmRulesService.getAlarmRules(pageLink, query).subscribe(alarmRules => {
-  console.log('List of Alarm Rules:', alarmRules);
+alarmRulesService.getAlarmRules(pageLink, 'your-query-value').subscribe(alarmRules => {
+  console.log('Get Alarm Rules:', alarmRules);
 });
 ```
 
 **5. getAlarmRulesByEntityId**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const alarmRulesService = $injector.get(self.ctx.servicesMap.get('alarmRulesService'));
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-alarmRulesService.getAlarmRulesByEntityId(pageLink).subscribe(alarmRulesByEntitys => {
-  console.log('List of Alarm Rules By Entity Ids:', alarmRulesByEntitys);
+alarmRulesService.getAlarmRulesByEntityId(pageLink).subscribe(alarmRulesByEntityId => {
+  console.log('Get Alarm Rules By Entity Id:', alarmRulesByEntityId);
 });
 ```
 
 **6. testScript**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const alarmRulesService = $injector.get(self.ctx.servicesMap.get('alarmRulesService'));
-const inputParams = {  // CalculatedFieldTestScriptInputParams object
-  // ... set the fields you need
-};
-alarmRulesService.testScript(inputParams).subscribe(testScript => {
+alarmRulesService.testScript('your-inputparams-value').subscribe(testScript => {
   console.log('Test Script:', testScript);
 });
 ```
@@ -83,10 +62,7 @@ alarmRulesService.testScript(inputParams).subscribe(testScript => {
 **7. getLatestAlarmRuleDebugEvent**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const alarmRulesService = $injector.get(self.ctx.servicesMap.get('alarmRulesService'));
-const id = 'your-id';
-alarmRulesService.getLatestAlarmRuleDebugEvent(id).subscribe(latestAlarmRuleDebugEvent => {
+alarmRulesService.getLatestAlarmRuleDebugEvent('your--id').subscribe(latestAlarmRuleDebugEvent => {
   console.log('Get Latest Alarm Rule Debug Event:', latestAlarmRuleDebugEvent);
 });
 ```
@@ -94,10 +70,8 @@ alarmRulesService.getLatestAlarmRuleDebugEvent(id).subscribe(latestAlarmRuleDebu
 **8. getAlarmRuleNames**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const alarmRulesService = $injector.get(self.ctx.servicesMap.get('alarmRulesService'));
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
 alarmRulesService.getAlarmRuleNames(pageLink).subscribe(alarmRuleNames => {
-  console.log('List of Alarm Rule Names:', alarmRuleNames);
+  console.log('Get Alarm Rule Names:', alarmRuleNames);
 });
 ```

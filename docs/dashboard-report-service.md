@@ -1,5 +1,7 @@
 # DASHBOARD REPORT SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -13,58 +15,47 @@ const dashboardReportService = self.ctx.reportService;
 **1. loadReportParams**
 
 ```javascript
-const dashboardReportService = self.ctx.reportService;
-const result = dashboardReportService.loadReportParams();
-console.log('Result:', result);
+self.ctx.reportService.loadReportParams().subscribe(loadReportParams => {
+  console.log('Load Report Params:', loadReportParams);
+});
 ```
 
 **2. onWaitForMap**
 
 ```javascript
-const dashboardReportService = self.ctx.reportService;
-const result = dashboardReportService.onWaitForMap();
-console.log('Result:', result);
+self.ctx.reportService.onWaitForMap().subscribe(onWaitForMap => {
+  console.log('On Wait For Map:', onWaitForMap);
+});
 ```
 
 **3. onWaitForWidget**
 
 ```javascript
-const dashboardReportService = self.ctx.reportService;
-const result = dashboardReportService.onWaitForWidget();
-console.log('Result:', result);
+self.ctx.reportService.onWaitForWidget().subscribe(onWaitForWidget => {
+  console.log('On Wait For Widget:', onWaitForWidget);
+});
 ```
 
 **4. onMapLoaded**
 
 ```javascript
-const dashboardReportService = self.ctx.reportService;
-const uuid = 'your-uuid';
-const result = dashboardReportService.onMapLoaded(uuid);
-console.log('Result:', result);
+self.ctx.reportService.onMapLoaded('your-uu-id').subscribe(onMapLoaded => {
+  console.log('On Map Loaded:', onMapLoaded);
+});
 ```
 
 **5. onWidgetLoaded**
 
 ```javascript
-const dashboardReportService = self.ctx.reportService;
-const uuid = 'your-uuid';
-const result = dashboardReportService.onWidgetLoaded(uuid);
-console.log('Result:', result);
+self.ctx.reportService.onWidgetLoaded('your-uu-id').subscribe(onWidgetLoaded => {
+  console.log('On Widget Loaded:', onWidgetLoaded);
+});
 ```
 
 **6. downloadDashboardReport**
 
 ```javascript
-const dashboardReportService = self.ctx.reportService;
-const dashboardId = 'your-dashboard-id';
-const reportType = {  // DashboardReportType object
-  // ... set the fields you need
-};
-const state = 'state-value';
-const timewindow = {  // Timewindow object
-  // ... set the fields you need
-};
-dashboardReportService.downloadDashboardReport(dashboardId, reportType, state, timewindow).subscribe(downloadDashboardReport => {
+self.ctx.reportService.downloadDashboardReport('your-dashboard-id', 'your-reporttype-value', 'your-state-value', 'your-timewindow-value').subscribe(downloadDashboardReport => {
   console.log('Download Dashboard Report:', downloadDashboardReport);
 });
 ```
@@ -72,12 +63,7 @@ dashboardReportService.downloadDashboardReport(dashboardId, reportType, state, t
 **7. downloadTestReport**
 
 ```javascript
-const dashboardReportService = self.ctx.reportService;
-const reportConfig = {  // DashboardReportParams object
-  // ... set the fields you need
-};
-const reportsServerEndpointUrl = 'your-reports-server-endpoint-url';
-dashboardReportService.downloadTestReport(reportConfig, reportsServerEndpointUrl).subscribe(downloadTestReport => {
+self.ctx.reportService.downloadTestReport('your-reportconfig-value', 'your-reportsserverendpointurl-value').subscribe(downloadTestReport => {
   console.log('Download Test Report:', downloadTestReport);
 });
 ```
@@ -85,11 +71,7 @@ dashboardReportService.downloadTestReport(reportConfig, reportsServerEndpointUrl
 **8. openReport**
 
 ```javascript
-const dashboardReportService = self.ctx.reportService;
-const openReportMessage = {  // OpenReportMessage object
-  // ... set the fields you need
-};
-dashboardReportService.openReport(openReportMessage).subscribe(openReport => {
+self.ctx.reportService.openReport('your-openreportmessage-value').subscribe(openReport => {
   console.log('Open Report:', openReport);
 });
 ```
@@ -97,16 +79,15 @@ dashboardReportService.openReport(openReportMessage).subscribe(openReport => {
 **9. pageHeight**
 
 ```javascript
-const dashboardReportService = self.ctx.reportService;
-const result = dashboardReportService.pageHeight();
-console.log('Result:', result);
+self.ctx.reportService.pageHeight().subscribe(pageHeight => {
+  console.log('Page Height:', pageHeight);
+});
 ```
 
 **10. waitForLayoutReady**
 
 ```javascript
-const dashboardReportService = self.ctx.reportService;
-dashboardReportService.waitForLayoutReady().subscribe(waitForLayoutReady => {
+self.ctx.reportService.waitForLayoutReady().subscribe(waitForLayoutReady => {
   console.log('Wait For Layout Ready:', waitForLayoutReady);
 });
 ```
@@ -114,24 +95,23 @@ dashboardReportService.waitForLayoutReady().subscribe(waitForLayoutReady => {
 **11. waitForReportPage**
 
 ```javascript
-const dashboardReportService = self.ctx.reportService;
-const result = dashboardReportService.waitForReportPage();
-console.log('Result:', result);
+self.ctx.reportService.waitForReportPage().subscribe(waitForReportPage => {
+  console.log('Wait For Report Page:', waitForReportPage);
+});
 ```
 
 **12. waitForWebsocketData**
 
 ```javascript
-const dashboardReportService = self.ctx.reportService;
-const result = dashboardReportService.waitForWebsocketData();
-console.log('Result:', result);
+self.ctx.reportService.waitForWebsocketData().subscribe(waitForWebsocketData => {
+  console.log('Wait For Websocket Data:', waitForWebsocketData);
+});
 ```
 
 **13. waitWidgets**
 
 ```javascript
-const dashboardReportService = self.ctx.reportService;
-dashboardReportService.waitWidgets().subscribe(waitWidgets => {
+self.ctx.reportService.waitWidgets().subscribe(waitWidgets => {
   console.log('Wait Widgets:', waitWidgets);
 });
 ```
@@ -139,49 +119,39 @@ dashboardReportService.waitWidgets().subscribe(waitWidgets => {
 **14. waitForWidgetsLoaded**
 
 ```javascript
-const dashboardReportService = self.ctx.reportService;
-const result = dashboardReportService.waitForWidgetsLoaded();
-console.log('Result:', result);
+self.ctx.reportService.waitForWidgetsLoaded().subscribe(waitForWidgetsLoaded => {
+  console.log('Wait For Widgets Loaded:', waitForWidgetsLoaded);
+});
 ```
 
 **15. isReportPageDomReady**
 
 ```javascript
-const dashboardReportService = self.ctx.reportService;
-const result = dashboardReportService.isReportPageDomReady();
-console.log('Result:', result);
+self.ctx.reportService.isReportPageDomReady().subscribe(isReportPageDomReady => {
+  console.log('Is Report Page Dom Ready:', isReportPageDomReady);
+});
 ```
 
 **16. clearReport**
 
 ```javascript
-const dashboardReportService = self.ctx.reportService;
-dashboardReportService.clearReport().subscribe(clearReport => {
-  console.log('Clear Report:', clearReport);
+self.ctx.reportService.clearReport().subscribe(report => {
+  console.log('Clear Report:', report);
 });
 ```
 
 **17. loadUser**
 
 ```javascript
-const dashboardReportService = self.ctx.reportService;
-const accessToken = 'your-access-token';
-const publicId = 'your-public-id';
-dashboardReportService.loadUser(accessToken, publicId).subscribe(user => {
-  console.log('Load User:', user);
+self.ctx.reportService.loadUser('your-access-token', 'your-public-id').subscribe(loadUser => {
+  console.log('Load User:', loadUser);
 });
 ```
 
 **18. downloadReport**
 
 ```javascript
-const dashboardReportService = self.ctx.reportService;
-const url = 'your-url';
-const reportParams = {  // DashboardReportParams object
-  // ... set the fields you need
-};
-const params = 'value';
-dashboardReportService.downloadReport(url, reportParams, params).subscribe(downloadReport => {
+self.ctx.reportService.downloadReport('your-url-value', 'your-reportparams-value', 'your-params-value').subscribe(downloadReport => {
   console.log('Download Report:', downloadReport);
 });
 ```

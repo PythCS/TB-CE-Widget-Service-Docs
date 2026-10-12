@@ -1,5 +1,7 @@
 # REPORT TEMPLATE SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -10,10 +12,7 @@ const reportTemplateService = $injector.get(self.ctx.servicesMap.get('reportTemp
 **1. getReportTemplateInfo**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const reportTemplateService = $injector.get(self.ctx.servicesMap.get('reportTemplateService'));
-const reportTemplateId = 'your-report-template-id';
-reportTemplateService.getReportTemplateInfo(reportTemplateId).subscribe(reportTemplateInfo => {
+reportTemplateService.getReportTemplateInfo('your-reporttemplate-id').subscribe(reportTemplateInfo => {
   console.log('Get Report Template Info:', reportTemplateInfo);
 });
 ```
@@ -21,23 +20,15 @@ reportTemplateService.getReportTemplateInfo(reportTemplateId).subscribe(reportTe
 **2. getAllReportTemplateInfos**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const reportTemplateService = $injector.get(self.ctx.servicesMap.get('reportTemplateService'));
-const query = {  // ReportTemplateQuery object
-  // ... set the fields you need
-};
-reportTemplateService.getAllReportTemplateInfos(query).subscribe(allReportTemplateInfos => {
-  console.log('List of All Report Template Infos:', allReportTemplateInfos);
+reportTemplateService.getAllReportTemplateInfos('your-query-value').subscribe(allReportTemplateInfos => {
+  console.log('Get All Report Template Infos:', allReportTemplateInfos);
 });
 ```
 
 **3. getReportTemplatesByIds**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const reportTemplateService = $injector.get(self.ctx.servicesMap.get('reportTemplateService'));
-const reportTemplateIds = ['your-report-template-i-1', 'your-report-template-i-2'];
-reportTemplateService.getReportTemplatesByIds(reportTemplateIds).subscribe(reportTemplatesBys => {
-  console.log('List of Report Templates By Ids:', reportTemplatesBys);
+reportTemplateService.getReportTemplatesByIds('your-reporttemplateids-value').subscribe(reportTemplatesByIds => {
+  console.log('Get Report Templates By Ids:', reportTemplatesByIds);
 });
 ```

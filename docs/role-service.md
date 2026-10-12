@@ -1,5 +1,7 @@
 # ROLE SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -10,35 +12,24 @@ const roleService = $injector.get(self.ctx.servicesMap.get('roleService'));
 **1. getRoles**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const roleService = $injector.get(self.ctx.servicesMap.get('roleService'));
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const type = {  // RoleType object
-  // ... set the fields you need
-};
-roleService.getRoles(pageLink, type).subscribe(roles => {
-  console.log('List of Roles:', roles);
+roleService.getRoles(pageLink, 'your-type-value').subscribe(roles => {
+  console.log('Get Roles:', roles);
 });
 ```
 
 **2. getRolesByIds**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const roleService = $injector.get(self.ctx.servicesMap.get('roleService'));
-const roleIds = ['your-role-i-1', 'your-role-i-2'];
-roleService.getRolesByIds(roleIds).subscribe(rolesBys => {
-  console.log('List of Roles By Ids:', rolesBys);
+roleService.getRolesByIds('your-roleids-value').subscribe(rolesByIds => {
+  console.log('Get Roles By Ids:', rolesByIds);
 });
 ```
 
 **3. getRole**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const roleService = $injector.get(self.ctx.servicesMap.get('roleService'));
-const roleId = 'your-role-id';
-roleService.getRole(roleId).subscribe(role => {
+roleService.getRole('your-role-id').subscribe(role => {
   console.log('Get Role:', role);
 });
 ```
@@ -46,81 +37,55 @@ roleService.getRole(roleId).subscribe(role => {
 **4. saveRole**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const roleService = $injector.get(self.ctx.servicesMap.get('roleService'));
-const role = {  // Role object
-  // ... set the fields you need
-};
-roleService.saveRole(role).subscribe(savedRole => {
-  console.log('Saved Role:', savedRole);
+roleService.saveRole('your-role-value').subscribe(role => {
+  console.log('Save Role:', role);
 });
 ```
 
 **5. saveGroupPermission**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const roleService = $injector.get(self.ctx.servicesMap.get('roleService'));
-const groupPermission = {  // GroupPermission object
-  // ... set the fields you need
-};
-roleService.saveGroupPermission(groupPermission).subscribe(savedGroupPermission => {
-  console.log('Saved Group Permission:', savedGroupPermission);
+roleService.saveGroupPermission('your-grouppermission-value').subscribe(groupPermission => {
+  console.log('Save Group Permission:', groupPermission);
 });
 ```
 
 **6. deleteGroupPermissions**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const roleService = $injector.get(self.ctx.servicesMap.get('roleService'));
-const groupPermissionIds = ['your-group-permission-i-1', 'your-group-permission-i-2'];
-roleService.deleteGroupPermissions(groupPermissionIds).subscribe(result => {
-  console.log('Delete Group Permissions result:', result);
+roleService.deleteGroupPermissions('your-grouppermissionids-value').subscribe(groupPermissions => {
+  console.log('Delete Group Permissions:', groupPermissions);
 });
 ```
 
 **7. deleteGroupPermission**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const roleService = $injector.get(self.ctx.servicesMap.get('roleService'));
-const groupPermissionId = 'your-group-permission-id';
-roleService.deleteGroupPermission(groupPermissionId).subscribe(result => {
-  console.log('Delete Group Permission result:', result);
+roleService.deleteGroupPermission('your-grouppermission-id').subscribe(groupPermission => {
+  console.log('Delete Group Permission:', groupPermission);
 });
 ```
 
 **8. getUserGroupPermissions**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const roleService = $injector.get(self.ctx.servicesMap.get('roleService'));
-const userGroupId = 'your-user-group-id';
-roleService.getUserGroupPermissions(userGroupId).subscribe(userGroupPermissions => {
-  console.log('List of User Group Permissions:', userGroupPermissions);
+roleService.getUserGroupPermissions('your-usergroup-id').subscribe(userGroupPermissions => {
+  console.log('Get User Group Permissions:', userGroupPermissions);
 });
 ```
 
 **9. getEntityGroupPermissions**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const roleService = $injector.get(self.ctx.servicesMap.get('roleService'));
-const entityGroupId = 'your-entity-group-id';
-roleService.getEntityGroupPermissions(entityGroupId).subscribe(entityGroupPermissions => {
-  console.log('List of Entity Group Permissions:', entityGroupPermissions);
+roleService.getEntityGroupPermissions('your-entitygroup-id').subscribe(entityGroupPermissions => {
+  console.log('Get Entity Group Permissions:', entityGroupPermissions);
 });
 ```
 
 **10. getGroupPermissionInfo**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const roleService = $injector.get(self.ctx.servicesMap.get('roleService'));
-const groupPermissionId = 'your-group-permission-id';
-const isUserGroup = true;
-roleService.getGroupPermissionInfo(groupPermissionId, isUserGroup).subscribe(groupPermissionInfo => {
+roleService.getGroupPermissionInfo('your-grouppermission-id', true).subscribe(groupPermissionInfo => {
   console.log('Get Group Permission Info:', groupPermissionInfo);
 });
 ```
@@ -128,10 +93,7 @@ roleService.getGroupPermissionInfo(groupPermissionId, isUserGroup).subscribe(gro
 **11. loadUserGroupPermissionInfos**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const roleService = $injector.get(self.ctx.servicesMap.get('roleService'));
-const groupPermissions = [];  // e.g. array of group-permissions values
-roleService.loadUserGroupPermissionInfos(groupPermissions).subscribe(userGroupPermissionInfos => {
-  console.log('List of User Group Permission Infos:', userGroupPermissionInfos);
+roleService.loadUserGroupPermissionInfos('your-grouppermissions-value').subscribe(loadUserGroupPermissionInfos => {
+  console.log('Load User Group Permission Infos:', loadUserGroupPermissionInfos);
 });
 ```

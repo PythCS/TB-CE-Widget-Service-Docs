@@ -1,5 +1,7 @@
 # ENTITY VIEW SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -13,32 +15,25 @@ const entityViewService = self.ctx.entityViewService;
 **1. getTenantEntityViews**
 
 ```javascript
-const entityViewService = self.ctx.entityViewService;
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const type = 'value';
-entityViewService.getTenantEntityViews(pageLink, type).subscribe(tenantEntityViews => {
-  console.log('List of Tenant Entity Views:', tenantEntityViews);
+self.ctx.entityViewService.getTenantEntityViews(pageLink, 'your-type-value').subscribe(tenantEntityViews => {
+  console.log('Get Tenant Entity Views:', tenantEntityViews);
 });
 ```
 
 **2. getCustomerEntityViews**
 
 ```javascript
-const entityViewService = self.ctx.entityViewService;
-const customerId = 'your-customer-id';
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const type = 'value';
-entityViewService.getCustomerEntityViews(customerId, pageLink, type).subscribe(customerEntityViews => {
-  console.log('List of Customer Entity Views:', customerEntityViews);
+self.ctx.entityViewService.getCustomerEntityViews('your-customer-id', pageLink, 'your-type-value').subscribe(customerEntityViews => {
+  console.log('Get Customer Entity Views:', customerEntityViews);
 });
 ```
 
 **3. getEntityView**
 
 ```javascript
-const entityViewService = self.ctx.entityViewService;
-const entityViewId = 'your-entity-view-id';
-entityViewService.getEntityView(entityViewId).subscribe(entityView => {
+self.ctx.entityViewService.getEntityView('your-entityview-id').subscribe(entityView => {
   console.log('Get Entity View:', entityView);
 });
 ```
@@ -46,55 +41,42 @@ entityViewService.getEntityView(entityViewId).subscribe(entityView => {
 **4. getEntityViews**
 
 ```javascript
-const entityViewService = self.ctx.entityViewService;
-const entityViewIds = ['your-entity-view-i-1', 'your-entity-view-i-2'];
-entityViewService.getEntityViews(entityViewIds).subscribe(entityViews => {
-  console.log('List of Entity Views:', entityViews);
+self.ctx.entityViewService.getEntityViews('your-entityviewids-value').subscribe(entityViews => {
+  console.log('Get Entity Views:', entityViews);
 });
 ```
 
 **5. getUserEntityViews**
 
 ```javascript
-const entityViewService = self.ctx.entityViewService;
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const type = 'value';
-entityViewService.getUserEntityViews(pageLink, type).subscribe(userEntityViews => {
-  console.log('List of User Entity Views:', userEntityViews);
+self.ctx.entityViewService.getUserEntityViews(pageLink, 'your-type-value').subscribe(userEntityViews => {
+  console.log('Get User Entity Views:', userEntityViews);
 });
 ```
 
 **6. getAllEntityViewInfos**
 
 ```javascript
-const entityViewService = self.ctx.entityViewService;
-const includeCustomers = true;
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const type = 'value';
-entityViewService.getAllEntityViewInfos(includeCustomers, pageLink, type).subscribe(allEntityViewInfos => {
-  console.log('List of All Entity View Infos:', allEntityViewInfos);
+self.ctx.entityViewService.getAllEntityViewInfos(true, pageLink, 'your-type-value').subscribe(allEntityViewInfos => {
+  console.log('Get All Entity View Infos:', allEntityViewInfos);
 });
 ```
 
 **7. getCustomerEntityViewInfos**
 
 ```javascript
-const entityViewService = self.ctx.entityViewService;
-const includeCustomers = true;
-const customerId = 'your-customer-id';
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const type = 'value';
-entityViewService.getCustomerEntityViewInfos(includeCustomers, customerId, pageLink, type).subscribe(customerEntityViewInfos => {
-  console.log('List of Customer Entity View Infos:', customerEntityViewInfos);
+self.ctx.entityViewService.getCustomerEntityViewInfos(true, 'your-customer-id', pageLink, 'your-type-value').subscribe(customerEntityViewInfos => {
+  console.log('Get Customer Entity View Infos:', customerEntityViewInfos);
 });
 ```
 
 **8. getEntityViewInfo**
 
 ```javascript
-const entityViewService = self.ctx.entityViewService;
-const entityViewId = 'your-entity-view-id';
-entityViewService.getEntityViewInfo(entityViewId).subscribe(entityViewInfo => {
+self.ctx.entityViewService.getEntityViewInfo('your-entityview-id').subscribe(entityViewInfo => {
   console.log('Get Entity View Info:', entityViewInfo);
 });
 ```
@@ -102,32 +84,23 @@ entityViewService.getEntityViewInfo(entityViewId).subscribe(entityViewInfo => {
 **9. saveEntityView**
 
 ```javascript
-const entityViewService = self.ctx.entityViewService;
-const entityView = {  // EntityView object
-  // ... set the fields you need
-};
-const entityGroupIds = ['your-entity-group-i-1', 'your-entity-group-i-2'];
-const result = entityViewService.saveEntityView(entityView, entityGroupIds);
-console.log('Result:', result);
+self.ctx.entityViewService.saveEntityView('your-entityview-value', 'your-entitygroupids-value').subscribe(entityView => {
+  console.log('Save Entity View:', entityView);
+});
 ```
 
 **10. getEntityViewTypes**
 
 ```javascript
-const entityViewService = self.ctx.entityViewService;
-entityViewService.getEntityViewTypes().subscribe(entityViewTypes => {
-  console.log('List of Entity View Types:', entityViewTypes);
+self.ctx.entityViewService.getEntityViewTypes().subscribe(entityViewTypes => {
+  console.log('Get Entity View Types:', entityViewTypes);
 });
 ```
 
 **11. findByQuery**
 
 ```javascript
-const entityViewService = self.ctx.entityViewService;
-const query = {  // EntityViewSearchQuery object
-  // ... set the fields you need
-};
-entityViewService.findByQuery(query).subscribe(byQuerys => {
-  console.log('List of By Querys:', byQuerys);
+self.ctx.entityViewService.findByQuery('your-query-value').subscribe(byQuery => {
+  console.log('Find By Query:', byQuery);
 });
 ```

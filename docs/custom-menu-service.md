@@ -1,5 +1,7 @@
 # CUSTOM MENU SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -10,46 +12,32 @@ const customMenuService = $injector.get(self.ctx.servicesMap.get('customMenuServ
 **1. getCustomMenu**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const customMenuService = $injector.get(self.ctx.servicesMap.get('customMenuService'));
-const result = customMenuService.getCustomMenu();
-console.log('Result:', result);
+customMenuService.getCustomMenu().subscribe(customMenu => {
+  console.log('Get Custom Menu:', customMenu);
+});
 ```
 
 **2. loadCustomMenu**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const customMenuService = $injector.get(self.ctx.servicesMap.get('customMenuService'));
-customMenuService.loadCustomMenu().subscribe(customMenu => {
-  console.log('Load Custom Menu:', customMenu);
+customMenuService.loadCustomMenu().subscribe(loadCustomMenu => {
+  console.log('Load Custom Menu:', loadCustomMenu);
 });
 ```
 
 **3. getCustomMenuInfos**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const customMenuService = $injector.get(self.ctx.servicesMap.get('customMenuService'));
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const scope = {  // CMScope object
-  // ... set the fields you need
-};
-const assigneeType = {  // CMAssigneeType object
-  // ... set the fields you need
-};
-customMenuService.getCustomMenuInfos(pageLink, scope, assigneeType).subscribe(customMenuInfos => {
-  console.log('List of Custom Menu Infos:', customMenuInfos);
+customMenuService.getCustomMenuInfos(pageLink, 'your-scope-value', 'your-assigneetype-value').subscribe(customMenuInfos => {
+  console.log('Get Custom Menu Infos:', customMenuInfos);
 });
 ```
 
 **4. getCustomMenuInfo**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const customMenuService = $injector.get(self.ctx.servicesMap.get('customMenuService'));
-const customMenuId = 'your-custom-menu-id';
-customMenuService.getCustomMenuInfo(customMenuId).subscribe(customMenuInfo => {
+customMenuService.getCustomMenuInfo('your-custommenu-id').subscribe(customMenuInfo => {
   console.log('Get Custom Menu Info:', customMenuInfo);
 });
 ```
@@ -57,10 +45,7 @@ customMenuService.getCustomMenuInfo(customMenuId).subscribe(customMenuInfo => {
 **5. getCustomMenuConfig**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const customMenuService = $injector.get(self.ctx.servicesMap.get('customMenuService'));
-const customMenuId = 'your-custom-menu-id';
-customMenuService.getCustomMenuConfig(customMenuId).subscribe(customMenuConfig => {
+customMenuService.getCustomMenuConfig('your-custommenu-id').subscribe(customMenuConfig => {
   console.log('Get Custom Menu Config:', customMenuConfig);
 });
 ```
@@ -68,76 +53,47 @@ customMenuService.getCustomMenuConfig(customMenuId).subscribe(customMenuConfig =
 **6. getCustomMenuAssigneeList**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const customMenuService = $injector.get(self.ctx.servicesMap.get('customMenuService'));
-const customMenuId = 'your-custom-menu-id';
-customMenuService.getCustomMenuAssigneeList(customMenuId).subscribe(customMenuAssigneeLists => {
-  console.log('List of Custom Menu Assignee Lists:', customMenuAssigneeLists);
+customMenuService.getCustomMenuAssigneeList('your-custommenu-id').subscribe(customMenuAssigneeList => {
+  console.log('Get Custom Menu Assignee List:', customMenuAssigneeList);
 });
 ```
 
 **7. updateCustomMenuConfig**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const customMenuService = $injector.get(self.ctx.servicesMap.get('customMenuService'));
-const customMenuId = 'your-custom-menu-id';
-const customMenuConfig = {  // CustomMenuConfig object
-  // ... set the fields you need
-};
-customMenuService.updateCustomMenuConfig(customMenuId, customMenuConfig).subscribe(savedCustomMenuConfig => {
-  console.log('Saved Custom Menu Config:', savedCustomMenuConfig);
+customMenuService.updateCustomMenuConfig('your-custommenu-id', 'your-custommenuconfig-value').subscribe(customMenuConfig => {
+  console.log('Update Custom Menu Config:', customMenuConfig);
 });
 ```
 
 **8. updateCustomMenuName**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const customMenuService = $injector.get(self.ctx.servicesMap.get('customMenuService'));
-const customMenuId = 'your-custom-menu-id';
-const name = 'name-value';
-customMenuService.updateCustomMenuName(customMenuId, name).subscribe(savedCustomMenuName => {
-  console.log('Saved Custom Menu Name:', savedCustomMenuName);
+customMenuService.updateCustomMenuName('your-custommenu-id', 'your-name-value').subscribe(result => {
+  console.log('Update Custom Menu Name:', result);
 });
 ```
 
 **9. assignCustomMenu**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const customMenuService = $injector.get(self.ctx.servicesMap.get('customMenuService'));
-const customMenuId = 'your-custom-menu-id';
-const assigneeType = {  // CMAssigneeType object
-  // ... set the fields you need
-};
-const entityIds = ['your-entity-i-1', 'your-entity-i-2'];
-customMenuService.assignCustomMenu(customMenuId, assigneeType, entityIds).subscribe(assignCustomMenu => {
-  console.log('Assign Custom Menu:', assignCustomMenu);
+customMenuService.assignCustomMenu('your-custommenu-id', 'your-assigneetype-value', 'your-entityids-value').subscribe(result => {
+  console.log('Assign Custom Menu:', result);
 });
 ```
 
 **10. saveCustomMenu**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const customMenuService = $injector.get(self.ctx.servicesMap.get('customMenuService'));
-const customMenuInfo = {  // CustomMenuInfo object
-  // ... set the fields you need
-};
-const assignToList = [];  // e.g. array of assign-to-list values
-customMenuService.saveCustomMenu(customMenuInfo, assignToList).subscribe(savedCustomMenu => {
-  console.log('Saved Custom Menu:', savedCustomMenu);
+customMenuService.saveCustomMenu('your-custommenuinfo-value', 'your-assigntolist-value').subscribe(customMenu => {
+  console.log('Save Custom Menu:', customMenu);
 });
 ```
 
 **11. deleteCustomMenu**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const customMenuService = $injector.get(self.ctx.servicesMap.get('customMenuService'));
-const customMenuId = 'your-custom-menu-id';
-customMenuService.deleteCustomMenu(customMenuId).subscribe(result => {
-  console.log('Delete Custom Menu result:', result);
+customMenuService.deleteCustomMenu('your-custommenu-id').subscribe(customMenu => {
+  console.log('Delete Custom Menu:', customMenu);
 });
 ```

@@ -1,5 +1,7 @@
 # OTA PACKAGE SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -10,36 +12,25 @@ const otaPackageService = $injector.get(self.ctx.servicesMap.get('otaPackageServ
 **1. getOtaPackages**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const otaPackageService = $injector.get(self.ctx.servicesMap.get('otaPackageService'));
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
 otaPackageService.getOtaPackages(pageLink).subscribe(otaPackages => {
-  console.log('List of Ota Packages:', otaPackages);
+  console.log('Get Ota Packages:', otaPackages);
 });
 ```
 
 **2. getOtaPackagesInfoByDeviceProfileId**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const otaPackageService = $injector.get(self.ctx.servicesMap.get('otaPackageService'));
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const deviceProfileId = 'your-device-profile-id';
-const type = {  // OtaUpdateType object
-  // ... set the fields you need
-};
-otaPackageService.getOtaPackagesInfoByDeviceProfileId(pageLink, deviceProfileId, type).subscribe(otaPackagesInfoByDeviceProfiles => {
-  console.log('List of Ota Packages Info By Device Profile Ids:', otaPackagesInfoByDeviceProfiles);
+otaPackageService.getOtaPackagesInfoByDeviceProfileId(pageLink, 'your-deviceprofile-id', 'your-type-value').subscribe(otaPackagesInfoByDeviceProfileId => {
+  console.log('Get Ota Packages Info By Device Profile Id:', otaPackagesInfoByDeviceProfileId);
 });
 ```
 
 **3. getOtaPackage**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const otaPackageService = $injector.get(self.ctx.servicesMap.get('otaPackageService'));
-const otaPackageId = 'your-ota-package-id';
-otaPackageService.getOtaPackage(otaPackageId).subscribe(otaPackage => {
+otaPackageService.getOtaPackage('your-otapackage-id').subscribe(otaPackage => {
   console.log('Get Ota Package:', otaPackage);
 });
 ```
@@ -47,10 +38,7 @@ otaPackageService.getOtaPackage(otaPackageId).subscribe(otaPackage => {
 **4. getOtaPackageInfo**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const otaPackageService = $injector.get(self.ctx.servicesMap.get('otaPackageService'));
-const otaPackageId = 'your-ota-package-id';
-otaPackageService.getOtaPackageInfo(otaPackageId).subscribe(otaPackageInfo => {
+otaPackageService.getOtaPackageInfo('your-otapackage-id').subscribe(otaPackageInfo => {
   console.log('Get Ota Package Info:', otaPackageInfo);
 });
 ```
@@ -58,10 +46,7 @@ otaPackageService.getOtaPackageInfo(otaPackageId).subscribe(otaPackageInfo => {
 **5. downloadOtaPackage**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const otaPackageService = $injector.get(self.ctx.servicesMap.get('otaPackageService'));
-const otaPackageId = 'your-ota-package-id';
-otaPackageService.downloadOtaPackage(otaPackageId).subscribe(downloadOtaPackage => {
+otaPackageService.downloadOtaPackage('your-otapackage-id').subscribe(downloadOtaPackage => {
   console.log('Download Ota Package:', downloadOtaPackage);
 });
 ```
@@ -69,89 +54,48 @@ otaPackageService.downloadOtaPackage(otaPackageId).subscribe(downloadOtaPackage 
 **6. saveOtaPackage**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const otaPackageService = $injector.get(self.ctx.servicesMap.get('otaPackageService'));
-const otaPackage = {  // OtaPackage object
-  // ... set the fields you need
-};
-otaPackageService.saveOtaPackage(otaPackage).subscribe(savedOtaPackage => {
-  console.log('Saved Ota Package:', savedOtaPackage);
+otaPackageService.saveOtaPackage('your-otapackage-value').subscribe(otaPackage => {
+  console.log('Save Ota Package:', otaPackage);
 });
 ```
 
 **7. saveOtaPackageInfo**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const otaPackageService = $injector.get(self.ctx.servicesMap.get('otaPackageService'));
-const otaPackageInfo = {  // OtaPackageInfo object
-  // ... set the fields you need
-};
-otaPackageService.saveOtaPackageInfo(otaPackageInfo).subscribe(savedOtaPackageInfo => {
-  console.log('Saved Ota Package Info:', savedOtaPackageInfo);
+otaPackageService.saveOtaPackageInfo('your-otapackageinfo-value').subscribe(otaPackageInfo => {
+  console.log('Save Ota Package Info:', otaPackageInfo);
 });
 ```
 
 **8. uploadOtaPackageFile**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const otaPackageService = $injector.get(self.ctx.servicesMap.get('otaPackageService'));
-const otaPackageId = 'your-ota-package-id';
-const file = {  // File object
-  // ... set the fields you need
-};
-const checksumAlgorithm = {  // ChecksumAlgorithm object
-  // ... set the fields you need
-};
-const checksum = 'your-checksum';
-otaPackageService.uploadOtaPackageFile(otaPackageId, file, checksumAlgorithm, checksum).subscribe(savedOtaPackageFile => {
-  console.log('Saved Ota Package File:', savedOtaPackageFile);
+otaPackageService.uploadOtaPackageFile('your-otapackage-id', 'your-file-value', 'your-checksumalgorithm-value', 'your-checksum-value').subscribe(uploadOtaPackageFile => {
+  console.log('Upload Ota Package File:', uploadOtaPackageFile);
 });
 ```
 
 **9. getOtaPackageInfoByDeviceGroupId**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const otaPackageService = $injector.get(self.ctx.servicesMap.get('otaPackageService'));
-const deviceGroupId = 'your-device-group-id';
-const type = {  // OtaUpdateType object
-  // ... set the fields you need
-};
-otaPackageService.getOtaPackageInfoByDeviceGroupId(deviceGroupId, type).subscribe(otaPackageInfoByDeviceGroup => {
-  console.log('Get Ota Package Info By Device Group Id:', otaPackageInfoByDeviceGroup);
+otaPackageService.getOtaPackageInfoByDeviceGroupId('your-devicegroup-id', 'your-type-value').subscribe(otaPackageInfoByDeviceGroupId => {
+  console.log('Get Ota Package Info By Device Group Id:', otaPackageInfoByDeviceGroupId);
 });
 ```
 
 **10. getOtaPackagesInfoByDeviceGroupId**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const otaPackageService = $injector.get(self.ctx.servicesMap.get('otaPackageService'));
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const deviceGroupId = 'your-device-group-id';
-const type = {  // OtaUpdateType object
-  // ... set the fields you need
-};
-otaPackageService.getOtaPackagesInfoByDeviceGroupId(pageLink, deviceGroupId, type).subscribe(otaPackagesInfoByDeviceGroups => {
-  console.log('List of Ota Packages Info By Device Group Ids:', otaPackagesInfoByDeviceGroups);
+otaPackageService.getOtaPackagesInfoByDeviceGroupId(pageLink, 'your-devicegroup-id', 'your-type-value').subscribe(otaPackagesInfoByDeviceGroupId => {
+  console.log('Get Ota Packages Info By Device Group Id:', otaPackagesInfoByDeviceGroupId);
 });
 ```
 
 **11. countUpdateDeviceAfterChangePackage**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const otaPackageService = $injector.get(self.ctx.servicesMap.get('otaPackageService'));
-const type = {  // OtaUpdateType object
-  // ... set the fields you need
-};
-const entityId = {  // EntityId object
-  // ... set the fields you need
-};
-const packageId = 'your-package-id';
-otaPackageService.countUpdateDeviceAfterChangePackage(type, entityId, packageId).subscribe(countUpdateDeviceAfterChangePackage => {
+otaPackageService.countUpdateDeviceAfterChangePackage('your-type-value', 'your-entity-id', 'your-package-id').subscribe(countUpdateDeviceAfterChangePackage => {
   console.log('Count Update Device After Change Package:', countUpdateDeviceAfterChangePackage);
 });
 ```
@@ -159,15 +103,7 @@ otaPackageService.countUpdateDeviceAfterChangePackage(type, entityId, packageId)
 **12. confirmDialogUpdatePackage**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const otaPackageService = $injector.get(self.ctx.servicesMap.get('otaPackageService'));
-const entity = {  // BaseData<EntityId>&OtaPagesIds object
-  // ... set the fields you need
-};
-const originEntity = {  // BaseData<EntityId>&OtaPagesIds object
-  // ... set the fields you need
-};
-otaPackageService.confirmDialogUpdatePackage(entity, originEntity).subscribe(confirmDialogUpdatePackage => {
+otaPackageService.confirmDialogUpdatePackage('your-entity-value', 'your-originentity-value').subscribe(confirmDialogUpdatePackage => {
   console.log('Confirm Dialog Update Package:', confirmDialogUpdatePackage);
 });
 ```

@@ -1,5 +1,7 @@
 # ASSET PROFILE SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -10,21 +12,16 @@ const assetProfileService = $injector.get(self.ctx.servicesMap.get('assetProfile
 **1. getAssetProfiles**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const assetProfileService = $injector.get(self.ctx.servicesMap.get('assetProfileService'));
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
 assetProfileService.getAssetProfiles(pageLink).subscribe(assetProfiles => {
-  console.log('List of Asset Profiles:', assetProfiles);
+  console.log('Get Asset Profiles:', assetProfiles);
 });
 ```
 
 **2. getAssetProfile**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const assetProfileService = $injector.get(self.ctx.servicesMap.get('assetProfileService'));
-const assetProfileId = 'your-asset-profile-id';
-assetProfileService.getAssetProfile(assetProfileId).subscribe(assetProfile => {
+assetProfileService.getAssetProfile('your-assetprofile-id').subscribe(assetProfile => {
   console.log('Get Asset Profile:', assetProfile);
 });
 ```
@@ -32,43 +29,30 @@ assetProfileService.getAssetProfile(assetProfileId).subscribe(assetProfile => {
 **3. exportAssetProfile**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const assetProfileService = $injector.get(self.ctx.servicesMap.get('assetProfileService'));
-const assetProfileId = 'your-asset-profile-id';
-assetProfileService.exportAssetProfile(assetProfileId).subscribe(exportAssetProfile => {
-  console.log('Export Asset Profile:', exportAssetProfile);
+assetProfileService.exportAssetProfile('your-assetprofile-id').subscribe(assetProfile => {
+  console.log('Export Asset Profile:', assetProfile);
 });
 ```
 
 **4. saveAssetProfile**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const assetProfileService = $injector.get(self.ctx.servicesMap.get('assetProfileService'));
-const assetProfile = {  // AssetProfile object
-  // ... set the fields you need
-};
-assetProfileService.saveAssetProfile(assetProfile).subscribe(savedAssetProfile => {
-  console.log('Saved Asset Profile:', savedAssetProfile);
+assetProfileService.saveAssetProfile('your-assetprofile-value').subscribe(assetProfile => {
+  console.log('Save Asset Profile:', assetProfile);
 });
 ```
 
 **5. setDefaultAssetProfile**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const assetProfileService = $injector.get(self.ctx.servicesMap.get('assetProfileService'));
-const assetProfileId = 'your-asset-profile-id';
-assetProfileService.setDefaultAssetProfile(assetProfileId).subscribe(setDefaultAssetProfile => {
-  console.log('Set Default Asset Profile:', setDefaultAssetProfile);
+assetProfileService.setDefaultAssetProfile('your-assetprofile-id').subscribe(defaultAssetProfile => {
+  console.log('Set Default Asset Profile:', defaultAssetProfile);
 });
 ```
 
 **6. getDefaultAssetProfileInfo**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const assetProfileService = $injector.get(self.ctx.servicesMap.get('assetProfileService'));
 assetProfileService.getDefaultAssetProfileInfo().subscribe(defaultAssetProfileInfo => {
   console.log('Get Default Asset Profile Info:', defaultAssetProfileInfo);
 });
@@ -77,10 +61,7 @@ assetProfileService.getDefaultAssetProfileInfo().subscribe(defaultAssetProfileIn
 **7. getAssetProfileInfo**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const assetProfileService = $injector.get(self.ctx.servicesMap.get('assetProfileService'));
-const assetProfileId = 'your-asset-profile-id';
-assetProfileService.getAssetProfileInfo(assetProfileId).subscribe(assetProfileInfo => {
+assetProfileService.getAssetProfileInfo('your-assetprofile-id').subscribe(assetProfileInfo => {
   console.log('Get Asset Profile Info:', assetProfileInfo);
 });
 ```
@@ -88,32 +69,24 @@ assetProfileService.getAssetProfileInfo(assetProfileId).subscribe(assetProfileIn
 **8. getAssetProfileInfos**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const assetProfileService = $injector.get(self.ctx.servicesMap.get('assetProfileService'));
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
 assetProfileService.getAssetProfileInfos(pageLink).subscribe(assetProfileInfos => {
-  console.log('List of Asset Profile Infos:', assetProfileInfos);
+  console.log('Get Asset Profile Infos:', assetProfileInfos);
 });
 ```
 
 **9. getAssetProfilesByIds**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const assetProfileService = $injector.get(self.ctx.servicesMap.get('assetProfileService'));
-const assetProfileIds = ['your-asset-profile-i-1', 'your-asset-profile-i-2'];
-assetProfileService.getAssetProfilesByIds(assetProfileIds).subscribe(assetProfilesBys => {
-  console.log('List of Asset Profiles By Ids:', assetProfilesBys);
+assetProfileService.getAssetProfilesByIds('your-assetprofileids-value').subscribe(assetProfilesByIds => {
+  console.log('Get Asset Profiles By Ids:', assetProfilesByIds);
 });
 ```
 
 **10. getAssetProfileNames**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const assetProfileService = $injector.get(self.ctx.servicesMap.get('assetProfileService'));
-const activeOnly = 'value';
-assetProfileService.getAssetProfileNames(activeOnly).subscribe(assetProfileNames => {
-  console.log('List of Asset Profile Names:', assetProfileNames);
+assetProfileService.getAssetProfileNames('your-activeonly-value').subscribe(assetProfileNames => {
+  console.log('Get Asset Profile Names:', assetProfileNames);
 });
 ```

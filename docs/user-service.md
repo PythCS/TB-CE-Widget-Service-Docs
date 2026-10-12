@@ -1,5 +1,7 @@
 # USER SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -13,52 +15,43 @@ const userService = self.ctx.userService;
 **1. getTenantAdmins**
 
 ```javascript
-const userService = self.ctx.userService;
-const tenantId = 'your-tenant-id';
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-userService.getTenantAdmins(tenantId, pageLink).subscribe(tenantAdmins => {
-  console.log('List of Tenant Admins:', tenantAdmins);
+self.ctx.userService.getTenantAdmins('your-tenant-id', pageLink).subscribe(admins => {
+  console.log('Get Tenant Admins:', admins);
 });
 ```
 
 **2. getCustomerUsers**
 
 ```javascript
-const userService = self.ctx.userService;
-const customerId = 'your-customer-id';
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-userService.getCustomerUsers(customerId, pageLink).subscribe(customerUsers => {
-  console.log('List of Customer Users:', customerUsers);
+self.ctx.userService.getCustomerUsers('your-customer-id', pageLink).subscribe(users => {
+  console.log('Get Customer Users:', users);
 });
 ```
 
 **3. getAllCustomerUsers**
 
 ```javascript
-const userService = self.ctx.userService;
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-userService.getAllCustomerUsers(pageLink).subscribe(allCustomerUsers => {
-  console.log('List of All Customer Users:', allCustomerUsers);
+self.ctx.userService.getAllCustomerUsers(pageLink).subscribe(allCustomerUsers => {
+  console.log('Get All Customer Users:', allCustomerUsers);
 });
 ```
 
 **4. getUsersForAssign**
 
 ```javascript
-const userService = self.ctx.userService;
-const alarmId = 'your-alarm-id';
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-userService.getUsersForAssign(alarmId, pageLink).subscribe(usersForAssigns => {
-  console.log('List of Users For Assigns:', usersForAssigns);
+self.ctx.userService.getUsersForAssign('your-alarm-id', pageLink).subscribe(usersForAssign => {
+  console.log('Get Users For Assign:', usersForAssign);
 });
 ```
 
 **5. getUser**
 
 ```javascript
-const userService = self.ctx.userService;
-const userId = 'your-user-id';
-userService.getUser(userId).subscribe(user => {
+self.ctx.userService.getUser('your-user-id').subscribe(user => {
   console.log('Get User:', user);
 });
 ```
@@ -66,76 +59,58 @@ userService.getUser(userId).subscribe(user => {
 **6. getUserInfo**
 
 ```javascript
-const userService = self.ctx.userService;
-const userId = 'your-user-id';
-userService.getUserInfo(userId).subscribe(userInfo => {
-  console.log('Get User Info:', userInfo);
+self.ctx.userService.getUserInfo('your-user-id').subscribe(info => {
+  console.log('Get User Info:', info);
 });
 ```
 
 **7. getUsers** (!!CE VERSION!!)
 
 ```javascript
-const userService = self.ctx.userService;
-const userIds = ['your-user-i-1', 'your-user-i-2'];
-userService.getUsers(userIds).subscribe(users => {
-  console.log('List of Users:', users);
+self.ctx.userService.getUsers('your-userids-value').subscribe(users => {
+  console.log('Get Users:', users);
 });
 ```
 
 **8. getUserUsers**
 
 ```javascript
-const userService = self.ctx.userService;
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-userService.getUserUsers(pageLink).subscribe(userUsers => {
-  console.log('List of User Users:', userUsers);
+self.ctx.userService.getUserUsers(pageLink).subscribe(userUsers => {
+  console.log('Get User Users:', userUsers);
 });
 ```
 
 **9. getAllUserInfos**
 
 ```javascript
-const userService = self.ctx.userService;
-const includeCustomers = true;
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-userService.getAllUserInfos(includeCustomers, pageLink).subscribe(allUserInfos => {
-  console.log('List of All User Infos:', allUserInfos);
+self.ctx.userService.getAllUserInfos(true, pageLink).subscribe(allUserInfos => {
+  console.log('Get All User Infos:', allUserInfos);
 });
 ```
 
 **10. getCustomerUserInfos**
 
 ```javascript
-const userService = self.ctx.userService;
-const includeCustomers = true;
-const customerId = 'your-customer-id';
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-userService.getCustomerUserInfos(includeCustomers, customerId, pageLink).subscribe(customerUserInfos => {
-  console.log('List of Customer User Infos:', customerUserInfos);
+self.ctx.userService.getCustomerUserInfos(true, 'your-customer-id', pageLink).subscribe(customerUserInfos => {
+  console.log('Get Customer User Infos:', customerUserInfos);
 });
 ```
 
 **11. saveUser**
 
 ```javascript
-const userService = self.ctx.userService;
-const user = {  // User object
-  // ... set the fields you need
-};
-const sendActivationMail = 'value';
-const entityGroupIds = ['your-entity-group-i-1', 'your-entity-group-i-2'];
-userService.saveUser(user, sendActivationMail, entityGroupIds).subscribe(savedUser => {
-  console.log('Saved User:', savedUser);
+self.ctx.userService.saveUser('your-user-value', 'your-email@example.com', 'your-entitygroupids-value').subscribe(user => {
+  console.log('Save User:', user);
 });
 ```
 
 **12. getActivationLink**
 
 ```javascript
-const userService = self.ctx.userService;
-const userId = 'your-user-id';
-userService.getActivationLink(userId).subscribe(activationLink => {
+self.ctx.userService.getActivationLink('your-user-id').subscribe(activationLink => {
   console.log('Get Activation Link:', activationLink);
 });
 ```
@@ -143,9 +118,7 @@ userService.getActivationLink(userId).subscribe(activationLink => {
 **13. getActivationLinkInfo**
 
 ```javascript
-const userService = self.ctx.userService;
-const userId = 'your-user-id';
-userService.getActivationLinkInfo(userId).subscribe(activationLinkInfo => {
+self.ctx.userService.getActivationLinkInfo('your-user-id').subscribe(activationLinkInfo => {
   console.log('Get Activation Link Info:', activationLinkInfo);
 });
 ```
@@ -153,20 +126,16 @@ userService.getActivationLinkInfo(userId).subscribe(activationLinkInfo => {
 **14. setUserCredentialsEnabled**
 
 ```javascript
-const userService = self.ctx.userService;
-const userId = 'your-user-id';
-const userCredentialsEnabled = true;
-userService.setUserCredentialsEnabled(userId, userCredentialsEnabled).subscribe(setUserCredentialsEnabled => {
-  console.log('Set User Credentials Enabled:', setUserCredentialsEnabled);
+self.ctx.userService.setUserCredentialsEnabled('your-user-id', true).subscribe(userCredentialsEnabled => {
+  console.log('Set User Credentials Enabled:', userCredentialsEnabled);
 });
 ```
 
 **15. findUsersByQuery**
 
 ```javascript
-const userService = self.ctx.userService;
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-userService.findUsersByQuery(pageLink).subscribe(usersByQuerys => {
-  console.log('List of Users By Querys:', usersByQuerys);
+self.ctx.userService.findUsersByQuery(pageLink).subscribe(usersByQuery => {
+  console.log('Find Users By Query:', usersByQuery);
 });
 ```

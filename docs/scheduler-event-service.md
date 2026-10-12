@@ -1,5 +1,7 @@
 # SCHEDULER EVENT SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -10,60 +12,40 @@ const schedulerEventService = $injector.get(self.ctx.servicesMap.get('schedulerE
 **1. getSchedulerEvents**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const schedulerEventService = $injector.get(self.ctx.servicesMap.get('schedulerEventService'));
-const type = 'value';
-schedulerEventService.getSchedulerEvents(type).subscribe(schedulerEvents => {
-  console.log('List of Scheduler Events:', schedulerEvents);
+schedulerEventService.getSchedulerEvents('your-type-value').subscribe(schedulerEvents => {
+  console.log('Get Scheduler Events:', schedulerEvents);
 });
 ```
 
 **2. getSchedulerEventsByPageLink**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const schedulerEventService = $injector.get(self.ctx.servicesMap.get('schedulerEventService'));
-const type = 'type-value';
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const edgeId = 'your-edge-id';
-schedulerEventService.getSchedulerEventsByPageLink(type, pageLink, edgeId).subscribe(schedulerEventsByPageLinks => {
-  console.log('List of Scheduler Events By Page Links:', schedulerEventsByPageLinks);
+schedulerEventService.getSchedulerEventsByPageLink('your-type-value', pageLink, 'your-edge-id').subscribe(schedulerEventsByPageLink => {
+  console.log('Get Scheduler Events By Page Link:', schedulerEventsByPageLink);
 });
 ```
 
 **3. getCalendarSchedulerEvents**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const schedulerEventService = $injector.get(self.ctx.servicesMap.get('schedulerEventService'));
-const type = 'type-value';
-const startTime = 10;
-const endTime = 10;
-const textSearch = 'your-text-search';
-const edgeId = 'your-edge-id';
-schedulerEventService.getCalendarSchedulerEvents(type, startTime, endTime, textSearch, edgeId).subscribe(calendarSchedulerEvents => {
-  console.log('List of Calendar Scheduler Events:', calendarSchedulerEvents);
+schedulerEventService.getCalendarSchedulerEvents('your-type-value', 0, 0, 'your-textsearch-value', 'your-edge-id').subscribe(calendarSchedulerEvents => {
+  console.log('Get Calendar Scheduler Events:', calendarSchedulerEvents);
 });
 ```
 
 **4. getSchedulerEventsByIds**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const schedulerEventService = $injector.get(self.ctx.servicesMap.get('schedulerEventService'));
-const schedulerEventIds = ['your-scheduler-event-i-1', 'your-scheduler-event-i-2'];
-schedulerEventService.getSchedulerEventsByIds(schedulerEventIds).subscribe(schedulerEventsBys => {
-  console.log('List of Scheduler Events By Ids:', schedulerEventsBys);
+schedulerEventService.getSchedulerEventsByIds('your-schedulereventids-value').subscribe(schedulerEventsByIds => {
+  console.log('Get Scheduler Events By Ids:', schedulerEventsByIds);
 });
 ```
 
 **5. getSchedulerEventInfo**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const schedulerEventService = $injector.get(self.ctx.servicesMap.get('schedulerEventService'));
-const schedulerEventId = 'your-scheduler-event-id';
-schedulerEventService.getSchedulerEventInfo(schedulerEventId).subscribe(schedulerEventInfo => {
+schedulerEventService.getSchedulerEventInfo('your-schedulerevent-id').subscribe(schedulerEventInfo => {
   console.log('Get Scheduler Event Info:', schedulerEventInfo);
 });
 ```
@@ -71,10 +53,7 @@ schedulerEventService.getSchedulerEventInfo(schedulerEventId).subscribe(schedule
 **6. getSchedulerEvent**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const schedulerEventService = $injector.get(self.ctx.servicesMap.get('schedulerEventService'));
-const schedulerEventId = 'your-scheduler-event-id';
-schedulerEventService.getSchedulerEvent(schedulerEventId).subscribe(schedulerEvent => {
+schedulerEventService.getSchedulerEvent('your-schedulerevent-id').subscribe(schedulerEvent => {
   console.log('Get Scheduler Event:', schedulerEvent);
 });
 ```
@@ -82,48 +61,31 @@ schedulerEventService.getSchedulerEvent(schedulerEventId).subscribe(schedulerEve
 **7. saveSchedulerEvent**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const schedulerEventService = $injector.get(self.ctx.servicesMap.get('schedulerEventService'));
-const schedulerEvent = {  // SchedulerEvent object
-  // ... set the fields you need
-};
-schedulerEventService.saveSchedulerEvent(schedulerEvent).subscribe(savedSchedulerEvent => {
-  console.log('Saved Scheduler Event:', savedSchedulerEvent);
+schedulerEventService.saveSchedulerEvent('your-schedulerevent-value').subscribe(schedulerEvent => {
+  console.log('Save Scheduler Event:', schedulerEvent);
 });
 ```
 
 **8. getEdgeSchedulerEvents**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const schedulerEventService = $injector.get(self.ctx.servicesMap.get('schedulerEventService'));
-const edgeId = 'your-edge-id';
-schedulerEventService.getEdgeSchedulerEvents(edgeId).subscribe(edgeSchedulerEvents => {
-  console.log('List of Edge Scheduler Events:', edgeSchedulerEvents);
+schedulerEventService.getEdgeSchedulerEvents('your-edge-id').subscribe(edgeSchedulerEvents => {
+  console.log('Get Edge Scheduler Events:', edgeSchedulerEvents);
 });
 ```
 
 **9. assignSchedulerEventToEdge**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const schedulerEventService = $injector.get(self.ctx.servicesMap.get('schedulerEventService'));
-const edgeId = 'your-edge-id';
-const schedulerEventId = 'your-scheduler-event-id';
-schedulerEventService.assignSchedulerEventToEdge(edgeId, schedulerEventId).subscribe(assignSchedulerEventToEdge => {
-  console.log('Assign Scheduler Event To Edge:', assignSchedulerEventToEdge);
+schedulerEventService.assignSchedulerEventToEdge('your-edge-id', 'your-schedulerevent-id').subscribe(schedulerEventToEdge => {
+  console.log('Assign Scheduler Event To Edge:', schedulerEventToEdge);
 });
 ```
 
 **10. getScheduledReports**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const schedulerEventService = $injector.get(self.ctx.servicesMap.get('schedulerEventService'));
-const query = {  // ReportQuery object
-  // ... set the fields you need
-};
-schedulerEventService.getScheduledReports(query).subscribe(scheduledReports => {
-  console.log('List of Scheduled Reports:', scheduledReports);
+schedulerEventService.getScheduledReports('your-query-value').subscribe(scheduledReports => {
+  console.log('Get Scheduled Reports:', scheduledReports);
 });
 ```

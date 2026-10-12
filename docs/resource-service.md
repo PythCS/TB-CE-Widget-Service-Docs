@@ -1,5 +1,7 @@
 # RESOURCE SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -13,33 +15,25 @@ const resourceService = self.ctx.resourceService;
 **1. getResources**
 
 ```javascript
-const resourceService = self.ctx.resourceService;
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const resourceType = [];  // e.g. array of resource-type values
-const resourceSubType = {  // ResourceSubType object
-  // ... set the fields you need
-};
-resourceService.getResources(pageLink, resourceType, resourceSubType).subscribe(resources => {
-  console.log('List of Resources:', resources);
+self.ctx.resourceService.getResources(pageLink, 'your-resourcetype-value', 'your-resourcesubtype-value').subscribe(resources => {
+  console.log('Get Resources:', resources);
 });
 ```
 
 **2. getTenantResources**
 
 ```javascript
-const resourceService = self.ctx.resourceService;
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-resourceService.getTenantResources(pageLink).subscribe(tenantResources => {
-  console.log('List of Tenant Resources:', tenantResources);
+self.ctx.resourceService.getTenantResources(pageLink).subscribe(tenantResources => {
+  console.log('Get Tenant Resources:', tenantResources);
 });
 ```
 
 **3. getResource**
 
 ```javascript
-const resourceService = self.ctx.resourceService;
-const resourceId = 'your-resource-id';
-resourceService.getResource(resourceId).subscribe(resource => {
+self.ctx.resourceService.getResource('your-resource-id').subscribe(resource => {
   console.log('Get Resource:', resource);
 });
 ```
@@ -47,25 +41,15 @@ resourceService.getResource(resourceId).subscribe(resource => {
 **4. getResourceInfoById**
 
 ```javascript
-const resourceService = self.ctx.resourceService;
-const resourceId = 'your-resource-id';
-resourceService.getResourceInfoById(resourceId).subscribe(resourceInfoBy => {
-  console.log('Get Resource Info By Id:', resourceInfoBy);
+self.ctx.resourceService.getResourceInfoById('your-resource-id').subscribe(resourceInfoById => {
+  console.log('Get Resource Info By Id:', resourceInfoById);
 });
 ```
 
 **5. getResourceInfo**
 
 ```javascript
-const resourceService = self.ctx.resourceService;
-const type = {  // ResourceType object
-  // ... set the fields you need
-};
-const scope = {  // TBResourceScope object
-  // ... set the fields you need
-};
-const key = 'key-value';
-resourceService.getResourceInfo(type, scope, key).subscribe(resourceInfo => {
+self.ctx.resourceService.getResourceInfo('your-type-value', 'your-scope-value', 'your-key-value').subscribe(resourceInfo => {
   console.log('Get Resource Info:', resourceInfo);
 });
 ```
@@ -73,9 +57,7 @@ resourceService.getResourceInfo(type, scope, key).subscribe(resourceInfo => {
 **6. downloadResource**
 
 ```javascript
-const resourceService = self.ctx.resourceService;
-const resourceId = 'your-resource-id';
-resourceService.downloadResource(resourceId).subscribe(downloadResource => {
+self.ctx.resourceService.downloadResource('your-resource-id').subscribe(downloadResource => {
   console.log('Download Resource:', downloadResource);
 });
 ```
@@ -83,79 +65,55 @@ resourceService.downloadResource(resourceId).subscribe(downloadResource => {
 **7. saveResources**
 
 ```javascript
-const resourceService = self.ctx.resourceService;
-const resources = [];  // e.g. array of resources values
-resourceService.saveResources(resources).subscribe(savedResources => {
-  console.log('Saved Resources:', savedResources);
+self.ctx.resourceService.saveResources('your-resources-value').subscribe(resources => {
+  console.log('Save Resources:', resources);
 });
 ```
 
 **8. saveResource**
 
 ```javascript
-const resourceService = self.ctx.resourceService;
-const resource = {  // Resource object
-  // ... set the fields you need
-};
-resourceService.saveResource(resource).subscribe(savedResource => {
-  console.log('Saved Resource:', savedResource);
+self.ctx.resourceService.saveResource('your-resource-value').subscribe(resource => {
+  console.log('Save Resource:', resource);
 });
 ```
 
 **9. uploadResources**
 
 ```javascript
-const resourceService = self.ctx.resourceService;
-const resources = [];  // e.g. array of resources values
-resourceService.uploadResources(resources).subscribe(savedResources => {
-  console.log('Saved Resources:', savedResources);
+self.ctx.resourceService.uploadResources('your-resources-value').subscribe(uploadResources => {
+  console.log('Upload Resources:', uploadResources);
 });
 ```
 
 **10. uploadResource**
 
 ```javascript
-const resourceService = self.ctx.resourceService;
-const resource = {  // Resource object
-  // ... set the fields you need
-};
-resourceService.uploadResource(resource).subscribe(savedResource => {
-  console.log('Saved Resource:', savedResource);
+self.ctx.resourceService.uploadResource('your-resource-value').subscribe(uploadResource => {
+  console.log('Upload Resource:', uploadResource);
 });
 ```
 
 **11. updatedResourceInfo**
 
 ```javascript
-const resourceService = self.ctx.resourceService;
-const resourceId = 'your-resource-id';
-const updatedResources = {  // Partial<Omit<Resource object
-  // ... set the fields you need
-};
-resourceService.updatedResourceInfo(resourceId, updatedResources).subscribe(saveddResourceInfo => {
-  console.log('Saved Updated Resource Info:', saveddResourceInfo);
+self.ctx.resourceService.updatedResourceInfo('your-resource-id', 'your-updatedresources-value').subscribe(dResourceInfo => {
+  console.log('Updated Resource Info:', dResourceInfo);
 });
 ```
 
 **12. updatedResourceData**
 
 ```javascript
-const resourceService = self.ctx.resourceService;
-const resourceId = 'your-resource-id';
-const data = {  // File object
-  // ... set the fields you need
-};
-resourceService.updatedResourceData(resourceId, data).subscribe(saveddResourceData => {
-  console.log('Saved Updated Resource Data:', saveddResourceData);
+self.ctx.resourceService.updatedResourceData('your-resource-id', 'your-data-value').subscribe(dResourceData => {
+  console.log('Updated Resource Data:', dResourceData);
 });
 ```
 
 **13. getResourcesByIds**
 
 ```javascript
-const resourceService = self.ctx.resourceService;
-const ids = [];  // e.g. array of ids values
-resourceService.getResourcesByIds(ids).subscribe(resourcesBys => {
-  console.log('List of Resources By Ids:', resourcesBys);
+self.ctx.resourceService.getResourcesByIds('your-ids-value').subscribe(resourcesByIds => {
+  console.log('Get Resources By Ids:', resourcesByIds);
 });
 ```

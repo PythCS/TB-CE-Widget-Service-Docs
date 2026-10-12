@@ -1,5 +1,7 @@
 # AI MODEL SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -10,47 +12,32 @@ const aiModelService = $injector.get(self.ctx.servicesMap.get('aiModelService'))
 **1. saveAiModel**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const aiModelService = $injector.get(self.ctx.servicesMap.get('aiModelService'));
-const aiModel = {  // AiModel object
-  // ... set the fields you need
-};
-aiModelService.saveAiModel(aiModel).subscribe(savedAiModel => {
-  console.log('Saved Ai Model:', savedAiModel);
+aiModelService.saveAiModel('your-aimodel-value').subscribe(aiModel => {
+  console.log('Save Ai Model:', aiModel);
 });
 ```
 
 **2. getAiModels**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const aiModelService = $injector.get(self.ctx.servicesMap.get('aiModelService'));
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
 aiModelService.getAiModels(pageLink).subscribe(aiModels => {
-  console.log('List of Ai Models:', aiModels);
+  console.log('Get Ai Models:', aiModels);
 });
 ```
 
 **3. getAiModelById**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const aiModelService = $injector.get(self.ctx.servicesMap.get('aiModelService'));
-const aiModelId = 'your-ai-model-id';
-aiModelService.getAiModelById(aiModelId).subscribe(aiModelBy => {
-  console.log('Get Ai Model By Id:', aiModelBy);
+aiModelService.getAiModelById('your-aimodel-id').subscribe(aiModelById => {
+  console.log('Get Ai Model By Id:', aiModelById);
 });
 ```
 
 **4. checkConnectivity**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const aiModelService = $injector.get(self.ctx.servicesMap.get('aiModelService'));
-const aiModelWithUserMsg = {  // AiModelWithUserMsg object
-  // ... set the fields you need
-};
-aiModelService.checkConnectivity(aiModelWithUserMsg).subscribe(checkConnectivity => {
-  console.log('Check Connectivity:', checkConnectivity);
+aiModelService.checkConnectivity('your-aimodelwithusermsg-value').subscribe(connectivity => {
+  console.log('Check Connectivity:', connectivity);
 });
 ```

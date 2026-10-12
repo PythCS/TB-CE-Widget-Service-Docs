@@ -1,5 +1,7 @@
 # SECRET STORAGE SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -10,58 +12,40 @@ const secretStorageService = $injector.get(self.ctx.servicesMap.get('secretStora
 **1. getSecrets**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const secretStorageService = $injector.get(self.ctx.servicesMap.get('secretStorageService'));
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
 secretStorageService.getSecrets(pageLink).subscribe(secrets => {
-  console.log('List of Secrets:', secrets);
+  console.log('Get Secrets:', secrets);
 });
 ```
 
 **2. saveSecret**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const secretStorageService = $injector.get(self.ctx.servicesMap.get('secretStorageService'));
-const secret = {  // SecretStorageInfo object
-  // ... set the fields you need
-};
-secretStorageService.saveSecret(secret).subscribe(savedSecret => {
-  console.log('Saved Secret:', savedSecret);
+secretStorageService.saveSecret('your-secret-value').subscribe(secret => {
+  console.log('Save Secret:', secret);
 });
 ```
 
 **3. updateSecretDescription**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const secretStorageService = $injector.get(self.ctx.servicesMap.get('secretStorageService'));
-const secretId = 'your-secret-id';
-const description = 'your-description';
-secretStorageService.updateSecretDescription(secretId, description).subscribe(savedSecretDescription => {
-  console.log('Saved Secret Description:', savedSecretDescription);
+secretStorageService.updateSecretDescription('your-secret-id', 'your-description-value').subscribe(result => {
+  console.log('Update Secret Description:', result);
 });
 ```
 
 **4. updateSecretValue**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const secretStorageService = $injector.get(self.ctx.servicesMap.get('secretStorageService'));
-const secretId = 'your-secret-id';
-const value = 'your-value';
-secretStorageService.updateSecretValue(secretId, value).subscribe(savedSecretValue => {
-  console.log('Saved Secret Value:', savedSecretValue);
+secretStorageService.updateSecretValue('your-secret-id', 'your-value-value').subscribe(result => {
+  console.log('Update Secret Value:', result);
 });
 ```
 
 **5. getSecretByName**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const secretStorageService = $injector.get(self.ctx.servicesMap.get('secretStorageService'));
-const name = 'name-value';
-secretStorageService.getSecretByName(name).subscribe(secretByName => {
+secretStorageService.getSecretByName('your-name-value').subscribe(secretByName => {
   console.log('Get Secret By Name:', secretByName);
 });
 ```

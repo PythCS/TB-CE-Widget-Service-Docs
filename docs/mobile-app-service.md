@@ -1,5 +1,7 @@
 # MOBILE APP SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -10,81 +12,57 @@ const mobileAppService = $injector.get(self.ctx.servicesMap.get('mobileAppServic
 **1. saveMobileApp**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const mobileAppService = $injector.get(self.ctx.servicesMap.get('mobileAppService'));
-const mobileApp = {  // MobileApp object
-  // ... set the fields you need
-};
-mobileAppService.saveMobileApp(mobileApp).subscribe(savedMobileApp => {
-  console.log('Saved Mobile App:', savedMobileApp);
+mobileAppService.saveMobileApp('your-mobileapp-value').subscribe(mobileApp => {
+  console.log('Save Mobile App:', mobileApp);
 });
 ```
 
 **2. getTenantMobileAppInfos**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const mobileAppService = $injector.get(self.ctx.servicesMap.get('mobileAppService'));
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const platformType = {  // PlatformType object
-  // ... set the fields you need
-};
-mobileAppService.getTenantMobileAppInfos(pageLink, platformType).subscribe(tenantMobileAppInfos => {
-  console.log('List of Tenant Mobile App Infos:', tenantMobileAppInfos);
+mobileAppService.getTenantMobileAppInfos(pageLink, 'your-platformtype-value').subscribe(tenantMobileAppInfos => {
+  console.log('Get Tenant Mobile App Infos:', tenantMobileAppInfos);
 });
 ```
 
 **3. getMobileAppInfoById**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const mobileAppService = $injector.get(self.ctx.servicesMap.get('mobileAppService'));
-const id = 'your-id';
-mobileAppService.getMobileAppInfoById(id).subscribe(mobileAppInfoBy => {
-  console.log('Get Mobile App Info By Id:', mobileAppInfoBy);
+mobileAppService.getMobileAppInfoById('your--id').subscribe(mobileAppInfoById => {
+  console.log('Get Mobile App Info By Id:', mobileAppInfoById);
 });
 ```
 
 **4. deleteMobileApp**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const mobileAppService = $injector.get(self.ctx.servicesMap.get('mobileAppService'));
-const id = 'your-id';
-mobileAppService.deleteMobileApp(id).subscribe(result => {
-  console.log('Delete Mobile App result:', result);
+mobileAppService.deleteMobileApp('your--id').subscribe(result => {
+  console.log('Delete Mobile App:', result);
 });
 ```
 
 **5. getTenantMobileAppBundleInfos**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const mobileAppService = $injector.get(self.ctx.servicesMap.get('mobileAppService'));
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
 mobileAppService.getTenantMobileAppBundleInfos(pageLink).subscribe(tenantMobileAppBundleInfos => {
-  console.log('List of Tenant Mobile App Bundle Infos:', tenantMobileAppBundleInfos);
+  console.log('Get Tenant Mobile App Bundle Infos:', tenantMobileAppBundleInfos);
 });
 ```
 
 **6. getMobileAppBundleInfoById**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const mobileAppService = $injector.get(self.ctx.servicesMap.get('mobileAppService'));
-const id = 'your-id';
-mobileAppService.getMobileAppBundleInfoById(id).subscribe(mobileAppBundleInfoBy => {
-  console.log('Get Mobile App Bundle Info By Id:', mobileAppBundleInfoBy);
+mobileAppService.getMobileAppBundleInfoById('your--id').subscribe(mobileAppBundleInfoById => {
+  console.log('Get Mobile App Bundle Info By Id:', mobileAppBundleInfoById);
 });
 ```
 
 **7. deleteMobileAppBundle**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const mobileAppService = $injector.get(self.ctx.servicesMap.get('mobileAppService'));
-const id = 'your-id';
-mobileAppService.deleteMobileAppBundle(id).subscribe(result => {
-  console.log('Delete Mobile App Bundle result:', result);
+mobileAppService.deleteMobileAppBundle('your--id').subscribe(result => {
+  console.log('Delete Mobile App Bundle:', result);
 });
 ```

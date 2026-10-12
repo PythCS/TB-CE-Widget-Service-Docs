@@ -1,5 +1,7 @@
 # EVENT SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -10,34 +12,17 @@ const eventService = $injector.get(self.ctx.servicesMap.get('eventService'));
 **1. getEvents**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const eventService = $injector.get(self.ctx.servicesMap.get('eventService'));
-const entityId = {  // EntityId object
-  // ... set the fields you need
-};
-const eventType = 'eventType';  // e.g. one of the allowed EventType
-const tenantId = 'your-tenant-id';
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-eventService.getEvents(entityId, eventType, tenantId, pageLink).subscribe(events => {
-  console.log('List of Events:', events);
+eventService.getEvents('your-entity-id', 'your-eventtype-value', 'your-tenant-id', pageLink).subscribe(events => {
+  console.log('Get Events:', events);
 });
 ```
 
 **2. getFilterEvents**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const eventService = $injector.get(self.ctx.servicesMap.get('eventService'));
-const entityId = {  // EntityId object
-  // ... set the fields you need
-};
-const eventType = 'eventType';  // e.g. one of the allowed EventType
-const tenantId = 'your-tenant-id';
-const filters = {  // FilterEventBody object
-  // ... set the fields you need
-};
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-eventService.getFilterEvents(entityId, eventType, tenantId, filters, pageLink).subscribe(filterEvents => {
-  console.log('List of Filter Events:', filterEvents);
+eventService.getFilterEvents('your-entity-id', 'your-eventtype-value', 'your-tenant-id', 'your-filters-value', pageLink).subscribe(filterEvents => {
+  console.log('Get Filter Events:', filterEvents);
 });
 ```

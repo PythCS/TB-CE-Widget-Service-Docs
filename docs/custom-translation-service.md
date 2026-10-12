@@ -1,5 +1,7 @@
 # CUSTOM TRANSLATION SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -10,8 +12,6 @@ const customTranslationService = $injector.get(self.ctx.servicesMap.get('customT
 **1. getAvailableLocales**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const customTranslationService = $injector.get(self.ctx.servicesMap.get('customTranslationService'));
 customTranslationService.getAvailableLocales().subscribe(availableLocales => {
   console.log('Get Available Locales:', availableLocales);
 });
@@ -20,8 +20,6 @@ customTranslationService.getAvailableLocales().subscribe(availableLocales => {
 **2. getAvailableJavaLocales**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const customTranslationService = $injector.get(self.ctx.servicesMap.get('customTranslationService'));
 customTranslationService.getAvailableJavaLocales().subscribe(availableJavaLocales => {
   console.log('Get Available Java Locales:', availableJavaLocales);
 });
@@ -30,20 +28,15 @@ customTranslationService.getAvailableJavaLocales().subscribe(availableJavaLocale
 **3. getTranslationInfos**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const customTranslationService = $injector.get(self.ctx.servicesMap.get('customTranslationService'));
 customTranslationService.getTranslationInfos().subscribe(translationInfos => {
-  console.log('List of Translation Infos:', translationInfos);
+  console.log('Get Translation Infos:', translationInfos);
 });
 ```
 
 **4. getTranslationForBasicEdit**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const customTranslationService = $injector.get(self.ctx.servicesMap.get('customTranslationService'));
-const localeCode = 'your-locale-code';
-customTranslationService.getTranslationForBasicEdit(localeCode).subscribe(translationForBasicEdit => {
+customTranslationService.getTranslationForBasicEdit('your-localecode-value').subscribe(translationForBasicEdit => {
   console.log('Get Translation For Basic Edit:', translationForBasicEdit);
 });
 ```
@@ -51,10 +44,7 @@ customTranslationService.getTranslationForBasicEdit(localeCode).subscribe(transl
 **5. getFullTranslation**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const customTranslationService = $injector.get(self.ctx.servicesMap.get('customTranslationService'));
-const localeCode = 'your-locale-code';
-customTranslationService.getFullTranslation(localeCode).subscribe(fullTranslation => {
+customTranslationService.getFullTranslation('your-localecode-value').subscribe(fullTranslation => {
   console.log('Get Full Translation:', fullTranslation);
 });
 ```
@@ -62,10 +52,7 @@ customTranslationService.getFullTranslation(localeCode).subscribe(fullTranslatio
 **6. downloadFullTranslation**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const customTranslationService = $injector.get(self.ctx.servicesMap.get('customTranslationService'));
-const localeCode = 'your-locale-code';
-customTranslationService.downloadFullTranslation(localeCode).subscribe(downloadFullTranslation => {
+customTranslationService.downloadFullTranslation('your-localecode-value').subscribe(downloadFullTranslation => {
   console.log('Download Full Translation:', downloadFullTranslation);
 });
 ```
@@ -73,47 +60,31 @@ customTranslationService.downloadFullTranslation(localeCode).subscribe(downloadF
 **7. deleteCustomTranslation**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const customTranslationService = $injector.get(self.ctx.servicesMap.get('customTranslationService'));
-const localeCode = 'your-locale-code';
-customTranslationService.deleteCustomTranslation(localeCode).subscribe(result => {
-  console.log('Delete Custom Translation result:', result);
+customTranslationService.deleteCustomTranslation('your-localecode-value').subscribe(result => {
+  console.log('Delete Custom Translation:', result);
 });
 ```
 
 **8. deleteCustomTranslationKey**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const customTranslationService = $injector.get(self.ctx.servicesMap.get('customTranslationService'));
-const localesCode = 'your-locales-code';
-const key = 'key-value';
-customTranslationService.deleteCustomTranslationKey(localesCode, key).subscribe(result => {
-  console.log('Delete Custom Translation Key result:', result);
+customTranslationService.deleteCustomTranslationKey('your-localescode-value', 'your-key-value').subscribe(result => {
+  console.log('Delete Custom Translation Key:', result);
 });
 ```
 
 **9. saveCustomTranslation**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const customTranslationService = $injector.get(self.ctx.servicesMap.get('customTranslationService'));
-const localeCode = 'your-locale-code';
-const customTranslationValue = {  // object object
-  // ... set the fields you need
-};
-customTranslationService.saveCustomTranslation(localeCode, customTranslationValue).subscribe(savedCustomTranslation => {
-  console.log('Saved Custom Translation:', savedCustomTranslation);
+customTranslationService.saveCustomTranslation('your-localecode-value', 'your-customtranslationvalue-value').subscribe(result => {
+  console.log('Save Custom Translation:', result);
 });
 ```
 
 **10. getCustomTranslation**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const customTranslationService = $injector.get(self.ctx.servicesMap.get('customTranslationService'));
-const localeCode = 'your-locale-code';
-customTranslationService.getCustomTranslation(localeCode).subscribe(customTranslation => {
+customTranslationService.getCustomTranslation('your-localecode-value').subscribe(customTranslation => {
   console.log('Get Custom Translation:', customTranslation);
 });
 ```
@@ -121,13 +92,7 @@ customTranslationService.getCustomTranslation(localeCode).subscribe(customTransl
 **11. patchCustomTranslation**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const customTranslationService = $injector.get(self.ctx.servicesMap.get('customTranslationService'));
-const localeCode = 'your-locale-code';
-const newCustomTranslation = {  // object object
-  // ... set the fields you need
-};
-customTranslationService.patchCustomTranslation(localeCode, newCustomTranslation).subscribe(patchCustomTranslation => {
-  console.log('Patch Custom Translation:', patchCustomTranslation);
+customTranslationService.patchCustomTranslation('your-localecode-value', 'your-newcustomtranslation-value').subscribe(result => {
+  console.log('Patch Custom Translation:', result);
 });
 ```

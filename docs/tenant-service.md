@@ -1,5 +1,7 @@
 # TENANT SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -10,43 +12,33 @@ const tenantService = $injector.get(self.ctx.servicesMap.get('tenantService'));
 **1. getTenants**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const tenantService = $injector.get(self.ctx.servicesMap.get('tenantService'));
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
 tenantService.getTenants(pageLink).subscribe(tenants => {
-  console.log('List of Tenants:', tenants);
+  console.log('Get Tenants:', tenants);
 });
 ```
 
 **2. getTenantsByIds**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const tenantService = $injector.get(self.ctx.servicesMap.get('tenantService'));
-const tenantIds = ['your-tenant-i-1', 'your-tenant-i-2'];
-tenantService.getTenantsByIds(tenantIds).subscribe(tenantsBys => {
-  console.log('List of Tenants By Ids:', tenantsBys);
+tenantService.getTenantsByIds('your-tenantids-value').subscribe(tenantsByIds => {
+  console.log('Get Tenants By Ids:', tenantsByIds);
 });
 ```
 
 **3. getTenantInfos**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const tenantService = $injector.get(self.ctx.servicesMap.get('tenantService'));
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
 tenantService.getTenantInfos(pageLink).subscribe(tenantInfos => {
-  console.log('List of Tenant Infos:', tenantInfos);
+  console.log('Get Tenant Infos:', tenantInfos);
 });
 ```
 
 **4. getTenant**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const tenantService = $injector.get(self.ctx.servicesMap.get('tenantService'));
-const tenantId = 'your-tenant-id';
-tenantService.getTenant(tenantId).subscribe(tenant => {
+tenantService.getTenant('your-tenant-id').subscribe(tenant => {
   console.log('Get Tenant:', tenant);
 });
 ```
@@ -54,10 +46,7 @@ tenantService.getTenant(tenantId).subscribe(tenant => {
 **5. getTenantInfo**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const tenantService = $injector.get(self.ctx.servicesMap.get('tenantService'));
-const tenantId = 'your-tenant-id';
-tenantService.getTenantInfo(tenantId).subscribe(tenantInfo => {
+tenantService.getTenantInfo('your-tenant-id').subscribe(tenantInfo => {
   console.log('Get Tenant Info:', tenantInfo);
 });
 ```
@@ -65,12 +54,7 @@ tenantService.getTenantInfo(tenantId).subscribe(tenantInfo => {
 **6. saveTenant**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const tenantService = $injector.get(self.ctx.servicesMap.get('tenantService'));
-const tenant = {  // Tenant object
-  // ... set the fields you need
-};
-tenantService.saveTenant(tenant).subscribe(savedTenant => {
-  console.log('Saved Tenant:', savedTenant);
+tenantService.saveTenant('your-tenant-value').subscribe(tenant => {
+  console.log('Save Tenant:', tenant);
 });
 ```

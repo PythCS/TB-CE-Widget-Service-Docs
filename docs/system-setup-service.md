@@ -1,5 +1,7 @@
 # SYSTEM SETUP SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -10,70 +12,54 @@ const systemSetupService = $injector.get(self.ctx.servicesMap.get('systemSetupSe
 **1. checkSetupState**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const systemSetupService = $injector.get(self.ctx.servicesMap.get('systemSetupService'));
-systemSetupService.checkSetupState().subscribe(checkSetupState => {
-  console.log('Check Setup State:', checkSetupState);
+systemSetupService.checkSetupState().subscribe(setupState => {
+  console.log('Check Setup State:', setupState);
 });
 ```
 
 **2. readableState**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const systemSetupService = $injector.get(self.ctx.servicesMap.get('systemSetupService'));
-const setupInfo = {  // SetupInfo object
-  // ... set the fields you need
-};
-const result = systemSetupService.readableState(setupInfo);
-console.log('Result:', result);
+systemSetupService.readableState('your-setupinfo-value').subscribe(readableState => {
+  console.log('Readable State:', readableState);
+});
 ```
 
 **3. handleSetupState**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const systemSetupService = $injector.get(self.ctx.servicesMap.get('systemSetupService'));
-const state = {  // SystemSetupState object
-  // ... set the fields you need
-};
-const result = systemSetupService.handleSetupState(state);
-console.log('Result:', result);
+systemSetupService.handleSetupState('your-state-value').subscribe(handleSetupState => {
+  console.log('Handle Setup State:', handleSetupState);
+});
 ```
 
 **4. finishSetup**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const systemSetupService = $injector.get(self.ctx.servicesMap.get('systemSetupService'));
-const result = systemSetupService.finishSetup();
-console.log('Result:', result);
+systemSetupService.finishSetup().subscribe(finishSetup => {
+  console.log('Finish Setup:', finishSetup);
+});
 ```
 
 **5. makeStartUpHandOff**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const systemSetupService = $injector.get(self.ctx.servicesMap.get('systemSetupService'));
-const gotoDefaultPlace = true;
-const result = systemSetupService.makeStartUpHandOff(gotoDefaultPlace);
-console.log('Result:', result);
+systemSetupService.makeStartUpHandOff(true).subscribe(makeStartUpHandOff => {
+  console.log('Make Start Up Hand Off:', makeStartUpHandOff);
+});
 ```
 
 **6. getState**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const systemSetupService = $injector.get(self.ctx.servicesMap.get('systemSetupService'));
-const result = systemSetupService.getState();
-console.log('Result:', result);
+systemSetupService.getState().subscribe(state => {
+  console.log('Get State:', state);
+});
 ```
 
 **7. getSetupState**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const systemSetupService = $injector.get(self.ctx.servicesMap.get('systemSetupService'));
 systemSetupService.getSetupState().subscribe(setupState => {
   console.log('Get Setup State:', setupState);
 });
@@ -82,10 +68,7 @@ systemSetupService.getSetupState().subscribe(setupState => {
 **8. getClaimInfo**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const systemSetupService = $injector.get(self.ctx.servicesMap.get('systemSetupService'));
-const claimToken = 'your-claim-token';
-systemSetupService.getClaimInfo(claimToken).subscribe(claimInfo => {
+systemSetupService.getClaimInfo('your-access-token').subscribe(claimInfo => {
   console.log('Get Claim Info:', claimInfo);
 });
 ```
@@ -93,8 +76,6 @@ systemSetupService.getClaimInfo(claimToken).subscribe(claimInfo => {
 **9. requestClaim**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const systemSetupService = $injector.get(self.ctx.servicesMap.get('systemSetupService'));
 systemSetupService.requestClaim().subscribe(requestClaim => {
   console.log('Request Claim:', requestClaim);
 });
@@ -103,10 +84,7 @@ systemSetupService.requestClaim().subscribe(requestClaim => {
 **10. applyLicenseKey**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const systemSetupService = $injector.get(self.ctx.servicesMap.get('systemSetupService'));
-const secret = 'your-secret';
-systemSetupService.applyLicenseKey(secret).subscribe(applyLicenseKey => {
+systemSetupService.applyLicenseKey('your-secret-value').subscribe(applyLicenseKey => {
   console.log('Apply License Key:', applyLicenseKey);
 });
 ```
@@ -114,10 +92,7 @@ systemSetupService.applyLicenseKey(secret).subscribe(applyLicenseKey => {
 **11. changeLicenseKey**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const systemSetupService = $injector.get(self.ctx.servicesMap.get('systemSetupService'));
-const secret = 'your-secret';
-systemSetupService.changeLicenseKey(secret).subscribe(changeLicenseKey => {
+systemSetupService.changeLicenseKey('your-secret-value').subscribe(changeLicenseKey => {
   console.log('Change License Key:', changeLicenseKey);
 });
 ```
@@ -125,10 +100,7 @@ systemSetupService.changeLicenseKey(secret).subscribe(changeLicenseKey => {
 **12. previewLicenseKey**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const systemSetupService = $injector.get(self.ctx.servicesMap.get('systemSetupService'));
-const secret = 'your-secret';
-systemSetupService.previewLicenseKey(secret).subscribe(previewLicenseKey => {
+systemSetupService.previewLicenseKey('your-secret-value').subscribe(previewLicenseKey => {
   console.log('Preview License Key:', previewLicenseKey);
 });
 ```
@@ -136,33 +108,23 @@ systemSetupService.previewLicenseKey(secret).subscribe(previewLicenseKey => {
 **13. completeSetup**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const systemSetupService = $injector.get(self.ctx.servicesMap.get('systemSetupService'));
-const request = {  // SystemSetupRequest object
-  // ... set the fields you need
-};
-systemSetupService.completeSetup(request).subscribe(completeSetup => {
-  console.log('Complete Setup:', completeSetup);
+systemSetupService.completeSetup('your-request-value').subscribe(result => {
+  console.log('Complete Setup:', result);
 });
 ```
 
 **14. confirmNonProduction**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const systemSetupService = $injector.get(self.ctx.servicesMap.get('systemSetupService'));
-systemSetupService.confirmNonProduction().subscribe(confirmNonProduction => {
-  console.log('Confirm Non Production:', confirmNonProduction);
+systemSetupService.confirmNonProduction().subscribe(result => {
+  console.log('Confirm Non Production:', result);
 });
 ```
 
 **15. initTranslate**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const systemSetupService = $injector.get(self.ctx.servicesMap.get('systemSetupService'));
-const setupCompleted = true;
-systemSetupService.initTranslate(setupCompleted).subscribe(initTranslate => {
+systemSetupService.initTranslate(true).subscribe(initTranslate => {
   console.log('Init Translate:', initTranslate);
 });
 ```

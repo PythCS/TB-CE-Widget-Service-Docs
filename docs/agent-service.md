@@ -1,5 +1,7 @@
 # AGENT SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -10,44 +12,31 @@ const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
 **1. getAgentById**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const agentId = 'your-agent-id';
-agentService.getAgentById(agentId).subscribe(agentBy => {
-  console.log('Get Agent By Id:', agentBy);
+agentService.getAgentById('your-agent-id').subscribe(agentById => {
+  console.log('Get Agent By Id:', agentById);
 });
 ```
 
 **2. getAgentInfoById**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const agentId = 'your-agent-id';
-agentService.getAgentInfoById(agentId).subscribe(agentInfoBy => {
-  console.log('Get Agent Info By Id:', agentInfoBy);
+agentService.getAgentInfoById('your-agent-id').subscribe(agentInfoById => {
+  console.log('Get Agent Info By Id:', agentInfoById);
 });
 ```
 
 **3. getAgentInfosByIds**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const agentIds = ['your-agent-i-1', 'your-agent-i-2'];
-agentService.getAgentInfosByIds(agentIds).subscribe(agentInfosBys => {
-  console.log('Get Agent Infos By Ids:', agentInfosBys);
+agentService.getAgentInfosByIds('your-agentids-value').subscribe(agentInfosByIds => {
+  console.log('Get Agent Infos By Ids:', agentInfosByIds);
 });
 ```
 
 **4. getAgentInstallInstructions**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const agentId = 'your-agent-id';
-const method = 'value';
-agentService.getAgentInstallInstructions(agentId, method).subscribe(agentInstallInstructions => {
+agentService.getAgentInstallInstructions('your-agent-id', 'your-method-value').subscribe(agentInstallInstructions => {
   console.log('Get Agent Install Instructions:', agentInstallInstructions);
 });
 ```
@@ -55,11 +44,7 @@ agentService.getAgentInstallInstructions(agentId, method).subscribe(agentInstall
 **5. getAgentProvisionInstructions**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const agentProfileId = 'your-agent-profile-id';
-const method = 'value';
-agentService.getAgentProvisionInstructions(agentProfileId, method).subscribe(agentProvisionInstructions => {
+agentService.getAgentProvisionInstructions('your-agentprofile-id', 'your-method-value').subscribe(agentProvisionInstructions => {
   console.log('Get Agent Provision Instructions:', agentProvisionInstructions);
 });
 ```
@@ -67,11 +52,7 @@ agentService.getAgentProvisionInstructions(agentProfileId, method).subscribe(age
 **6. upgradeAgent**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const agentId = 'your-agent-id';
-const imageRef = 'your-image-ref';
-agentService.upgradeAgent(agentId, imageRef).subscribe(upgradeAgent => {
+agentService.upgradeAgent('your-agent-id', 'your-imageref-value').subscribe(upgradeAgent => {
   console.log('Upgrade Agent:', upgradeAgent);
 });
 ```
@@ -79,123 +60,88 @@ agentService.upgradeAgent(agentId, imageRef).subscribe(upgradeAgent => {
 **7. saveAgent**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const agent = {  // Agent object
-  // ... set the fields you need
-};
-const entityGroupIds = ['your-entity-group-i-1', 'your-entity-group-i-2'];
-agentService.saveAgent(agent, entityGroupIds).subscribe(savedAgent => {
-  console.log('Saved Agent:', savedAgent);
+agentService.saveAgent('your-agent-value', 'your-entitygroupids-value').subscribe(agent => {
+  console.log('Save Agent:', agent);
 });
 ```
 
 **8. join**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const result = agentService.join();
-console.log('Result:', result);
+agentService.join().subscribe(join => {
+  console.log('Join:', join);
+});
 ```
 
 **9. deleteAgent**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const agentId = 'your-agent-id';
-agentService.deleteAgent(agentId).subscribe(result => {
-  console.log('Delete Agent result:', result);
+agentService.deleteAgent('your-agent-id').subscribe(result => {
+  console.log('Delete Agent:', result);
 });
 ```
 
 **10. getTenantAgentInfos**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
 agentService.getTenantAgentInfos(pageLink).subscribe(tenantAgentInfos => {
-  console.log('List of Tenant Agent Infos:', tenantAgentInfos);
+  console.log('Get Tenant Agent Infos:', tenantAgentInfos);
 });
 ```
 
 **11. getCustomerAgentInfos**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const customerId = 'your-customer-id';
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-agentService.getCustomerAgentInfos(customerId, pageLink).subscribe(customerAgentInfos => {
-  console.log('List of Customer Agent Infos:', customerAgentInfos);
+agentService.getCustomerAgentInfos('your-customer-id', pageLink).subscribe(customerAgentInfos => {
+  console.log('Get Customer Agent Infos:', customerAgentInfos);
 });
 ```
 
 **12. getAgentProfileById**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const agentProfileId = 'your-agent-profile-id';
-agentService.getAgentProfileById(agentProfileId).subscribe(agentProfileBy => {
-  console.log('Get Agent Profile By Id:', agentProfileBy);
+agentService.getAgentProfileById('your-agentprofile-id').subscribe(agentProfileById => {
+  console.log('Get Agent Profile By Id:', agentProfileById);
 });
 ```
 
 **13. getAgentProfileInfoById**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const agentProfileId = 'your-agent-profile-id';
-agentService.getAgentProfileInfoById(agentProfileId).subscribe(agentProfileInfoBy => {
-  console.log('Get Agent Profile Info By Id:', agentProfileInfoBy);
+agentService.getAgentProfileInfoById('your-agentprofile-id').subscribe(agentProfileInfoById => {
+  console.log('Get Agent Profile Info By Id:', agentProfileInfoById);
 });
 ```
 
 **14. saveAgentProfile**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const agentProfile = {  // AgentProfile object
-  // ... set the fields you need
-};
-const appProfileIds = ['your-app-profile-i-1', 'your-app-profile-i-2'];
-agentService.saveAgentProfile(agentProfile, appProfileIds).subscribe(savedAgentProfile => {
-  console.log('Saved Agent Profile:', savedAgentProfile);
+agentService.saveAgentProfile('your-agentprofile-value', 'your-appprofileids-value').subscribe(agentProfile => {
+  console.log('Save Agent Profile:', agentProfile);
 });
 ```
 
 **15. deleteAgentProfile**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const agentProfileId = 'your-agent-profile-id';
-agentService.deleteAgentProfile(agentProfileId).subscribe(result => {
-  console.log('Delete Agent Profile result:', result);
+agentService.deleteAgentProfile('your-agentprofile-id').subscribe(result => {
+  console.log('Delete Agent Profile:', result);
 });
 ```
 
 **16. setDefaultAgentProfile**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const agentProfileId = 'your-agent-profile-id';
-agentService.setDefaultAgentProfile(agentProfileId).subscribe(setDefaultAgentProfile => {
-  console.log('Set Default Agent Profile:', setDefaultAgentProfile);
+agentService.setDefaultAgentProfile('your-agentprofile-id').subscribe(defaultAgentProfile => {
+  console.log('Set Default Agent Profile:', defaultAgentProfile);
 });
 ```
 
 **17. getDefaultAgentProfileInfo**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
 agentService.getDefaultAgentProfileInfo().subscribe(defaultAgentProfileInfo => {
   console.log('Get Default Agent Profile Info:', defaultAgentProfileInfo);
 });
@@ -204,32 +150,25 @@ agentService.getDefaultAgentProfileInfo().subscribe(defaultAgentProfileInfo => {
 **18. getTenantAgentProfiles**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
 agentService.getTenantAgentProfiles(pageLink).subscribe(tenantAgentProfiles => {
-  console.log('List of Tenant Agent Profiles:', tenantAgentProfiles);
+  console.log('Get Tenant Agent Profiles:', tenantAgentProfiles);
 });
 ```
 
 **19. getTenantAgentProfileInfos**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
 agentService.getTenantAgentProfileInfos(pageLink).subscribe(tenantAgentProfileInfos => {
-  console.log('List of Tenant Agent Profile Infos:', tenantAgentProfileInfos);
+  console.log('Get Tenant Agent Profile Infos:', tenantAgentProfileInfos);
 });
 ```
 
 **20. getAgentProfileAppProfileInfos**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const agentProfileId = 'your-agent-profile-id';
-agentService.getAgentProfileAppProfileInfos(agentProfileId).subscribe(agentProfileAppProfileInfos => {
+agentService.getAgentProfileAppProfileInfos('your-agentprofile-id').subscribe(agentProfileAppProfileInfos => {
   console.log('Get Agent Profile App Profile Infos:', agentProfileAppProfileInfos);
 });
 ```
@@ -237,60 +176,39 @@ agentService.getAgentProfileAppProfileInfos(agentProfileId).subscribe(agentProfi
 **21. assignAppProfileToAgentProfile**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const agentProfileId = 'your-agent-profile-id';
-const applicationProfileId = 'your-application-profile-id';
-agentService.assignAppProfileToAgentProfile(agentProfileId, applicationProfileId).subscribe(assignAppProfileToAgentProfile => {
-  console.log('Assign App Profile To Agent Profile:', assignAppProfileToAgentProfile);
+agentService.assignAppProfileToAgentProfile('your-agentprofile-id', 'your-applicationprofile-id').subscribe(result => {
+  console.log('Assign App Profile To Agent Profile:', result);
 });
 ```
 
 **22. assignAppProfilesToAgentProfile**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const agentProfileId = 'your-agent-profile-id';
-const appProfileIds = ['your-app-profile-i-1', 'your-app-profile-i-2'];
-agentService.assignAppProfilesToAgentProfile(agentProfileId, appProfileIds).subscribe(assignAppProfilesToAgentProfile => {
-  console.log('Assign App Profiles To Agent Profile:', assignAppProfilesToAgentProfile);
+agentService.assignAppProfilesToAgentProfile('your-agentprofile-id', 'your-appprofileids-value').subscribe(result => {
+  console.log('Assign App Profiles To Agent Profile:', result);
 });
 ```
 
 **23. join**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const result = agentService.join();
-console.log('Result:', result);
+agentService.join().subscribe(join => {
+  console.log('Join:', join);
+});
 ```
 
 **24. setAppProfileRelatesOnAutoDiscovery**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const agentProfileId = 'your-agent-profile-id';
-const applicationProfileId = 'your-application-profile-id';
-const relate = true;
-agentService.setAppProfileRelatesOnAutoDiscovery(agentProfileId, applicationProfileId, relate).subscribe(setAppProfileRelatesOnAutoDiscovery => {
-  console.log('Set App Profile Relates On Auto Discovery:', setAppProfileRelatesOnAutoDiscovery);
+agentService.setAppProfileRelatesOnAutoDiscovery('your-agentprofile-id', 'your-applicationprofile-id', true).subscribe(result => {
+  console.log('Set App Profile Relates On Auto Discovery:', result);
 });
 ```
 
 **25. previewBulkOperation**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const agentProfileId = 'your-agent-profile-id';
-const applicationProfileId = 'your-application-profile-id';
-const request = {  // BulkOperationRequest object
-  // ... set the fields you need
-};
-agentService.previewBulkOperation(agentProfileId, applicationProfileId, request).subscribe(previewBulkOperation => {
+agentService.previewBulkOperation('your-agentprofile-id', 'your-applicationprofile-id', 'your-request-value').subscribe(previewBulkOperation => {
   console.log('Preview Bulk Operation:', previewBulkOperation);
 });
 ```
@@ -298,14 +216,7 @@ agentService.previewBulkOperation(agentProfileId, applicationProfileId, request)
 **26. bulkOperation**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const agentProfileId = 'your-agent-profile-id';
-const applicationProfileId = 'your-application-profile-id';
-const request = {  // BulkOperationRequest object
-  // ... set the fields you need
-};
-agentService.bulkOperation(agentProfileId, applicationProfileId, request).subscribe(bulkOperation => {
+agentService.bulkOperation('your-agentprofile-id', 'your-applicationprofile-id', 'your-request-value').subscribe(bulkOperation => {
   console.log('Bulk Operation:', bulkOperation);
 });
 ```
@@ -313,34 +224,24 @@ agentService.bulkOperation(agentProfileId, applicationProfileId, request).subscr
 **27. getAgentApplicationInfoById**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const applicationId = 'your-application-id';
-agentService.getAgentApplicationInfoById(applicationId).subscribe(agentApplicationInfoBy => {
-  console.log('Get Agent Application Info By Id:', agentApplicationInfoBy);
+agentService.getAgentApplicationInfoById('your-application-id').subscribe(agentApplicationInfoById => {
+  console.log('Get Agent Application Info By Id:', agentApplicationInfoById);
 });
 ```
 
 **28. getAgentApplicationsByAgentId**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const agentId = 'your-agent-id';
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-agentService.getAgentApplicationsByAgentId(agentId, pageLink).subscribe(agentApplicationsByAgents => {
-  console.log('List of Agent Applications By Agent Ids:', agentApplicationsByAgents);
+agentService.getAgentApplicationsByAgentId('your-agent-id', pageLink).subscribe(agentApplicationsByAgentId => {
+  console.log('Get Agent Applications By Agent Id:', agentApplicationsByAgentId);
 });
 ```
 
 **29. getAgentApplicationByRelatedEntity**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const entityType = 'your-entity-type';
-const entityId = 'your-entity-id';
-agentService.getAgentApplicationByRelatedEntity(entityType, entityId).subscribe(agentApplicationByRelatedEntity => {
+agentService.getAgentApplicationByRelatedEntity('your-entitytype-value', 'your-entity-id').subscribe(agentApplicationByRelatedEntity => {
   console.log('Get Agent Application By Related Entity:', agentApplicationByRelatedEntity);
 });
 ```
@@ -348,25 +249,15 @@ agentService.getAgentApplicationByRelatedEntity(entityType, entityId).subscribe(
 **30. updateAgentApplication**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const application = {  // AgentApplication object
-  // ... set the fields you need
-};
-agentService.updateAgentApplication(application).subscribe(savedAgentApplication => {
-  console.log('Saved Agent Application:', savedAgentApplication);
+agentService.updateAgentApplication('your-application-value').subscribe(agentApplication => {
+  console.log('Update Agent Application:', agentApplication);
 });
 ```
 
 **31. installAgentApp**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const request = {  // AgentAppEventRequest object
-  // ... set the fields you need
-};
-agentService.installAgentApp(request).subscribe(installAgentApp => {
+agentService.installAgentApp('your-request-value').subscribe(installAgentApp => {
   console.log('Install Agent App:', installAgentApp);
 });
 ```
@@ -374,101 +265,58 @@ agentService.installAgentApp(request).subscribe(installAgentApp => {
 **32. createAgentAppEvent**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const applicationId = 'your-application-id';
-const request = {  // AgentAppEventRequest object
-  // ... set the fields you need
-};
-agentService.createAgentAppEvent(applicationId, request).subscribe(createAgentAppEvent => {
-  console.log('Create Agent App Event:', createAgentAppEvent);
+agentService.createAgentAppEvent('your-application-id', 'your-request-value').subscribe(agentAppEvent => {
+  console.log('Create Agent App Event:', agentAppEvent);
 });
 ```
 
 **33. cancelAgentAppEvent**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const applicationId = 'your-application-id';
-const eventId = 'your-event-id';
-agentService.cancelAgentAppEvent(applicationId, eventId).subscribe(cancelAgentAppEvent => {
-  console.log('Cancel Agent App Event:', cancelAgentAppEvent);
+agentService.cancelAgentAppEvent('your-application-id', 'your-event-id').subscribe(result => {
+  console.log('Cancel Agent App Event:', result);
 });
 ```
 
 **34. getAgentAppEventById**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const eventId = 'your-event-id';
-agentService.getAgentAppEventById(eventId).subscribe(agentAppEventBy => {
-  console.log('Get Agent App Event By Id:', agentAppEventBy);
+agentService.getAgentAppEventById('your-event-id').subscribe(agentAppEventById => {
+  console.log('Get Agent App Event By Id:', agentAppEventById);
 });
 ```
 
 **35. getAgentAppEvents**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const applicationId = 'your-application-id';
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const actionType = 'your-action-type';
-const processingStatus = 'your-processing-status';
-agentService.getAgentAppEvents(applicationId, pageLink, actionType, processingStatus).subscribe(agentAppEvents => {
-  console.log('List of Agent App Events:', agentAppEvents);
+agentService.getAgentAppEvents('your-application-id', pageLink, 'your-actiontype-value', 'your-processingstatus-value').subscribe(agentAppEvents => {
+  console.log('Get Agent App Events:', agentAppEvents);
 });
 ```
 
 **36. getAgentAppEventsByAgentId**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const agentId = 'your-agent-id';
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-agentService.getAgentAppEventsByAgentId(agentId, pageLink).subscribe(agentAppEventsByAgents => {
-  console.log('List of Agent App Events By Agent Ids:', agentAppEventsByAgents);
+agentService.getAgentAppEventsByAgentId('your-agent-id', pageLink).subscribe(agentAppEventsByAgentId => {
+  console.log('Get Agent App Events By Agent Id:', agentAppEventsByAgentId);
 });
 ```
 
 **37. getAgentAppEventInfosByAgentId**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const agentId = 'your-agent-id';
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const actionType = 'your-action-type';
-const processingStatus = 'your-processing-status';
-agentService.getAgentAppEventInfosByAgentId(agentId, pageLink, actionType, processingStatus).subscribe(agentAppEventInfosByAgents => {
-  console.log('List of Agent App Event Infos By Agent Ids:', agentAppEventInfosByAgents);
+agentService.getAgentAppEventInfosByAgentId('your-agent-id', pageLink, 'your-actiontype-value', 'your-processingstatus-value').subscribe(agentAppEventInfosByAgentId => {
+  console.log('Get Agent App Event Infos By Agent Id:', agentAppEventInfosByAgentId);
 });
 ```
 
 **38. mergeForPreview**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const templateVersion = 'your-template-version';
-const appType = {  // AgentApplicationType object
-  // ... set the fields you need
-};
-const application = {  // AgentApplication object
-  // ... set the fields you need
-};
-const composeType = 'your-compose-type';
-const relatedEntityId = {  // EntityId object
-  // ... set the fields you need
-};
-const actionType = {  // AgentAppEventActionType object
-  // ... set the fields you need
-};
-const setHostValues = true;
-agentService.mergeForPreview(templateVersion, appType, application, composeType, relatedEntityId, actionType, setHostValues).subscribe(mergeForPreview => {
+agentService.mergeForPreview('your-templateversion-value', 'your-apptype-value', 'your-application-value', 'your-composetype-value', 'your-relatedentity-id', 'your-actiontype-value', true).subscribe(mergeForPreview => {
   console.log('Merge For Preview:', mergeForPreview);
 });
 ```
@@ -476,59 +324,39 @@ agentService.mergeForPreview(templateVersion, appType, application, composeType,
 **39. assignRelatedEntity**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const applicationId = 'your-application-id';
-const relatedEntityId = {  // EntityId object
-  // ... set the fields you need
-};
-agentService.assignRelatedEntity(applicationId, relatedEntityId).subscribe(assignRelatedEntity => {
-  console.log('Assign Related Entity:', assignRelatedEntity);
+agentService.assignRelatedEntity('your-application-id', 'your-relatedentity-id').subscribe(relatedEntity => {
+  console.log('Assign Related Entity:', relatedEntity);
 });
 ```
 
 **40. unassignRelatedEntity**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const applicationId = 'your-application-id';
-agentService.unassignRelatedEntity(applicationId).subscribe(unassignRelatedEntity => {
-  console.log('Unassign Related Entity:', unassignRelatedEntity);
+agentService.unassignRelatedEntity('your-application-id').subscribe(relatedEntity => {
+  console.log('Unassign Related Entity:', relatedEntity);
 });
 ```
 
 **41. detachFromProfile**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const applicationId = 'your-application-id';
-agentService.detachFromProfile(applicationId).subscribe(detachFromProfile => {
-  console.log('Detach From Profile:', detachFromProfile);
+agentService.detachFromProfile('your-application-id').subscribe(result => {
+  console.log('Detach From Profile:', result);
 });
 ```
 
 **42. attachToProfile**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const applicationId = 'your-application-id';
-const profileId = 'your-profile-id';
-agentService.attachToProfile(applicationId, profileId).subscribe(attachToProfile => {
-  console.log('Attach To Profile:', attachToProfile);
+agentService.attachToProfile('your-application-id', 'your-profile-id').subscribe(result => {
+  console.log('Attach To Profile:', result);
 });
 ```
 
 **43. getLatestAgentAppTemplate**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const appType = 'your-app-type';
-const configType = 'your-config-type';
-agentService.getLatestAgentAppTemplate(appType, configType).subscribe(latestAgentAppTemplate => {
+agentService.getLatestAgentAppTemplate('your-apptype-value', 'your-configtype-value').subscribe(latestAgentAppTemplate => {
   console.log('Get Latest Agent App Template:', latestAgentAppTemplate);
 });
 ```
@@ -536,12 +364,7 @@ agentService.getLatestAgentAppTemplate(appType, configType).subscribe(latestAgen
 **44. getAgentAppTemplateByVersion**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const appType = 'your-app-type';
-const configType = 'your-config-type';
-const version = 'your-version';
-agentService.getAgentAppTemplateByVersion(appType, configType, version).subscribe(agentAppTemplateByVersion => {
+agentService.getAgentAppTemplateByVersion('your-apptype-value', 'your-configtype-value', 'your-version-value').subscribe(agentAppTemplateByVersion => {
   console.log('Get Agent App Template By Version:', agentAppTemplateByVersion);
 });
 ```
@@ -549,8 +372,6 @@ agentService.getAgentAppTemplateByVersion(appType, configType, version).subscrib
 **45. getAgentAppTemplates**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
 agentService.getAgentAppTemplates().subscribe(agentAppTemplates => {
   console.log('Get Agent App Templates:', agentAppTemplates);
 });
@@ -559,10 +380,7 @@ agentService.getAgentAppTemplates().subscribe(agentAppTemplates => {
 **46. getAgentAppProfilesByAppType**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const appType = 'your-app-type';
-agentService.getAgentAppProfilesByAppType(appType).subscribe(agentAppProfilesByAppType => {
+agentService.getAgentAppProfilesByAppType('your-apptype-value').subscribe(agentAppProfilesByAppType => {
   console.log('Get Agent App Profiles By App Type:', agentAppProfilesByAppType);
 });
 ```
@@ -570,11 +388,7 @@ agentService.getAgentAppProfilesByAppType(appType).subscribe(agentAppProfilesByA
 **47. getAgentAppTemplatesByAppType**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const appType = 'your-app-type';
-const configType = 'value';
-agentService.getAgentAppTemplatesByAppType(appType, configType).subscribe(agentAppTemplatesByAppType => {
+agentService.getAgentAppTemplatesByAppType('your-apptype-value', 'your-configtype-value').subscribe(agentAppTemplatesByAppType => {
   console.log('Get Agent App Templates By App Type:', agentAppTemplatesByAppType);
 });
 ```
@@ -582,82 +396,56 @@ agentService.getAgentAppTemplatesByAppType(appType, configType).subscribe(agentA
 **48. getAgentAppProfileById**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const profileId = 'your-profile-id';
-agentService.getAgentAppProfileById(profileId).subscribe(agentAppProfileBy => {
-  console.log('Get Agent App Profile By Id:', agentAppProfileBy);
+agentService.getAgentAppProfileById('your-profile-id').subscribe(agentAppProfileById => {
+  console.log('Get Agent App Profile By Id:', agentAppProfileById);
 });
 ```
 
 **49. getAgentAppProfileInfoById**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const profileId = 'your-profile-id';
-agentService.getAgentAppProfileInfoById(profileId).subscribe(agentAppProfileInfoBy => {
-  console.log('Get Agent App Profile Info By Id:', agentAppProfileInfoBy);
+agentService.getAgentAppProfileInfoById('your-profile-id').subscribe(agentAppProfileInfoById => {
+  console.log('Get Agent App Profile Info By Id:', agentAppProfileInfoById);
 });
 ```
 
 **50. saveAgentAppProfile**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const profile = {  // AgentAppProfile object
-  // ... set the fields you need
-};
-agentService.saveAgentAppProfile(profile).subscribe(savedAgentAppProfile => {
-  console.log('Saved Agent App Profile:', savedAgentAppProfile);
+agentService.saveAgentAppProfile('your-profile-value').subscribe(agentAppProfile => {
+  console.log('Save Agent App Profile:', agentAppProfile);
 });
 ```
 
 **51. deleteAgentAppProfile**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const profileId = 'your-profile-id';
-agentService.deleteAgentAppProfile(profileId).subscribe(result => {
-  console.log('Delete Agent App Profile result:', result);
+agentService.deleteAgentAppProfile('your-profile-id').subscribe(result => {
+  console.log('Delete Agent App Profile:', result);
 });
 ```
 
 **52. getTenantAgentAppProfiles**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
 agentService.getTenantAgentAppProfiles(pageLink).subscribe(tenantAgentAppProfiles => {
-  console.log('List of Tenant Agent App Profiles:', tenantAgentAppProfiles);
+  console.log('Get Tenant Agent App Profiles:', tenantAgentAppProfiles);
 });
 ```
 
 **53. getAgentAppProfilesByIds**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const profileIds = ['your-profile-i-1', 'your-profile-i-2'];
-agentService.getAgentAppProfilesByIds(profileIds).subscribe(agentAppProfilesBys => {
-  console.log('Get Agent App Profiles By Ids:', agentAppProfilesBys);
+agentService.getAgentAppProfilesByIds('your-profileids-value').subscribe(agentAppProfilesByIds => {
+  console.log('Get Agent App Profiles By Ids:', agentAppProfilesByIds);
 });
 ```
 
 **54. materializeAgentAppProfile**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const appType = {  // AgentApplicationType object
-  // ... set the fields you need
-};
-const templateVersion = 'your-template-version';
-const composeType = 'your-compose-type';
-agentService.materializeAgentAppProfile(appType, templateVersion, composeType).subscribe(materializeAgentAppProfile => {
+agentService.materializeAgentAppProfile('your-apptype-value', 'your-templateversion-value', 'your-composetype-value').subscribe(materializeAgentAppProfile => {
   console.log('Materialize Agent App Profile:', materializeAgentAppProfile);
 });
 ```
@@ -665,18 +453,7 @@ agentService.materializeAgentAppProfile(appType, templateVersion, composeType).s
 **55. mergeProfileForPreview**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const templateVersion = 'your-template-version';
-const profile = {  // AgentAppProfile object
-  // ... set the fields you need
-};
-const composeType = 'your-compose-type';
-const actionType = {  // AgentAppEventActionType object
-  // ... set the fields you need
-};
-const setHostValues = true;
-agentService.mergeProfileForPreview(templateVersion, profile, composeType, actionType, setHostValues).subscribe(mergeProfileForPreview => {
+agentService.mergeProfileForPreview('your-templateversion-value', 'your-profile-value', 'your-composetype-value', 'your-actiontype-value', true).subscribe(mergeProfileForPreview => {
   console.log('Merge Profile For Preview:', mergeProfileForPreview);
 });
 ```
@@ -684,23 +461,16 @@ agentService.mergeProfileForPreview(templateVersion, profile, composeType, actio
 **56. getAgentAppUnits**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const applicationId = 'your-application-id';
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const type = 'type-value';
-agentService.getAgentAppUnits(applicationId, pageLink, type).subscribe(agentAppUnits => {
-  console.log('List of Agent App Units:', agentAppUnits);
+agentService.getAgentAppUnits('your-application-id', pageLink, 'your-type-value').subscribe(agentAppUnits => {
+  console.log('Get Agent App Units:', agentAppUnits);
 });
 ```
 
 **57. getAgentBulkAction**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const bulkActionId = 'your-bulk-action-id';
-agentService.getAgentBulkAction(bulkActionId).subscribe(agentBulkAction => {
+agentService.getAgentBulkAction('your-bulkaction-id').subscribe(agentBulkAction => {
   console.log('Get Agent Bulk Action:', agentBulkAction);
 });
 ```
@@ -708,35 +478,25 @@ agentService.getAgentBulkAction(bulkActionId).subscribe(agentBulkAction => {
 **58. getAgentProfileBulkActions**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const agentProfileId = 'your-agent-profile-id';
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-agentService.getAgentProfileBulkActions(agentProfileId, pageLink).subscribe(agentProfileBulkActions => {
-  console.log('List of Agent Profile Bulk Actions:', agentProfileBulkActions);
+agentService.getAgentProfileBulkActions('your-agentprofile-id', pageLink).subscribe(agentProfileBulkActions => {
+  console.log('Get Agent Profile Bulk Actions:', agentProfileBulkActions);
 });
 ```
 
 **59. getAgentProfileAppProfileBulkActions**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const agentProfileId = 'your-agent-profile-id';
-const applicationProfileId = 'your-application-profile-id';
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-agentService.getAgentProfileAppProfileBulkActions(agentProfileId, applicationProfileId, pageLink).subscribe(agentProfileAppProfileBulkActions => {
-  console.log('List of Agent Profile App Profile Bulk Actions:', agentProfileAppProfileBulkActions);
+agentService.getAgentProfileAppProfileBulkActions('your-agentprofile-id', 'your-applicationprofile-id', pageLink).subscribe(agentProfileAppProfileBulkActions => {
+  console.log('Get Agent Profile App Profile Bulk Actions:', agentProfileAppProfileBulkActions);
 });
 ```
 
 **60. getAgentBulkActionEventStats**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const bulkActionId = 'your-bulk-action-id';
-agentService.getAgentBulkActionEventStats(bulkActionId).subscribe(agentBulkActionEventStats => {
+agentService.getAgentBulkActionEventStats('your-bulkaction-id').subscribe(agentBulkActionEventStats => {
   console.log('Get Agent Bulk Action Event Stats:', agentBulkActionEventStats);
 });
 ```
@@ -744,28 +504,17 @@ agentService.getAgentBulkActionEventStats(bulkActionId).subscribe(agentBulkActio
 **61. getAgentBulkActionEvents**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const bulkActionId = 'your-bulk-action-id';
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const actionType = 'your-action-type';
-const processingStatus = 'your-processing-status';
-agentService.getAgentBulkActionEvents(bulkActionId, pageLink, actionType, processingStatus).subscribe(agentBulkActionEvents => {
-  console.log('List of Agent Bulk Action Events:', agentBulkActionEvents);
+agentService.getAgentBulkActionEvents('your-bulkaction-id', pageLink, 'your-actiontype-value', 'your-processingstatus-value').subscribe(agentBulkActionEvents => {
+  console.log('Get Agent Bulk Action Events:', agentBulkActionEvents);
 });
 ```
 
 **62. getRelatedEntityCandidates**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const agentService = $injector.get(self.ctx.servicesMap.get('agentService'));
-const entityType = {  // EntityType object
-  // ... set the fields you need
-};
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const currentEntityId = 'your-current-entity-id';
-agentService.getRelatedEntityCandidates(entityType, pageLink, currentEntityId).subscribe(relatedEntityCandidates => {
-  console.log('List of Related Entity Candidates:', relatedEntityCandidates);
+agentService.getRelatedEntityCandidates('your-entitytype-value', pageLink, 'your-currententity-id').subscribe(relatedEntityCandidates => {
+  console.log('Get Related Entity Candidates:', relatedEntityCandidates);
 });
 ```

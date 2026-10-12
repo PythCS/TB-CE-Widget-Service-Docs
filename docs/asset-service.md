@@ -1,5 +1,7 @@
 # ASSET SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -13,32 +15,25 @@ const assetService = self.ctx.assetService;
 **1. getTenantAssets**
 
 ```javascript
-const assetService = self.ctx.assetService;
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const type = 'value';
-assetService.getTenantAssets(pageLink, type).subscribe(tenantAssets => {
-  console.log('List of Tenant Assets:', tenantAssets);
+self.ctx.assetService.getTenantAssets(pageLink, 'your-type-value').subscribe(tenantAssets => {
+  console.log('Get Tenant Assets:', tenantAssets);
 });
 ```
 
 **2. getCustomerAssets**
 
 ```javascript
-const assetService = self.ctx.assetService;
-const customerId = 'your-customer-id';
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const type = 'value';
-assetService.getCustomerAssets(customerId, pageLink, type).subscribe(customerAssets => {
-  console.log('List of Customer Assets:', customerAssets);
+self.ctx.assetService.getCustomerAssets('your-customer-id', pageLink, 'your-type-value').subscribe(customerAssets => {
+  console.log('Get Customer Assets:', customerAssets);
 });
 ```
 
 **3. getAsset**
 
 ```javascript
-const assetService = self.ctx.assetService;
-const assetId = 'your-asset-id';
-assetService.getAsset(assetId).subscribe(asset => {
+self.ctx.assetService.getAsset('your-asset-id').subscribe(asset => {
   console.log('Get Asset:', asset);
 });
 ```
@@ -46,55 +41,42 @@ assetService.getAsset(assetId).subscribe(asset => {
 **4. getAssets**
 
 ```javascript
-const assetService = self.ctx.assetService;
-const assetIds = ['your-asset-i-1', 'your-asset-i-2'];
-assetService.getAssets(assetIds).subscribe(assets => {
-  console.log('List of Assets:', assets);
+self.ctx.assetService.getAssets('your-assetids-value').subscribe(assets => {
+  console.log('Get Assets:', assets);
 });
 ```
 
 **5. getUserAssets**
 
 ```javascript
-const assetService = self.ctx.assetService;
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const type = 'value';
-assetService.getUserAssets(pageLink, type).subscribe(userAssets => {
-  console.log('List of User Assets:', userAssets);
+self.ctx.assetService.getUserAssets(pageLink, 'your-type-value').subscribe(userAssets => {
+  console.log('Get User Assets:', userAssets);
 });
 ```
 
 **6. getAllAssetInfos**
 
 ```javascript
-const assetService = self.ctx.assetService;
-const includeCustomers = true;
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const assetProfileId = 'value';
-assetService.getAllAssetInfos(includeCustomers, pageLink, assetProfileId).subscribe(allAssetInfos => {
-  console.log('List of All Asset Infos:', allAssetInfos);
+self.ctx.assetService.getAllAssetInfos(true, pageLink, 'your-assetprofile-id').subscribe(allAssetInfos => {
+  console.log('Get All Asset Infos:', allAssetInfos);
 });
 ```
 
 **7. getCustomerAssetInfos**
 
 ```javascript
-const assetService = self.ctx.assetService;
-const includeCustomers = true;
-const customerId = 'your-customer-id';
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const assetProfileId = 'value';
-assetService.getCustomerAssetInfos(includeCustomers, customerId, pageLink, assetProfileId).subscribe(customerAssetInfos => {
-  console.log('List of Customer Asset Infos:', customerAssetInfos);
+self.ctx.assetService.getCustomerAssetInfos(true, 'your-customer-id', pageLink, 'your-assetprofile-id').subscribe(customerAssetInfos => {
+  console.log('Get Customer Asset Infos:', customerAssetInfos);
 });
 ```
 
 **8. getAssetInfo**
 
 ```javascript
-const assetService = self.ctx.assetService;
-const assetId = 'your-asset-id';
-assetService.getAssetInfo(assetId).subscribe(assetInfo => {
+self.ctx.assetService.getAssetInfo('your-asset-id').subscribe(assetInfo => {
   console.log('Get Asset Info:', assetInfo);
 });
 ```
@@ -102,42 +84,31 @@ assetService.getAssetInfo(assetId).subscribe(assetInfo => {
 **9. saveAsset**
 
 ```javascript
-const assetService = self.ctx.assetService;
-const asset = {  // Asset object
-  // ... set the fields you need
-};
-const entityGroupIds = ['your-entity-group-i-1', 'your-entity-group-i-2'];
-const result = assetService.saveAsset(asset, entityGroupIds);
-console.log('Result:', result);
+self.ctx.assetService.saveAsset('your-asset-value', 'your-entitygroupids-value').subscribe(asset => {
+  console.log('Save Asset:', asset);
+});
 ```
 
 **10. getAssetTypes**
 
 ```javascript
-const assetService = self.ctx.assetService;
-assetService.getAssetTypes().subscribe(assetTypes => {
-  console.log('List of Asset Types:', assetTypes);
+self.ctx.assetService.getAssetTypes().subscribe(assetTypes => {
+  console.log('Get Asset Types:', assetTypes);
 });
 ```
 
 **11. findByQuery**
 
 ```javascript
-const assetService = self.ctx.assetService;
-const query = {  // AssetSearchQuery object
-  // ... set the fields you need
-};
-assetService.findByQuery(query).subscribe(byQuerys => {
-  console.log('List of By Querys:', byQuerys);
+self.ctx.assetService.findByQuery('your-query-value').subscribe(byQuery => {
+  console.log('Find By Query:', byQuery);
 });
 ```
 
 **12. findByName**
 
 ```javascript
-const assetService = self.ctx.assetService;
-const assetName = 'your-asset-name';
-assetService.findByName(assetName).subscribe(byName => {
+self.ctx.assetService.findByName('your-assetname-value').subscribe(byName => {
   console.log('Find By Name:', byName);
 });
 ```
@@ -145,11 +116,7 @@ assetService.findByName(assetName).subscribe(byName => {
 **13. bulkImportAssets**
 
 ```javascript
-const assetService = self.ctx.assetService;
-const entitiesData = {  // BulkImportRequest object
-  // ... set the fields you need
-};
-assetService.bulkImportAssets(entitiesData).subscribe(bulkImportAssets => {
+self.ctx.assetService.bulkImportAssets('your-entitiesdata-value').subscribe(bulkImportAssets => {
   console.log('Bulk Import Assets:', bulkImportAssets);
 });
 ```

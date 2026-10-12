@@ -1,5 +1,7 @@
 # ATTRIBUTE SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -13,96 +15,47 @@ const attributeService = self.ctx.attributeService;
 **1. getEntityAttributes**
 
 ```javascript
-const attributeService = self.ctx.attributeService;
-const entityId = {  // EntityId object
-  // ... set the fields you need
-};
-const attributeScope = {  // AttributeScope object
-  // ... set the fields you need
-};
-const keys = [];  // e.g. array of keys values
-attributeService.getEntityAttributes(entityId, attributeScope, keys).subscribe(entityAttributes => {
-  console.log('List of Entity Attributes:', entityAttributes);
+self.ctx.attributeService.getEntityAttributes('your-entity-id', 'your-attributescope-value', 'your-keys-value').subscribe(entityAttributes => {
+  console.log('Get Entity Attributes:', entityAttributes);
 });
 ```
 
 **2. deleteEntityAttributes**
 
 ```javascript
-const attributeService = self.ctx.attributeService;
-const entityId = {  // EntityId object
-  // ... set the fields you need
-};
-const attributeScope = {  // AttributeScope object
-  // ... set the fields you need
-};
-const attributes = [];  // e.g. array of attributes values
-attributeService.deleteEntityAttributes(entityId, attributeScope, attributes).subscribe(result => {
-  console.log('Delete Entity Attributes result:', result);
+self.ctx.attributeService.deleteEntityAttributes('your-entity-id', 'your-attributescope-value', 'your-attributes-value').subscribe(entityAttributes => {
+  console.log('Delete Entity Attributes:', entityAttributes);
 });
 ```
 
 **3. deleteEntityTimeseries**
 
 ```javascript
-const attributeService = self.ctx.attributeService;
-const entityId = {  // EntityId object
-  // ... set the fields you need
-};
-const timeseries = [];  // e.g. array of timeseries values
-const startTs = 10;
-const endTs = 10;
-attributeService.deleteEntityTimeseries(entityId, timeseries, startTs, endTs).subscribe(result => {
-  console.log('Delete Entity Timeseries result:', result);
+self.ctx.attributeService.deleteEntityTimeseries('your-entity-id', 'your-timeseries-value', 0, 0).subscribe(entityTimeseries => {
+  console.log('Delete Entity Timeseries:', entityTimeseries);
 });
 ```
 
 **4. saveEntityAttributes**
 
 ```javascript
-const attributeService = self.ctx.attributeService;
-const entityId = {  // EntityId object
-  // ... set the fields you need
-};
-const attributeScope = {  // AttributeScope object
-  // ... set the fields you need
-};
-const attributes = [];  // e.g. array of attributes values
-attributeService.saveEntityAttributes(entityId, attributeScope, attributes).subscribe(savedEntityAttributes => {
-  console.log('Saved Entity Attributes:', savedEntityAttributes);
+self.ctx.attributeService.saveEntityAttributes('your-entity-id', 'your-attributescope-value', 'your-attributes-value').subscribe(entityAttributes => {
+  console.log('Save Entity Attributes:', entityAttributes);
 });
 ```
 
 **5. saveEntityTimeseries**
 
 ```javascript
-const attributeService = self.ctx.attributeService;
-const entityId = {  // EntityId object
-  // ... set the fields you need
-};
-const timeseriesScope = 'your-timeseries-scope';
-const timeseries = [];  // e.g. array of timeseries values
-attributeService.saveEntityTimeseries(entityId, timeseriesScope, timeseries).subscribe(savedEntityTimeseries => {
-  console.log('Saved Entity Timeseries:', savedEntityTimeseries);
+self.ctx.attributeService.saveEntityTimeseries('your-entity-id', 'your-timeseriesscope-value', 'your-timeseries-value').subscribe(entityTimeseries => {
+  console.log('Save Entity Timeseries:', entityTimeseries);
 });
 ```
 
 **6. getEntityTimeseries**
 
 ```javascript
-const attributeService = self.ctx.attributeService;
-const entityId = {  // EntityId object
-  // ... set the fields you need
-};
-const keys = [];  // e.g. array of keys values
-const startTs = 10;
-const endTs = 10;
-const limit = 'value';
-const agg = 'value';
-const interval = 10;
-const orderBy = 'value';
-const useStrictDataTypes = 'value';
-attributeService.getEntityTimeseries(entityId, keys, startTs, endTs, limit, agg, interval, orderBy, useStrictDataTypes).subscribe(entityTimeseries => {
+self.ctx.attributeService.getEntityTimeseries('your-entity-id', 'your-keys-value', 0, 0, 'your-limit-value', 'your-agg-value', 0, 'your-orderby-value', 'your-usestrictdatatypes-value').subscribe(entityTimeseries => {
   console.log('Get Entity Timeseries:', entityTimeseries);
 });
 ```
@@ -110,12 +63,7 @@ attributeService.getEntityTimeseries(entityId, keys, startTs, endTs, limit, agg,
 **7. getEntityTimeseriesLatest**
 
 ```javascript
-const attributeService = self.ctx.attributeService;
-const entityId = {  // EntityId object
-  // ... set the fields you need
-};
-const keys = [];  // e.g. array of keys values
-attributeService.getEntityTimeseriesLatest(entityId, keys).subscribe(entityTimeseriesLatest => {
+self.ctx.attributeService.getEntityTimeseriesLatest('your-entity-id', 'your-keys-value').subscribe(entityTimeseriesLatest => {
   console.log('Get Entity Timeseries Latest:', entityTimeseriesLatest);
 });
 ```

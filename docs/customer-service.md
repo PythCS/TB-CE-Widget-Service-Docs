@@ -1,5 +1,7 @@
 # CUSTOMER SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -13,19 +15,16 @@ const customerService = self.ctx.customerService;
 **1. getCustomers**
 
 ```javascript
-const customerService = self.ctx.customerService;
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-customerService.getCustomers(pageLink).subscribe(customers => {
-  console.log('List of Customers:', customers);
+self.ctx.customerService.getCustomers(pageLink).subscribe(customers => {
+  console.log('Get Customers:', customers);
 });
 ```
 
 **2. getCustomer**
 
 ```javascript
-const customerService = self.ctx.customerService;
-const customerId = 'your-customer-id';
-customerService.getCustomer(customerId).subscribe(customer => {
+self.ctx.customerService.getCustomer('your-customer-id').subscribe(customer => {
   console.log('Get Customer:', customer);
 });
 ```
@@ -33,9 +32,7 @@ customerService.getCustomer(customerId).subscribe(customer => {
 **3. getCustomerInfo**
 
 ```javascript
-const customerService = self.ctx.customerService;
-const customerId = 'your-customer-id';
-customerService.getCustomerInfo(customerId).subscribe(customerInfo => {
+self.ctx.customerService.getCustomerInfo('your-customer-id').subscribe(customerInfo => {
   console.log('Get Customer Info:', customerInfo);
 });
 ```
@@ -43,64 +40,50 @@ customerService.getCustomerInfo(customerId).subscribe(customerInfo => {
 **4. saveCustomer**
 
 ```javascript
-const customerService = self.ctx.customerService;
-const customer = {  // Customer object
-  // ... set the fields you need
-};
-const entityGroupIds = ['your-entity-group-i-1', 'your-entity-group-i-2'];
-const result = customerService.saveCustomer(customer, entityGroupIds);
-console.log('Result:', result);
+self.ctx.customerService.saveCustomer('your-customer-value', 'your-entitygroupids-value').subscribe(customer => {
+  console.log('Save Customer:', customer);
+});
 ```
 
 **5. getCustomersByIds**
 
 ```javascript
-const customerService = self.ctx.customerService;
-const customerIds = ['your-customer-i-1', 'your-customer-i-2'];
-customerService.getCustomersByIds(customerIds).subscribe(customersBys => {
-  console.log('List of Customers By Ids:', customersBys);
+self.ctx.customerService.getCustomersByIds('your-customerids-value').subscribe(customersByIds => {
+  console.log('Get Customers By Ids:', customersByIds);
 });
 ```
 
 **6. getUserCustomers**
 
 ```javascript
-const customerService = self.ctx.customerService;
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-customerService.getUserCustomers(pageLink).subscribe(userCustomers => {
-  console.log('List of User Customers:', userCustomers);
+self.ctx.customerService.getUserCustomers(pageLink).subscribe(userCustomers => {
+  console.log('Get User Customers:', userCustomers);
 });
 ```
 
 **7. getAllCustomerInfos**
 
 ```javascript
-const customerService = self.ctx.customerService;
-const includeCustomers = true;
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-customerService.getAllCustomerInfos(includeCustomers, pageLink).subscribe(allCustomerInfos => {
-  console.log('List of All Customer Infos:', allCustomerInfos);
+self.ctx.customerService.getAllCustomerInfos(true, pageLink).subscribe(allCustomerInfos => {
+  console.log('Get All Customer Infos:', allCustomerInfos);
 });
 ```
 
 **8. getCustomerCustomerInfos**
 
 ```javascript
-const customerService = self.ctx.customerService;
-const includeCustomers = true;
-const customerId = 'your-customer-id';
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-customerService.getCustomerCustomerInfos(includeCustomers, customerId, pageLink).subscribe(customerCustomerInfos => {
-  console.log('List of Customer Customer Infos:', customerCustomerInfos);
+self.ctx.customerService.getCustomerCustomerInfos(true, 'your-customer-id', pageLink).subscribe(customerCustomerInfos => {
+  console.log('Get Customer Customer Infos:', customerCustomerInfos);
 });
 ```
 
 **9. getShortCustomerInfo**
 
 ```javascript
-const customerService = self.ctx.customerService;
-const customerId = 'your-customer-id';
-customerService.getShortCustomerInfo(customerId).subscribe(shortCustomerInfo => {
+self.ctx.customerService.getShortCustomerInfo('your-customer-id').subscribe(shortCustomerInfo => {
   console.log('Get Short Customer Info:', shortCustomerInfo);
 });
 ```

@@ -1,5 +1,7 @@
 # IMAGE SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -10,84 +12,48 @@ const imageService = $injector.get(self.ctx.servicesMap.get('imageService'));
 **1. uploadImage**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const imageService = $injector.get(self.ctx.servicesMap.get('imageService'));
-const file = {  // File object
-  // ... set the fields you need
-};
-const title = 'title-value';
-const imageSubType = 'value';
-imageService.uploadImage(file, title, imageSubType).subscribe(savedImage => {
-  console.log('Saved Image:', savedImage);
+imageService.uploadImage('your-file-value', 'your-title-value', 'your-imagesubtype-value').subscribe(uploadImage => {
+  console.log('Upload Image:', uploadImage);
 });
 ```
 
 **2. updateImage**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const imageService = $injector.get(self.ctx.servicesMap.get('imageService'));
-const type = {  // ImageResourceType object
-  // ... set the fields you need
-};
-const key = 'key-value';
-const file = {  // File object
-  // ... set the fields you need
-};
-imageService.updateImage(type, key, file).subscribe(savedImage => {
-  console.log('Saved Image:', savedImage);
+imageService.updateImage('your-type-value', 'your-key-value', 'your-file-value').subscribe(image => {
+  console.log('Update Image:', image);
 });
 ```
 
 **3. updateImageInfo**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const imageService = $injector.get(self.ctx.servicesMap.get('imageService'));
-const imageInfo = {  // ImageResourceInfo object
-  // ... set the fields you need
-};
-imageService.updateImageInfo(imageInfo).subscribe(savedImageInfo => {
-  console.log('Saved Image Info:', savedImageInfo);
+imageService.updateImageInfo('your-imageinfo-value').subscribe(imageInfo => {
+  console.log('Update Image Info:', imageInfo);
 });
 ```
 
 **4. updateImagePublicStatus**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const imageService = $injector.get(self.ctx.servicesMap.get('imageService'));
-const imageInfo = {  // ImageResourceInfo object
-  // ... set the fields you need
-};
-const isPublic = true;
-imageService.updateImagePublicStatus(imageInfo, isPublic).subscribe(savedImagePublicStatus => {
-  console.log('Saved Image Public Status:', savedImagePublicStatus);
+imageService.updateImagePublicStatus('your-imageinfo-value', true).subscribe(imagePublicStatus => {
+  console.log('Update Image Public Status:', imagePublicStatus);
 });
 ```
 
 **5. getImages**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const imageService = $injector.get(self.ctx.servicesMap.get('imageService'));
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const imageSubType = 'value';
-imageService.getImages(pageLink, imageSubType).subscribe(images => {
-  console.log('List of Images:', images);
+imageService.getImages(pageLink, 'your-imagesubtype-value').subscribe(images => {
+  console.log('Get Images:', images);
 });
 ```
 
 **6. getImageInfo**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const imageService = $injector.get(self.ctx.servicesMap.get('imageService'));
-const type = {  // ImageResourceType object
-  // ... set the fields you need
-};
-const key = 'key-value';
-imageService.getImageInfo(type, key).subscribe(imageInfo => {
+imageService.getImageInfo('your-type-value', 'your-key-value').subscribe(imageInfo => {
   console.log('Get Image Info:', imageInfo);
 });
 ```
@@ -95,10 +61,7 @@ imageService.getImageInfo(type, key).subscribe(imageInfo => {
 **7. getImageDataUrl**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const imageService = $injector.get(self.ctx.servicesMap.get('imageService'));
-const imageUrl = 'your-image-url';
-imageService.getImageDataUrl(imageUrl).subscribe(imageDataUrl => {
+imageService.getImageDataUrl('your-imageurl-value').subscribe(imageDataUrl => {
   console.log('Get Image Data Url:', imageDataUrl);
 });
 ```
@@ -106,11 +69,7 @@ imageService.getImageDataUrl(imageUrl).subscribe(imageDataUrl => {
 **8. getLoginImageDataUrl**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const imageService = $injector.get(self.ctx.servicesMap.get('imageService'));
-const imageUrl = 'your-image-url';
-const faviconElseLogo = true;
-imageService.getLoginImageDataUrl(imageUrl, faviconElseLogo).subscribe(loginImageDataUrl => {
+imageService.getLoginImageDataUrl('your-imageurl-value', true).subscribe(loginImageDataUrl => {
   console.log('Get Login Image Data Url:', loginImageDataUrl);
 });
 ```
@@ -118,21 +77,15 @@ imageService.getLoginImageDataUrl(imageUrl, faviconElseLogo).subscribe(loginImag
 **9. loadImageDataUrl**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const imageService = $injector.get(self.ctx.servicesMap.get('imageService'));
-const imageLink = 'your-image-link';
-imageService.loadImageDataUrl(imageLink).subscribe(imageDataUrl => {
-  console.log('Load Image Data Url:', imageDataUrl);
+imageService.loadImageDataUrl('your-imagelink-value').subscribe(loadImageDataUrl => {
+  console.log('Load Image Data Url:', loadImageDataUrl);
 });
 ```
 
 **10. getImageString**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const imageService = $injector.get(self.ctx.servicesMap.get('imageService'));
-const imageUrl = 'your-image-url';
-imageService.getImageString(imageUrl).subscribe(imageString => {
+imageService.getImageString('your-imageurl-value').subscribe(imageString => {
   console.log('Get Image String:', imageString);
 });
 ```
@@ -140,10 +93,7 @@ imageService.getImageString(imageUrl).subscribe(imageString => {
 **11. resolveImageUrl**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const imageService = $injector.get(self.ctx.servicesMap.get('imageService'));
-const imageUrl = 'your-image-url';
-imageService.resolveImageUrl(imageUrl).subscribe(resolveImageUrl => {
+imageService.resolveImageUrl('your-imageurl-value').subscribe(resolveImageUrl => {
   console.log('Resolve Image Url:', resolveImageUrl);
 });
 ```
@@ -151,11 +101,7 @@ imageService.resolveImageUrl(imageUrl).subscribe(resolveImageUrl => {
 **12. resolveLoginImageUrl**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const imageService = $injector.get(self.ctx.servicesMap.get('imageService'));
-const imageUrl = 'your-image-url';
-const faviconElseLogo = true;
-imageService.resolveLoginImageUrl(imageUrl, faviconElseLogo).subscribe(resolveLoginImageUrl => {
+imageService.resolveLoginImageUrl('your-imageurl-value', true).subscribe(resolveLoginImageUrl => {
   console.log('Resolve Login Image Url:', resolveLoginImageUrl);
 });
 ```
@@ -163,13 +109,7 @@ imageService.resolveLoginImageUrl(imageUrl, faviconElseLogo).subscribe(resolveLo
 **13. downloadImage**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const imageService = $injector.get(self.ctx.servicesMap.get('imageService'));
-const type = {  // ImageResourceType object
-  // ... set the fields you need
-};
-const key = 'key-value';
-imageService.downloadImage(type, key).subscribe(downloadImage => {
+imageService.downloadImage('your-type-value', 'your-key-value').subscribe(downloadImage => {
   console.log('Download Image:', downloadImage);
 });
 ```
@@ -177,26 +117,15 @@ imageService.downloadImage(type, key).subscribe(downloadImage => {
 **14. exportImage**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const imageService = $injector.get(self.ctx.servicesMap.get('imageService'));
-const type = {  // ImageResourceType object
-  // ... set the fields you need
-};
-const key = 'key-value';
-imageService.exportImage(type, key).subscribe(exportImage => {
-  console.log('Export Image:', exportImage);
+imageService.exportImage('your-type-value', 'your-key-value').subscribe(image => {
+  console.log('Export Image:', image);
 });
 ```
 
 **15. importImage**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const imageService = $injector.get(self.ctx.servicesMap.get('imageService'));
-const imageData = {  // ImageExportData object
-  // ... set the fields you need
-};
-imageService.importImage(imageData).subscribe(importImage => {
-  console.log('Import Image:', importImage);
+imageService.importImage('your-imagedata-value').subscribe(image => {
+  console.log('Import Image:', image);
 });
 ```

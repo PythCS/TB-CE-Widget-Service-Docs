@@ -1,5 +1,7 @@
 # SOLUTIONS CREATOR SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -10,19 +12,14 @@ const solutionsCreatorService = $injector.get(self.ctx.servicesMap.get('solution
 **1. getSolutionById**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const solutionsCreatorService = $injector.get(self.ctx.servicesMap.get('solutionsCreatorService'));
-const solutionId = 'your-solution-id';
-solutionsCreatorService.getSolutionById(solutionId).subscribe(solutionBy => {
-  console.log('Get Solution By Id:', solutionBy);
+solutionsCreatorService.getSolutionById('your-solution-id').subscribe(solutionById => {
+  console.log('Get Solution By Id:', solutionById);
 });
 ```
 
 **2. startSolution**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const solutionsCreatorService = $injector.get(self.ctx.servicesMap.get('solutionsCreatorService'));
 solutionsCreatorService.startSolution().subscribe(startSolution => {
   console.log('Start Solution:', startSolution);
 });
@@ -31,39 +28,23 @@ solutionsCreatorService.startSolution().subscribe(startSolution => {
 **3. clearStep**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const solutionsCreatorService = $injector.get(self.ctx.servicesMap.get('solutionsCreatorService'));
-const solutionId = 'your-solution-id';
-const step = {  // SolutionStep object
-  // ... set the fields you need
-};
-solutionsCreatorService.clearStep(solutionId, step).subscribe(clearStep => {
-  console.log('Clear Step:', clearStep);
+solutionsCreatorService.clearStep('your-solution-id', 'your-step-value').subscribe(result => {
+  console.log('Clear Step:', result);
 });
 ```
 
 **4. createSolution**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const solutionsCreatorService = $injector.get(self.ctx.servicesMap.get('solutionsCreatorService'));
-const solutionId = 'your-solution-id';
-solutionsCreatorService.createSolution(solutionId).subscribe(createSolution => {
-  console.log('Create Solution:', createSolution);
+solutionsCreatorService.createSolution('your-solution-id').subscribe(solution => {
+  console.log('Create Solution:', solution);
 });
 ```
 
 **5. chatSolution**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const solutionsCreatorService = $injector.get(self.ctx.servicesMap.get('solutionsCreatorService'));
-const solutionId = 'your-solution-id';
-const step = {  // SolutionStep object
-  // ... set the fields you need
-};
-const msg = 'your-msg';
-solutionsCreatorService.chatSolution(solutionId, step, msg).subscribe(chatSolution => {
+solutionsCreatorService.chatSolution('your-solution-id', 'your-step-value', 'your-msg-value').subscribe(chatSolution => {
   console.log('Chat Solution:', chatSolution);
 });
 ```
@@ -71,27 +52,15 @@ solutionsCreatorService.chatSolution(solutionId, step, msg).subscribe(chatSoluti
 **6. updateSolutionData**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const solutionsCreatorService = $injector.get(self.ctx.servicesMap.get('solutionsCreatorService'));
-const solutionId = 'your-solution-id';
-const dataKey = {  // SolutionDataKey object
-  // ... set the fields you need
-};
-const msg = {  // SolutionDataValues object
-  // ... set the fields you need
-};
-solutionsCreatorService.updateSolutionData(solutionId, dataKey, msg).subscribe(savedSolutionData => {
-  console.log('Saved Solution Data:', savedSolutionData);
+solutionsCreatorService.updateSolutionData('your-solution-id', 'your-datakey-value', 'your-msg-value').subscribe(solutionData => {
+  console.log('Update Solution Data:', solutionData);
 });
 ```
 
 **7. installSolution**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const solutionsCreatorService = $injector.get(self.ctx.servicesMap.get('solutionsCreatorService'));
-const solutionId = 'your-solution-id';
-solutionsCreatorService.installSolution(solutionId).subscribe(installSolution => {
+solutionsCreatorService.installSolution('your-solution-id').subscribe(installSolution => {
   console.log('Install Solution:', installSolution);
 });
 ```
@@ -99,10 +68,7 @@ solutionsCreatorService.installSolution(solutionId).subscribe(installSolution =>
 **8. uninstallSolution**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const solutionsCreatorService = $injector.get(self.ctx.servicesMap.get('solutionsCreatorService'));
-const solutionId = 'your-solution-id';
-solutionsCreatorService.uninstallSolution(solutionId).subscribe(uninstallSolution => {
+solutionsCreatorService.uninstallSolution('your-solution-id').subscribe(uninstallSolution => {
   console.log('Uninstall Solution:', uninstallSolution);
 });
 ```
@@ -110,20 +76,15 @@ solutionsCreatorService.uninstallSolution(solutionId).subscribe(uninstallSolutio
 **9. getSolutions**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const solutionsCreatorService = $injector.get(self.ctx.servicesMap.get('solutionsCreatorService'));
 solutionsCreatorService.getSolutions().subscribe(solutions => {
-  console.log('List of Solutions:', solutions);
+  console.log('Get Solutions:', solutions);
 });
 ```
 
 **10. deleteSolution**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const solutionsCreatorService = $injector.get(self.ctx.servicesMap.get('solutionsCreatorService'));
-const solutionId = 'your-solution-id';
-solutionsCreatorService.deleteSolution(solutionId).subscribe(result => {
-  console.log('Delete Solution result:', result);
+solutionsCreatorService.deleteSolution('your-solution-id').subscribe(result => {
+  console.log('Delete Solution:', result);
 });
 ```

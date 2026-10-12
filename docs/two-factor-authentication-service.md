@@ -1,5 +1,7 @@
 # TWO FACTOR AUTHENTICATION SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -10,8 +12,6 @@ const twoFactorAuthenticationService = $injector.get(self.ctx.servicesMap.get('t
 **1. getTwoFaSettings**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const twoFactorAuthenticationService = $injector.get(self.ctx.servicesMap.get('twoFactorAuthenticationService'));
 twoFactorAuthenticationService.getTwoFaSettings().subscribe(twoFaSettings => {
   console.log('Get Two Fa Settings:', twoFaSettings);
 });
@@ -20,44 +20,30 @@ twoFactorAuthenticationService.getTwoFaSettings().subscribe(twoFaSettings => {
 **2. saveTwoFaSettings**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const twoFactorAuthenticationService = $injector.get(self.ctx.servicesMap.get('twoFactorAuthenticationService'));
-const settings = {  // TwoFactorAuthSettings object
-  // ... set the fields you need
-};
-twoFactorAuthenticationService.saveTwoFaSettings(settings).subscribe(savedTwoFaSettings => {
-  console.log('Saved Two Fa Settings:', savedTwoFaSettings);
+twoFactorAuthenticationService.saveTwoFaSettings('your-settings-value').subscribe(twoFaSettings => {
+  console.log('Save Two Fa Settings:', twoFaSettings);
 });
 ```
 
 **3. getAvailableTwoFaProviders**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const twoFactorAuthenticationService = $injector.get(self.ctx.servicesMap.get('twoFactorAuthenticationService'));
 twoFactorAuthenticationService.getAvailableTwoFaProviders().subscribe(availableTwoFaProviders => {
-  console.log('List of Available Two Fa Providers:', availableTwoFaProviders);
+  console.log('Get Available Two Fa Providers:', availableTwoFaProviders);
 });
 ```
 
 **4. generateTwoFaAccountConfig**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const twoFactorAuthenticationService = $injector.get(self.ctx.servicesMap.get('twoFactorAuthenticationService'));
-const providerType = {  // TwoFactorAuthProviderType object
-  // ... set the fields you need
-};
-twoFactorAuthenticationService.generateTwoFaAccountConfig(providerType).subscribe(generateTwoFaAccountConfig => {
-  console.log('Generate Two Fa Account Config:', generateTwoFaAccountConfig);
+twoFactorAuthenticationService.generateTwoFaAccountConfig('your-providertype-value').subscribe(twoFaAccountConfig => {
+  console.log('Generate Two Fa Account Config:', twoFaAccountConfig);
 });
 ```
 
 **5. getAccountTwoFaSettings**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const twoFactorAuthenticationService = $injector.get(self.ctx.servicesMap.get('twoFactorAuthenticationService'));
 twoFactorAuthenticationService.getAccountTwoFaSettings().subscribe(accountTwoFaSettings => {
   console.log('Get Account Two Fa Settings:', accountTwoFaSettings);
 });
@@ -66,26 +52,15 @@ twoFactorAuthenticationService.getAccountTwoFaSettings().subscribe(accountTwoFaS
 **6. updateTwoFaAccountConfig**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const twoFactorAuthenticationService = $injector.get(self.ctx.servicesMap.get('twoFactorAuthenticationService'));
-const providerType = {  // TwoFactorAuthProviderType object
-  // ... set the fields you need
-};
-const useByDefault = true;
-twoFactorAuthenticationService.updateTwoFaAccountConfig(providerType, useByDefault).subscribe(savedTwoFaAccountConfig => {
-  console.log('Saved Two Fa Account Config:', savedTwoFaAccountConfig);
+twoFactorAuthenticationService.updateTwoFaAccountConfig('your-providertype-value', true).subscribe(twoFaAccountConfig => {
+  console.log('Update Two Fa Account Config:', twoFaAccountConfig);
 });
 ```
 
 **7. submitTwoFaAccountConfig**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const twoFactorAuthenticationService = $injector.get(self.ctx.servicesMap.get('twoFactorAuthenticationService'));
-const authConfig = {  // TwoFactorAuthAccountConfig object
-  // ... set the fields you need
-};
-twoFactorAuthenticationService.submitTwoFaAccountConfig(authConfig).subscribe(submitTwoFaAccountConfig => {
+twoFactorAuthenticationService.submitTwoFaAccountConfig('your-authconfig-value').subscribe(submitTwoFaAccountConfig => {
   console.log('Submit Two Fa Account Config:', submitTwoFaAccountConfig);
 });
 ```
@@ -93,13 +68,7 @@ twoFactorAuthenticationService.submitTwoFaAccountConfig(authConfig).subscribe(su
 **8. verifyAndSaveTwoFaAccountConfig**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const twoFactorAuthenticationService = $injector.get(self.ctx.servicesMap.get('twoFactorAuthenticationService'));
-const authConfig = {  // TwoFactorAuthAccountConfig object
-  // ... set the fields you need
-};
-const verificationCode = 10;
-twoFactorAuthenticationService.verifyAndSaveTwoFaAccountConfig(authConfig, verificationCode).subscribe(verifyAndSaveTwoFaAccountConfig => {
+twoFactorAuthenticationService.verifyAndSaveTwoFaAccountConfig('your-authconfig-value', 0).subscribe(verifyAndSaveTwoFaAccountConfig => {
   console.log('Verify And Save Two Fa Account Config:', verifyAndSaveTwoFaAccountConfig);
 });
 ```
@@ -107,12 +76,7 @@ twoFactorAuthenticationService.verifyAndSaveTwoFaAccountConfig(authConfig, verif
 **9. deleteTwoFaAccountConfig**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const twoFactorAuthenticationService = $injector.get(self.ctx.servicesMap.get('twoFactorAuthenticationService'));
-const providerType = {  // TwoFactorAuthProviderType object
-  // ... set the fields you need
-};
-twoFactorAuthenticationService.deleteTwoFaAccountConfig(providerType).subscribe(result => {
-  console.log('Delete Two Fa Account Config result:', result);
+twoFactorAuthenticationService.deleteTwoFaAccountConfig('your-providertype-value').subscribe(twoFaAccountConfig => {
+  console.log('Delete Two Fa Account Config:', twoFaAccountConfig);
 });
 ```

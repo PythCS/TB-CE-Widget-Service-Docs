@@ -1,5 +1,7 @@
 # WHITE LABELING SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -13,178 +15,175 @@ const whiteLabelingService = self.ctx.wl;
 **1. logoImageUrl**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-const result = whiteLabelingService.logoImageUrl();
-console.log('Result:', result);
+self.ctx.wl.logoImageUrl().subscribe(logoImageUrl => {
+  console.log('Logo Image Url:', logoImageUrl);
+});
 ```
 
 **2. logoImageHeight**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-const result = whiteLabelingService.logoImageHeight();
-console.log('Result:', result);
+self.ctx.wl.logoImageHeight().subscribe(logoImageHeight => {
+  console.log('Logo Image Height:', logoImageHeight);
+});
 ```
 
 **3. collapsedLogoImageUrl**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-const result = whiteLabelingService.collapsedLogoImageUrl();
-console.log('Result:', result);
+self.ctx.wl.collapsedLogoImageUrl().subscribe(collapsedLogoImageUrl => {
+  console.log('Collapsed Logo Image Url:', collapsedLogoImageUrl);
+});
 ```
 
 **4. appTitle**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-const result = whiteLabelingService.appTitle();
-console.log('Result:', result);
+self.ctx.wl.appTitle().subscribe(appTitle => {
+  console.log('App Title:', appTitle);
+});
 ```
 
 **5. faviconUrl**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-const result = whiteLabelingService.faviconUrl();
-console.log('Result:', result);
+self.ctx.wl.faviconUrl().subscribe(faviconUrl => {
+  console.log('Favicon Url:', faviconUrl);
+});
 ```
 
 **6. getPrimaryPalette**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-const result = whiteLabelingService.getPrimaryPalette();
-console.log('Result:', result);
+self.ctx.wl.getPrimaryPalette().subscribe(primaryPalette => {
+  console.log('Get Primary Palette:', primaryPalette);
+});
 ```
 
 **7. getPrimaryColor**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-const hue = 'your-hue';
-const result = whiteLabelingService.getPrimaryColor(hue);
-console.log('Result:', result);
+self.ctx.wl.getPrimaryColor('your-hue-value').subscribe(primaryColor => {
+  console.log('Get Primary Color:', primaryColor);
+});
 ```
 
 **8. getAccentPalette**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-const result = whiteLabelingService.getAccentPalette();
-console.log('Result:', result);
+self.ctx.wl.getAccentPalette().subscribe(accentPalette => {
+  console.log('Get Accent Palette:', accentPalette);
+});
 ```
 
 **9. getLoginPrimaryPalette**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-const result = whiteLabelingService.getLoginPrimaryPalette();
-console.log('Result:', result);
+self.ctx.wl.getLoginPrimaryPalette().subscribe(loginPrimaryPalette => {
+  console.log('Get Login Primary Palette:', loginPrimaryPalette);
+});
 ```
 
 **10. getLoginAccentPalette**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-const result = whiteLabelingService.getLoginAccentPalette();
-console.log('Result:', result);
+self.ctx.wl.getLoginAccentPalette().subscribe(loginAccentPalette => {
+  console.log('Get Login Accent Palette:', loginAccentPalette);
+});
 ```
 
 **11. isPrimaryColorPanels**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-const result = whiteLabelingService.isPrimaryColorPanels();
-console.log('Result:', result);
+self.ctx.wl.isPrimaryColorPanels().subscribe(isPrimaryColorPanels => {
+  console.log('Is Primary Color Panels:', isPrimaryColorPanels);
+});
 ```
 
 **12. getDocsUrl**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-const result = whiteLabelingService.getDocsUrl();
-console.log('Result:', result);
+self.ctx.wl.getDocsUrl().subscribe(docsUrl => {
+  console.log('Get Docs Url:', docsUrl);
+});
 ```
 
 **13. getHelpLinkBaseUrl**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-const result = whiteLabelingService.getHelpLinkBaseUrl();
-console.log('Result:', result);
+self.ctx.wl.getHelpLinkBaseUrl().subscribe(helpLinkBaseUrl => {
+  console.log('Get Help Link Base Url:', helpLinkBaseUrl);
+});
 ```
 
 **14. getUiHelpBaseUrl**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-const result = whiteLabelingService.getUiHelpBaseUrl();
-console.log('Result:', result);
+self.ctx.wl.getUiHelpBaseUrl().subscribe(uiHelpBaseUrl => {
+  console.log('Get Ui Help Base Url:', uiHelpBaseUrl);
+});
 ```
 
 **15. isEnableHelpLinks**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-const result = whiteLabelingService.isEnableHelpLinks();
-console.log('Result:', result);
+self.ctx.wl.isEnableHelpLinks().subscribe(isEnableHelpLinks => {
+  console.log('Is Enable Help Links:', isEnableHelpLinks);
+});
 ```
 
 **16. isShowVersion**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-const result = whiteLabelingService.isShowVersion();
-console.log('Result:', result);
+self.ctx.wl.isShowVersion().subscribe(isShowVersion => {
+  console.log('Is Show Version:', isShowVersion);
+});
 ```
 
 **17. getPlatformName**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-const result = whiteLabelingService.getPlatformName();
-console.log('Result:', result);
+self.ctx.wl.getPlatformName().subscribe(platformName => {
+  console.log('Get Platform Name:', platformName);
+});
 ```
 
 **18. getTrendzName**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-const result = whiteLabelingService.getTrendzName();
-console.log('Result:', result);
+self.ctx.wl.getTrendzName().subscribe(trendzName => {
+  console.log('Get Trendz Name:', trendzName);
+});
 ```
 
 **19. getPlatformVersion**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-const result = whiteLabelingService.getPlatformVersion();
-console.log('Result:', result);
+self.ctx.wl.getPlatformVersion().subscribe(platformVersion => {
+  console.log('Get Platform Version:', platformVersion);
+});
 ```
 
 **20. getHideConnectivityDialog**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-const result = whiteLabelingService.getHideConnectivityDialog();
-console.log('Result:', result);
+self.ctx.wl.getHideConnectivityDialog().subscribe(hideConnectivityDialog => {
+  console.log('Get Hide Connectivity Dialog:', hideConnectivityDialog);
+});
 ```
 
 **21. loadLoginWhiteLabelingParams**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-whiteLabelingService.loadLoginWhiteLabelingParams().subscribe(loginWhiteLabelingParams => {
-  console.log('Load Login White Labeling Params:', loginWhiteLabelingParams);
+self.ctx.wl.loadLoginWhiteLabelingParams().subscribe(loadLoginWhiteLabelingParams => {
+  console.log('Load Login White Labeling Params:', loadLoginWhiteLabelingParams);
 });
 ```
 
 **22. onLoginWlParamsLoaded**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-whiteLabelingService.onLoginWlParamsLoaded().subscribe(onLoginWlParamsLoaded => {
+self.ctx.wl.onLoginWlParamsLoaded().subscribe(onLoginWlParamsLoaded => {
   console.log('On Login Wl Params Loaded:', onLoginWlParamsLoaded);
 });
 ```
@@ -192,17 +191,15 @@ whiteLabelingService.onLoginWlParamsLoaded().subscribe(onLoginWlParamsLoaded => 
 **23. loadUserWhiteLabelingParams**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-whiteLabelingService.loadUserWhiteLabelingParams().subscribe(userWhiteLabelingParams => {
-  console.log('Load User White Labeling Params:', userWhiteLabelingParams);
+self.ctx.wl.loadUserWhiteLabelingParams().subscribe(loadUserWhiteLabelingParams => {
+  console.log('Load User White Labeling Params:', loadUserWhiteLabelingParams);
 });
 ```
 
 **24. onUserWlParamsLoaded**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-whiteLabelingService.onUserWlParamsLoaded().subscribe(onUserWlParamsLoaded => {
+self.ctx.wl.onUserWlParamsLoaded().subscribe(onUserWlParamsLoaded => {
   console.log('On User Wl Params Loaded:', onUserWlParamsLoaded);
 });
 ```
@@ -210,11 +207,7 @@ whiteLabelingService.onUserWlParamsLoaded().subscribe(onUserWlParamsLoaded => {
 **25. whiteLabelPreview**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-const wLParams = {  // WhiteLabelingParams object
-  // ... set the fields you need
-};
-whiteLabelingService.whiteLabelPreview(wLParams).subscribe(whiteLabelPreview => {
+self.ctx.wl.whiteLabelPreview('your-wlparams-value').subscribe(whiteLabelPreview => {
   console.log('White Label Preview:', whiteLabelPreview);
 });
 ```
@@ -222,8 +215,7 @@ whiteLabelingService.whiteLabelPreview(wLParams).subscribe(whiteLabelPreview => 
 **26. cancelWhiteLabelPreview**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-whiteLabelingService.cancelWhiteLabelPreview().subscribe(cancelWhiteLabelPreview => {
+self.ctx.wl.cancelWhiteLabelPreview().subscribe(cancelWhiteLabelPreview => {
   console.log('Cancel White Label Preview:', cancelWhiteLabelPreview);
 });
 ```
@@ -231,8 +223,7 @@ whiteLabelingService.cancelWhiteLabelPreview().subscribe(cancelWhiteLabelPreview
 **27. getCurrentWhiteLabelParams**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-whiteLabelingService.getCurrentWhiteLabelParams().subscribe(currentWhiteLabelParams => {
+self.ctx.wl.getCurrentWhiteLabelParams().subscribe(currentWhiteLabelParams => {
   console.log('Get Current White Label Params:', currentWhiteLabelParams);
 });
 ```
@@ -240,8 +231,7 @@ whiteLabelingService.getCurrentWhiteLabelParams().subscribe(currentWhiteLabelPar
 **28. getCurrentLoginWhiteLabelParams**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-whiteLabelingService.getCurrentLoginWhiteLabelParams().subscribe(currentLoginWhiteLabelParams => {
+self.ctx.wl.getCurrentLoginWhiteLabelParams().subscribe(currentLoginWhiteLabelParams => {
   console.log('Get Current Login White Label Params:', currentLoginWhiteLabelParams);
 });
 ```
@@ -249,41 +239,31 @@ whiteLabelingService.getCurrentLoginWhiteLabelParams().subscribe(currentLoginWhi
 **29. saveWhiteLabelParams**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-const wlParams = {  // WhiteLabelingParams object
-  // ... set the fields you need
-};
-whiteLabelingService.saveWhiteLabelParams(wlParams).subscribe(savedWhiteLabelParams => {
-  console.log('Saved White Label Params:', savedWhiteLabelParams);
+self.ctx.wl.saveWhiteLabelParams('your-wlparams-value').subscribe(whiteLabelParams => {
+  console.log('Save White Label Params:', whiteLabelParams);
 });
 ```
 
 **30. saveLoginWhiteLabelParams**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-const wlParams = {  // LoginWhiteLabelingParams object
-  // ... set the fields you need
-};
-whiteLabelingService.saveLoginWhiteLabelParams(wlParams).subscribe(savedLoginWhiteLabelParams => {
-  console.log('Saved Login White Label Params:', savedLoginWhiteLabelParams);
+self.ctx.wl.saveLoginWhiteLabelParams('your-wlparams-value').subscribe(loginWhiteLabelParams => {
+  console.log('Save Login White Label Params:', loginWhiteLabelParams);
 });
 ```
 
 **31. deleteCurrentLoginWhiteLabelParams**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-whiteLabelingService.deleteCurrentLoginWhiteLabelParams().subscribe(result => {
-  console.log('Delete Current Login White Label Params result:', result);
+self.ctx.wl.deleteCurrentLoginWhiteLabelParams().subscribe(result => {
+  console.log('Delete Current Login White Label Params:', result);
 });
 ```
 
 **32. isWhiteLabelingAllowed**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-whiteLabelingService.isWhiteLabelingAllowed().subscribe(isWhiteLabelingAllowed => {
+self.ctx.wl.isWhiteLabelingAllowed().subscribe(isWhiteLabelingAllowed => {
   console.log('Is White Labeling Allowed:', isWhiteLabelingAllowed);
 });
 ```
@@ -291,8 +271,7 @@ whiteLabelingService.isWhiteLabelingAllowed().subscribe(isWhiteLabelingAllowed =
 **33. isCustomerWhiteLabelingAllowed**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-whiteLabelingService.isCustomerWhiteLabelingAllowed().subscribe(isCustomerWhiteLabelingAllowed => {
+self.ctx.wl.isCustomerWhiteLabelingAllowed().subscribe(isCustomerWhiteLabelingAllowed => {
   console.log('Is Customer White Labeling Allowed:', isCustomerWhiteLabelingAllowed);
 });
 ```
@@ -300,20 +279,15 @@ whiteLabelingService.isCustomerWhiteLabelingAllowed().subscribe(isCustomerWhiteL
 **34. saveMailTemplates**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-const mailTemplates = {  // MailTemplatesSettings object
-  // ... set the fields you need
-};
-whiteLabelingService.saveMailTemplates(mailTemplates).subscribe(savedMailTemplates => {
-  console.log('Saved Mail Templates:', savedMailTemplates);
+self.ctx.wl.saveMailTemplates('your-email@example.com').subscribe(mailTemplates => {
+  console.log('Save Mail Templates:', mailTemplates);
 });
 ```
 
 **35. getMailTemplates**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-whiteLabelingService.getMailTemplates().subscribe(mailTemplates => {
+self.ctx.wl.getMailTemplates().subscribe(mailTemplates => {
   console.log('Get Mail Templates:', mailTemplates);
 });
 ```
@@ -321,8 +295,7 @@ whiteLabelingService.getMailTemplates().subscribe(mailTemplates => {
 **36. wlChanged**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-whiteLabelingService.wlChanged().subscribe(wlChanged => {
+self.ctx.wl.wlChanged().subscribe(wlChanged => {
   console.log('Wl Changed:', wlChanged);
 });
 ```
@@ -330,30 +303,23 @@ whiteLabelingService.wlChanged().subscribe(wlChanged => {
 **37. getCurrentWlParams**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-const result = whiteLabelingService.getCurrentWlParams();
-console.log('Result:', result);
+self.ctx.wl.getCurrentWlParams().subscribe(currentWlParams => {
+  console.log('Get Current Wl Params:', currentWlParams);
+});
 ```
 
 **38. setLoginWlParams**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-const newWlParams = {  // LoginWhiteLabelingParams object
-  // ... set the fields you need
-};
-const result = whiteLabelingService.setLoginWlParams(newWlParams);
-console.log('Result:', result);
+self.ctx.wl.setLoginWlParams('your-newwlparams-value').subscribe(loginWlParams => {
+  console.log('Set Login Wl Params:', loginWlParams);
+});
 ```
 
 **39. applyThemePalettes**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-const paletteSettings = {  // PaletteSettings object
-  // ... set the fields you need
-};
-whiteLabelingService.applyThemePalettes(paletteSettings).subscribe(applyThemePalettes => {
+self.ctx.wl.applyThemePalettes('your-palettesettings-value').subscribe(applyThemePalettes => {
   console.log('Apply Theme Palettes:', applyThemePalettes);
 });
 ```
@@ -361,11 +327,7 @@ whiteLabelingService.applyThemePalettes(paletteSettings).subscribe(applyThemePal
 **40. applyLoginThemePalettes**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-const paletteSettings = {  // PaletteSettings object
-  // ... set the fields you need
-};
-whiteLabelingService.applyLoginThemePalettes(paletteSettings).subscribe(applyLoginThemePalettes => {
+self.ctx.wl.applyLoginThemePalettes('your-palettesettings-value').subscribe(applyLoginThemePalettes => {
   console.log('Apply Login Theme Palettes:', applyLoginThemePalettes);
 });
 ```
@@ -373,15 +335,7 @@ whiteLabelingService.applyLoginThemePalettes(paletteSettings).subscribe(applyLog
 **41. configurePalette**
 
 ```javascript
-const whiteLabelingService = self.ctx.wl;
-const paletteConfig = {  // Palette object
-  // ... set the fields you need
-};
-const defaultColors = {  // ColorPalette object
-  // ... set the fields you need
-};
-const defaultType = 'your-default-type';
-const defaultExtends = 'your-default-extends';
-const result = whiteLabelingService.configurePalette(paletteConfig, defaultColors, defaultType, defaultExtends);
-console.log('Result:', result);
+self.ctx.wl.configurePalette('your-paletteconfig-value', 'your-defaultcolors-value', 'your-defaulttype-value', 'your-defaultextends-value').subscribe(configurePalette => {
+  console.log('Configure Palette:', configurePalette);
+});
 ```

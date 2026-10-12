@@ -1,5 +1,7 @@
 # USER PERMISSIONS SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -10,25 +12,15 @@ const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermi
 **1. loadPermissionsInfo**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-userPermissionsService.loadPermissionsInfo().subscribe(permissionsInfo => {
-  console.log('Load Permissions Info:', permissionsInfo);
+userPermissionsService.loadPermissionsInfo().subscribe(loadPermissionsInfo => {
+  console.log('Load Permissions Info:', loadPermissionsInfo);
 });
 ```
 
 **2. hasEntityPermission**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const entityId = {  // EntityId object
-  // ... set the fields you need
-};
-const operation = {  // Operation object
-  // ... set the fields you need
-};
-userPermissionsService.hasEntityPermission(entityId, operation).subscribe(hasEntityPermission => {
+userPermissionsService.hasEntityPermission('your-entity-id', 'your-operation-value').subscribe(hasEntityPermission => {
   console.log('Has Entity Permission:', hasEntityPermission);
 });
 ```
@@ -36,387 +28,239 @@ userPermissionsService.hasEntityPermission(entityId, operation).subscribe(hasEnt
 **3. getOperationsByResource**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const resource = {  // Resource object
-  // ... set the fields you need
-};
-const result = userPermissionsService.getOperationsByResource(resource);
-console.log('Result:', result);
+userPermissionsService.getOperationsByResource('your-resource-value').subscribe(operationsByResource => {
+  console.log('Get Operations By Resource:', operationsByResource);
+});
 ```
 
 **4. getAllowedGroupRoleOperations**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const result = userPermissionsService.getAllowedGroupRoleOperations();
-console.log('Result:', result);
+userPermissionsService.getAllowedGroupRoleOperations().subscribe(allowedGroupRoleOperations => {
+  console.log('Get Allowed Group Role Operations:', allowedGroupRoleOperations);
+});
 ```
 
 **5. getAllowedResources**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const result = userPermissionsService.getAllowedResources();
-console.log('Result:', result);
+userPermissionsService.getAllowedResources().subscribe(allowedResources => {
+  console.log('Get Allowed Resources:', allowedResources);
+});
 ```
 
 **6. hasReadGroupsPermission**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const entityType = {  // EntityType object
-  // ... set the fields you need
-};
-const result = userPermissionsService.hasReadGroupsPermission(entityType);
-console.log('Result:', result);
+userPermissionsService.hasReadGroupsPermission('your-entitytype-value').subscribe(hasReadGroupsPermission => {
+  console.log('Has Read Groups Permission:', hasReadGroupsPermission);
+});
 ```
 
 **7. hasGenericReadGroupsPermission**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const entityType = {  // EntityType object
-  // ... set the fields you need
-};
-const result = userPermissionsService.hasGenericReadGroupsPermission(entityType);
-console.log('Result:', result);
+userPermissionsService.hasGenericReadGroupsPermission('your-entitytype-value').subscribe(hasGenericReadGroupsPermission => {
+  console.log('Has Generic Read Groups Permission:', hasGenericReadGroupsPermission);
+});
 ```
 
 **8. hasSharedReadGroupsPermission**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const entityType = {  // EntityType object
-  // ... set the fields you need
-};
-const result = userPermissionsService.hasSharedReadGroupsPermission(entityType);
-console.log('Result:', result);
+userPermissionsService.hasSharedReadGroupsPermission('your-entitytype-value').subscribe(hasSharedReadGroupsPermission => {
+  console.log('Has Shared Read Groups Permission:', hasSharedReadGroupsPermission);
+});
 ```
 
 **9. hasReadGenericPermission**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const resource = {  // Resource object
-  // ... set the fields you need
-};
-const result = userPermissionsService.hasReadGenericPermission(resource);
-console.log('Result:', result);
+userPermissionsService.hasReadGenericPermission('your-resource-value').subscribe(hasReadGenericPermission => {
+  console.log('Has Read Generic Permission:', hasReadGenericPermission);
+});
 ```
 
 **10. hasGenericPermission**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const resource = {  // Resource object
-  // ... set the fields you need
-};
-const operation = {  // Operation object
-  // ... set the fields you need
-};
-const result = userPermissionsService.hasGenericPermission(resource, operation);
-console.log('Result:', result);
+userPermissionsService.hasGenericPermission('your-resource-value', 'your-operation-value').subscribe(hasGenericPermission => {
+  console.log('Has Generic Permission:', hasGenericPermission);
+});
 ```
 
 **11. isAiEnabled**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const result = userPermissionsService.isAiEnabled();
-console.log('Result:', result);
+userPermissionsService.isAiEnabled().subscribe(isAiEnabled => {
+  console.log('Is Ai Enabled:', isAiEnabled);
+});
 ```
 
 **12. isResourceAllowed**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const resource = {  // Resource object
-  // ... set the fields you need
-};
-const result = userPermissionsService.isResourceAllowed(resource);
-console.log('Result:', result);
+userPermissionsService.isResourceAllowed('your-resource-value').subscribe(isResourceAllowed => {
+  console.log('Is Resource Allowed:', isResourceAllowed);
+});
 ```
 
 **13. hasGenericPermissionByEntityGroupType**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const operation = {  // Operation object
-  // ... set the fields you need
-};
-const groupType = {  // EntityType object
-  // ... set the fields you need
-};
-const result = userPermissionsService.hasGenericPermissionByEntityGroupType(operation, groupType);
-console.log('Result:', result);
+userPermissionsService.hasGenericPermissionByEntityGroupType('your-operation-value', 'your-grouptype-value').subscribe(hasGenericPermissionByEntityGroupType => {
+  console.log('Has Generic Permission By Entity Group Type:', hasGenericPermissionByEntityGroupType);
+});
 ```
 
 **14. hasGenericEntityGroupTypePermission**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const operation = {  // Operation object
-  // ... set the fields you need
-};
-const groupType = {  // EntityType object
-  // ... set the fields you need
-};
-const result = userPermissionsService.hasGenericEntityGroupTypePermission(operation, groupType);
-console.log('Result:', result);
+userPermissionsService.hasGenericEntityGroupTypePermission('your-operation-value', 'your-grouptype-value').subscribe(hasGenericEntityGroupTypePermission => {
+  console.log('Has Generic Entity Group Type Permission:', hasGenericEntityGroupTypePermission);
+});
 ```
 
 **15. hasGenericEntityGroupPermission**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const operation = {  // Operation object
-  // ... set the fields you need
-};
-const entityGroup = {  // EntityGroup object
-  // ... set the fields you need
-};
-const result = userPermissionsService.hasGenericEntityGroupPermission(operation, entityGroup);
-console.log('Result:', result);
+userPermissionsService.hasGenericEntityGroupPermission('your-operation-value', 'your-entitygroup-value').subscribe(hasGenericEntityGroupPermission => {
+  console.log('Has Generic Entity Group Permission:', hasGenericEntityGroupPermission);
+});
 ```
 
 **16. hasEntityGroupPermission**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const operation = {  // Operation object
-  // ... set the fields you need
-};
-const entityGroup = {  // EntityGroupInfo object
-  // ... set the fields you need
-};
-const result = userPermissionsService.hasEntityGroupPermission(operation, entityGroup);
-console.log('Result:', result);
+userPermissionsService.hasEntityGroupPermission('your-operation-value', 'your-entitygroup-value').subscribe(hasEntityGroupPermission => {
+  console.log('Has Entity Group Permission:', hasEntityGroupPermission);
+});
 ```
 
 **17. hasGroupEntityPermission**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const operation = {  // Operation object
-  // ... set the fields you need
-};
-const entityGroup = {  // EntityGroupInfo object
-  // ... set the fields you need
-};
-const result = userPermissionsService.hasGroupEntityPermission(operation, entityGroup);
-console.log('Result:', result);
+userPermissionsService.hasGroupEntityPermission('your-operation-value', 'your-entitygroup-value').subscribe(hasGroupEntityPermission => {
+  console.log('Has Group Entity Permission:', hasGroupEntityPermission);
+});
 ```
 
 **18. isOwnedGroup**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const entityGroup = {  // EntityGroupInfo object
-  // ... set the fields you need
-};
-const result = userPermissionsService.isOwnedGroup(entityGroup);
-console.log('Result:', result);
+userPermissionsService.isOwnedGroup('your-entitygroup-value').subscribe(isOwnedGroup => {
+  console.log('Is Owned Group:', isOwnedGroup);
+});
 ```
 
 **19. getUserOwnerId**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const result = userPermissionsService.getUserOwnerId();
-console.log('Result:', result);
+userPermissionsService.getUserOwnerId().subscribe(userOwnerId => {
+  console.log('Get User Owner Id:', userOwnerId);
+});
 ```
 
 **20. isDirectOwner**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const ownerId = {  // EntityId object
-  // ... set the fields you need
-};
-const result = userPermissionsService.isDirectOwner(ownerId);
-console.log('Result:', result);
+userPermissionsService.isDirectOwner('your-owner-id').subscribe(isDirectOwner => {
+  console.log('Is Direct Owner:', isDirectOwner);
+});
 ```
 
 **21. hasEntityTypeOperationPermission**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const entityType = {  // EntityType object
-  // ... set the fields you need
-};
-const operation = {  // Operation object
-  // ... set the fields you need
-};
-const entityGroup = {  // EntityGroupInfo object
-  // ... set the fields you need
-};
-const result = userPermissionsService.hasEntityTypeOperationPermission(entityType, operation, entityGroup);
-console.log('Result:', result);
+userPermissionsService.hasEntityTypeOperationPermission('your-entitytype-value', 'your-operation-value', 'your-entitygroup-value').subscribe(hasEntityTypeOperationPermission => {
+  console.log('Has Entity Type Operation Permission:', hasEntityTypeOperationPermission);
+});
 ```
 
 **22. hasResourcesGenericPermission**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const resource = [];  // e.g. array of resource values
-const operation = [];  // e.g. array of operation values
-const result = userPermissionsService.hasResourcesGenericPermission(resource, operation);
-console.log('Result:', result);
+userPermissionsService.hasResourcesGenericPermission('your-resource-value', 'your-operation-value').subscribe(hasResourcesGenericPermission => {
+  console.log('Has Resources Generic Permission:', hasResourcesGenericPermission);
+});
 ```
 
 **23. hasGenericResourcesPermission**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const resources = [];  // e.g. array of resources values
-const operation = [];  // e.g. array of operation values
-const result = userPermissionsService.hasGenericResourcesPermission(resources, operation);
-console.log('Result:', result);
+userPermissionsService.hasGenericResourcesPermission('your-resources-value', 'your-operation-value').subscribe(hasGenericResourcesPermission => {
+  console.log('Has Generic Resources Permission:', hasGenericResourcesPermission);
+});
 ```
 
 **24. hasGenericOperationsPermission**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const resource = [];  // e.g. array of resource values
-const operations = [];  // e.g. array of operations values
-const result = userPermissionsService.hasGenericOperationsPermission(resource, operations);
-console.log('Result:', result);
+userPermissionsService.hasGenericOperationsPermission('your-resource-value', 'your-operations-value').subscribe(hasGenericOperationsPermission => {
+  console.log('Has Generic Operations Permission:', hasGenericOperationsPermission);
+});
 ```
 
 **25. hasGenericAllPermission**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const resource = {  // Resource object
-  // ... set the fields you need
-};
-const operation = {  // Operation object
-  // ... set the fields you need
-};
-const result = userPermissionsService.hasGenericAllPermission(resource, operation);
-console.log('Result:', result);
+userPermissionsService.hasGenericAllPermission('your-resource-value', 'your-operation-value').subscribe(hasGenericAllPermission => {
+  console.log('Has Generic All Permission:', hasGenericAllPermission);
+});
 ```
 
 **26. hasGenericResourcePermission**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const resource = {  // Resource object
-  // ... set the fields you need
-};
-const operation = {  // Operation object
-  // ... set the fields you need
-};
-const result = userPermissionsService.hasGenericResourcePermission(resource, operation);
-console.log('Result:', result);
+userPermissionsService.hasGenericResourcePermission('your-resource-value', 'your-operation-value').subscribe(hasGenericResourcePermission => {
+  console.log('Has Generic Resource Permission:', hasGenericResourcePermission);
+});
 ```
 
 **27. checkOperation**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const operations = [];  // e.g. array of operations values
-const operation = {  // Operation object
-  // ... set the fields you need
-};
-const result = userPermissionsService.checkOperation(operations, operation);
-console.log('Result:', result);
+userPermissionsService.checkOperation('your-operations-value', 'your-operation-value').subscribe(operation => {
+  console.log('Check Operation:', operation);
+});
 ```
 
 **28. checkEntityGroupPermission**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const operation = {  // Operation object
-  // ... set the fields you need
-};
-const entityGroup = {  // EntityGroupInfo object
-  // ... set the fields you need
-};
-const isGroup = true;
-const result = userPermissionsService.checkEntityGroupPermission(operation, entityGroup, isGroup);
-console.log('Result:', result);
+userPermissionsService.checkEntityGroupPermission('your-operation-value', 'your-entitygroup-value', true).subscribe(entityGroupPermission => {
+  console.log('Check Entity Group Permission:', entityGroupPermission);
+});
 ```
 
 **29. hasGroupPermissions**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const entityGroup = {  // EntityGroupInfo object
-  // ... set the fields you need
-};
-const operation = {  // Operation object
-  // ... set the fields you need
-};
-const isGroup = true;
-const result = userPermissionsService.hasGroupPermissions(entityGroup, operation, isGroup);
-console.log('Result:', result);
+userPermissionsService.hasGroupPermissions('your-entitygroup-value', 'your-operation-value', true).subscribe(hasGroupPermissions => {
+  console.log('Has Group Permissions:', hasGroupPermissions);
+});
 ```
 
 **30. isCurrentUserOwner**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const entityGroup = {  // EntityGroupInfo object
-  // ... set the fields you need
-};
-const result = userPermissionsService.isCurrentUserOwner(entityGroup);
-console.log('Result:', result);
+userPermissionsService.isCurrentUserOwner('your-entitygroup-value').subscribe(isCurrentUserOwner => {
+  console.log('Is Current User Owner:', isCurrentUserOwner);
+});
 ```
 
 **31. containsId**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const idsArray = [];  // e.g. array of ids-array values
-const id = {  // EntityId object
-  // ... set the fields you need
-};
-const result = userPermissionsService.containsId(idsArray, id);
-console.log('Result:', result);
+userPermissionsService.containsId('your-idsarray-value', 'your--id').subscribe(containsId => {
+  console.log('Contains Id:', containsId);
+});
 ```
 
 **32. idsEqual**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const userPermissionsService = $injector.get(self.ctx.servicesMap.get('userPermissionsService'));
-const id1 = {  // EntityId object
-  // ... set the fields you need
-};
-const id2 = {  // EntityId object
-  // ... set the fields you need
-};
-const result = userPermissionsService.idsEqual(id1, id2);
-console.log('Result:', result);
+userPermissionsService.idsEqual('your-id1-value', 'your-id2-value').subscribe(idsEqual => {
+  console.log('Ids Equal:', idsEqual);
+});
 ```

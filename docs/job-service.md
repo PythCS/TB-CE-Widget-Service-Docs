@@ -1,5 +1,7 @@
 # JOB SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -10,56 +12,39 @@ const jobService = $injector.get(self.ctx.servicesMap.get('jobService'));
 **1. getJobById**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const jobService = $injector.get(self.ctx.servicesMap.get('jobService'));
-const id = 'your-id';
-jobService.getJobById(id).subscribe(jobBy => {
-  console.log('Get Job By Id:', jobBy);
+jobService.getJobById('your--id').subscribe(jobById => {
+  console.log('Get Job By Id:', jobById);
 });
 ```
 
 **2. getJobs**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const jobService = $injector.get(self.ctx.servicesMap.get('jobService'));
-const query = {  // JobQuery object
-  // ... set the fields you need
-};
-jobService.getJobs(query).subscribe(jobs => {
-  console.log('List of Jobs:', jobs);
+jobService.getJobs('your-query-value').subscribe(jobs => {
+  console.log('Get Jobs:', jobs);
 });
 ```
 
 **3. cancelJob**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const jobService = $injector.get(self.ctx.servicesMap.get('jobService'));
-const id = 'your-id';
-jobService.cancelJob(id).subscribe(cancelJob => {
-  console.log('Cancel Job:', cancelJob);
+jobService.cancelJob('your--id').subscribe(result => {
+  console.log('Cancel Job:', result);
 });
 ```
 
 **4. reprocessJob**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const jobService = $injector.get(self.ctx.servicesMap.get('jobService'));
-const id = 'your-id';
-jobService.reprocessJob(id).subscribe(reprocessJob => {
-  console.log('Reprocess Job:', reprocessJob);
+jobService.reprocessJob('your--id').subscribe(result => {
+  console.log('Reprocess Job:', result);
 });
 ```
 
 **5. deleteJob**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const jobService = $injector.get(self.ctx.servicesMap.get('jobService'));
-const id = 'your-id';
-jobService.deleteJob(id).subscribe(result => {
-  console.log('Delete Job result:', result);
+jobService.deleteJob('your--id').subscribe(result => {
+  console.log('Delete Job:', result);
 });
 ```

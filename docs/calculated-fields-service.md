@@ -1,5 +1,7 @@
 # CALCULATED FIELDS SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -10,75 +12,49 @@ const calculatedFieldsService = $injector.get(self.ctx.servicesMap.get('calculat
 **1. getCalculatedFieldById**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const calculatedFieldsService = $injector.get(self.ctx.servicesMap.get('calculatedFieldsService'));
-const calculatedFieldId = 'your-calculated-field-id';
-calculatedFieldsService.getCalculatedFieldById(calculatedFieldId).subscribe(calculatedFieldBy => {
-  console.log('Get Calculated Field By Id:', calculatedFieldBy);
+calculatedFieldsService.getCalculatedFieldById('your-calculatedfield-id').subscribe(field => {
+  console.log('Get Calculated Field By Id:', field);
 });
 ```
 
 **2. saveCalculatedField**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const calculatedFieldsService = $injector.get(self.ctx.servicesMap.get('calculatedFieldsService'));
-const calculatedField = {  // CalculatedField object
-  // ... set the fields you need
-};
-calculatedFieldsService.saveCalculatedField(calculatedField).subscribe(savedCalculatedField => {
-  console.log('Saved Calculated Field:', savedCalculatedField);
+calculatedFieldsService.saveCalculatedField('your-calculatedfield-value').subscribe(calculatedField => {
+  console.log('Save Calculated Field:', calculatedField);
 });
 ```
 
 **3. deleteCalculatedField**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const calculatedFieldsService = $injector.get(self.ctx.servicesMap.get('calculatedFieldsService'));
-const calculatedFieldId = 'your-calculated-field-id';
-calculatedFieldsService.deleteCalculatedField(calculatedFieldId).subscribe(result => {
-  console.log('Delete Calculated Field result:', result);
+calculatedFieldsService.deleteCalculatedField('your-calculatedfield-id').subscribe(calculatedField => {
+  console.log('Delete Calculated Field:', calculatedField);
 });
 ```
 
 **4. getCalculatedFields**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const calculatedFieldsService = $injector.get(self.ctx.servicesMap.get('calculatedFieldsService'));
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const query = {  // CalculatedFieldsQuery object
-  // ... set the fields you need
-};
-calculatedFieldsService.getCalculatedFields(pageLink, query).subscribe(calculatedFields => {
-  console.log('List of Calculated Fields:', calculatedFields);
+calculatedFieldsService.getCalculatedFields(pageLink, 'your-query-value').subscribe(fields => {
+  console.log('Get Calculated Fields:', fields);
 });
 ```
 
 **5. getCalculatedFieldsByEntityId**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const calculatedFieldsService = $injector.get(self.ctx.servicesMap.get('calculatedFieldsService'));
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const type = {  // CalculatedFieldType object
-  // ... set the fields you need
-};
-calculatedFieldsService.getCalculatedFieldsByEntityId(pageLink, type).subscribe(calculatedFieldsByEntitys => {
-  console.log('List of Calculated Fields By Entity Ids:', calculatedFieldsByEntitys);
+calculatedFieldsService.getCalculatedFieldsByEntityId(pageLink, 'your-type-value').subscribe(calculatedFieldsByEntityId => {
+  console.log('Get Calculated Fields By Entity Id:', calculatedFieldsByEntityId);
 });
 ```
 
 **6. testScript**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const calculatedFieldsService = $injector.get(self.ctx.servicesMap.get('calculatedFieldsService'));
-const inputParams = {  // CalculatedFieldTestScriptInputParams object
-  // ... set the fields you need
-};
-calculatedFieldsService.testScript(inputParams).subscribe(testScript => {
+calculatedFieldsService.testScript('your-inputparams-value').subscribe(testScript => {
   console.log('Test Script:', testScript);
 });
 ```
@@ -86,10 +62,7 @@ calculatedFieldsService.testScript(inputParams).subscribe(testScript => {
 **7. getLatestCalculatedFieldDebugEvent**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const calculatedFieldsService = $injector.get(self.ctx.servicesMap.get('calculatedFieldsService'));
-const id = 'your-id';
-calculatedFieldsService.getLatestCalculatedFieldDebugEvent(id).subscribe(latestCalculatedFieldDebugEvent => {
+calculatedFieldsService.getLatestCalculatedFieldDebugEvent('your--id').subscribe(latestCalculatedFieldDebugEvent => {
   console.log('Get Latest Calculated Field Debug Event:', latestCalculatedFieldDebugEvent);
 });
 ```
@@ -97,26 +70,16 @@ calculatedFieldsService.getLatestCalculatedFieldDebugEvent(id).subscribe(latestC
 **8. getCalculatedFieldNames**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const calculatedFieldsService = $injector.get(self.ctx.servicesMap.get('calculatedFieldsService'));
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const type = {  // CalculatedFieldType object
-  // ... set the fields you need
-};
-calculatedFieldsService.getCalculatedFieldNames(pageLink, type).subscribe(calculatedFieldNames => {
-  console.log('List of Calculated Field Names:', calculatedFieldNames);
+calculatedFieldsService.getCalculatedFieldNames(pageLink, 'your-type-value').subscribe(calculatedFieldNames => {
+  console.log('Get Calculated Field Names:', calculatedFieldNames);
 });
 ```
 
 **9. reprocessCalculatedField**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const calculatedFieldsService = $injector.get(self.ctx.servicesMap.get('calculatedFieldsService'));
-const id = 'your-id';
-const startTs = 10;
-const endTs = 10;
-calculatedFieldsService.reprocessCalculatedField(id, startTs, endTs).subscribe(reprocessCalculatedField => {
+calculatedFieldsService.reprocessCalculatedField('your--id', 0, 0).subscribe(reprocessCalculatedField => {
   console.log('Reprocess Calculated Field:', reprocessCalculatedField);
 });
 ```
@@ -124,10 +87,7 @@ calculatedFieldsService.reprocessCalculatedField(id, startTs, endTs).subscribe(r
 **10. getLastCalculatedFieldReprocessingJob**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const calculatedFieldsService = $injector.get(self.ctx.servicesMap.get('calculatedFieldsService'));
-const id = 'your-id';
-calculatedFieldsService.getLastCalculatedFieldReprocessingJob(id).subscribe(lastCalculatedFieldReprocessingJob => {
+calculatedFieldsService.getLastCalculatedFieldReprocessingJob('your--id').subscribe(lastCalculatedFieldReprocessingJob => {
   console.log('Get Last Calculated Field Reprocessing Job:', lastCalculatedFieldReprocessingJob);
 });
 ```
@@ -135,10 +95,7 @@ calculatedFieldsService.getLastCalculatedFieldReprocessingJob(id).subscribe(last
 **11. validateCalculatedFieldReprocessing**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const calculatedFieldsService = $injector.get(self.ctx.servicesMap.get('calculatedFieldsService'));
-const id = 'your-id';
-calculatedFieldsService.validateCalculatedFieldReprocessing(id).subscribe(validateCalculatedFieldReprocessing => {
+calculatedFieldsService.validateCalculatedFieldReprocessing('your--id').subscribe(validateCalculatedFieldReprocessing => {
   console.log('Validate Calculated Field Reprocessing:', validateCalculatedFieldReprocessing);
 });
 ```

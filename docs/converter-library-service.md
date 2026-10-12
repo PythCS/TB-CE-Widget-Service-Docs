@@ -1,5 +1,7 @@
 # CONVERTER LIBRARY SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -10,15 +12,7 @@ const converterLibraryService = $injector.get(self.ctx.servicesMap.get('converte
 **1. getVendors**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const converterLibraryService = $injector.get(self.ctx.servicesMap.get('converterLibraryService'));
-const integrationType = {  // IntegrationType object
-  // ... set the fields you need
-};
-const converterType = {  // ConverterType object
-  // ... set the fields you need
-};
-converterLibraryService.getVendors(integrationType, converterType).subscribe(vendors => {
+converterLibraryService.getVendors('your-integrationtype-value', 'your-convertertype-value').subscribe(vendors => {
   console.log('Get Vendors:', vendors);
 });
 ```
@@ -26,16 +20,7 @@ converterLibraryService.getVendors(integrationType, converterType).subscribe(ven
 **2. getModels**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const converterLibraryService = $injector.get(self.ctx.servicesMap.get('converterLibraryService'));
-const integrationType = {  // IntegrationType object
-  // ... set the fields you need
-};
-const vendorName = 'your-vendor-name';
-const converterType = {  // ConverterType object
-  // ... set the fields you need
-};
-converterLibraryService.getModels(integrationType, vendorName, converterType).subscribe(models => {
+converterLibraryService.getModels('your-integrationtype-value', 'your-vendorname-value', 'your-convertertype-value').subscribe(models => {
   console.log('Get Models:', models);
 });
 ```
@@ -43,17 +28,7 @@ converterLibraryService.getModels(integrationType, vendorName, converterType).su
 **3. getConverter**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const converterLibraryService = $injector.get(self.ctx.servicesMap.get('converterLibraryService'));
-const integrationType = {  // IntegrationType object
-  // ... set the fields you need
-};
-const vendorName = 'your-vendor-name';
-const modelName = 'your-model-name';
-const converterType = {  // ConverterType object
-  // ... set the fields you need
-};
-converterLibraryService.getConverter(integrationType, vendorName, modelName, converterType).subscribe(converter => {
+converterLibraryService.getConverter('your-integrationtype-value', 'your-vendorname-value', 'your-modelname-value', 'your-convertertype-value').subscribe(converter => {
   console.log('Get Converter:', converter);
 });
 ```
@@ -61,17 +36,7 @@ converterLibraryService.getConverter(integrationType, vendorName, modelName, con
 **4. getConverterMetaData**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const converterLibraryService = $injector.get(self.ctx.servicesMap.get('converterLibraryService'));
-const integrationType = {  // IntegrationType object
-  // ... set the fields you need
-};
-const vendorName = 'your-vendor-name';
-const modelName = 'your-model-name';
-const converterType = {  // ConverterType object
-  // ... set the fields you need
-};
-converterLibraryService.getConverterMetaData(integrationType, vendorName, modelName, converterType).subscribe(converterMetaData => {
+converterLibraryService.getConverterMetaData('your-integrationtype-value', 'your-vendorname-value', 'your-modelname-value', 'your-convertertype-value').subscribe(converterMetaData => {
   console.log('Get Converter Meta Data:', converterMetaData);
 });
 ```
@@ -79,17 +44,7 @@ converterLibraryService.getConverterMetaData(integrationType, vendorName, modelN
 **5. getConverterPayload**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const converterLibraryService = $injector.get(self.ctx.servicesMap.get('converterLibraryService'));
-const integrationType = {  // IntegrationType object
-  // ... set the fields you need
-};
-const vendorName = 'your-vendor-name';
-const modelName = 'your-model-name';
-const converterType = {  // ConverterType object
-  // ... set the fields you need
-};
-converterLibraryService.getConverterPayload(integrationType, vendorName, modelName, converterType).subscribe(converterPayload => {
+converterLibraryService.getConverterPayload('your-integrationtype-value', 'your-vendorname-value', 'your-modelname-value', 'your-convertertype-value').subscribe(converterPayload => {
   console.log('Get Converter Payload:', converterPayload);
 });
 ```

@@ -1,5 +1,7 @@
 # COMPONENT DESCRIPTOR SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -10,40 +12,23 @@ const componentDescriptorService = $injector.get(self.ctx.servicesMap.get('compo
 **1. getComponentDescriptorsByType**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const componentDescriptorService = $injector.get(self.ctx.servicesMap.get('componentDescriptorService'));
-const componentType = {  // ComponentType object
-  // ... set the fields you need
-};
-const ruleChainType = {  // RuleChainType object
-  // ... set the fields you need
-};
-componentDescriptorService.getComponentDescriptorsByType(componentType, ruleChainType).subscribe(componentDescriptorsByTypes => {
-  console.log('List of Component Descriptors By Types:', componentDescriptorsByTypes);
+componentDescriptorService.getComponentDescriptorsByType('your-componenttype-value', 'your-rulechaintype-value').subscribe(componentDescriptorsByType => {
+  console.log('Get Component Descriptors By Type:', componentDescriptorsByType);
 });
 ```
 
 **2. getComponentDescriptorsByTypes**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const componentDescriptorService = $injector.get(self.ctx.servicesMap.get('componentDescriptorService'));
-const componentTypes = [];  // e.g. array of component-types values
-const ruleChainType = {  // RuleChainType object
-  // ... set the fields you need
-};
-componentDescriptorService.getComponentDescriptorsByTypes(componentTypes, ruleChainType).subscribe(componentDescriptorsByTypes => {
-  console.log('List of Component Descriptors By Types:', componentDescriptorsByTypes);
+componentDescriptorService.getComponentDescriptorsByTypes('your-componenttypes-value', 'your-rulechaintype-value').subscribe(componentDescriptorsByTypes => {
+  console.log('Get Component Descriptors By Types:', componentDescriptorsByTypes);
 });
 ```
 
 **3. getComponentDescriptorByClazz**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const componentDescriptorService = $injector.get(self.ctx.servicesMap.get('componentDescriptorService'));
-const componentDescriptorClazz = 'your-component-descriptor-clazz';
-componentDescriptorService.getComponentDescriptorByClazz(componentDescriptorClazz).subscribe(componentDescriptorByClazz => {
+componentDescriptorService.getComponentDescriptorByClazz('your-componentdescriptorclazz-value').subscribe(componentDescriptorByClazz => {
   console.log('Get Component Descriptor By Clazz:', componentDescriptorByClazz);
 });
 ```

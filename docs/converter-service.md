@@ -1,5 +1,7 @@
 # CONVERTER SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -10,47 +12,33 @@ const converterService = $injector.get(self.ctx.servicesMap.get('converterServic
 **1. getConverters**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const converterService = $injector.get(self.ctx.servicesMap.get('converterService'));
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
 converterService.getConverters(pageLink).subscribe(converters => {
-  console.log('List of Converters:', converters);
+  console.log('Get Converters:', converters);
 });
 ```
 
 **2. getConvertersByEdgeTemplate**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const converterService = $injector.get(self.ctx.servicesMap.get('converterService'));
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const isEdgeTemplate = true;
-const integrationType = {  // IntegrationType object
-  // ... set the fields you need
-};
-converterService.getConvertersByEdgeTemplate(pageLink, isEdgeTemplate, integrationType).subscribe(convertersByEdgeTemplates => {
-  console.log('List of Converters By Edge Templates:', convertersByEdgeTemplates);
+converterService.getConvertersByEdgeTemplate(pageLink, true, 'your-integrationtype-value').subscribe(convertersByEdgeTemplate => {
+  console.log('Get Converters By Edge Template:', convertersByEdgeTemplate);
 });
 ```
 
 **3. getConvertersByIds**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const converterService = $injector.get(self.ctx.servicesMap.get('converterService'));
-const converterIds = ['your-converter-i-1', 'your-converter-i-2'];
-converterService.getConvertersByIds(converterIds).subscribe(convertersBys => {
-  console.log('List of Converters By Ids:', convertersBys);
+converterService.getConvertersByIds('your-converterids-value').subscribe(convertersByIds => {
+  console.log('Get Converters By Ids:', convertersByIds);
 });
 ```
 
 **4. getConverter**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const converterService = $injector.get(self.ctx.servicesMap.get('converterService'));
-const converterId = 'your-converter-id';
-converterService.getConverter(converterId).subscribe(converter => {
+converterService.getConverter('your-converter-id').subscribe(converter => {
   console.log('Get Converter:', converter);
 });
 ```
@@ -58,28 +46,15 @@ converterService.getConverter(converterId).subscribe(converter => {
 **5. saveConverter**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const converterService = $injector.get(self.ctx.servicesMap.get('converterService'));
-const converter = {  // Converter object
-  // ... set the fields you need
-};
-converterService.saveConverter(converter).subscribe(savedConverter => {
-  console.log('Saved Converter:', savedConverter);
+converterService.saveConverter('your-converter-value').subscribe(converter => {
+  console.log('Save Converter:', converter);
 });
 ```
 
 **6. testUpLink**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const converterService = $injector.get(self.ctx.servicesMap.get('converterService'));
-const inputParams = {  // TestUpLinkInputParams object
-  // ... set the fields you need
-};
-const scriptLang = {  // ScriptLanguage object
-  // ... set the fields you need
-};
-converterService.testUpLink(inputParams, scriptLang).subscribe(testUpLink => {
+converterService.testUpLink('your-inputparams-value', 'your-scriptlang-value').subscribe(testUpLink => {
   console.log('Test Up Link:', testUpLink);
 });
 ```
@@ -87,15 +62,7 @@ converterService.testUpLink(inputParams, scriptLang).subscribe(testUpLink => {
 **7. testDownLink**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const converterService = $injector.get(self.ctx.servicesMap.get('converterService'));
-const inputParams = {  // TestDownLinkInputParams object
-  // ... set the fields you need
-};
-const scriptLang = {  // ScriptLanguage object
-  // ... set the fields you need
-};
-converterService.testDownLink(inputParams, scriptLang).subscribe(testDownLink => {
+converterService.testDownLink('your-inputparams-value', 'your-scriptlang-value').subscribe(testDownLink => {
   console.log('Test Down Link:', testDownLink);
 });
 ```
@@ -103,13 +70,7 @@ converterService.testDownLink(inputParams, scriptLang).subscribe(testDownLink =>
 **8. getLatestConverterDebugInput**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const converterService = $injector.get(self.ctx.servicesMap.get('converterService'));
-const converterId = 'your-converter-id';
-const parameters = {  // LatestConverterParameters object
-  // ... set the fields you need
-};
-converterService.getLatestConverterDebugInput(converterId, parameters).subscribe(latestConverterDebugInput => {
+converterService.getLatestConverterDebugInput('your-converter-id', 'your-parameters-value').subscribe(latestConverterDebugInput => {
   console.log('Get Latest Converter Debug Input:', latestConverterDebugInput);
 });
 ```
@@ -117,15 +78,7 @@ converterService.getLatestConverterDebugInput(converterId, parameters).subscribe
 **9. unwrapRawPayload**
 
 ```javascript
-const $injector = self.ctx.$scope.$injector;
-const converterService = $injector.get(self.ctx.servicesMap.get('converterService'));
-const integrationType = {  // IntegrationType object
-  // ... set the fields you need
-};
-const msg = {  // ConvertedInputMsgParams object
-  // ... set the fields you need
-};
-converterService.unwrapRawPayload(integrationType, msg).subscribe(unwrapRawPayload => {
+converterService.unwrapRawPayload('your-integrationtype-value', 'your-msg-value').subscribe(unwrapRawPayload => {
   console.log('Unwrap Raw Payload:', unwrapRawPayload);
 });
 ```

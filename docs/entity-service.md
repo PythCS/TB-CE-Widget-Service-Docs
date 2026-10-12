@@ -1,5 +1,7 @@
 # ENTITY SERVICE
 
+Part of the [ThingsBoard CE Widget Services Documentation](../DOCUMENTATION.md).
+
 TO INJECT THE SERVICE:
 
 ```javascript
@@ -13,12 +15,7 @@ const entityService = self.ctx.entityService;
 **1. getEntityObservable**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const entityType = {  // EntityType object
-  // ... set the fields you need
-};
-const entityId = 'your-entity-id';
-entityService.getEntityObservable(entityType, entityId).subscribe(entityObservable => {
+self.ctx.entityService.getEntityObservable('your-entitytype-value', 'your-entity-id').subscribe(entityObservable => {
   console.log('Get Entity Observable:', entityObservable);
 });
 ```
@@ -26,24 +23,15 @@ entityService.getEntityObservable(entityType, entityId).subscribe(entityObservab
 **2. saveEntityObservable**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const entity = {  // BaseData<EntityId> object
-  // ... set the fields you need
-};
-entityService.saveEntityObservable(entity).subscribe(savedEntityObservable => {
-  console.log('Saved Entity Observable:', savedEntityObservable);
+self.ctx.entityService.saveEntityObservable('your-entity-value').subscribe(entityObservable => {
+  console.log('Save Entity Observable:', entityObservable);
 });
 ```
 
 **3. getEntity**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const entityType = {  // EntityType object
-  // ... set the fields you need
-};
-const entityId = 'your-entity-id';
-entityService.getEntity(entityType, entityId).subscribe(entity => {
+self.ctx.entityService.getEntity('your-entitytype-value', 'your-entity-id').subscribe(entity => {
   console.log('Get Entity:', entity);
 });
 ```
@@ -51,171 +39,107 @@ entityService.getEntity(entityType, entityId).subscribe(entity => {
 **4. saveEntity**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const entity = {  // BaseData<EntityId> object
-  // ... set the fields you need
-};
-entityService.saveEntity(entity).subscribe(savedEntity => {
-  console.log('Saved Entity:', savedEntity);
+self.ctx.entityService.saveEntity('your-entity-value').subscribe(entity => {
+  console.log('Save Entity:', entity);
 });
 ```
 
 **5. saveGroupEntityObservable**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const entity = {  // BaseData<EntityId> object
-  // ... set the fields you need
-};
-const entityGroupIds = ['your-entity-group-i-1', 'your-entity-group-i-2'];
-entityService.saveGroupEntityObservable(entity, entityGroupIds).subscribe(savedGroupEntityObservable => {
-  console.log('Saved Group Entity Observable:', savedGroupEntityObservable);
+self.ctx.entityService.saveGroupEntityObservable('your-entity-value', 'your-entitygroupids-value').subscribe(groupEntityObservable => {
+  console.log('Save Group Entity Observable:', groupEntityObservable);
 });
 ```
 
 **6. saveGroupEntity**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const entity = {  // BaseData<EntityId> object
-  // ... set the fields you need
-};
-const entityGroupIds = ['your-entity-group-i-1', 'your-entity-group-i-2'];
-entityService.saveGroupEntity(entity, entityGroupIds).subscribe(savedGroupEntity => {
-  console.log('Saved Group Entity:', savedGroupEntity);
+self.ctx.entityService.saveGroupEntity('your-entity-value', 'your-entitygroupids-value').subscribe(groupEntity => {
+  console.log('Save Group Entity:', groupEntity);
 });
 ```
 
 **7. getEntitiesObservable**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const entityType = {  // EntityType object
-  // ... set the fields you need
-};
-const entityIds = ['your-entity-i-1', 'your-entity-i-2'];
-entityService.getEntitiesObservable(entityType, entityIds).subscribe(entitiesObservables => {
-  console.log('List of Entities Observables:', entitiesObservables);
+self.ctx.entityService.getEntitiesObservable('your-entitytype-value', 'your-entityids-value').subscribe(entitiesObservable => {
+  console.log('Get Entities Observable:', entitiesObservable);
 });
 ```
 
 **8. getEntities**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const entityType = {  // EntityType object
-  // ... set the fields you need
-};
-const entityIds = ['your-entity-i-1', 'your-entity-i-2'];
-entityService.getEntities(entityType, entityIds).subscribe(entities => {
-  console.log('List of Entities:', entities);
+self.ctx.entityService.getEntities('your-entitytype-value', 'your-entityids-value').subscribe(entities => {
+  console.log('Get Entities:', entities);
 });
 ```
 
 **9. getSingleTenantByPageLinkObservable**
 
 ```javascript
-const entityService = self.ctx.entityService;
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-entityService.getSingleTenantByPageLinkObservable(pageLink).subscribe(singleTenantByPageLinkObservables => {
-  console.log('List of Single Tenant By Page Link Observables:', singleTenantByPageLinkObservables);
+self.ctx.entityService.getSingleTenantByPageLinkObservable(pageLink).subscribe(singleTenantByPageLinkObservable => {
+  console.log('Get Single Tenant By Page Link Observable:', singleTenantByPageLinkObservable);
 });
 ```
 
 **10. getEntitiesByPageLinkObservable**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const entityType = {  // EntityType object
-  // ... set the fields you need
-};
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const subType = 'value';
-entityService.getEntitiesByPageLinkObservable(entityType, pageLink, subType).subscribe(entitiesByPageLinkObservables => {
-  console.log('List of Entities By Page Link Observables:', entitiesByPageLinkObservables);
+self.ctx.entityService.getEntitiesByPageLinkObservable('your-entitytype-value', pageLink, 'your-subtype-value').subscribe(entitiesByPageLinkObservable => {
+  console.log('Get Entities By Page Link Observable:', entitiesByPageLinkObservable);
 });
 ```
 
 **11. getEntitiesByPageLink**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const entityType = {  // EntityType object
-  // ... set the fields you need
-};
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const subType = 'value';
-entityService.getEntitiesByPageLink(entityType, pageLink, subType).subscribe(entitiesByPageLinks => {
-  console.log('List of Entities By Page Links:', entitiesByPageLinks);
+self.ctx.entityService.getEntitiesByPageLink('your-entitytype-value', pageLink, 'your-subtype-value').subscribe(entitiesByPageLink => {
+  console.log('Get Entities By Page Link:', entitiesByPageLink);
 });
 ```
 
 **12. getEntitiesByNameFilter**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const entityType = {  // EntityType object
-  // ... set the fields you need
-};
-const entityNameFilter = 'your-entity-name-filter';
-const pageSize = 10;
-const subType = 'value';
-entityService.getEntitiesByNameFilter(entityType, entityNameFilter, pageSize, subType).subscribe(entitiesByNameFilters => {
-  console.log('List of Entities By Name Filters:', entitiesByNameFilters);
+self.ctx.entityService.getEntitiesByNameFilter('your-entitytype-value', 'your-entitynamefilter-value', 0, 'your-subtype-value').subscribe(entitiesByNameFilter => {
+  console.log('Get Entities By Name Filter:', entitiesByNameFilter);
 });
 ```
 
 **13. getEntityGroupEntitiesByPageLink**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const entityGroupId = 'your-entity-group-id';
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-const entityGroupType = {  // EntityType object
-  // ... set the fields you need
-};
-entityService.getEntityGroupEntitiesByPageLink(entityGroupId, pageLink, entityGroupType).subscribe(entityGroupEntitiesByPageLinks => {
-  console.log('List of Entity Group Entities By Page Links:', entityGroupEntitiesByPageLinks);
+self.ctx.entityService.getEntityGroupEntitiesByPageLink('your-entitygroup-id', pageLink, 'your-entitygrouptype-value').subscribe(entityGroupEntitiesByPageLink => {
+  console.log('Get Entity Group Entities By Page Link:', entityGroupEntitiesByPageLink);
 });
 ```
 
 **14. getEntityGroupEntities**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const entityGroupId = 'your-entity-group-id';
-const entityGroupType = {  // EntityType object
-  // ... set the fields you need
-};
-const pageSize = 10;
-entityService.getEntityGroupEntities(entityGroupId, entityGroupType, pageSize).subscribe(entityGroupEntities => {
-  console.log('List of Entity Group Entities:', entityGroupEntities);
+self.ctx.entityService.getEntityGroupEntities('your-entitygroup-id', 'your-entitygrouptype-value', 0).subscribe(entityGroupEntities => {
+  console.log('Get Entity Group Entities:', entityGroupEntities);
 });
 ```
 
 **15. findEntityDataByQuery**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const query = {  // EntityDataQuery object
-  // ... set the fields you need
-};
-entityService.findEntityDataByQuery(query).subscribe(entityDataByQuerys => {
-  console.log('List of Entity Data By Querys:', entityDataByQuerys);
+self.ctx.entityService.findEntityDataByQuery('your-query-value').subscribe(entityDataByQuery => {
+  console.log('Find Entity Data By Query:', entityDataByQuery);
 });
 ```
 
 **16. findEntityKeysByQuery**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const query = {  // EntityDataQuery object
-  // ... set the fields you need
-};
-const scope = {  // AttributeScope object
-  // ... set the fields you need
-};
-entityService.findEntityKeysByQuery(query, scope).subscribe(entityKeysByQuery => {
+self.ctx.entityService.findEntityKeysByQuery('your-query-value', 'your-scope-value').subscribe(entityKeysByQuery => {
   console.log('Find Entity Keys By Query:', entityKeysByQuery);
 });
 ```
@@ -223,49 +147,31 @@ entityService.findEntityKeysByQuery(query, scope).subscribe(entityKeysByQuery =>
 **17. findEntityKeysByQueryV2**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const query = {  // EntityDataQuery object
-  // ... set the fields you need
-};
-const scopes = [];  // e.g. array of scopes values
-entityService.findEntityKeysByQueryV2(query, scopes).subscribe(entityKeysByQueryV2 => {
-  console.log('Find Entity Keys By Query V2:', entityKeysByQueryV2);
+self.ctx.entityService.findEntityKeysByQueryV2('your-query-value', 'your-scopes-value').subscribe(entityKeysByQueryV2 => {
+  console.log('Find Entity Keys By Query V 2:', entityKeysByQueryV2);
 });
 ```
 
 **18. findAlarmDataByQuery**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const query = {  // AlarmDataQuery object
-  // ... set the fields you need
-};
-entityService.findAlarmDataByQuery(query).subscribe(alarmDataByQuerys => {
-  console.log('List of Alarm Data By Querys:', alarmDataByQuerys);
+self.ctx.entityService.findAlarmDataByQuery('your-query-value').subscribe(alarmDataByQuery => {
+  console.log('Find Alarm Data By Query:', alarmDataByQuery);
 });
 ```
 
 **19. findEntityInfosByFilterAndName**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const filter = {  // EntityFilter object
-  // ... set the fields you need
-};
-const searchText = 'searchText';
-entityService.findEntityInfosByFilterAndName(filter, searchText).subscribe(entityInfosByFilterAndNames => {
-  console.log('List of Entity Infos By Filter And Names:', entityInfosByFilterAndNames);
+self.ctx.entityService.findEntityInfosByFilterAndName('your-filter-value', 'your-searchtext-value').subscribe(entityInfosByFilterAndName => {
+  console.log('Find Entity Infos By Filter And Name:', entityInfosByFilterAndName);
 });
 ```
 
 **20. findSingleEntityInfoByEntityFilter**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const filter = {  // EntityFilter object
-  // ... set the fields you need
-};
-entityService.findSingleEntityInfoByEntityFilter(filter).subscribe(singleEntityInfoByEntityFilter => {
+self.ctx.entityService.findSingleEntityInfoByEntityFilter('your-filter-value').subscribe(singleEntityInfoByEntityFilter => {
   console.log('Find Single Entity Info By Entity Filter:', singleEntityInfoByEntityFilter);
 });
 ```
@@ -273,159 +179,104 @@ entityService.findSingleEntityInfoByEntityFilter(filter).subscribe(singleEntityI
 **21. getAliasFilterTypesByEntityTypes**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const entityTypes = [];  // e.g. array of entity-types values
-const result = entityService.getAliasFilterTypesByEntityTypes(entityTypes);
-console.log('Result:', result);
+self.ctx.entityService.getAliasFilterTypesByEntityTypes('your-entitytypes-value').subscribe(aliasFilterTypesByEntityTypes => {
+  console.log('Get Alias Filter Types By Entity Types:', aliasFilterTypesByEntityTypes);
+});
 ```
 
 **22. filterAliasByEntityTypes**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const entityAlias = {  // EntityAlias object
-  // ... set the fields you need
-};
-const entityTypes = [];  // e.g. array of entity-types values
-const result = entityService.filterAliasByEntityTypes(entityAlias, entityTypes);
-console.log('Result:', result);
+self.ctx.entityService.filterAliasByEntityTypes('your-entityalias-value', 'your-entitytypes-value').subscribe(filterAliasByEntityTypes => {
+  console.log('Filter Alias By Entity Types:', filterAliasByEntityTypes);
+});
 ```
 
 **23. filterAliasFilterTypeByEntityTypes**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const aliasFilterType = {  // AliasFilterType object
-  // ... set the fields you need
-};
-const entityTypes = [];  // e.g. array of entity-types values
-const result = entityService.filterAliasFilterTypeByEntityTypes(aliasFilterType, entityTypes);
-console.log('Result:', result);
+self.ctx.entityService.filterAliasFilterTypeByEntityTypes('your-aliasfiltertype-value', 'your-entitytypes-value').subscribe(filterAliasFilterTypeByEntityTypes => {
+  console.log('Filter Alias Filter Type By Entity Types:', filterAliasFilterTypeByEntityTypes);
+});
 ```
 
 **24. filterAliasFilterTypeByEntityType**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const aliasFilterType = {  // AliasFilterType object
-  // ... set the fields you need
-};
-const entityType = 'entityType';  // e.g. one of the allowed EntityType
-const result = entityService.filterAliasFilterTypeByEntityType(aliasFilterType, entityType);
-console.log('Result:', result);
+self.ctx.entityService.filterAliasFilterTypeByEntityType('your-aliasfiltertype-value', 'your-entitytype-value').subscribe(filterAliasFilterTypeByEntityType => {
+  console.log('Filter Alias Filter Type By Entity Type:', filterAliasFilterTypeByEntityType);
+});
 ```
 
 **25. prepareAllowedEntityTypesList**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const allowedEntityTypes = [];  // e.g. array of allowed-entity-types values
-const useAliasEntityTypes = true;
-const operation = {  // Operation object
-  // ... set the fields you need
-};
-const result = entityService.prepareAllowedEntityTypesList(allowedEntityTypes, useAliasEntityTypes, operation);
-console.log('Result:', result);
+self.ctx.entityService.prepareAllowedEntityTypesList('your-allowedentitytypes-value', true, 'your-operation-value').subscribe(prepareAllowedEntityTypesList => {
+  console.log('Prepare Allowed Entity Types List:', prepareAllowedEntityTypesList);
+});
 ```
 
 **26. getEntityFieldKeys**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const entityType = {  // EntityType object
-  // ... set the fields you need
-};
-const searchText = 'value';
-const result = entityService.getEntityFieldKeys(entityType, searchText);
-console.log('Result:', result);
+self.ctx.entityService.getEntityFieldKeys('your-entitytype-value', 'your-searchtext-value').subscribe(entityFieldKeys => {
+  console.log('Get Entity Field Keys:', entityFieldKeys);
+});
 ```
 
 **27. getAlarmKeys**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const searchText = 'value';
-const result = entityService.getAlarmKeys(searchText);
-console.log('Result:', result);
+self.ctx.entityService.getAlarmKeys('your-searchtext-value').subscribe(alarmKeys => {
+  console.log('Get Alarm Keys:', alarmKeys);
+});
 ```
 
 **28. getEntityKeys**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const entityId = {  // EntityId object
-  // ... set the fields you need
-};
-const query = 'your-query';
-const type = {  // DataKeyType object
-  // ... set the fields you need
-};
-entityService.getEntityKeys(entityId, query, type).subscribe(entityKeys => {
-  console.log('List of Entity Keys:', entityKeys);
+self.ctx.entityService.getEntityKeys('your-entity-id', 'your-query-value', 'your-type-value').subscribe(entityKeys => {
+  console.log('Get Entity Keys:', entityKeys);
 });
 ```
 
 **29. getEntityKeysByEntityFilter**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const filter = {  // EntityFilter object
-  // ... set the fields you need
-};
-const types = [];  // e.g. array of types values
-const entityTypes = [];  // e.g. array of entity-types values
-entityService.getEntityKeysByEntityFilter(filter, types, entityTypes).subscribe(entityKeysByEntityFilters => {
-  console.log('List of Entity Keys By Entity Filters:', entityKeysByEntityFilters);
+self.ctx.entityService.getEntityKeysByEntityFilter('your-filter-value', 'your-types-value', 'your-entitytypes-value').subscribe(entityKeysByEntityFilter => {
+  console.log('Get Entity Keys By Entity Filter:', entityKeysByEntityFilter);
 });
 ```
 
 **30. getEntityKeysByEntityFilterAndScope**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const filter = {  // EntityFilter object
-  // ... set the fields you need
-};
-const types = [];  // e.g. array of types values
-const entityTypes = [];  // e.g. array of entity-types values
-const scope = {  // AttributeScope object
-  // ... set the fields you need
-};
-entityService.getEntityKeysByEntityFilterAndScope(filter, types, entityTypes, scope).subscribe(entityKeysByEntityFilterAndScopes => {
-  console.log('List of Entity Keys By Entity Filter And Scopes:', entityKeysByEntityFilterAndScopes);
+self.ctx.entityService.getEntityKeysByEntityFilterAndScope('your-filter-value', 'your-types-value', 'your-entitytypes-value', 'your-scope-value').subscribe(entityKeysByEntityFilterAndScope => {
+  console.log('Get Entity Keys By Entity Filter And Scope:', entityKeysByEntityFilterAndScope);
 });
 ```
 
 **31. createDatasourcesFromSubscriptionsInfo**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const subscriptionsInfo = [];  // e.g. array of subscriptions-info values
-const result = entityService.createDatasourcesFromSubscriptionsInfo(subscriptionsInfo);
-console.log('Result:', result);
+self.ctx.entityService.createDatasourcesFromSubscriptionsInfo('your-subscriptionsinfo-value').subscribe(datasourcesFromSubscriptionsInfo => {
+  console.log('Create Datasources From Subscriptions Info:', datasourcesFromSubscriptionsInfo);
+});
 ```
 
 **32. createAlarmSourceFromSubscriptionInfo**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const subscriptionInfo = {  // SubscriptionInfo object
-  // ... set the fields you need
-};
-const result = entityService.createAlarmSourceFromSubscriptionInfo(subscriptionInfo);
-console.log('Result:', result);
+self.ctx.entityService.createAlarmSourceFromSubscriptionInfo('your-subscriptioninfo-value').subscribe(alarmSourceFromSubscriptionInfo => {
+  console.log('Create Alarm Source From Subscription Info:', alarmSourceFromSubscriptionInfo);
+});
 ```
 
 **33. getAssignedToEdgeEntitiesByType**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const edgeId = 'your-edge-id';
-const entityType = {  // EntityType object
-  // ... set the fields you need
-};
 const pageLink = self.ctx.pageLink(10, 0, 'searchText', 'sortProperty', 'sortOrder');
-entityService.getAssignedToEdgeEntitiesByType(edgeId, entityType, pageLink).subscribe(assignedToEdgeEntitiesByType => {
+self.ctx.entityService.getAssignedToEdgeEntitiesByType('your-edge-id', 'your-entitytype-value', pageLink).subscribe(assignedToEdgeEntitiesByType => {
   console.log('Get Assigned To Edge Entities By Type:', assignedToEdgeEntitiesByType);
 });
 ```
@@ -433,11 +284,7 @@ entityService.getAssignedToEdgeEntitiesByType(edgeId, entityType, pageLink).subs
 **34. getEdgeEventContent**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const entity = {  // EdgeEvent object
-  // ... set the fields you need
-};
-entityService.getEdgeEventContent(entity).subscribe(edgeEventContent => {
+self.ctx.entityService.getEdgeEventContent('your-entity-value').subscribe(edgeEventContent => {
   console.log('Get Edge Event Content:', edgeEventContent);
 });
 ```
@@ -445,11 +292,7 @@ entityService.getEdgeEventContent(entity).subscribe(edgeEventContent => {
 **35. getEntitySubtypesObservable**
 
 ```javascript
-const entityService = self.ctx.entityService;
-const entityType = {  // EntityType object
-  // ... set the fields you need
-};
-entityService.getEntitySubtypesObservable(entityType).subscribe(entitySubtypesObservables => {
-  console.log('List of Entity Subtypes Observables:', entitySubtypesObservables);
+self.ctx.entityService.getEntitySubtypesObservable('your-entitytype-value').subscribe(entitySubtypesObservable => {
+  console.log('Get Entity Subtypes Observable:', entitySubtypesObservable);
 });
 ```
