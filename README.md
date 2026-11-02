@@ -2,9 +2,9 @@
 
 Copy-paste ready documentation for all ThingsBoard CE widget services.
 
-Generated from TB CE commit `79bb2b0a659d` (2026-10-10).
+Generated from TB CE commit `79bb2b0a659d` (2026-10-27).
 
-65 services · 807 methods
+65 services · 809 methods
 
 ## Usage
 

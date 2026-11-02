@@ -887,7 +887,23 @@ aiChatService.sendChatMessage('your-chat-id', 'your-request-value').subscribe(ch
 });
 ```
 
-**9. parseEventStrings**
+**9. resumeChat**
+
+```javascript
+aiChatService.resumeChat('your-chat-id').subscribe(resumeChat => {
+  console.log('Resume Chat:', resumeChat);
+});
+```
+
+**10. streamEvents**
+
+```javascript
+aiChatService.streamEvents('your-url-value', 'your-body-value').subscribe(streamEvents => {
+  console.log('Stream Events:', streamEvents);
+});
+```
+
+**11. parseEventStrings**
 
 ```javascript
 aiChatService.parseEventStrings('your-input-value').subscribe(parseEventStrings => {
@@ -895,7 +911,7 @@ aiChatService.parseEventStrings('your-input-value').subscribe(parseEventStrings 
 });
 ```
 
-**10. parseSingleEvent**
+**12. parseSingleEvent**
 
 ```javascript
 aiChatService.parseSingleEvent('your-input-value').subscribe(parseSingleEvent => {
